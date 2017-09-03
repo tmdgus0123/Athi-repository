@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
 
-public class modifyInfoCommand implements ICommand{
+public class ModifyInfoCommand implements ICommand{
 	@Override
 	public void execute(Model model) {
 		

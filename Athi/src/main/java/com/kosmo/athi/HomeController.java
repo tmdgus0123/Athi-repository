@@ -33,10 +33,10 @@ import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
 import com.kosmo.athi.command.EditMemberCommand;
-import com.kosmo.athi.command.memberDeleteCommand;
-import com.kosmo.athi.command.memberModifyCommand;
-import com.kosmo.athi.command.modeCommand;
-import com.kosmo.athi.command.modifyInfoCommand;
+import com.kosmo.athi.command.MemberDeleteCommand;
+import com.kosmo.athi.command.MemberModifyCommand;
+import com.kosmo.athi.command.ModeCommand;
+import com.kosmo.athi.command.ModifyInfoCommand;
 import com.kosmo.athi.command.RankListCommand;
 import com.kosmo.athi.command.ReplyActionCommand;
 import com.kosmo.athi.command.ReplyCommand;
@@ -391,7 +391,7 @@ public class HomeController {
 
 		model.addAttribute("req", req);
 
-		command = new memberModifyCommand();
+		command = new MemberModifyCommand();
 		command.execute(model);
 
 		Map<String, Object> map = model.asMap();
@@ -422,7 +422,7 @@ public class HomeController {
 
 		model.addAttribute("req", req);
 
-		command = new memberDeleteCommand();
+		command = new MemberDeleteCommand();
 		command.execute(model);
 
 		Map<String, Object> map = model.asMap();
@@ -483,7 +483,7 @@ public class HomeController {
 
 		model.addAttribute("req", req);
 
-		command = new modeCommand();
+		command = new ModeCommand();
 		command.execute(model);
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";
@@ -494,7 +494,7 @@ public class HomeController {
 
 		model.addAttribute("req", req);
 
-		command = new modifyInfoCommand();
+		command = new ModifyInfoCommand();
 		command.execute(model);
 
 		return "board/modify";
@@ -505,7 +505,7 @@ public class HomeController {
 
 		model.addAttribute("req", req);
 
-		command = new modeCommand();
+		command = new ModeCommand();
 		command.execute(model);
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";

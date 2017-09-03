@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import com.kosmo.athi.model.MemberDAO;
 import com.kosmo.athi.model.MemberDTO;
 
-public class memberModifyCommand implements ICommand{
+public class MemberModifyCommand implements ICommand{
 	
 	@Override
 	public void execute(Model model) {

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.MemberDAO;
 
-public class memberDeleteCommand implements ICommand{
+public class MemberDeleteCommand implements ICommand{
 	
 	@Override
 	public void execute(Model model) {

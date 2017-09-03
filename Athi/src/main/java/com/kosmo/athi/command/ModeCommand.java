@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.BoardDAO;
 
-public class modeCommand implements ICommand{
+public class ModeCommand implements ICommand{
 	
 	@Override
 	public void execute(Model model) {
