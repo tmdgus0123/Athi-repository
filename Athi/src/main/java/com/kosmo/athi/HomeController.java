@@ -32,12 +32,12 @@ import com.kosmo.athi.command.SearchCommand;
 import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
-import com.kosmo.athi.command.editMemberCommand;
+import com.kosmo.athi.command.EditMemberCommand;
 import com.kosmo.athi.command.memberDeleteCommand;
 import com.kosmo.athi.command.memberModifyCommand;
 import com.kosmo.athi.command.modeCommand;
 import com.kosmo.athi.command.modifyInfoCommand;
-import com.kosmo.athi.command.rankListCommand;
+import com.kosmo.athi.command.RankListCommand;
 import com.kosmo.athi.command.ReplyActionCommand;
 import com.kosmo.athi.command.ReplyCommand;
 import com.kosmo.athi.model.Constant;
@@ -72,7 +72,7 @@ public class HomeController {
 			model.addAttribute("session", session);
 		}
 
-		command = new rankListCommand();
+		command = new RankListCommand();
 		command.execute(model);
 
 		return "home";
@@ -297,7 +297,7 @@ public class HomeController {
 
 		System.out.println(session.getAttribute("user_id"));
 		model.addAttribute("session", session);
-		command = new editMemberCommand();
+		command = new EditMemberCommand();
 		command.execute(model);
 
 		return "editMember";

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import com.kosmo.athi.model.MemberDAO;
 import com.kosmo.athi.model.MemberDTO;
 
-public class rankListCommand implements ICommand{
+public class RankListCommand implements ICommand{
 	
 	@Override
 	public void execute(Model model) {
