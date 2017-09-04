@@ -36,14 +36,14 @@
 			</li>
 			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="질문과 답변">
-				<a class="nav-link" href="QnABoard.do">
+				<a class="nav-link" href="QnABoard.do?boardName=QnABoard">
 					<i class="fa fa-fw fa fa fa-question"></i>
 					<span class="nav-link-text"> 질문과 답변 </span>
 				</a>
 			</li>
 			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="팁과 노하우">
-				<a class="nav-link" href="tipBoard">
+				<a class="nav-link" href="tipBoard.do?boardName=tipBoard">
 					<i class="fa fa-fw fa fa fa-lightbulb-o"></i>
 					<span class="nav-link-text"> 팁과 노하우 </span>
 				</a>

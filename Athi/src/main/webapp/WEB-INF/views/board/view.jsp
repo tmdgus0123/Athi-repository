@@ -66,6 +66,7 @@
 						<!-- 반복문 시작 -->
 						<c:forEach items='${comments}' var='dto' varStatus='loop'>
 							<li>
+							<form id="commForm_${dto.num }">
 								<div class="row" style="margin-top: 25px;">
 									<div class="col-sm-1">
 										<input type="checkbox" style="margin-top: 6.5px;" />
@@ -75,23 +76,24 @@
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
 									<div class="col-sm-1 text-right">
-										<button class="btn btn-danger" style="margin-top: 13px;">삭제</button>
+										<button id="deleteBtn_${dto.num }" class="btn btn-danger" style="margin-top: 13px;">삭제</button>
 									</div>
 									<div class="col-sm-1" style="margin-top: 25px;"></div>
 								</div>
+							</form>
 							</li>
 						</c:forEach>
 						<!-- 반복문 끝 -->
 					</ul>
 					<form name="commentsForm">
 						<input type="hidden" id="num" value="${viewRow.num }" />
-						<div class="row" style="margin-top: 50px;">
+						<div class="row" style="margin-top: 50px;background-color:#f3f3f3;padding:10px;">
 							<div class="col-sm-2">
 								<br /> <strong>${user_id }</strong>
 								<input type="hidden" id="id" value="${user_id }" />
 							</div>
 							<div class="col-sm-8">
-								<textarea id="content" rows="5" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
+								<textarea id="content" rows="3" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
 							</div>
 							<div class="col-sm-1">
 								<input type="button" id="enrollBtn" value="등록" />
@@ -138,6 +140,8 @@
 				}
 			});
 		});
+		
+		$('#deleteBtn_${list}')
 	</script>
 
 </body>

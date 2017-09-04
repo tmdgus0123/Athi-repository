@@ -30,12 +30,16 @@ public class ViewCommand implements ICommand {
 		
 		model.addAttribute("nowPage", req.getParameter("nowPage"));
 		model.addAttribute("viewRow", dto);
-		dao.close();
 
 		//댓글 리스트
 		CommentsDAO cdao = new CommentsDAO();
 		ArrayList<CommentsDTO> list = cdao.getAllComments(num);
 		model.addAttribute("comments", list);
+		
+		//댓글수
+		dto.setcomm_cnt(list.size());
+
+		dao.close();
 		cdao.close();
 	}
 
