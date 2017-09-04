@@ -129,7 +129,7 @@ public class HomeController {
 	@RequestMapping("/QnABoard.do")
 	public String QnADesign(HttpServletRequest req, Model model) {
 		System.out.println("QnABoard() 메소드 실행");
-
+		
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
@@ -567,13 +567,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping("selectMemberDelete.do")
-	public String selectMemberDelete(Model model, HttpServletRequest req){
-		
-		String id = req.getParameter("id");
-		Object[] obj = req.getParameterValues("");
+	public String selectMemberDelete(Model model, HttpServletRequest req){	
+		//String id = req.getParameter("id");
+		String[] id = req.getParameterValues("tdArr");
+		String realId = "";
 		
 		MemberDAO mDao = new MemberDAO();
-		ArrayList<MemberDTO> mDto = mDao.selectMember(id);
+		ArrayList<MemberDTO> mDto = null;
+		
+		for(int i=0; i<id.length; i++){
+			realId = id[i];
+			mDto = mDao.selectMember(realId);
+		}
 		
 		model.addAttribute("sMemberList", mDto);
 		

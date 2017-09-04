@@ -27,19 +27,21 @@
 			
 			var checkbox = $("input:checkbox[name='deleteInfo']:checked");
 			var tdArr = new Array();
-			
+			var popup = window.open("about:blank", "winOpen", "width=700, height=700");
 			// CheckBox 검사
-			if(checkbox==true){
-				checkbox.each(function(idx){
-					
-					var tr = checkbox.parent().parent().eq(idx);
-					var td = tr.children();
-					
-					tdArr.push(td.text());
-					
-					alert(tdArr + " ");
+			if(checkbox.is(":checked")==true){
+				checkbox.is(":checked").each(function(idx){
+					var test = $(this).val();
+					tdArr.push(test);
 				});
 			}
+			else{
+				alert("체크된 항목이 없습니다.");
+				return false;
+			}
+			
+			$("#memberList").attr("action", "selectMemberDelete.do").attr("target", "winOpen");
+			$("#memberList").submit();
 		});
 	});
 </script>
@@ -117,7 +119,7 @@
 		</div>
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
-				<form id="memberList">
+				<form id="memberList" method="post">
 					<table class="table table-bordered" id="dataTable" cellspacing="0">
 						<thead>
 							<tr class="btn-primary">
@@ -140,12 +142,12 @@
 								<c:otherwise>
 									<c:forEach items='${memberRows}' var='row' varStatus='loop'>
 										<tr>
-											<td class="text-center"><input type="checkbox" name="deleteInfo" /></td>
-											<td><input type="hidden" name="grade" value="${row.grade}" />${row.grade}</td>
-											<td><input type="hidden" name="exp" value="${row.exp}" />${row.exp}</td>
-											<td><input type="hidden" name="id" value="${row.id}" />${row.id}</td>
-											<td><input type="hidden" name="name" value="${row.name}" />${row.name}</td>
-											<td><input type="hidden" name="regidate" value="${row.regidate}" />${row.regidate}</td>
+											<td class="text-center"><input type="checkbox" name="deleteInfo" value="${row.id}"/></td>
+											<td>${row.grade}</td>
+											<td>${row.exp}</td>
+											<td>${row.id}</td>
+											<td>${row.name}</td>
+											<td>${row.regidate}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

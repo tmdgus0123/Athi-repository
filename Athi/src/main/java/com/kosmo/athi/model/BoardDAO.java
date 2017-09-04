@@ -66,7 +66,7 @@ public class BoardDAO {
 
 		String searchColumn = (String) map.get("searchColumn");
 		String searchWord = (String) map.get("searchWord");
-
+	
 		try {
 			String sql = "SELECT count(*) FROM board b JOIN board_type bt ON b.num = bt.num";
 			if (boardName != null) {
@@ -128,7 +128,7 @@ public class BoardDAO {
 
 		String searchColumn = (String) map.get("searchColumn");
 		String searchWord = (String) map.get("searchWord");
-
+		
 		String sql = "SELECT * FROM ( SELECT Tb.*, rownum rNum FROM ( " + " SELECT * FROM board b JOIN board_type bt ON b.num = bt.num ";
 		if (boardName != null) {
 			sql += " WHERE board_name = '" + boardName + "' ";

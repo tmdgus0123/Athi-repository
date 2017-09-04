@@ -20,7 +20,26 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+<script src="./resources/jQuery/jquery-3.2.1.js"></script>
+<script>
+	$(document).ready(function(){
+		$("select[name='category']").on("change", function(){
+			$("select[name='category'] option:selected").each(function(idx){
+				$.ajax({
+					url : "QnABoard.do",
+					type : "post",
+					dataType : "html",
+					contentType : "text/html; chartset:UTF-8",
+					data : {
+						category : $("select[name='category'] option:selected").val(),
+						boardName : "QnABoard"
+					},
+					asyn : "false"
+				});
+			});
+		});
+	});
+</script>
 </head>
 
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
@@ -39,13 +58,21 @@
 						<div style="float: left;">
 							<form action="">
 								<div class="form-group">
-									<select name="searchColumn" class="form-control">
-										<option value="">카테고리</option>
-										<option value="">JAVA</option>
-										<option value="">HTML</option>
-										<option value="">CSS</option>
-										<option value="">jQuery</option>
-										<option value="">Spring</option>
+									<select name="category" class="form-control">
+										<option value="" style="color:red;">--- 카테고리 ---</option>
+										<option value="">---------------</option>
+										<option value="java">JAVA</option>
+										<option value="html">HTML</option>
+										<option value="javascript">javaScript</option>
+										<option value="jQuery">jQuery</option>
+										<option value="spring">Spring</option>
+										<option value="JSP">JSP</option>
+										<option value="">---------------</option>
+										<option value="bootstrap">bootStrap</option>
+										<option value="jqueryUI">jQuery UI</option>
+										<option value="css">CSS</option>
+										<option value="">---------------</option>
+										<option value="servlet">servlet</option>
 									</select>
 								</div>
 							</form>

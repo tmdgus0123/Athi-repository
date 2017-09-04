@@ -47,23 +47,17 @@
 											</td>
 											<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><select name="pLang" class="form-control" name="title" style="width: 90%;" id="">
 													<c:choose>
-														<c:when test="${param.boardName=='QnADesign'}">
+														<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
 															<option value="bootstrap">Bootstrap</option>
 															<option value="css">CSS</option>
 															<option value="jQueryUI">jQuery UI</option>
-														</c:when>
-														<c:when test="${param.boardName=='QnADevelop'}">
 															<option value="java">JAVA</option>
 															<option value="javascript">javascript</option>
 															<option value="html">HTML</option>
-															<option value="jQueryAjax">jQuery&Ajax</option>
-															<option value="jspServlet">JSP&Servlet</option>
+															<option value="jQuery">jQuery&Ajax</option>
+															<option value="jsp">JSP</option>
+															<option value="servlet">SERVLET</option>
 															<option value="spring">SRPING</option>
-														</c:when>
-														<c:when test="${param.boardName=='QnAProgram'}">
-															<option value="software">소프트웨어</option>
-															<option value="hardware">하드웨어</option>
-															<option value="system">시스템</option>
 														</c:when>
 													</c:choose>
 											</select></td>
