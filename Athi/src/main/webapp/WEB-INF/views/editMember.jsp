@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page session="true" %>
+<%@ page session="true"%>
 
 <html>
 <head>
@@ -27,16 +27,6 @@
 
 <script src="./resources/jQuery/jquery-3.2.1.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-<style>
-#title {
-	font-weight: bold;
-	font-size: 1.2em;
-	font-family: Tahoma;
-	text-align: right;
-}
-</style>
-
 <script>
 	$(document).ready(function() {
 		$("select[name='emailChange']").on("change", function() {
@@ -76,11 +66,11 @@
 	    	
 	    	if(val1 == val2){
 	    		$('p[id="chkTxt"]').html("비밀번호가 일치합니다.");
-	    		$('p[id="chkTxt"]').css({"fontWeight":"bold", color:"blue", "fontSize":"0.8em;"});
+	    		$('p[id="chkTxt"]').css({"fontWeight":"bold", color:"blue"});
 	    	}
 	    	else if(val1 != val2){
 	    		$('p[id="chkTxt"]').html("비밀번호를 다시 확인해주세요.");
-	    		$('p[id="chkTxt"]').css({"fontWeight":"bold", color:"red", "fontSize":"0.8em"});
+	    		$('p[id="chkTxt"]').css({"fontWeight":"bold", color:"red"});
 	    	}
 	    });
 	    
@@ -105,185 +95,155 @@
 	});
 </script>
 </head>
-<body class="fixed-nav" id="page-top">
+<body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
-
-	<div class="content-wrapper py-3" align="center" style="background-color: #e8eaed;">
-		<!-- 회원가입 S -->
-		<div class="col-md-12">
-			<hr>
-			<div class="row col-sm-12" style="width: 100%; height: 300px; background-image: url('./resources/images/like.gif'); background-size: 100% 900px; background-repeat: no-repeat;">
-				<p style="color: black; font-size: 1.5em; font-weight: bold;">&copy; Hello ATHI.</p>
+	<div class="container">
+		<div class="col-sm-12" style="margin-top: 50px;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
+				<h1>회원 정보 수정</h1>
 			</div>
-			<hr>
-			<div class="page-header text-center" style="background-color: #b25e93; color: white;">
-				<span style="font-weight: bold; font-size: 1.5em;">회원 정보 수정</span><br />
-			</div>
-			<hr />
-			<form class="form-horizontal" name="modifyFrm" method="post">
-				<input type="hidden" name="mode" value="modify" />
-				<c:choose>
-					<c:when test="${not empty memberInfo}">
-						<c:forEach items="${memberInfo}" var="memberInfo">
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputId"><span id="title">아이디</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="input-group col-md-4">
-									<input type="text" class="form-control" name="inputId" id="inputId" placeholder="ID" style="width: 200px;" value="${memberInfo.id}" readonly />
-									&nbsp;&nbsp;&nbsp;
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputPassword"><span id="title">비밀번호</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="input-group col-md-5">
-									<input class="form-control" name="inputPassword" id="inputPassword" type="password" placeholder="비밀번호" value="${memberInfo.pass}">
-									&nbsp;&nbsp;
-								</div>
-							</div>
-							<br />
-							<div class="col-md-10" style="text-align: left; margin-left: 31%;">
-								<p class="help-block" style="color: red; font-size: 0.8em;">숫자, 특수문자 포함 8자 이상</p>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputPasswordCheck"><span id="title">비밀번호 확인</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="input-group col-md-5">
-									<input class="form-control" name="inputPasswordCheck" id="inputPasswordCheck" type="password" placeholder="비밀번호 확인" value="${memberInfo.pass}">
-								</div>
-								<div class="col-md-10 text-center">
-									<p class="help-block">
-										<!-- EL식 -->
-									</p>
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline">
-								<span style="font-size: 0.8em; color: red;"> <!-- EL식 -->
-								</span>
-							</div>
-						</div>
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputName"><span id="title">이름</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="input-group col-md-3">
-									<input class="form-control" name="inputName" id="inputName" type="text" placeholder="이름" size="5" value="${memberInfo.name}" readonly>
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputAddr"><span id="title">주소</span></label>
-								<div class="col-md-7">
-									<input type="text" class="form-control" name="inputAddr" id="inputAddr" placeholder="주소" size="65" value="${memberInfo.address}" />
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="input-group-btn" style="margin-left: 14px;"> <!-- 다음 API 삽입 -->
-										<button type="button" id="postBtn" class="btn btn-success">
-											주소 입력<i class="fa fa-mail-forward spaceLeft"></i>
-										</button>
-									</span>
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputEmail"><span id="title">이메일</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="col-md-7 input-group">
-									<input class="form-control col-md-3" name="inputEmail" id="inputEmail" type="text" placeholder="이메일 아이디" value="${fn:substringBefore(memberInfo.email, '@')}">
-									&nbsp;&nbsp;&nbsp;
-									<input class="form-control col-md-4" name="inputEmail2" id="inputEmail2" type="text" placeholder="도메인" value="<%="@"%>${fn:substringAfter(memberInfo.email, '@')}">
-									<select name="emailChange">
-										<option value="">도메인</option>
-										<option value="@naver.com">NAVER</option>
-										<option value="@nate.com">NATE</option>
-										<option value="@hanmail.net">DAUM</option>
-										<option value="@gmail.com">GOOGLE</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputEmail"><span id="title">생년월일</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="input-group col-md-2">
-									<input class="form-control" name="inputBirthday" id="inputBirthday" type="date" style="width: 200px; height: 30px;" value="${fn:substring(memberInfo.birthday, 0, 10)}">
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputGender"><span id="title">성별</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="input-group col-md-7">
-								<c:choose>
-									<c:when test="${memberInfo.gender == '남'}">
-									<div class="btn btn-success">
-										<input type="checkbox" name="inputGender" class="" id="inputGender" value="남" checked/>
-										<i class="fa fa-mars-stroke-v" aria-hidden="true"></i>남성
-									</div>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<div class="btn btn-success">
-										<input type="checkbox" name="inputGender" class="" id="inputGender" value="여" />
-										<i class="fa fa-venus" aria-hidden="true"></i>여성
-									</div>
-									</c:when>
-									<c:when test="${memberInfo.gender == '여'}">
-									<div class="btn btn-success">
-										<input type="checkbox" name="inputGender" class="" id="inputGender" value="남" />
-										<i class="fa fa-mars-stroke-v" aria-hidden="true"></i>남성
-									</div>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<div class="btn btn-success">
-										<input type="checkbox" name="inputGender" class="" id="inputGender" value="여" checked/>
-										<i class="fa fa-venus" aria-hidden="true"></i>여성
-									</div>
-									</c:when>
-								</c:choose>
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group" style="margin-left: 15%;">
-							<div class="col-md-10 form-inline text-center">
-								<label class="col-md-3 control-label" for="inputPhone"><span id="title">휴대전화</span></label> &nbsp;&nbsp;&nbsp;
-								<div class="input-group col-md-3">
-									<input class="form-control" name="inputPhone" id="inputPhone" type="text" placeholder="휴대폰번호" value="${memberInfo.phone}">
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="form-group">
-							<div class="col-md-12 text-center">
-								<button class="btn btn-success" type="submit" name="modifyBtn"> 
-									<i class="fa fa-check spaceLeft"></i>&nbsp; 정보 수정
-								</button>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<!-- redirect 태그 삽입 -->
-								<button class="btn btn-danger" type="button" name="mainBtn">
-									<i class="fa fa-times spaceLeft"></i>&nbsp; 홈으로
-								</button>
-							</div>
-						</div>
-						<hr />
-						</c:forEach>
-					</c:when>
-				</c:choose>
-			</form>
-			<hr>
 		</div>
-		<jsp:include page="/common/modalLogin.jsp"/>
+		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
+				<form name="modifyFrm" method="post">
+					<input type="hidden" name="mode" value="modify" />
+					<c:choose>
+						<c:when test="${not empty memberInfo}">
+							<c:forEach items="${memberInfo}" var="memberInfo">
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputId">아이디</label>
+									<div class="col-sm-6">
+										<input type="text" class="form-control" name="inputId" id="inputId" value="${memberInfo.id}" readonly />
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputPassword">비밀번호</label>
+									<div class="col-sm-6">
+										<input class="form-control" name="inputPassword" id="inputPassword" type="password" value="${memberInfo.pass}" />
+										<p class="help-block text-left">숫자, 특수문자 포함 8자 이상</p>
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputPasswordCheck">비밀번호 확인</label>
+									<div class="col-sm-6">
+										<input class="form-control" name="inputPasswordCheck" id="inputPasswordCheck" type="password" value="${memberInfo.pass}" />
+										<p class="help-block text-left" id="chkTxt">비밀번호를 입력해주세요.</p>
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputName">이름</label>
+									<div class="col-sm-6">
+										<input class="form-control" name="inputName" id="inputName" type="text" value="${memberInfo.name}">
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputAddr">주소</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<input type="text" class="form-control" name="inputAddr" id="inputAddr" id="inputId" value="${memberInfo.address}" />
+											<span class="input-group-btn">
+												<button type="button" id="postBtn" class="btn btn-primary">
+													주소 입력<i class="fa fa-mail-forward spaceLeft"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputName">생년월일</label>
+									<div class="col-sm-6">
+										<input class="form-control" name="inputBirthday" id="inputBirthday" type="date" value="${fn:substring(memberInfo.birthday, 0, 10)}">
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left">성별</label>
+									<div class="col-sm-6 text-left">
+										<c:choose>
+											<c:when test="${memberInfo.gender == '남'}">
+												<div class="btn btn-primary">
+													<input type="checkbox" name="inputGender" class="" id="inputGender" value="남" checked /> <i class="fa fa-mars-stroke-v" aria-hidden="true"></i>남성
+												</div>
+
+												<div class="btn btn-primary">
+													<input type="checkbox" name="inputGender" class="" id="inputGender" value="여" /> <i class="fa fa-venus" aria-hidden="true"></i>여성
+												</div>
+											</c:when>
+											<c:when test="${memberInfo.gender == '여'}">
+												<div class="btn btn-primary">
+													<input type="checkbox" name="inputGender" class="" id="inputGender" value="남" /> <i class="fa fa-mars-stroke-v" aria-hidden="true"></i>남성
+												</div>
+
+												<div class="btn btn-primary">
+													<input type="checkbox" name="inputGender" class="" id="inputGender" value="여" checked /> <i class="fa fa-venus" aria-hidden="true"></i>여성
+												</div>
+											</c:when>
+										</c:choose>
+									</div>
+
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputNumber">휴대폰 번호</label>
+									<div class="col-sm-6">
+										<input type="tel" class="form-control" name="inputPhone" id="inputPhone" value="${memberInfo.phone}" />
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-2"></div>
+									<label class="col-sm-2 control-label text-left" for="inputEmail">이메일</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<input type="text" class="form-control" name="inputEmail" id="inputEmail" value="${fn:substringBefore(memberInfo.email, '@')}" /> <input class="form-control col-md-4" name="inputEmail2" id="inputEmail2" type="text"
+												value="<%="@"%>${fn:substringAfter(memberInfo.email, '@')}"> <select name="emailChange">
+												<option value="">도메인</option>
+												<option value="@naver.com">@naver.com</option>
+												<option value="@nate.com">@nate.com</option>
+												<option value="@hanmail.net">@hanmail.net</option>
+												<option value="@gmail.com">@gmail.com</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row form-group">
+									<div class="col-sm-12 text-center" style="margin-top: 15px;">
+										<button class="btn btn-success" type="submit" name="modifyBtn">
+											<i class="fa fa-check spaceLeft"></i>정보수정
+										</button>
+										&nbsp;&nbsp;&nbsp;
+										<button class="btn btn-danger" type="button" name="mainBtn">
+											<i class="fa fa-times spaceLeft"></i>이전으로
+										</button>
+									</div>
+								</div>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</form>
+			</div>
+		</div>
 	</div>
-	<!-- 회원가입 E -->
+	<a class="scroll-to-top rounded" href="#page-top">
+		<i class="fa fa-angle-up"></i>
+	</a>
+
+	<jsp:include page="/common/modalLogin.jsp" />
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>
@@ -297,6 +257,6 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-</body>
 
+</body>
 </html>

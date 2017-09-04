@@ -126,37 +126,15 @@ public class HomeController {
 		return "notice";
 	}
 
-	@RequestMapping("/QnADesign.do")
+	@RequestMapping("/QnABoard.do")
 	public String QnADesign(HttpServletRequest req, Model model) {
-		System.out.println("QnADesign() 메소드 실행");
+		System.out.println("QnABoard() 메소드 실행");
 
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
 
-		return "QnADesign";
-	}
-
-	@RequestMapping("/QnADevelop.do")
-	public String QnADL(HttpServletRequest req, Model model) {
-		System.out.println("QnADL() 메소드 실행");
-
-		model.addAttribute("req", req);
-		command = new BoardCommand();
-		command.execute(model);
-
-		return "QnADevelop";
-	}
-
-	@RequestMapping("/QnAProgram.do")
-	public String QnAProgram(HttpServletRequest req, Model model) {
-		System.out.println("QnAProgram() 메소드 실행");
-
-		model.addAttribute("req", req);
-		command = new BoardCommand();
-		command.execute(model);
-
-		return "QnAProgram";
+		return "QnABoard";
 	}
 
 	@RequestMapping("/recruitProject.do")
@@ -199,37 +177,15 @@ public class HomeController {
 		return "suggestions";
 	}
 
-	@RequestMapping("/tipDevelop.do")
+	@RequestMapping("/tipBoard.do")
 	public String tipDL(HttpServletRequest req, Model model) {
-		System.out.println("tipDL() 메소드 실행");
+		System.out.println("tipBoard() 메소드 실행");
 
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
 
-		return "tipDevelop";
-	}
-
-	@RequestMapping("/tipDesign.do")
-	public String tipDesign(HttpServletRequest req, Model model) {
-		System.out.println("tipDesign() 메소드 실행");
-
-		model.addAttribute("req", req);
-		command = new BoardCommand();
-		command.execute(model);
-
-		return "tipDesign";
-	}
-
-	@RequestMapping("/tipProgram.do")
-	public String tipProgram(HttpServletRequest req, Model model) {
-		System.out.println("tipProgram() 메소드 실행");
-
-		model.addAttribute("req", req);
-		command = new BoardCommand();
-		command.execute(model);
-
-		return "tipProgram";
+		return "tipBoard";
 	}
 
 	@RequestMapping("/adminBoard.do")
@@ -387,7 +343,7 @@ public class HomeController {
 		return "IDCheck";
 	}
 
-	@RequestMapping("modifyAction.do")
+	@RequestMapping("/modifyAction.do")
 	public void modifyAction(HttpServletRequest req, HttpServletResponse rep, HttpSession session, Model model) throws IOException {
 
 		System.out.println("modifyAction() 메소드 실행");
@@ -592,6 +548,7 @@ public class HomeController {
 			}
 			returnObject.put("files", resultList);
 			returnObject.put("params", mhsr.getParameterMap());
+			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (IllegalStateException e) {
