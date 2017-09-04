@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
+import com.kosmo.athi.model.CommentsDAO;
+import com.kosmo.athi.model.CommentsDTO;
 
 
 public class ViewCommand implements ICommand {
@@ -29,7 +31,12 @@ public class ViewCommand implements ICommand {
 		model.addAttribute("nowPage", req.getParameter("nowPage"));
 		model.addAttribute("viewRow", dto);
 		dao.close();
-		
+
+		//댓글 리스트
+		CommentsDAO cdao = new CommentsDAO();
+		ArrayList<CommentsDTO> list = cdao.getAllComments(num);
+		model.addAttribute("comments", list);
+		cdao.close();
 	}
 
 
