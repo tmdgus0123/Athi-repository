@@ -42,7 +42,7 @@
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
 				<div class="row">
 					<div class="col-sm-12">
-						<div style="float: right;">
+						<div style="float: right; margin-bottom:25px;">
 							<c:choose>
 								<c:when test="${user_id!=null}">
 									<form action="portfolioWrite.do" method="get">
