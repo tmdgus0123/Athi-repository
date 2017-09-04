@@ -18,6 +18,7 @@
 %>
 	<script>
 		alert("사용가능한 아이디 입니다.");
+		opener.signFrm.overFlag.value=1;
 		self.close();
 	</script>
 <%

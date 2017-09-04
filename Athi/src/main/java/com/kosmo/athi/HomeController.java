@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
@@ -42,6 +44,7 @@ import com.kosmo.athi.command.ReplyActionCommand;
 import com.kosmo.athi.command.ReplyCommand;
 import com.kosmo.athi.model.Constant;
 import com.kosmo.athi.model.MemberDAO;
+import com.kosmo.athi.model.MemberDTO;
 
 /**
  * Handles requests for the application home page.
@@ -385,7 +388,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("modifyAction.do")
-	public String modifyAction(HttpServletResponse response, HttpServletRequest req, Model model) {
+	public void modifyAction(HttpServletRequest req, HttpServletResponse rep, HttpSession session, Model model) throws IOException {
 
 		System.out.println("modifyAction() 메소드 실행");
 
@@ -396,27 +399,32 @@ public class HomeController {
 
 		Map<String, Object> map = model.asMap();
 		int ret = (Integer) map.get("modeValue");
-
-		response.setContentType("text/html;charset=utf-8");
+		
 		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		if (ret==1){
+			
+			out = rep.getWriter();
+			
+			rep.setContentType("text/html; charset='UTF-8'"); 
+			out.println("<script>");
+			out.println("alert('정보 수정을 완료하였습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
 		}
-
-		if (ret == 1) {
-			out.println("<script>alert('정보수정이 완료되었습니다.');</script>");
-		} else {
-			out.println("<script>alert('정보수정을 실패하였습니다.');</script>");
+		else{
+			out = rep.getWriter();
+			
+			rep.setContentType("text/html; charset='UTF-8'"); 
+			out.println("<script>");
+			out.println("alert('정보 수정을 실패하였습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
 		}
-		out.flush();
-
-		return "redirect:home";
 	}
 
 	@RequestMapping("deleteAction.do")
-	public String deleteAction(HttpServletResponse response, HttpServletRequest req, HttpSession session, Model model) {
+	public void deleteAction(HttpServletRequest req, HttpServletResponse rep, Model model, HttpSession session) throws IOException {
 
 		System.out.println("deleteAction() 메소드 실행");
 
@@ -427,24 +435,31 @@ public class HomeController {
 
 		Map<String, Object> map = model.asMap();
 		int ret = (Integer) map.get("modeValue");
-
-		response.setContentType("text/html;charset=utf-8");
+		
+		
 		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (ret == 1) {
-			out.println("<script>alert('그동안 이용해주셔서 감사합니다.'); self.close();</script>");
+		
+		if (ret==1){
+			
+			out = rep.getWriter();
+			
+			rep.setContentType("text/html; charset='UTF-8'"); 
+			out.println("<script>");
+			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			
 			session.invalidate();
-		} else {
-			out.println("<script>alert('회원탈퇴에 실패하였습니다!'); self.close();</script>");
 		}
-		out.flush();
-
-		return "redirect:home";
+		else{
+			out = rep.getWriter();
+			
+			rep.setContentType("text/html; charset='UTF-8'"); 
+			out.println("<script>");
+			out.println("alert('탈퇴 실패! 정보 오류');");
+			out.println("history.back();");
+			out.println("</script>");
+		}
 	}
 
 	@RequestMapping("search.do")
@@ -592,5 +607,19 @@ public class HomeController {
 	// uuid생성
 	public static String getUuid() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+	
+	@RequestMapping("selectMemberDelete.do")
+	public String selectMemberDelete(Model model, HttpServletRequest req){
+		
+		String id = req.getParameter("id");
+		Object[] obj = req.getParameterValues("");
+		
+		MemberDAO mDao = new MemberDAO();
+		ArrayList<MemberDTO> mDto = mDao.selectMember(id);
+		
+		model.addAttribute("sMemberList", mDto);
+		
+		return "process/selectMemberDelete";
 	}
 }

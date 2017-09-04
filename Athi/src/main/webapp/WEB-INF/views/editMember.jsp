@@ -98,6 +98,10 @@
 	    	
 	    	else{$('form[name="modifyFrm"][method="post"]').attr("action", "./modifyAction.do");}
 	    });
+	    
+	    $('button[class="btn btn-danger"][type="button"][name="mainBtn"]').on("click", function(){
+	    	location.href="./";
+	    });
 	});
 </script>
 </head>
@@ -261,12 +265,12 @@
 						<div class="form-group">
 							<div class="col-md-12 text-center">
 								<button class="btn btn-success" type="submit" name="modifyBtn"> 
-									<i class="fa fa-check spaceLeft"></i>&nbsp;정보 수정
+									<i class="fa fa-check spaceLeft"></i>&nbsp; 정보 수정
 								</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<!-- redirect 태그 삽입 -->
-								<button class="btn btn-danger" type="button">
-									<i class="fa fa-times spaceLeft"></i>&nbsp;취소
+								<button class="btn btn-danger" type="button" name="mainBtn">
+									<i class="fa fa-times spaceLeft"></i>&nbsp; 홈으로
 								</button>
 							</div>
 						</div>

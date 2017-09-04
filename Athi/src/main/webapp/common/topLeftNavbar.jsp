@@ -222,7 +222,14 @@
 							<i class="fa fa-fw fa-bell"></i>마이페이지
 						</a>
 						<div class="dropdown-menu" aria-labelledby="alertsDropdown">
-							<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">${user_id}님의 마이 페이지</h6>
+							<c:choose>							
+								<c:when test="${user_id=='athi'}">
+									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">관리자님 안녕하세요.</h6>
+								</c:when>
+								<c:otherwise>
+									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">${user_id}님의 마이 페이지</h6>
+								</c:otherwise>
+							</c:choose>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="myPortfolio.do">
 								<strong style="color:#1f9125;">나의 포트폴리오</strong>

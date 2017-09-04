@@ -37,8 +37,10 @@
 	<div class="content-wrapper py-3" style="background-color: #f2f4f7;">
 		<!-- 배너 시작 -->
 		<div class="row cycle-slideshow" style="margin-top: -16px;">
-			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> <img src="./resources/images/baner2.jpg" width=100% height="200px" /> <img src="./resources/images/baner3.jpg" width=100% height="200px" /> <img
-				src="./resources/images/baner4.jpg" width=100% height="200px" />
+			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> 
+			<img src="./resources/images/baner2.jpg" width=100% height="200px" /> 
+			<img src="./resources/images/baner3.jpg" width=100% height="200px" /> 
+			<img src="./resources/images/baner4.jpg" width=100% height="200px" />
 		</div>
 		<!-- 배너 끝 -->
 		<!-- 순위 시작 -->
@@ -124,7 +126,7 @@
 	<c:set var="today" value="${sessionScope.todayCnt}" />
 
 	<jsp:include page="/common/modalLogin.jsp" />
-
+	
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>
 	<script src="./resources/sb-admin/vendor/popper/popper.min.js"></script>
@@ -146,7 +148,7 @@
 		var myLineChart = new Chart(ctx, {
 			type : 'line',
 			data : {
-				labels : [ "Total", "08.30", "08.31" ],
+				labels : [ "Total", "08.30", "08.31", "09.01", "09.02", "09.03", "09.04" ],
 				datasets : [ {
 					label : "방문자수",
 					lineTension : 0.3,
@@ -159,7 +161,7 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					data : [ total, total-today ,today ],
+					data : [ total, "23" , "31", "58", "21", "25", today ],
 				} ],
 			},
 			options : {
@@ -197,6 +199,5 @@
 	<script src="./resources/xeon/js/jquery.isotope.min.js"></script>
 	<script src="./resources/xeon/js/jquery.prettyPhoto.js"></script>
 	<script src="./resources/xeon/js/main.js"></script>
-
 </body>
 </html>

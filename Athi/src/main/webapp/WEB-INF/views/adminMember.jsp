@@ -42,9 +42,7 @@
 									<div class="mr-5">26 New Messages!</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span>
-									<span class="float-right">
-										<i class="fa fa-angle-right"></i>
+									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -58,9 +56,7 @@
 									<div class="mr-5">11 New Tasks!</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span>
-									<span class="float-right">
-										<i class="fa fa-angle-right"></i>
+									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -74,9 +70,7 @@
 									<div class="mr-5">123 New Orders!</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span>
-									<span class="float-right">
-										<i class="fa fa-angle-right"></i>
+									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -90,9 +84,7 @@
 									<div class="mr-5">13 New Tickets!</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span>
-									<span class="float-right">
-										<i class="fa fa-angle-right"></i>
+									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -101,50 +93,54 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-12" style="margin-top: 50px; opacity: 0.85;">
-			<div class="card mb-3">
-				<div class="card-header">
-					<i class="fa fa-table"></i> Data Table Example
-				</div>
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
-							<colgroup>
-								<col width="5%"/>
-								<col width="10%"/>
-								<col width="15%"/>
-								<col width="15%"/>
-								<col width="25%"/>
-								<col width="20%"/>
-							</colgroup>
-							<thead>
-								<tr>
-									<th class="text-center"><input type="checkbox" />
-									<th>등급</th>
-									<th>경험치</th>
-									<th>아이디</th>
-									<th>이름</th>
-									<th>가입일</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- 반복문 시작 -->
-								<c:forEach items='${memberRows}' var='row' varStatus='loop'>
-								<tr>
-									<td class="text-center"><input type="checkbox" />
-									<td>${row.grade }</td>
-									<td>${row.exp }</td>
-									<td>${row.id }</td>
-									<td>${row.name }</td>
-									<td>${row.regidate }</td>
-								</tr>
-								</c:forEach>
-								<!-- 반복문 끝 -->
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
+				<form action="">
+					<table class="table table-bordered" id="dataTable" cellspacing="0">
+						<thead>
+							<tr class="btn-primary">
+								<th class="text-center"><input type="checkbox" />
+								<th>등급</th>
+								<th>경험치</th>
+								<th>아이디</th>
+								<th>이름</th>
+								<th>가입일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- 반복문 시작 -->
+							<c:choose>
+								<c:when test="${empty memberRows}">
+									<tr style="text-align: center;">
+										<td colspan="6">등록된 회원이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items='${memberRows}' var='row' varStatus='loop'>
+										<tr>
+											<td class="text-center"><input type="checkbox" /></td>
+											<td><input type="hidden" style="border: none;" value="${row.grade}" />${row.grade}</td>
+											<td><input type="hidden" style="border: none;" value="${row.exp}" />${row.exp}</td>
+											<td><input type="hidden" style="border: none;" value="${row.id}" />${row.id}</td>
+											<td><input type="hidden" style="border: none;" value="${row.name}" />${row.name}</td>
+											<td><input type="hidden" style="border: none;" value="${row.regidate}" />${row.regidate}</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							<!-- 반복문 끝 -->
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="6">
+									<button type="button" class="btn btn-danger" name="memberBtn">선택 회원 삭제</button>
+									&nbsp;&nbsp;&nbsp;
+									<button type="button" class="btn btn-info" name="gradeBtn">회원 등급 조정</button>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -163,7 +159,7 @@
 	<script src="./resources/sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 	<script src="./resources/sb-admin/vendor/datatables/jquery.dataTables.js"></script>
 	<script src="./resources/sb-admin/vendor/datatables/dataTables.bootstrap4.js"></script>
-	
+
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 </body>
