@@ -28,7 +28,7 @@
    <div class="container">
       <div class="col-sm-12" style="margin-top: 50px;">
          <div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-            <h1>회원 관리</h1>
+            <h1>게시물 관리</h1>
          </div>
          <div class="col-sm-12" style="margin-top: 50px; height: 125px; opacity: 0.85;">
             <div class="col-sm-12">
@@ -39,10 +39,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-pencil"></i>
                            </div>
-                           <div class="mr-5">26 New Messages!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -55,10 +55,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-eraser"></i>
                            </div>
-                           <div class="mr-5">11 New Tasks!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -71,10 +71,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-user-plus"></i>
                            </div>
-                           <div class="mr-5">123 New Orders!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -87,10 +87,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-user-times"></i>
                            </div>
-                           <div class="mr-5">13 New Tickets!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -145,6 +145,17 @@
                   </c:choose>
                   <!-- 반복문 끝 -->
                </tbody>
+                <c:choose>
+                     <c:when test="${not empty boardRows}">
+	               <tfoot>
+	               	  <tr>
+	               		<td colspan="8" style="text-align:right;">
+							<button type="button" class="btn btn-danger" name="memberBtn">선택 게시물 삭제</button>
+						</td>
+					  </tr>
+	               </tfoot>
+	               	</c:when>
+	            </c:choose>
             </table>
          </div>
       </div>
