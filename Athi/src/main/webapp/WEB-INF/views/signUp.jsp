@@ -24,7 +24,6 @@
 <script src="./resources/jQuery/jquery-3.2.1.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-	
 	$(document)
 			.ready(
 					function() {
@@ -118,7 +117,7 @@
 										});
 
 						$(
-								'button[class="btn btn-primary"][type="submit"][name="signUpBtn"]')
+								'button[class="btn btn-success"][type="submit"][name="signUpBtn"]')
 								.on(
 										"click",
 										function() {
@@ -198,7 +197,7 @@
 							<div class="input-group">
 								<input type="text" class="form-control" name="inputId" id="inputId" placeholder="아이디" />
 								<span class="input-group-btn">
-									<button class="btn btn-success" type="button" name="idChk">
+									<button class="btn btn-primary" type="button" name="idChk">
 										중복 확인<i class="fa fa-mail-forward spaceLeft"></i>
 									</button>
 								</span>
@@ -239,7 +238,7 @@
 							<div class="input-group">
 								<input type="text" class="form-control" name="inputAddr" id="inputAddr" id="inputId" placeholder="주소" />
 								<span class="input-group-btn">
-									<button type="button" id="postBtn" class="btn btn-success">
+									<button type="button" id="postBtn" class="btn btn-primary">
 										주소 입력<i class="fa fa-mail-forward spaceLeft"></i>
 									</button>
 								</span>
@@ -259,11 +258,11 @@
 						<div class="col-sm-2"></div>
 						<label class="col-sm-2 control-label text-left">성별</label>
 						<div class="col-sm-6 text-left">
-							<div class="btn btn-success">
+							<div class="btn btn-primary">
 								<input type="checkbox" name="inputGender" class="" id="inputGender" value="남" />
 								<i class="fa fa-mars-stroke-v" aria-hidden="true"></i>남성
 							</div>
-							<div class="btn btn-success">
+							<div class="btn btn-primary">
 								<input type="checkbox" name="inputGender" class="" id="inputGender" value="여" />
 								<i class="fa fa-venus" aria-hidden="true"></i>여성
 							</div>
@@ -297,7 +296,7 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-12 text-center" style="margin-top: 15px;">
-							<button class="btn btn-primary" type="submit" name="signUpBtn">
+							<button class="btn btn-success" type="submit" name="signUpBtn">
 								<i class="fa fa-check spaceLeft"></i>회원가입
 							</button>
 							&nbsp;&nbsp;&nbsp;

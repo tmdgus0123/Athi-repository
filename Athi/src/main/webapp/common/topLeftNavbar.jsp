@@ -34,41 +34,21 @@
 					<span class="nav-link-text"> 포트폴리오 전시 </span>
 				</a>
 			</li>
-
+			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="질문과 답변">
-				<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2">
-					<i class="fa fa-fw fa-question"></i>
-					<span class="nav-link-text"> 질문과 답변</span>
+				<a class="nav-link" href="QnABoard.do">
+					<i class="fa fa-fw fa fa fa-question"></i>
+					<span class="nav-link-text"> 질문과 답변 </span>
 				</a>
-				<ul class="sidenav-second-level collapse" id="collapseComponents2">
-					<li>
-						<a href="QnADesign.do?boardName=QnADesign">QnA Design</a>
-					</li>
-					<li>
-						<a href="QnADevelop.do?boardName=QnADevelop">QnA Develop</a>
-					</li>
-					<li>
-						<a href="QnAProgram.do?boardName=QnAProgram">QnA Program</a>
-					</li>
-				</ul>
 			</li>
+			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="팁과 노하우">
-				<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents3">
-					<i class="fa fa-fw fa-lightbulb-o"></i>
-					<span class="nav-link-text"> 팁과 노하우</span>
+				<a class="nav-link" href="tipBoard">
+					<i class="fa fa-fw fa fa fa-lightbulb-o"></i>
+					<span class="nav-link-text"> 팁과 노하우 </span>
 				</a>
-				<ul class="sidenav-second-level collapse" id="collapseComponents3">
-					<li>
-						<a href="tipDesign.do?boardName=tipDesign">Tip Design</a>
-					</li>
-					<li>
-						<a href="tipDevelop.do?boardName=tipDevelop">Tip Develop</a>
-					</li>
-					<li>
-						<a href="tipProgram.do?boardName=tipProgram">Tip Program</a>
-					</li>
-				</ul>
 			</li>
+			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="프로젝트 팀원 모집">
 				<a class="nav-link" href="recruitProject.do?boardName=recruitProject">
 					<i class="fa fa-fw fa-group"></i>
