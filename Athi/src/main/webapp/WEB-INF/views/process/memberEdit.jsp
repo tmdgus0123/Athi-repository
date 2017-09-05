@@ -147,14 +147,17 @@
 			var id = $("#user_id").val();
 			
 			$.ajax({
-				url : "",
+				url : "gradeEdit.do",
 				data : {
 					grade : grade,
 					id : id
 				},
 				dataType : "script",
 				type : "post",
-				cache : false
+				cache : false,
+				success : function(data){
+					window.location.reload();
+				}
 			});
 		});
 		
@@ -163,14 +166,17 @@
 			var id = $("#user_id").val();
 			
 			$.ajax({
-				url : "",
+				url : "expEdit.do",
 				data : {
 					exp : exp,
 					id : id
 				},
 				dataType : "script",
 				type : "post",
-				cache : false
+				cache : false,
+				success : function(data){
+					window.location.reload();
+				}
 			});
 		});
 	</script>
