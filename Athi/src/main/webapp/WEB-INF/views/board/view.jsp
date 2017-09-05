@@ -57,6 +57,17 @@
 						</c:when>
 					</c:choose>
 				</div>
+				<!-- 추천기능 -->
+				<div id="chuBtn" class="row">
+					<div class="text-center" style="margin: auto; padding-left: 30px;">
+						<c:choose>
+							<c:when test="${user_id==viewRow.id}">	
+								<button id="choiceBtn" type="button" style="border:0; outline:0; background-color:white;"><img src="resources/images/chu_up.png"><br><font size="4"><b>추천수 : ${viewRow.comm_cnt}</b></font></button><br>
+							</c:when>
+						</c:choose>
+					</div>
+				</div>
+				<br />
 				<div class="row" style="background-color: #f3f3f3; height: 50px">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-10 text-left" style="margin: auto; padding-left: 30px;">댓글 수(${viewRow.comm_cnt })</div>
@@ -155,6 +166,28 @@
 				}
 			})
 		}
+	</script>
+	
+	<!-- 추천 추가 -->
+	<script>
+		$('#choiceBtn').click(function() {
+			alert("추천하셨습니다.");
+	
+			$.ajax({
+				url : 'commChoice.do', //form : action
+				type : 'post', // form : method 
+				dataType : 'html',
+				data : { // form : input 's			
+					num : $('#num').val()
+				},
+				success : function(data) {
+					$('#chuBtn').html("");
+					$('#chuBtn').append('<div class="text-center" style="margin: auto;  padding-left: 30px;">');
+					$('#chuBtn').append(data);
+					$('#chuBtn').append('</div>');
+				}
+			});
+		});
 	</script>
 
 </body>

@@ -31,7 +31,6 @@ public class BoardCommand implements ICommand {
 		paramMap.put("searchColumn", searchColumn);
 		paramMap.put("searchWord", searchWord);
 		paramMap.put("boardName", boardName);
-
 		//전체 레코드수 카운트
 		int totalRecordCount = 0;
 
