@@ -45,7 +45,8 @@
 											<td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
 												<h4>카테고리</h4>
 											</td>
-											<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><select name="pLang" class="form-control" name="title" style="width: 90%;" id="">
+											<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;">
+												<select class="form-control" name="pLang" style="width: 90%;" id="">
 													<c:choose>
 														<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
 															<option value="bootstrap">Bootstrap</option>
@@ -60,7 +61,8 @@
 															<option value="spring">SRPING</option>
 														</c:when>
 													</c:choose>
-											</select></td>
+												</select>
+											</td>
 										</c:if>
 									</tr>
 									<tr>
