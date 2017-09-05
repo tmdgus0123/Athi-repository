@@ -47,20 +47,21 @@
 											</td>
 											<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;">
 												<select class="form-control" name="pLang" style="width: 90%;" id="">
-													<c:choose>
-														<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
-															<option value="bootstrap">Bootstrap</option>
-															<option value="css">CSS</option>
-															<option value="jQueryUI">jQuery UI</option>
-															<option value="java">JAVA</option>
-															<option value="javascript">javascript</option>
-															<option value="html">HTML</option>
-															<option value="jQuery">jQuery&Ajax</option>
-															<option value="jsp">JSP</option>
-															<option value="servlet">SERVLET</option>
-															<option value="spring">SRPING</option>
-														</c:when>
-													</c:choose>
+												<c:choose>
+													<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
+													<option value="" style="color:red;">--- 카테고리 ---</option>
+													<option value="java">java</option>
+													<option value="html">html</option>
+													<option value="javascript">javascript</option>
+													<option value="jQuery">jQuery</option>
+													<option value="spring">spring</option>
+													<option value="JSP">JSP</option>
+													<option value="bootstrap">bootstrap</option>
+													<option value="jqueryUI">jqueryUI</option>
+													<option value="css">css</option>
+													<option value="servlet">servlet</option>
+													</c:when>
+												</c:choose>
 												</select>
 											</td>
 										</c:if>

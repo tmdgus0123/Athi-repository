@@ -507,6 +507,18 @@ public class HomeController {
 		return "QnACategoryView";
 	}
 	
+	@RequestMapping("/tipcategory.do")
+	public String tipCategoryView(HttpServletRequest req, Model model){
+		System.out.println("QnAcategory() 메소드 실행");
+		
+		System.out.println(req.getParameter("category"));
+		
+		model.addAttribute("req", req);
+		command = new CategoryViewCommand();
+		command.execute(model);
+		
+		return "tipCategoryView";
+	}
 	@RequestMapping("/portfolioWriteAction.do")
 	public String uploadAction(HttpServletRequest req, Model model) {
 		System.out.println("파일업로드 진행중");
