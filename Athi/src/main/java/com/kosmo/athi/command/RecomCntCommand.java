@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
-import com.kosmo.athi.model.CommentsDAO;
 
-public class CommCntCommand implements ICommand {
+
+public class RecomCntCommand implements ICommand {
 
 	@Override
 	public void execute(Model model) {
@@ -21,10 +21,10 @@ public class CommCntCommand implements ICommand {
 		String num = req.getParameter("num");
 
 		BoardDAO dao = new BoardDAO();
-		dao.comm_Cnt(num);
+		dao.recom_Cnt(num);
 		
 		BoardDTO dto = dao.postView(num);
-		model.addAttribute("commCnt", dto.getcomm_cnt());
+		model.addAttribute("recomCnt", dto.getRecom_cnt());
 		dao.close();
 	}
 
