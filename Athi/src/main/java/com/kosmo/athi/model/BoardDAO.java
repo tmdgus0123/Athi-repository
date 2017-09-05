@@ -57,6 +57,40 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getTotalCount(Map<String, Object> map, String category){
+		int totalRecord = 0;
+
+		String boardName = (String) map.get("boardName");
+
+		String searchColumn = (String) map.get("searchColumn");
+		String searchWord = (String) map.get("searchWord");
+		
+		try {
+			String sql = "SELECT count(*) FROM board b JOIN board_type bt ON b.num = bt.num";
+			if (boardName != null) {
+				sql += " WHERE board_name='"+boardName+"'";
+			}
+			if(category != null){
+				sql += " AND p_language='"+category+"'";
+			}
+			if (searchColumn != null && searchWord != null) {
+				sql += " AND "+searchColumn+ " like '%"+searchWord+"%'";
+			}
+			/*
+			 * 검색어가 있을 경우 검색조건을 쿼리에 추가해야함 where 컬럼 like '%검색어%'
+			 */
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			totalRecord = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return totalRecord;
+	}
+	
 
 	// 전체 레코드 수 불러오기
 	public int getTotalCount(Map<String, Object> map) {
@@ -66,7 +100,7 @@ public class BoardDAO {
 
 		String searchColumn = (String) map.get("searchColumn");
 		String searchWord = (String) map.get("searchWord");
-
+		
 		try {
 			String sql = "SELECT count(*) FROM board b JOIN board_type bt ON b.num = bt.num";
 			if (boardName != null) {
@@ -126,12 +160,16 @@ public class BoardDAO {
 		int end = Integer.parseInt(map.get("end").toString());
 		String boardName = (String) map.get("boardName");
 
+		String category = (String) map.get("category");
 		String searchColumn = (String) map.get("searchColumn");
 		String searchWord = (String) map.get("searchWord");
-
+		
 		String sql = "SELECT * FROM ( SELECT Tb.*, rownum rNum FROM ( " + " SELECT * FROM board b JOIN board_type bt ON b.num = bt.num ";
 		if (boardName != null) {
 			sql += " WHERE board_name = '" + boardName + "' ";
+		}
+		if(category != null){
+			sql += " AND p_language='"+category+"'";
 		}
 		if (searchWord != null) {
 			sql += " AND " + searchColumn + " like '%" + searchWord + "%'";
@@ -140,8 +178,32 @@ public class BoardDAO {
 
 		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
+	
+	public ArrayList<BoardDTO> boardList(Map<String, Object> map, String category) {
 
-	// 자신이 쓴 글 불러오기
+
+		int start = Integer.parseInt(map.get("start").toString());
+		int end = Integer.parseInt(map.get("end").toString());
+		String boardName = (String) map.get("boardName");
+		String searchColumn = (String) map.get("searchColumn");
+		String searchWord = (String) map.get("searchWord");
+		
+		String sql = "SELECT * FROM ( SELECT Tb.*, rownum rNum FROM ( " + " SELECT * FROM board b JOIN board_type bt ON b.num = bt.num ";
+		if (boardName != null) {
+			sql += " WHERE board_name = '" + boardName + "' ";
+		}
+		if(category != null){
+			sql += " AND p_language='"+category+"'";
+		}
+		if (searchWord != null) {
+			sql += " AND " + searchColumn + " like '%" + searchWord + "%'";
+		}
+		sql += " ORDER BY bgroup DESC, bstep ASC) Tb " + " ) WHERE rNum BETWEEN " + start + " AND " + end;
+
+		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
+	
+	//자신이 쓴 글 불러오기
 	public ArrayList<BoardDTO> myPageBoardList(Map<String, Object> map) {
 
 		int start = Integer.parseInt(map.get("start").toString());
@@ -311,8 +373,38 @@ public class BoardDAO {
 			});
 		}
 	}
+	
+	// 게시글 삭제
+	public void postDelete(final String num) {
 
-	// 게시글 하나 가져오기
+		System.out.println("postDelete() 실행");
+
+		int res;
+
+		String sql = "DELETE FROM board_type WHERE num=?";
+
+		res = this.template.update(sql, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, num);
+			}
+		});
+
+		if (res == 1) {
+			String sql2 = "DELETE FROM board WHERE num=?";
+
+			this.template.update(sql2, new PreparedStatementSetter() {
+
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setString(1, num);
+				}
+			});
+		}
+	}
+	
+	//게시글 하나 가져오기
 	public BoardDTO selectPosts(String num) {
 
 		String dbQuery = "SELECT * FROM board b join board_type bt ON b.num=bt.num WHERE b.num=" + num;

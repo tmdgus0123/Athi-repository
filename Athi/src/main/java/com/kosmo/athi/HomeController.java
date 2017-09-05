@@ -23,17 +23,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
+import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
 import com.kosmo.athi.command.PortfolioBoardCommand;
 import com.kosmo.athi.command.PortfolioViewCommand;
 import com.kosmo.athi.command.PortfolioWriteCommand;
 import com.kosmo.athi.command.SearchCommand;
+import com.kosmo.athi.command.SelectMemberDeleteCommand;
+import com.kosmo.athi.command.SelectPostDeleteCommand;
 import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
@@ -132,7 +133,7 @@ public class HomeController {
 	@RequestMapping("/QnABoard.do")
 	public String QnADesign(HttpServletRequest req, Model model) {
 		System.out.println("QnABoard() 메소드 실행");
-
+		
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
@@ -502,6 +503,33 @@ public class HomeController {
 		return "fileupload/portfolioWrite";
 	}
 	
+
+	@RequestMapping("/QnAcategory.do")
+	public String QnACategoryView(HttpServletRequest req, Model model){
+		System.out.println("QnAcategory() 메소드 실행");
+		
+		System.out.println(req.getParameter("category"));
+		
+		model.addAttribute("req", req);
+		command = new CategoryViewCommand();
+		command.execute(model);
+		
+		return "QnACategoryView";
+	}
+	
+	@RequestMapping("/tipcategory.do")
+	public String tipCategoryView(HttpServletRequest req, Model model){
+		System.out.println("QnAcategory() 메소드 실행");
+		
+		System.out.println(req.getParameter("category"));
+		
+		model.addAttribute("req", req);
+		command = new CategoryViewCommand();
+		command.execute(model);
+		
+		return "tipCategoryView";
+	}
+	
 	@RequestMapping("/portfolioWriteAction.do")
 	public String portfolioWriteAction(HttpServletRequest req, Model model) {
 		model.addAttribute("req", req);
@@ -525,15 +553,26 @@ public class HomeController {
 	
 	@RequestMapping("selectMemberDelete.do")
 	public String selectMemberDelete(Model model, HttpServletRequest req){
+		System.out.println("회원삭제 실행");
 		
-		String id = req.getParameter("id");
-		Object[] obj = req.getParameterValues("");
+		model.addAttribute("req", req);
 		
-		MemberDAO mDao = new MemberDAO();
-		ArrayList<MemberDTO> mDto = mDao.selectMember(id);
+		command = new SelectMemberDeleteCommand();
+		command.execute(model);
 		
-		model.addAttribute("sMemberList", mDto);
+		return "adminMember";
+	}
+	
+	@RequestMapping("selectPostDelete.do")
+	public String selectPostDelete(Model model, HttpServletRequest req){
 		
-		return "process/selectMemberDelete";
+		System.out.println("선택 게시물 삭제 실행");
+		
+		model.addAttribute("req", req);
+		
+		command = new SelectPostDeleteCommand();
+		command.execute(model);
+		
+		return "adminBoard";
 	}
 }
