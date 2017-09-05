@@ -58,7 +58,7 @@ public class CommentsDAO {
 	//전체 댓글 가져오기
 	public ArrayList<CommentsDTO> getAllComments(String board_num) {
 
-		String sql = "SELECT * FROM comments WHERE board_num="+ board_num;
+		String sql = "SELECT * FROM comments WHERE board_num="+ board_num +"ORDER BY num ASC";
 
 		return (ArrayList<CommentsDTO>) template.query(sql, new BeanPropertyRowMapper<CommentsDTO>(CommentsDTO.class));
 	}
@@ -96,6 +96,23 @@ public class CommentsDAO {
 		String sql = "SELECT * FROM comments WHERE num in (SELECT MAX(num) FROM comments)";
 		
 		return (CommentsDTO)template.queryForObject(sql, new BeanPropertyRowMapper<CommentsDTO>(CommentsDTO.class));
+	}
+
+	public int delete(String num) {
+		int rs = 0;
+				
+		try {
+		String sql = "DELETE FROM comments WHERE num=?";
+		
+		psmt = conn.prepareStatement(sql);
+		psmt.setString(1, num);
+		
+		rs = psmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
 }

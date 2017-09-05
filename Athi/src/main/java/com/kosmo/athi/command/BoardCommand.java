@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
-import com.kosmo.athi.model.CommentsDAO;
 import com.kosmo.athi.model.PagingUtil;
 
 public class BoardCommand implements ICommand {

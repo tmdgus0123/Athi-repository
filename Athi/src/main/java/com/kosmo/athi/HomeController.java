@@ -18,20 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
-import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
 import com.kosmo.athi.command.SearchCommand;
@@ -499,17 +494,6 @@ public class HomeController {
 	public String portfolioWrite() {
 
 		return "fileupload/portfolioWrite";
-	}
-
-	@RequestMapping("/comments.do")
-	public String comments(HttpServletRequest req, Model model) {
-		System.out.println("comments() 메소드 실행");
-		
-		model.addAttribute("req", req);
-		command = new CommentsCommand();
-		command.execute(model);
-		
-		return "board/commentsAction";
 	}
 	
 	@RequestMapping("/QnAcategory.do")
