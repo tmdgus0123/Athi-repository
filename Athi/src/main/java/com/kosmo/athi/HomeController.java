@@ -35,6 +35,8 @@ import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
 import com.kosmo.athi.command.SearchCommand;
+import com.kosmo.athi.command.SelectMemberDeleteCommand;
+import com.kosmo.athi.command.SelectPostDeleteCommand;
 import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
@@ -607,21 +609,27 @@ public class HomeController {
 	}
 	
 	@RequestMapping("selectMemberDelete.do")
-	public String selectMemberDelete(Model model, HttpServletRequest req){	
-		//String id = req.getParameter("id");
-		String[] id = req.getParameterValues("tdArr");
-		String realId = "";
+	public String selectMemberDelete(Model model, HttpServletRequest req){
+		System.out.println("회원삭제 실행");
 		
-		MemberDAO mDao = new MemberDAO();
-		ArrayList<MemberDTO> mDto = null;
+		model.addAttribute("req", req);
 		
-		for(int i=0; i<id.length; i++){
-			realId = id[i];
-			mDto = mDao.selectMember(realId);
-		}
+		command = new SelectMemberDeleteCommand();
+		command.execute(model);
 		
-		model.addAttribute("sMemberList", mDto);
+		return "adminMember";
+	}
+	
+	@RequestMapping("selectPostDelete.do")
+	public String selectPostDelete(Model model, HttpServletRequest req){
 		
-		return "process/selectMemberDelete";
+		System.out.println("선택 게시물 삭제 실행");
+		
+		model.addAttribute("req", req);
+		
+		command = new SelectPostDeleteCommand();
+		command.execute(model);
+		
+		return "adminBoard";
 	}
 }

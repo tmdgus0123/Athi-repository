@@ -334,7 +334,37 @@ public class BoardDAO {
 			});
 		}
 	}
+	
+	// 게시글 삭제
+	public void postDelete(final String num) {
 
+		System.out.println("postDelete() 실행");
+
+		int res;
+
+		String sql = "DELETE FROM board_type WHERE num=?";
+
+		res = this.template.update(sql, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, num);
+			}
+		});
+
+		if (res == 1) {
+			String sql2 = "DELETE FROM board WHERE num=?";
+
+			this.template.update(sql2, new PreparedStatementSetter() {
+
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setString(1, num);
+				}
+			});
+		}
+	}
+	
 	//게시글 하나 가져오기
 	public BoardDTO selectPosts(String num) {
 

@@ -33,7 +33,9 @@
 				<div class="col-sm-12" style="margin-top: 50px;">
 					<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 5px; padding-bottom: 5px; margin-bottom: 25px; opacity: 0.85;">
 						<form name="writeFrm" action="writeAction.do" method="post" onsubmit="return checkWriteFrm();">
-							<input type="hidden" name="boardName" value="${param.boardName}" readonly /> <input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
+							<input type="hidden" name="boardName" value="${param.boardName}" readonly /> 
+							<input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> 
+							<input type="hidden" name="id" value="${param.id}" />
 							<div class="form-group">
 								<table class="table" style="margin-top: 50px;">
 									<tr>

@@ -50,7 +50,7 @@
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 					<button type="submit" class="btn btn-success">답글</button>
 					<c:choose>
-						<c:when test="${user_id==viewRow.id}">
+						<c:when test="${user_id==viewRow.id }">
 							<button type="button" class="btn btn-primary" onclick="location.href='board/modify.do?mode=modify&num=${param.num}&boardName=${param.boardName}'">수정</button>
 							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
 						</c:when>
@@ -64,7 +64,7 @@
 				<div class="col-sm-12" style="background-color: white; border-radius: 1em; padding-bottom: 40px;">
 					<ul id="comments" style="list-style: none;">
 						<!-- 반복문 시작 -->
-						<c:forEach items='${comments}' var='dto' varStatus='loop'>
+						<c:forEach items='${comments }' var='dto' varStatus='loop'>
 							<li>
 							<form id="commForm_${dto.num }">
 								<div class="row" style="margin-top: 25px;">

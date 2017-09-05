@@ -21,30 +21,7 @@
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="./resources/jQuery/jquery-3.2.1.js"></script>
-<script>
-	$(document).ready(function(){
-		$('#memberBtn').on('click', function(){
-			
-			var checkbox = $("input:checkbox[name='deleteInfo']:checked");
-			var tdArr = new Array();
-			var popup = window.open("about:blank", "winOpen", "width=700, height=700");
-			// CheckBox 검사
-			if(checkbox.is(":checked")==true){
-				checkbox.is(":checked").each(function(idx){
-					var test = $(this).val();
-					tdArr.push(test);
-				});
-			}
-			else{
-				alert("체크된 항목이 없습니다.");
-				return false;
-			}
-			
-			$("#memberList").attr("action", "selectMemberDelete.do").attr("target", "winOpen");
-			$("#memberList").submit();
-		});
-	});
-</script>
+
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -159,8 +136,8 @@
 								<tfoot>
 									<tr>
 										<td colspan="6" style="text-align: right;">
-											<button type="button" class="btn btn-danger" id="memberBtn">선택 회원 삭제</button> &nbsp;&nbsp;&nbsp;
-											<button type="button" class="btn btn-info" id="gradeBtn">회원 등급 조정</button>
+											<button type="button" class="btn btn-danger" name="memberBtn">선택 회원 삭제</button> &nbsp;&nbsp;&nbsp;
+											<button type="button" class="btn btn-info" name="gradeBtn">회원 등급 조정</button>
 										</td>
 									</tr>
 								</tfoot>
@@ -191,5 +168,33 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
+	
+	<script>
+		jQuery.ajaxSettings.traditional = true;
+		
+		$('button[type="button"][class="btn btn-danger"][name="memberBtn"]').click(function(){
+			var arr = new Array();
+			
+			$("input[name='deleteInfo'][type='checkbox']:checked").each(function(idx){
+				arr.push($("input[name='deleteInfo'][type='checkbox']:checked").eq(idx).val());
+			});
+			
+			$.ajax({
+				url : "selectMemberDelete.do",
+				data : {
+					'user_id' : arr
+				},
+				type : "post",
+				success : function(data){
+					alert("회원 삭제를 정상적으로 처리하였습니다.");
+					window.location.reload();
+				},
+				error : function(request, status, error) {
+				    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				},
+				async : true
+			});	
+		});
+	</script>
 </body>
 </html>

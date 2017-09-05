@@ -20,6 +20,7 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="./resources/jQuery/jquery-3.2.1.js"></script>
 
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
@@ -127,18 +128,16 @@
                      <c:otherwise>
                         <c:forEach items='${boardRows}' var='row' varStatus='loop'>
                            <tr>
-                              <td><input type="checkbox" name="listBox" /></td>
-                              <td><input type="hidden" style="border: none;" value="${row.num}" readonly />${row.num}</td>
+                              <td><input type="checkbox" name="listBox" value="${row.num}"/></td>
+                              <td>${row.num}</td>
                               <td>
-                                 <a href="./view.do?num=${row.num }&nowPage=${nowPage}">
-                                    <input type="hidden" style="border: none;" value="${row.title}" readonly />${row.title}
-                                 </a>
+                                 <a href="./view.do?num=${row.num }&nowPage=${nowPage}">${row.title}</a>
                               </td>
-                              <td><input type="hidden" style="border: none; " value="${row.id}" />${row.id}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.postdate}" />${row.postdate}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.visit_cnt}" />${row.visit_cnt}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.comm_cnt}" />${row.comm_cnt}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.recom_cnt}" />${row.recom_cnt}</td>
+                              <td>${row.id}</td>
+                              <td>${row.postdate}</td>
+                              <td>${row.visit_cnt}</td>
+                              <td>${row.comm_cnt}</td>
+                              <td>${row.recom_cnt}</td>
                            </tr>
                         </c:forEach>
                      </c:otherwise>
@@ -150,7 +149,7 @@
 	               <tfoot>
 	               	  <tr>
 	               		<td colspan="8" style="text-align:right;">
-							<button type="button" class="btn btn-danger" name="memberBtn">선택 게시물 삭제</button>
+							<button type="button" class="btn btn-danger" name="postBtn">선택 게시물 삭제</button>
 						</td>
 					  </tr>
 	               </tfoot>
@@ -178,5 +177,33 @@
 
    <!-- Custom scripts for this sb-admin -->
    <script src="./resources/sb-admin/js/sb-admin.min.js"></script>
+   
+   	<script>
+		jQuery.ajaxSettings.traditional = true;
+		
+		$('button[type="button"][class="btn btn-danger"][name="postBtn"]').click(function(){
+			var arr = new Array();
+			
+			$("input[name='listBox'][type='checkbox']:checked").each(function(idx){
+				arr.push($("input[name='listBox'][type='checkbox']:checked").eq(idx).val());
+			});
+			
+			$.ajax({
+				url : "selectPostDelete.do",
+				data : {
+					'postNum' : arr
+				},
+				type : "post",
+				success : function(data){
+					alert("선택한 게시물 삭제를 정상적으로 처리하였습니다.");
+					window.location.reload();
+				},
+				error : function(request, status, error) {
+				    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				},
+				async : true
+			});	
+		});
+	</script>
 </body>
 </html>
