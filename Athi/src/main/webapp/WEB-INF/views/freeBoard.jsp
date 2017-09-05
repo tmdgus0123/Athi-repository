@@ -96,7 +96,7 @@
 										<td style="text-align: center;">${row.id}</td>
 										<td style="text-align: center;">${row.postdate}</td>
 										<td style="text-align: center;">${row.visit_cnt}</td>
-										<td style="text-align: center;">${row.comm_cnt}</td>
+										<td style="text-align: center;">${row.recom_cnt}</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>

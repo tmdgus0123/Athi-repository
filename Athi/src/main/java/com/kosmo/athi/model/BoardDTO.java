@@ -11,8 +11,8 @@ public class BoardDTO {
 	private String id;
 	private int visit_cnt; // 조회수
 
-	private int comm_cnt; // 추천수
-	private int recom_cnt; // 댓글수
+	private int comm_cnt; // 댓글수
+	private int recom_cnt; // 추천수
 	
 	// 게시판 정렬에 필요한 변수
 	private int bgroup;

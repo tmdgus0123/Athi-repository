@@ -33,9 +33,7 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 5px; padding-bottom: 5px; margin-bottom: 25px; opacity: 0.85;">
 				<form name="writeFrm" action="writeAction.do" method="post" onsubmit="return checkWriteFrm();">
-					<input type="hidden" name="boardName" value="${param.boardName}" readonly />
-					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly />
-					<input type="hidden" name="id" value="${param.id}" />
+					<input type="hidden" name="boardName" value="${param.boardName}" readonly /> <input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
 					<div class="row form-group">
 						<div class="col-sm-2">
 							<c:choose>
@@ -69,13 +67,11 @@
 							<textarea name="content" class="form-control" style="height: 400px;" placeholder="내용을 입력해주세요."></textarea>
 						</div>
 					</div>
-					<div class="row form-group" style="background-color: #f3f3f3; height: 50px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em;">
-						<div class="col-sm-11 text-right" style="margin: auto;">
+					<div class="row form-group">
+						<div class="col-sm-12 text-right" style="margin-bottom: 15px;">
 							<button type="submit" class="btn btn-success">등록하기</button>
 						</div>
-						<div class="col-sm-1"></div>
 					</div>
-
 				</form>
 			</div>
 		</div>

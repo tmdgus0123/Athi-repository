@@ -27,7 +27,7 @@ import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
-import com.kosmo.athi.command.CommCntCommand;
+import com.kosmo.athi.command.RecomCntCommand;
 import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
@@ -534,14 +534,14 @@ public class HomeController {
 	}
 	@RequestMapping("/commChoice.do")
 	public String choice(HttpServletRequest req, Model model) {
-		System.out.println("commCnt() 메소드 실행");
+		System.out.println("recomCnt() 메소드 실행");
 		System.out.println("값넘어옴"+ req.getParameter("num"));
 		
 		model.addAttribute("req", req);
-		command = new CommCntCommand();
+		command = new RecomCntCommand();
 		command.execute(model);
 		
-		return "board/commCntAction";
+		return "board/recomCntAction";
 	}
 
 	@RequestMapping("/portfolioWriteAction.do")
