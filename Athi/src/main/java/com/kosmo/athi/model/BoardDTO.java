@@ -13,22 +13,25 @@ public class BoardDTO {
 
 	private int comm_cnt; // 추천수
 	private int recom_cnt; // 댓글수
-
-	//게시판 정렬에 필요한 변수
+	
+	// 게시판 정렬에 필요한 변수
 	private int bgroup;
 	private int bstep;
 	private int bdepth;
 	
-	//조인시 필요한 변수
+	// 조인시 필요한 변수
 	private String board_name;
 	
-	//게시글 가상 번호
+	// 게시글 가상 번호
 	private int rNum;
-
+	
+	// 포트폴리오 파일 이름
+	private String fileName;
+	
 	public BoardDTO() {
 	}
 
-	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int bgroup, int bstep, int bdepth, String board_name) {
+	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int bgroup, int bstep, int bdepth, String board_name, String fileName) {
 
 		this.num = num;
 		this.title = title;
@@ -42,6 +45,7 @@ public class BoardDTO {
 		this.bstep = bstep;
 		this.bdepth = bdepth;
 		this.board_name = board_name;
+		this.fileName = fileName;
 	}
 
 	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int bgroup, int bstep, int bdepth) {
@@ -56,6 +60,14 @@ public class BoardDTO {
 		this.bgroup = bgroup;
 		this.bstep = bstep;
 		this.bdepth = bdepth;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public int getNum() {

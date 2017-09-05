@@ -244,6 +244,34 @@ public class MemberDAO {
 			}
 		});
 	}
+	
+	public void deleteMember3(final String id){
+		
+		int commit = 0;
+		
+		String dbQuery1 = "DELETE FROM member_grade WHERE id=?";
+		
+		commit = this.template.update(dbQuery1, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setString(1, id);
+			}
+		});
+		
+		if(commit==1){
+			
+			String dbQuery2 = "DELETE FROM member WHERE id=?";
+			
+			this.template.update(dbQuery1, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement psmt) throws SQLException {
+					psmt.setString(1, id);
+				}
+			});
+		}
+	}
 
 	public ArrayList<MemberDTO> rankList(){
 		

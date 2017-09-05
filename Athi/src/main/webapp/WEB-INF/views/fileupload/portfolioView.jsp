@@ -1,6 +1,3 @@
-<%@page import="com.kosmo.athi.model.CommentsDTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.kosmo.athi.model.CommentsDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
@@ -22,7 +19,6 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -36,22 +32,24 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-bottom: 10px; opacity: 0.85;">
 				<div class="row" style="background-color: #f3f3f3; border-top-left-radius: 1em; border-top-right-radius: 1em; height: 50px;">
-					<div class="col-sm-4 text-left" style="margin: auto;">${viewRow.num }</div>
-					<div class="col-sm-4 text-center" style="margin: auto;">${viewRow.title }</div>
-					<div class="col-sm-4 text-right" style="margin: auto;">조회 : ${viewRow.visit_cnt } / 추천 : ${viewRow.recom_cnt }</div>
+					<div class="col-sm-4 text-left" style="margin: auto;">인벤관리자</div>
+					<div class="col-sm-4 text-center" style="margin: auto;">제목</div>
+					<div class="col-sm-4 text-right" style="margin: auto;">조회 : 100 / 추천 : 100</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6 text-left">${viewRow.board_name }</div>
-					<div class="col-sm-6 text-right">${viewRow.postdate }</div>
+					<div class="col-sm-6 text-left">[정보]</div>
+					<div class="col-sm-6 text-right">2017-09-03 12:59:59</div>
 				</div>
-				<div style="height: 100px;">
-					<div class="text-left" style="margin-top: 100px;">${viewRow.content }</div>
+				<div>
+					<div class="text-left" style="margin-top:50px; margin-bottom:50px;">
+						<img src="./resources/images/${param.fileName }" style="width:500px; height:500px;"/>
+					</div>
 				</div>
 				<div class="text-right" style="margin-top: 25px; margin-bottom: 25px;">
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 					<button type="submit" class="btn btn-success">답글</button>
 					<c:choose>
-						<c:when test="${user_id==viewRow.id }">
+						<c:when test="${user_id==viewRow.id}">
 							<button type="button" class="btn btn-primary" onclick="location.href='board/modify.do?mode=modify&num=${param.num}&boardName=${param.boardName}'">수정</button>
 							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
 						</c:when>
@@ -59,47 +57,34 @@
 				</div>
 				<div class="row" style="background-color: #f3f3f3; height: 50px">
 					<div class="col-sm-1"></div>
-					<div class="col-sm-10 text-left" style="margin: auto; padding-left: 30px;">댓글 수(${viewRow.comm_cnt })</div>
+					<div class="col-sm-10 text-left" style="margin: auto; padding-left: 30px;">댓글 수(0)</div>
 					<div class="col-sm-1"></div>
 				</div>
 				<div class="col-sm-12" style="background-color: white; border-radius: 1em; padding-bottom: 40px;">
-					<ul id="comments" style="list-style: none;">
-						<!-- 반복문 시작 -->
-						<c:forEach items='${comments}' var='dto' varStatus='loop'>
-							<li id="li_${dto.num }">
-								<div class="row" style="margin-top: 25px;">
-									<div class="col-sm-1">
-										<input type="checkbox" style="margin-top: 6.5px;" />
-									</div>
-									<div class="col-sm-9 text-left">                                                                                                                                                                                     
-										<div><strong>${dto.id }</strong>/<span>(${dto.postdate })</span></div>
-										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
-									</div>
-									<div class="col-sm-1 text-right">
-										<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
-									</div>
-									<div class="col-sm-1" style="margin-top: 25px;"></div>
-								</div>
-							</li>
-						</c:forEach>
-						<!-- 반복문 끝 -->
-					</ul>
-					<form name="commentsForm">
-						<input type="hidden" id="num" value="${viewRow.num }" />
-						<div class="row" style="margin-top: 50px;background-color:#f3f3f3;padding:10px;">
-							<div class="col-sm-2">
-								<br /> <strong>${user_id }</strong>
-								<input type="hidden" id="id" value="${user_id }" />
-							</div>
-							<div class="col-sm-8">
-								<textarea id="content" rows="3" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
-							</div>
-							<div class="col-sm-1">
-								<input type="button" id="enrollBtn" value="등록" />
-							</div>
-							<div class="col-sm-1"></div>
+					<div class="row" style="margin-top: 25px;">
+						<div class="col-sm-1">
+							<input type="checkbox" style="margin-top: 6.5px;" />
 						</div>
-					</form>
+						<div class="col-sm-9 text-left">
+							<div>이름 / 작성일</div>
+							<div style="margin-top: 25px; margin-bottom: 6.5px;">내용</div>
+						</div>
+						<div class="col-sm-1 text-right">
+							<button class="btn btn-danger" style="margin-top: 13px;">삭제</button>
+						</div>
+						<div class="col-sm-1" style="margin-top: 25px;"></div>
+					</div>
+					<hr>
+					<div class="row" style="margin-top: 50px;">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-9">
+							<textarea name="text" rows="5" style="width: 100%;">텍스트</textarea>
+						</div>
+						<div class="col-sm-1">
+							<button class="btn btn-default">답글</button>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -122,40 +107,5 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-	<!-- 댓글 추가 -->
-	<script>
-		$('#enrollBtn').click(function() {
-			$.ajax({
-				url : 'comments.do', //form : action
-				type : 'post', // form : method
-				dataType : 'html',
-				data : { // form : input 's
-					num : $('#num').val(),
-					id : $('#id').val(),
-					content : $('#content').val()
-				},
-				success : function(data) {
-					$('#comments').append(data);
-				}
-			});
-
-			$('#content').val("");
-		});
-	
-		function deleteComments(idx) {
-			$.ajax({
-				url : 'deleteComments.do',
-				type : 'post',
-				dataType : 'html',
-				data : {
-					num : idx,
-				},
-				success : function(data) {
-					$('#li_'+idx).remove();
-				}
-			})
-		}
-	</script>
-
 </body>
 </html>
