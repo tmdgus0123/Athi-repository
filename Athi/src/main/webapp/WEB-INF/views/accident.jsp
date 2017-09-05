@@ -25,6 +25,7 @@
 
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
+	
 	<jsp:include page="/common/topLeftNavbar.jsp" />
 	<div class="container">
 		<div class="col-sm-12" style="margin-top: 50px;">
@@ -165,6 +166,5 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-
 </body>
 </html>

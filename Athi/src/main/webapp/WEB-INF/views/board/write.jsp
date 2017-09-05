@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -29,61 +28,49 @@
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
 				<h1>글쓰기</h1>
 			</div>
-			<div>
-				<div class="col-sm-12" style="margin-top: 50px;">
-					<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 5px; padding-bottom: 5px; margin-bottom: 25px; opacity: 0.85;">
-						<form name="writeFrm" action="writeAction.do" method="post" onsubmit="return checkWriteFrm();">
-							<input type="hidden" name="boardName" value="${param.boardName}" readonly /> <input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
-							<div class="form-group">
-								<table class="table" style="margin-top: 50px;">
-									<tr>
-										<td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-											<h4>제목</h4>
-										</td>
-										<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><input type="text" class="form-control" name="title" style="width: 90%; border: 2px solid black; color: white;" /></td>
-										<c:if test="${param.boardName!='accident' and param.boardName!='freeBoard' and param.boardName!='notice' and param.boardName!='suggestions'}">
-											<td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-												<h4>카테고리</h4>
-											</td>
-											<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><select name="pLang" class="form-control" name="title" style="width: 90%;" id="">
-													<c:choose>
-														<c:when test="${param.boardName=='QnADesign'}">
-															<option value="bootstrap">Bootstrap</option>
-															<option value="css">CSS</option>
-															<option value="jQueryUI">jQuery UI</option>
-														</c:when>
-														<c:when test="${param.boardName=='QnADevelop'}">
-															<option value="java">JAVA</option>
-															<option value="javascript">javascript</option>
-															<option value="html">HTML</option>
-															<option value="jQueryAjax">jQuery&Ajax</option>
-															<option value="jspServlet">JSP&Servlet</option>
-															<option value="spring">SRPING</option>
-														</c:when>
-														<c:when test="${param.boardName=='QnAProgram'}">
-															<option value="software">소프트웨어</option>
-															<option value="hardware">하드웨어</option>
-															<option value="system">시스템</option>
-														</c:when>
-													</c:choose>
-											</select></td>
-										</c:if>
-									</tr>
-									<tr>
-										<td style="padding-top: 50px; padding-bottom: 50px; text-align: center;"><br> <br> <br> <br>
-											<h4>내용</h4></td>
-										<td colspan="3" style="padding-top: 50px; padding-bottom: 50px;"><textarea name="content" class="form-control" style="width: 90%; height: 200px; border: 2px solid black; color: white;"></textarea></td>
-									</tr>
-									<tr>
-										<td colspan="4" style="text-align: center; margin-top: 25px;">
-											<button type="submit" class="btn btn-success">등록하기</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</form>
+		</div>
+		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; margin-bottom: 25px; opacity: 0.85;">
+				<form id="frm" name="frm" method="post" enctype="multipart/form-data" action="portfolioWriteAction.do">
+					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
+					<div class="row form-group">
+						<div class="col-sm-2">
+							<select name="pLang" class="form-control">
+								<option value="bootstrap">Bootstrap</option>
+								<option value="css">CSS</option>
+								<option value="jQueryUI">jQuery UI</option>
+							</select>
+						</div>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." />
+						</div>
 					</div>
-				</div>
+					<div class="row form-group" style="background-color: #e7adb7; height: 50px">
+						<div class="col-sm-11 text-right" style="margin: auto;">글쓴이 : ${param.id }</div>
+						<div class="col-sm-1"></div>
+					</div>
+					<div class="row form-group">
+						<div class="col-sm-12">
+							<textarea name="content" class="form-control" style="height: 400px;" placeholder="내용을 입력해주세요."></textarea>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-sm-2" style="margin: auto;">
+							<span class="btn-primary" style="border-radius: 1em; padding-left: 50px; padding-right: 50px; padding-top: 12.5px; padding-bottom: 12.5px; ">
+								첨부 파일
+							</span>
+						</div>
+						<div class="col-sm-10">
+							<input type="file" class="form-control" name="file" id="file" />
+						</div>
+					</div>
+					<div class="row form-group" style="background-color: #f3f3f3; height: 50px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em;">
+						<div class="col-sm-11 text-right" style="margin: auto;">
+							<button type="submit" class="btn btn-success">등록하기</button>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -32,5 +32,4 @@ public class ViewCommand implements ICommand {
 		
 	}
 
-
 }

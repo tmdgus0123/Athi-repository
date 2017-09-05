@@ -29,7 +29,7 @@
 			</li>
 			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="포트폴리오 전시">
-				<a class="nav-link" href="displayPortfolio.do">
+				<a class="nav-link" href="portfolioBoard.do">
 					<i class="fa fa-fw fa fa fa-picture-o"></i>
 					<span class="nav-link-text"> 포트폴리오 전시 </span>
 				</a>
@@ -43,7 +43,7 @@
 			</li>
 			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="팁과 노하우">
-				<a class="nav-link" href="tipBoard">
+				<a class="nav-link" href="tipBoard.do">
 					<i class="fa fa-fw fa fa fa-lightbulb-o"></i>
 					<span class="nav-link-text"> 팁과 노하우 </span>
 				</a>
@@ -212,19 +212,19 @@
 							</c:choose>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="myPortfolio.do">
-								<strong style="color:#1f9125;">나의 포트폴리오</strong>
+								<strong style="color:#acc800;">나의 포트폴리오</strong>
 							</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="myPage.do">
-								<strong style="color:#0796ba;">나의 활동내역</strong>
+								<strong style="color:#fdbc00;">나의 활동내역</strong>
 							</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="editMember.do?user_id=${user_id}&user_pwd=${user_pwd}">
-								<strong style="color:#0d5de8;">회원 정보수정</strong>
+								<strong style="color:#608ffb;">회원 정보수정</strong>
 							</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" onclick="window.open('withDraw.do?id=${user_id}', '', 'width=500px, height=500px, status=no, toolbar=no, menubar=no, scrollbars=no');">
-								<strong style="color:red;">회원 탈퇴</strong>
+								<strong style="color:#f1685e;">회원 탈퇴</strong>
 							</a>
 						</div>
 					</li>

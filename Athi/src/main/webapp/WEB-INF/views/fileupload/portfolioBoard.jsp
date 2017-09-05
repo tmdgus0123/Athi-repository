@@ -1,8 +1,12 @@
 <%@page import="com.kosmo.athi.model.BoardDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://malsup.github.com/jquery.cycle2.js"></script>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +14,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>ATHI</title>
+<link href="./resources/xeon/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resources/xeon/css/prettyPhoto.css" rel="stylesheet">
+<link href="./resources/xeon/css/main.css" rel="stylesheet">
 
 <!-- Bootstrap core CSS -->
 <link href="./resources/sb-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +26,6 @@
 <link href="./resources/sb-admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
@@ -29,90 +35,81 @@
 	<div class="container">
 		<div class="col-sm-12" style="margin-top: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-				<h1>Tip Develop</h1>
+				<h1>포트폴리오 전시</h1>
 			</div>
 		</div>
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
-				<div class="row" style="margin-bottom: 10px;">
-					<div class="col-sm-6">
-						<div style="float: left;">
-							<form action="">
-								<div class="form-group">
-									<select name="searchColumn" class="form-control">
-										<option value="">카테고리</option>
-										<option value="">JAVA</option>
-										<option value="">HTML</option>
-										<option value="">CSS</option>
-										<option value="">jQuery</option>
-										<option value="">Spring</option>
-									</select>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div style="float: right;">
-						<c:choose>
-							<c:when test="${user_id!=null}">
-							<form action="write.do" method="get">
-								<input type="hidden" name="boardName" value="${boardName}" />
-								<input type="hidden" name="nowPage" value="${nowPage}" />
-								<input type="hidden" name="id" value="${user_id}"/>
-								<div class="input-group">
-									<button type="submit" class="btn btn-info">글쓰기</button>
-								</div>
-							</form>
-							</c:when>
-						</c:choose>
+				<div class="row">
+					<div class="col-sm-12">
+						<div style="float: right; margin-bottom: 25px;">
+							<c:choose>
+								<c:when test="${user_id!=null}">
+									<form action="portfolioWrite.do" method="get">
+										<input type="hidden" name="nowPage" value="${nowPage }" /> 
+										<input type="hidden" name="id" value="${user_id }" />
+										<div class="input-group">
+											<button type="submit" class="btn btn-info">글쓰기</button>
+										</div>
+									</form>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 				</div>
-				<table class="table table-hover">
-					<colgroup>
-						<col width="10%" />
-						<col width="30%" />
-						<col width="20%" />
-						<col width="20%" />
-						<col width="10%" />
-						<col width="10%" />
-					</colgroup>
-					<thead>
-						<tr class="active">
-							<th class="text-center">번호</th>
-							<th class="text-center">제목</th>
-							<th class="text-center">글쓴이</th>
-							<th class="text-center">등록일</th>
-							<th class="text-center">조회수</th>
-							<th class="text-center">추천</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<!-- 반복문 시작 -->
-						<c:choose>
-							<c:when test="${empty listRows}">
-								<tr style="text-align: center;">
-									<td colspan="6">등록된 글이 없습니다.</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items='${listRows}' var='row' varStatus='loop'>
-									<tr>
-										<td style="text-align: center;">${row.rNum}</td>
-										<td><a href="./view.do?num=${row.num }&nowPage=${nowPage}&rNum=${row.rNum}&boardName=${boardName}">${row.title}</a></td>
-										<td style="text-align: center;">${row.id}</td>
-										<td style="text-align: center;">${row.postdate}</td>
-										<td style="text-align: center;">${row.visit_cnt}</td>
-										<td style="text-align: center;">${row.comm_cnt}</td>
-									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-						<!-- 반복문 끝 -->
-					</tbody>
-				</table>
-				<div class="row" style="margin-top: 15px;">
+				<section id="portfolio">
+					<div class="container">
+						<div class="box">
+							<!--/.center-->
+							<ul class="portfolio-filter text-left">
+								<li>
+									<a class="btn btn-primary active" href="#" data-filter="*">All</a>
+								</li>
+								<li>
+									<a class="btn btn-primary" href="#" data-filter=".bootstrap">Bootstrap</a>
+								</li>
+								<li>
+									<a class="btn btn-primary" href="#" data-filter=".html">HTML</a>
+								</li>
+								<li>
+									<a class="btn btn-primary" href="#" data-filter=".wordpress">Wordpress</a>
+								</li>
+							</ul>
+							<!--/#portfolio-filter-->
+							<ul class="portfolio-items">
+								<c:choose>
+									<c:when test="${empty listRows}">
+										<li class="portfolio-item bootstrap apps col-sm-12">
+											<h5>등록된 글이 없습니다.</h5>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items='${listRows}' var='row' varStatus='loop'>
+											<li class="portfolio-item bootstrap apps col-sm-6">
+												<div class="item-inner">
+													<div class="portfolio-image">
+														<img src="./resources/images/${row.fileName }" alt="">
+														<div class="overlay">
+															<a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="./resources/images/${row.fileName }">
+																<i class="icon-eye-open"></i>
+															</a>
+														</div>
+													</div>
+													<a href="portfolioView.do?num=${row.num }&nowPage=${nowPage }&rNum=${row.rNum }&fileName=${row.fileName }">${row.title }</a>
+												</div>
+											</li>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</div>
+						<!--/.box-->
+					</div>
+					<!--/.container-->
+				</section>
+				<!--/#portfolio-->
+				<!-- 페이지 번호 -->
+				<div class="row" style="margin-top: 15px; margin-bottom: 20px;">
 					<div class="col-sm-6">
 						<div style="float: left;">
 							<ul class="pagination">
@@ -123,10 +120,8 @@
 					<div class="col-sm-6">
 						<div style="float: right;">
 							<form action="search.do" class="form-inline" name="searchFrm" method="get">
-								<div class="form-group" style="margin-top:18px;">
-									<input type="hidden" name="boardName" value="${boardName }" />
-									<input type="hidden" name="nowPage" value="${nowPage }" />
-									<select name="searchColumn" class="form-control">
+								<div class="form-group" style="margin-top: 18px;">
+									<input type="hidden" name="boardName" value="${boardName }" /> <input type="hidden" name="nowPage" value="${nowPage }" /> <select name="searchColumn" class="form-control">
 										<option value="title">제목</option>
 										<option value="content">내용</option>
 										<option value="id">작성자</option>
@@ -151,8 +146,6 @@
 		<i class="fa fa-angle-up"></i>
 	</a>
 
-	<jsp:include page="/common/modalLogin.jsp"/>
-
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>
 	<script src="./resources/sb-admin/vendor/popper/popper.min.js"></script>
@@ -160,11 +153,16 @@
 
 	<!-- Plugin JavaScript -->
 	<script src="./resources/sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="./resources/sb-admin/vendor/chart.js/Chart.min.js"></script>
 	<script src="./resources/sb-admin/vendor/datatables/jquery.dataTables.js"></script>
 	<script src="./resources/sb-admin/vendor/datatables/dataTables.bootstrap4.js"></script>
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
+	<script src="./resources/xeon/js/jquery.js"></script>
+	<script src="./resources/xeon/js/jquery.isotope.min.js"></script>
+	<script src="./resources/xeon/js/jquery.prettyPhoto.js"></script>
+	<script src="./resources/xeon/js/main.js"></script>
 
 </body>
 </html>

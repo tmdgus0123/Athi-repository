@@ -26,13 +26,15 @@ public class MyPageCommand implements ICommand{
 		
 		// 아이디
 		String id = session.getAttribute("user_id").toString();
-
 		paramMap.put("id", id);
-		// 게시판 이름
-		String boardName = req.getParameter("boardName");
-
-		// DAO로 넘길 파라미터 조립
-		paramMap.put("id", id);
+		
+		// 검색
+		String searchColumn = req.getParameter("searchColumn");
+		String searchWord = req.getParameter("searchWord");
+		
+		paramMap.put("searchColumn", searchColumn);
+		paramMap.put("searchWord", searchWord);
+		
 		
 		// 전체 레코드수 카운트
 		int totalRecordCount = dao.myPageGetTotalCount(paramMap);
@@ -85,7 +87,6 @@ public class MyPageCommand implements ICommand{
 		}
 		
 		// 페이지 처리를 위한 부분
-		model.addAttribute("boardName", boardName);
 		model.addAttribute("pagingImg", pagingImg);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("nowPage", nowPage);
