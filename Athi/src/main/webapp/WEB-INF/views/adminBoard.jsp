@@ -20,6 +20,7 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="./resources/jQuery/jquery-3.2.1.js"></script>
 
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
@@ -28,7 +29,7 @@
    <div class="container">
       <div class="col-sm-12" style="margin-top: 50px;">
          <div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-            <h1>회원 관리</h1>
+            <h1>게시물 관리</h1>
          </div>
          <div class="col-sm-12" style="margin-top: 50px; height: 125px; opacity: 0.85;">
             <div class="col-sm-12">
@@ -39,10 +40,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-pencil"></i>
                            </div>
-                           <div class="mr-5">26 New Messages!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -55,10 +56,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-eraser"></i>
                            </div>
-                           <div class="mr-5">11 New Tasks!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -71,10 +72,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-user-plus"></i>
                            </div>
-                           <div class="mr-5">123 New Orders!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -87,10 +88,10 @@
                            <div class="card-body-icon">
                               <i class="fa fa-fw fa fa-user-times"></i>
                            </div>
-                           <div class="mr-5">13 New Tickets!</div>
+                           <div class="mr-5">알림 갯수</div>
                         </div>
                         <a href="#" class="card-footer text-white clearfix small z-1">
-                           <span class="float-left">View Details</span>
+                           <span class="float-left">상세보기</span>
                            <span class="float-right">
                               <i class="fa fa-angle-right"></i>
                            </span>
@@ -127,24 +128,33 @@
                      <c:otherwise>
                         <c:forEach items='${boardRows}' var='row' varStatus='loop'>
                            <tr>
-                              <td><input type="checkbox" name="listBox" /></td>
-                              <td><input type="hidden" style="border: none;" value="${row.num}" readonly />${row.num}</td>
+                              <td><input type="checkbox" name="listBox" value="${row.num}"/></td>
+                              <td>${row.num}</td>
                               <td>
-                                 <a href="./view.do?num=${row.num }&nowPage=${nowPage}">
-                                    <input type="hidden" style="border: none;" value="${row.title}" readonly />${row.title}
-                                 </a>
+                                 <a href="./view.do?num=${row.num }&nowPage=${nowPage}">${row.title}</a>
                               </td>
-                              <td><input type="hidden" style="border: none; " value="${row.id}" />${row.id}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.postdate}" />${row.postdate}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.visit_cnt}" />${row.visit_cnt}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.comm_cnt}" />${row.comm_cnt}</td>
-                              <td><input type="hidden" style="border: none;" value="${row.recom_cnt}" />${row.recom_cnt}</td>
+                              <td>${row.id}</td>
+                              <td>${row.postdate}</td>
+                              <td>${row.visit_cnt}</td>
+                              <td>${row.comm_cnt}</td>
+                              <td>${row.recom_cnt}</td>
                            </tr>
                         </c:forEach>
                      </c:otherwise>
                   </c:choose>
                   <!-- 반복문 끝 -->
                </tbody>
+                <c:choose>
+                     <c:when test="${not empty boardRows}">
+	               <tfoot>
+	               	  <tr>
+	               		<td colspan="8" style="text-align:right;">
+							<button type="button" class="btn btn-danger" name="postBtn">선택 게시물 삭제</button>
+						</td>
+					  </tr>
+	               </tfoot>
+	               	</c:when>
+	            </c:choose>
             </table>
          </div>
       </div>
@@ -167,5 +177,33 @@
 
    <!-- Custom scripts for this sb-admin -->
    <script src="./resources/sb-admin/js/sb-admin.min.js"></script>
+   
+   	<script>
+		jQuery.ajaxSettings.traditional = true;
+		
+		$('button[type="button"][class="btn btn-danger"][name="postBtn"]').click(function(){
+			var arr = new Array();
+			
+			$("input[name='listBox'][type='checkbox']:checked").each(function(idx){
+				arr.push($("input[name='listBox'][type='checkbox']:checked").eq(idx).val());
+			});
+			
+			$.ajax({
+				url : "selectPostDelete.do",
+				data : {
+					'postNum' : arr
+				},
+				type : "post",
+				success : function(data){
+					alert("선택한 게시물 삭제를 정상적으로 처리하였습니다.");
+					window.location.reload();
+				},
+				error : function(request, status, error) {
+				    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				},
+				async : true
+			});	
+		});
+	</script>
 </body>
 </html>

@@ -18,23 +18,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.CommCntCommand;
 import com.kosmo.athi.command.CommentsCommand;
+import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
+import com.kosmo.athi.command.PortfolioBoardCommand;
+import com.kosmo.athi.command.PortfolioViewCommand;
+import com.kosmo.athi.command.PortfolioWriteCommand;
 import com.kosmo.athi.command.SearchCommand;
+import com.kosmo.athi.command.SelectMemberDeleteCommand;
+import com.kosmo.athi.command.SelectPostDeleteCommand;
 import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
@@ -57,7 +59,7 @@ import com.kosmo.athi.model.MemberDTO;
 public class HomeController {
 
 	ICommand command = null;
-
+	
 	// Spring JDBC를 사용하기 위한 설정
 	// JDBC템플릿설정
 	private JdbcTemplate template;
@@ -133,7 +135,7 @@ public class HomeController {
 	@RequestMapping("/QnABoard.do")
 	public String QnADesign(HttpServletRequest req, Model model) {
 		System.out.println("QnABoard() 메소드 실행");
-
+		
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
@@ -453,7 +455,7 @@ public class HomeController {
 		return "redirect:"+ req.getParameter("boardName") +".do?boardName="+req.getParameter("boardName")+"&nowPage="+ req.getParameter("nowPage");
 	}
 
-	@RequestMapping("/board/pModifyAction.do")
+	@RequestMapping("/board/ModifyAction.do")
 	public String pModifyAction(HttpServletRequest req, Model model) {
 
 		model.addAttribute("req", req);
@@ -485,12 +487,16 @@ public class HomeController {
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
+	
+	@RequestMapping("/portfolioBoard.do")
+	public String portfolioBoard(HttpServletRequest req, Model model) {
+		System.out.println("portfolioBoard() 메소드 실행");
 
-	@RequestMapping("/displayPortfolio.do")
-	public String displayPortfolio(Model model) {
-
-		System.out.println("displayPortfolio() 메소드 실행");
-		return "displayPortfolio";
+		model.addAttribute("req", req);
+		command = new PortfolioBoardCommand();
+		command.execute(model);
+		
+		return "fileupload/portfolioBoard";
 	}
 
 	@RequestMapping("/portfolioWrite.do")
@@ -498,16 +504,32 @@ public class HomeController {
 
 		return "fileupload/portfolioWrite";
 	}
+	
 
-	@RequestMapping("/comments.do")
-	public String comments(HttpServletRequest req, Model model) {
-		System.out.println("comments() 메소드 실행");
+	@RequestMapping("/QnAcategory.do")
+	public String QnACategoryView(HttpServletRequest req, Model model){
+		System.out.println("QnAcategory() 메소드 실행");
+		
+		System.out.println(req.getParameter("category"));
 		
 		model.addAttribute("req", req);
-		command = new CommentsCommand();
+		command = new CategoryViewCommand();
 		command.execute(model);
 		
-		return "board/commentsAction";
+		return "QnACategoryView";
+	}
+	
+	@RequestMapping("/tipcategory.do")
+	public String tipCategoryView(HttpServletRequest req, Model model){
+		System.out.println("QnAcategory() 메소드 실행");
+		
+		System.out.println(req.getParameter("category"));
+		
+		model.addAttribute("req", req);
+		command = new CategoryViewCommand();
+		command.execute(model);
+		
+		return "tipCategoryView";
 	}
 	@RequestMapping("/commChoice.do")
 	public String choice(HttpServletRequest req, Model model) {
@@ -522,87 +544,48 @@ public class HomeController {
 	}
 
 	@RequestMapping("/portfolioWriteAction.do")
-	public String uploadAction(HttpServletRequest req, Model model) {
-		System.out.println("파일업로드 진행중");
-		// 파일이 저장될 path 설정
-		String path = "C:\\05Git\\athi\\src\\main\\webapp\\resources\\upload";
-		Map returnObject = new HashMap();
+	public String portfolioWriteAction(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
 
-		try {
-			// MultipartHttpServletRequest 생성
-			MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req;
-			Iterator iter = mhsr.getFileNames();
-			MultipartFile mfile = null;
-			String fieldName = "";
-			List resultList = new ArrayList();
+		command = new PortfolioWriteCommand();
+		command.execute(model);
 
-			// 디렉토리가 없다면 생성
-			File dir = new File(path);
-			if (!dir.isDirectory()) {
-				dir.mkdirs();
-			}
-
-			// 값이 나올때까지
-			while (iter.hasNext()) {
-
-				fieldName = (String) iter.next();
-
-				// 내용을 가져와서
-				mfile = mhsr.getFile(fieldName);
-				String origName;
-				origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8");// 한글깨짐
-																								// 방지
-
-				// 파일명이 없다면
-				if ("".equals(origName)) {
-					continue;
-				}
-
-				// 파일 명 변경(uuid로 암호화)
-				String ext = origName.substring(origName.lastIndexOf('.'));
-
-				// 확장자
-				String saveFileName = getUuid() + ext;
-
-				// 설정한 path에 파일저장
-				File serverFile = new File(path + File.separator + saveFileName);
-				mfile.transferTo(serverFile);
-				Map file = new HashMap();
-				file.put("origName", origName);
-				file.put("sfile", serverFile);
-				resultList.add(file);
-			}
-			returnObject.put("files", resultList);
-			returnObject.put("params", mhsr.getParameterMap());
-			
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		model.addAttribute("returnObject", returnObject);
-		return "fileupload/portfolioWriteAction";
+		return "fileupload/portfolioBoard";
 	}
+	
+	@RequestMapping("portfolioView.do")
+	public String portfolioView(Model model, HttpServletRequest req) {
 
-	// uuid생성
-	public static String getUuid() {
-		return UUID.randomUUID().toString().replaceAll("-", "");
+		model.addAttribute("req", req);
+
+		command = new PortfolioViewCommand();
+		command.execute(model);
+
+		return "fileupload/portfolioView";
 	}
 	
 	@RequestMapping("selectMemberDelete.do")
 	public String selectMemberDelete(Model model, HttpServletRequest req){
+		System.out.println("회원삭제 실행");
 		
-		String id = req.getParameter("id");
-		Object[] obj = req.getParameterValues("");
+		model.addAttribute("req", req);
 		
-		MemberDAO mDao = new MemberDAO();
-		ArrayList<MemberDTO> mDto = mDao.selectMember(id);
+		command = new SelectMemberDeleteCommand();
+		command.execute(model);
 		
-		model.addAttribute("sMemberList", mDto);
+		return "adminMember";
+	}
+	
+	@RequestMapping("selectPostDelete.do")
+	public String selectPostDelete(Model model, HttpServletRequest req){
 		
-		return "process/selectMemberDelete";
+		System.out.println("선택 게시물 삭제 실행");
+		
+		model.addAttribute("req", req);
+		
+		command = new SelectPostDeleteCommand();
+		command.execute(model);
+		
+		return "adminBoard";
 	}
 }

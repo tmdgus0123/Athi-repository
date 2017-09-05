@@ -149,9 +149,9 @@ public class MemberDAO {
 	
 	// 관리자 모드에서 회원정보 불러오기
 	public ArrayList<MemberDTO> selectMember(String id){
-		
-		String sql = "SELECT b.* FROM member b join member_grade bg on b.id=bg.id WHERE b.id='"+id+"'";
-		
+	
+		String sql = " SELECT b.* FROM member b join member_grade bg on b.id=bg.id WHERE b.id in '"+id+"'";
+
 		return (ArrayList<MemberDTO>)template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
 	}
 	
@@ -243,6 +243,34 @@ public class MemberDAO {
 				psmt.setString(1, id);
 			}
 		});
+	}
+	
+	public void deleteMember3(final String id){
+		
+		int commit = 0;
+		
+		String dbQuery1 = "DELETE FROM member_grade WHERE id=?";
+		
+		commit = this.template.update(dbQuery1, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setString(1, id);
+			}
+		});
+		
+		if(commit==1){
+			
+			String dbQuery2 = "DELETE FROM member WHERE id=?";
+			
+			this.template.update(dbQuery1, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement psmt) throws SQLException {
+					psmt.setString(1, id);
+				}
+			});
+		}
 	}
 
 	public ArrayList<MemberDTO> rankList(){

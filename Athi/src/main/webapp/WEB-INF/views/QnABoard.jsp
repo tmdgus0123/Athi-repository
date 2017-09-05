@@ -20,13 +20,14 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="./resources/jQuery/jquery-3.2.1.js"></script>
 
 </head>
 
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
-	<div class="container">
+	<div class="container" id="categoryView">
 		<div class="col-sm-12" style="margin-top: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
 				<h1>질문과 답변 게시판</h1>
@@ -37,15 +38,40 @@
 				<div class="row" style="margin-bottom: 10px;">
 					<div class="col-sm-6">
 						<div style="float: left;">
-							<form action="">
+							<form action="" name="categoryFrm">
 								<div class="form-group">
-									<select name="searchColumn" class="form-control">
-										<option value="">카테고리</option>
-										<option value="">JAVA</option>
-										<option value="">HTML</option>
-										<option value="">CSS</option>
-										<option value="">jQuery</option>
-										<option value="">Spring</option>
+									<select id="category" class="form-control">
+										<% if(request.getParameter("category")!=null){%>
+										<option value="" style="color:red;" <%if(request.getAttribute("category").toString().equals(null)){%>selected<%}%>>--- 카테고리 ---</option>
+										<option value="java" <%if(request.getAttribute("category").toString().equals("java")){%>selected<%}%>>java</option>
+										<option value="html"<%if(request.getAttribute("category").toString().equals("html")){%>selected<%}%>>html</option>
+										<option value="javascript"<%if(request.getAttribute("category").toString().equals("javascript")){%>selected<%}%>>javascript</option>
+										<option value="jQuery"<%if(request.getAttribute("category").toString().equals("jQuery")){%>selected<%}%>>jQuery</option>
+										<option value="spring"<%if(request.getAttribute("category").toString().equals("spring")){%>selected<%}%>>spring</option>
+										<option value="JSP"<%if(request.getAttribute("category").toString().equals("JSP")){%>selected<%}%>>JSP</option>
+										<option value="bootstrap"<%if(request.getAttribute("category").toString().equals("bootstrap")){%>selected<%}%>>bootstrap</option>
+										<option value="jqueryUI"<%if(request.getAttribute("category").toString().equals("jqueryUI")){%>selected<%}%>>jqueryUI</option>
+										<option value="css"<%if(request.getAttribute("category").toString().equals("css")){%>selected<%}%>>css</option>
+										<option value="servlet"<%if(request.getAttribute("category").toString().equals("servlet")){%>selected<%}%>>servlet</option>
+										<% } 
+											else{
+										%>
+										<option value="" style="color:red;">--- 카테고리 ---</option>
+										<option value="java">java</option>
+										<option value="html">html</option>
+	
+	
+										<option value="javascript">javascript</option>
+										<option value="jQuery">jQuery</option>
+										<option value="spring">spring</option>
+										<option value="JSP">JSP</option>
+										<option value="bootstrap">bootstrap</option>
+										<option value="jqueryUI">jqueryUI</option>
+										<option value="css">css</option>
+										<option value="servlet">servlet</option>
+										<%
+											}
+										%>
 									</select>
 								</div>
 							</form>
@@ -165,6 +191,27 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-
+	<script>
+		$(document).ready(function(){
+			$("#category").click(function(){
+				$("#category").change(function(){
+					$.ajax({
+						url : 'QnAcategory.do',
+						type : "post",
+						data : {
+							boardName : "QnABoard",
+							category : $(this).val()
+						},
+						success : function(data){
+							$("#categoryView").html("");
+							$("#categoryView").html(data);
+						},
+						async : true,
+						cache : true
+					});
+				});
+			});
+		});
+	</script>
 </body>
 </html>

@@ -25,46 +25,49 @@
 	<jsp:include page="/common/topLeftNavbar.jsp" />
 	<div class="container">
 		<div class="col-sm-12" style="margin-top: 50px;">
-			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.7;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
 				<h1>글쓰기</h1>
 			</div>
-			<div>
-				<div class="col-sm-12" style="margin-top: 50px;">
-					<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 5px; margin-bottom: 25px; opacity: 0.7;">
-						<form id="frm" name="frm" method="post" enctype="multipart/form-data" action="portfolioWriteAction.do">
-							<table class="board_view table-bordered">
-								<colgroup>
-									<col width="15%">
-									<col width="*" />
-								</colgroup>
-								<caption>게시글 작성</caption>
-								<tbody>
-									<tr>
-										<th scope="row">제목</th>
-										<td><input type="text" id="title" name="title" class="wdp_90"></input></td>
-									</tr>
-									<tr>
-										<td colspan="2" class="view_text"><textarea rows="20" cols="100" title="내용" id="contents" name="contents"></textarea></td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td colspan="2" class="view_text text-center">
-											<input type="file" name="file" class="btn btn-primary">
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2" class="view_text text-center">
-											<input type="submit" value="파일업로드" class="btn btn-success"/>
-											<button type="button" class="btn btn-danger">취소</button>
-										</td>
-									</tr>
-								</tfoot>
-							</table>
-					
-						</form>
+		</div>
+		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; margin-bottom: 25px; opacity: 0.85;">
+				<form id="frm" name="frm" method="post" enctype="multipart/form-data" action="portfolioWriteAction.do">
+					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
+					<div class="row form-group">
+						<div class="col-sm-2">
+							<select name="pLang" class="form-control">
+								<option value="bootstrap">Bootstrap</option>
+								<option value="css">CSS</option>
+								<option value="jQueryUI">jQuery UI</option>
+							</select>
+						</div>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." />
+						</div>
 					</div>
-				</div>
+					<div class="row form-group" style="background-color: #e7adb7; height: 50px">
+						<div class="col-sm-11 text-right" style="margin: auto;">글쓴이 : ${param.id }</div>
+						<div class="col-sm-1"></div>
+					</div>
+					<div class="row form-group">
+						<div class="col-sm-12">
+							<textarea name="content" class="form-control" style="height: 400px;" placeholder="내용을 입력해주세요."></textarea>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-sm-2" style="margin: auto;">
+							<span class="btn-primary" style="border-radius: 1em; padding-left: 50px; padding-right: 50px; padding-top: 12.5px; padding-bottom: 12.5px;"> 첨부 파일 </span>
+						</div>
+						<div class="col-sm-10">
+							<input type="file" class="form-control" name="file" id="file" />
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-sm-12 text-right" style="margin-bottom:15px;">
+							<button type="submit" class="btn btn-success">등록하기</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

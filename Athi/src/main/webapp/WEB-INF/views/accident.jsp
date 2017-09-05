@@ -25,6 +25,7 @@
 
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
+	
 	<jsp:include page="/common/topLeftNavbar.jsp" />
 	<div class="container">
 		<div class="col-sm-12" style="margin-top: 50px;">
@@ -36,20 +37,6 @@
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
 				<div class="row" style="margin-bottom: 10px;">
 					<div class="col-sm-6">
-						<div style="float: left;">
-							<form action="">
-								<div class="form-group">
-									<select name="searchColumn" class="form-control">
-										<option value="">카테고리</option>
-										<option value="">JAVA</option>
-										<option value="">HTML</option>
-										<option value="">CSS</option>
-										<option value="">jQuery</option>
-										<option value="">Spring</option>
-									</select>
-								</div>
-							</form>
-						</div>
 					</div>
 					<div class="col-sm-6">
 						<div style="float: right;">
@@ -165,6 +152,5 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-
 </body>
 </html>

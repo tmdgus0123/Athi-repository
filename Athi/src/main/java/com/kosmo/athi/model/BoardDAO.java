@@ -57,8 +57,42 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getTotalCount(Map<String, Object> map, String category){
+		int totalRecord = 0;
 
-	//전체 레코드 수 불러오기
+		String boardName = (String) map.get("boardName");
+
+		String searchColumn = (String) map.get("searchColumn");
+		String searchWord = (String) map.get("searchWord");
+		
+		try {
+			String sql = "SELECT count(*) FROM board b JOIN board_type bt ON b.num = bt.num";
+			if (boardName != null) {
+				sql += " WHERE board_name='"+boardName+"'";
+			}
+			if(category != null){
+				sql += " AND p_language='"+category+"'";
+			}
+			if (searchColumn != null && searchWord != null) {
+				sql += " AND "+searchColumn+ " like '%"+searchWord+"%'";
+			}
+			/*
+			 * 검색어가 있을 경우 검색조건을 쿼리에 추가해야함 where 컬럼 like '%검색어%'
+			 */
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			totalRecord = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return totalRecord;
+	}
+	
+
+	// 전체 레코드 수 불러오기
 	public int getTotalCount(Map<String, Object> map) {
 		int totalRecord = 0;
 
@@ -66,7 +100,7 @@ public class BoardDAO {
 
 		String searchColumn = (String) map.get("searchColumn");
 		String searchWord = (String) map.get("searchWord");
-
+		
 		try {
 			String sql = "SELECT count(*) FROM board b JOIN board_type bt ON b.num = bt.num";
 			if (boardName != null) {
@@ -119,19 +153,23 @@ public class BoardDAO {
 		return myPagetotalRecord;
 	}
 
-	//게시판 목록 불러오기
+	// 게시판 목록 불러오기
 	public ArrayList<BoardDTO> boardList(Map<String, Object> map) {
 
 		int start = Integer.parseInt(map.get("start").toString());
 		int end = Integer.parseInt(map.get("end").toString());
 		String boardName = (String) map.get("boardName");
 
+		String category = (String) map.get("category");
 		String searchColumn = (String) map.get("searchColumn");
 		String searchWord = (String) map.get("searchWord");
-
+		
 		String sql = "SELECT * FROM ( SELECT Tb.*, rownum rNum FROM ( " + " SELECT * FROM board b JOIN board_type bt ON b.num = bt.num ";
 		if (boardName != null) {
 			sql += " WHERE board_name = '" + boardName + "' ";
+		}
+		if(category != null){
+			sql += " AND p_language='"+category+"'";
 		}
 		if (searchWord != null) {
 			sql += " AND " + searchColumn + " like '%" + searchWord + "%'";
@@ -140,21 +178,70 @@ public class BoardDAO {
 
 		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
+	
+	public ArrayList<BoardDTO> boardList(Map<String, Object> map, String category) {
 
+
+		int start = Integer.parseInt(map.get("start").toString());
+		int end = Integer.parseInt(map.get("end").toString());
+		String boardName = (String) map.get("boardName");
+		String searchColumn = (String) map.get("searchColumn");
+		String searchWord = (String) map.get("searchWord");
+		
+		String sql = "SELECT * FROM ( SELECT Tb.*, rownum rNum FROM ( " + " SELECT * FROM board b JOIN board_type bt ON b.num = bt.num ";
+		if (boardName != null) {
+			sql += " WHERE board_name = '" + boardName + "' ";
+		}
+		if(category != null){
+			sql += " AND p_language='"+category+"'";
+		}
+		if (searchWord != null) {
+			sql += " AND " + searchColumn + " like '%" + searchWord + "%'";
+		}
+		sql += " ORDER BY bgroup DESC, bstep ASC) Tb " + " ) WHERE rNum BETWEEN " + start + " AND " + end;
+
+		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
+	
 	//자신이 쓴 글 불러오기
 	public ArrayList<BoardDTO> myPageBoardList(Map<String, Object> map) {
 
 		int start = Integer.parseInt(map.get("start").toString());
 		int end = Integer.parseInt(map.get("end").toString());
+		
 		String id = map.get("id").toString();
+		
+		String searchColumn = (String) map.get("searchColumn");
+		String searchWord = (String) map.get("searchWord");
 
-		String sql = "SELECT * FROM ( SELECT Tb.*, rownum rNum FROM ( " + " SELECT * FROM board b JOIN board_type bt ON b.num = bt.num WHERE b.id='" + id + "'" + " ORDER BY b.num DESC) Tb " + " ) WHERE rNum BETWEEN " + start + " AND "
-				+ end;
+		String sql = "SELECT * FROM ( SELECT Tb.*, rownum rNum FROM ( SELECT * FROM board b JOIN board_type bt ON b.num = bt.num WHERE b.id='" + id + "'";
+		if (searchWord != null) {
+			sql += " AND " + searchColumn + " like '%" + searchWord + "%'";
+		}
+		sql += " ORDER BY b.num DESC) Tb " + " ) WHERE rNum BETWEEN " + start + " AND " + end;
 
 		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
 
-	//게시판 전체목록 불러오기(오버로딩)
+	// 포트폴리오 목록 불러오기
+	public ArrayList<BoardDTO> portfolioBoardList(Map<String, Object> map) {
+
+		int start = Integer.parseInt(map.get("start").toString());
+		int end = Integer.parseInt(map.get("end").toString());
+
+		String searchColumn = (String) map.get("searchColumn");
+		String searchWord = (String) map.get("searchWord");
+
+		String sql = "select * from ( select Tb.*, rownum rNum from ( select * from project_board ";
+		if (searchWord != null) {
+			sql += " where " + searchColumn + " like '%" + searchWord + "%'";
+		}
+		sql += "order by bgroup desc, bstep asc) Tb ) where rNum between " + start + " and " + end;
+		
+		return (ArrayList<BoardDTO>)template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
+
+	// 게시판 전체목록 불러오기(오버로딩)
 	public ArrayList<BoardDTO> boardList() {
 
 		String sql = "SELECT * FROM board b JOIN board_type bt ON b.num = bt.num";
@@ -215,12 +302,22 @@ public class BoardDAO {
 		return rs;
 	}	
 	
+	// 포트폴리오 상세보기
+	public BoardDTO portfolioView(String pidx) {
+		
+		// 조회수증가
+		visit_cnt(pidx);
+
+		String sql = "SELECT * FROM project_board WHERE num='" + pidx + "'";
+		return (BoardDTO) template.queryForObject(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
 
 	// 글쓰기 (언어 X)
 	public int write(final String boardName, final String id, final String title, final String content) {
 		int retValue = 0;
-		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt, recom_cnt, 
-		// 			   bgroup, bstep, bdepth, p_language
+		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
+		// recom_cnt,
+		// bgroup, bstep, bdepth, p_language
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, null)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -240,8 +337,9 @@ public class BoardDAO {
 	// 글쓰기 (언어 O) - 오버로딩
 	public int write(final String boardName, final String id, final String title, final String content, final String pLang) {
 		int retValue = 0;
-		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt, recom_cnt, 
-		// 			   bgroup, bstep, bdepth, p_language
+		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
+		// recom_cnt,
+		// bgroup, bstep, bdepth, p_language
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, ?)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -306,7 +404,37 @@ public class BoardDAO {
 			});
 		}
 	}
+	
+	// 게시글 삭제
+	public void postDelete(final String num) {
 
+		System.out.println("postDelete() 실행");
+
+		int res;
+
+		String sql = "DELETE FROM board_type WHERE num=?";
+
+		res = this.template.update(sql, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, num);
+			}
+		});
+
+		if (res == 1) {
+			String sql2 = "DELETE FROM board WHERE num=?";
+
+			this.template.update(sql2, new PreparedStatementSetter() {
+
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setString(1, num);
+				}
+			});
+		}
+	}
+	
 	//게시글 하나 가져오기
 	public BoardDTO selectPosts(String num) {
 
@@ -333,11 +461,11 @@ public class BoardDAO {
 		}
 	}
 
-	//답글
+	// 답글
 	public int replyWrite(BoardDTO dto, String id, String boardName, String title, String content) {
-		
+
 		replyPrevUpdate(dto.getBgroup(), dto.getBstep());
-		
+
 		int rs = 0;
 		int result = 0;
 
@@ -373,6 +501,23 @@ public class BoardDAO {
 
 		return result;
 	}
-	
-	//추천수 증가
+
+	public int portfolioWrite(final String id, final String title, final String content, final String fileName) {
+		int retValue = 0;
+
+		String sql = "INSERT INTO project_board VALUES(project_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, 0, 0, 0)";
+
+		retValue = this.template.update(sql, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, title);
+				ps.setString(2, content);
+				ps.setString(3, id);
+				ps.setString(4, fileName);
+			}
+		});
+
+		return retValue;
+	}
 }
