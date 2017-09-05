@@ -22,6 +22,7 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -65,12 +66,12 @@
 					<ul id="comments" style="list-style: none;">
 						<!-- 반복문 시작 -->
 						<c:forEach items='${comments}' var='dto' varStatus='loop'>
-							<li>
+							<li id="li_${dto.num }">
 								<div class="row" style="margin-top: 25px;">
 									<div class="col-sm-1">
 										<input type="checkbox" style="margin-top: 6.5px;" />
 									</div>
-									<div class="col-sm-9 text-left">
+									<div class="col-sm-9 text-left">                                                                                                                                                                                     
 										<div><strong>${dto.id }</strong>/<span>(${dto.postdate })</span></div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>

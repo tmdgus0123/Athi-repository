@@ -14,7 +14,9 @@
 		<table class="table-responsive table-bordered">
 			<c:if test="${sMemberList!=null}">
 				<c:forEach items="${sMemberList}" var="list" varStatus="loop">
-			
+					<tr>
+						<td>${list.id}</td>
+					</tr>
 				</c:forEach>
 			</c:if>
 		</table>

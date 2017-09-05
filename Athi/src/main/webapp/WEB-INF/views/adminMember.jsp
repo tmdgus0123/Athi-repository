@@ -20,7 +20,31 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+<script src="./resources/jQuery/jquery-3.2.1.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#memberBtn').on('click', function(){
+			
+			var checkbox = $("input:checkbox[name='deleteInfo']:checked");
+			var tdArr = new Array();
+			var popup = window.open("about:blank", "winOpen", "width=700, height=700");
+			// CheckBox 검사
+			if(checkbox.is(":checked")==true){
+				checkbox.is(":checked").each(function(idx){
+					var test = $(this).val();
+					tdArr.push(test);
+				});
+			}
+			else{
+				alert("체크된 항목이 없습니다.");
+				return false;
+			}
+			
+			$("#memberList").attr("action", "selectMemberDelete.do").attr("target", "winOpen");
+			$("#memberList").submit();
+		});
+	});
+</script>
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -39,10 +63,10 @@
 									<div class="card-body-icon">
 										<i class="fa fa-fw fa fa-pencil"></i>
 									</div>
-									<div class="mr-5">26 New Messages!</div>
+									<div class="mr-5">알림 갯수</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -53,10 +77,10 @@
 									<div class="card-body-icon">
 										<i class="fa fa-fw fa fa-eraser"></i>
 									</div>
-									<div class="mr-5">11 New Tasks!</div>
+									<div class="mr-5">알림 갯수</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -67,10 +91,10 @@
 									<div class="card-body-icon">
 										<i class="fa fa-fw fa fa-user-plus"></i>
 									</div>
-									<div class="mr-5">123 New Orders!</div>
+									<div class="mr-5">알림 갯수</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -81,10 +105,10 @@
 									<div class="card-body-icon">
 										<i class="fa fa-fw fa fa-user-times"></i>
 									</div>
-									<div class="mr-5">13 New Tickets!</div>
+									<div class="mr-5">알림 갯수</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">View Details</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
@@ -95,11 +119,11 @@
 		</div>
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
-				<form action="">
+				<form id="memberList" method="post">
 					<table class="table table-bordered" id="dataTable" cellspacing="0">
 						<thead>
 							<tr class="btn-primary">
-								<th class="text-center"><input type="checkbox" />
+								<th class="text-center"><input type="checkbox" name="allCheck" /></th>
 								<th>등급</th>
 								<th>경험치</th>
 								<th>아이디</th>
@@ -118,30 +142,35 @@
 								<c:otherwise>
 									<c:forEach items='${memberRows}' var='row' varStatus='loop'>
 										<tr>
-											<td class="text-center"><input type="checkbox" /></td>
-											<td><input type="hidden" style="border: none;" value="${row.grade}" />${row.grade}</td>
-											<td><input type="hidden" style="border: none;" value="${row.exp}" />${row.exp}</td>
-											<td><input type="hidden" style="border: none;" value="${row.id}" />${row.id}</td>
-											<td><input type="hidden" style="border: none;" value="${row.name}" />${row.name}</td>
-											<td><input type="hidden" style="border: none;" value="${row.regidate}" />${row.regidate}</td>
+											<td class="text-center"><input type="checkbox" name="deleteInfo" value="${row.id}"/></td>
+											<td>${row.grade}</td>
+											<td>${row.exp}</td>
+											<td>${row.id}</td>
+											<td>${row.name}</td>
+											<td>${row.regidate}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
 							<!-- 반복문 끝 -->
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="6">
-									<button type="button" class="btn btn-danger" name="memberBtn">선택 회원 삭제</button>
-									&nbsp;&nbsp;&nbsp;
-									<button type="button" class="btn btn-info" name="gradeBtn">회원 등급 조정</button>
-								</td>
-							</tr>
-						</tfoot>
+						<c:choose>
+							<c:when test="${not empty memberRows }">
+								<tfoot>
+									<tr>
+										<td colspan="6" style="text-align: right;">
+											<button type="button" class="btn btn-danger" id="memberBtn">선택 회원 삭제</button> &nbsp;&nbsp;&nbsp;
+											<button type="button" class="btn btn-info" id="gradeBtn">회원 등급 조정</button>
+										</td>
+									</tr>
+								</tfoot>
+							</c:when>
+						</c:choose>
 					</table>
 				</form>
 			</div>
+			
+			<div id="result"></div>
 		</div>
 	</div>
 	<a class="scroll-to-top rounded" href="#page-top">

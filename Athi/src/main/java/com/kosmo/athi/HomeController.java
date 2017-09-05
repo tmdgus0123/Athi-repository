@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
+import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
@@ -128,7 +129,7 @@ public class HomeController {
 	@RequestMapping("/QnABoard.do")
 	public String QnADesign(HttpServletRequest req, Model model) {
 		System.out.println("QnABoard() 메소드 실행");
-
+		
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
@@ -505,6 +506,19 @@ public class HomeController {
 		return "board/commentsAction";
 	}
 	
+	@RequestMapping("/QnAcategory.do")
+	public String QnACategoryView(HttpServletRequest req, Model model){
+		System.out.println("QnAcategory() 메소드 실행");
+		
+		System.out.println(req.getParameter("category"));
+		
+		model.addAttribute("req", req);
+		command = new CategoryViewCommand();
+		command.execute(model);
+		
+		return "QnACategoryView";
+	}
+	
 	@RequestMapping("/portfolioWriteAction.do")
 	public String uploadAction(HttpServletRequest req, Model model) {
 		System.out.println("파일업로드 진행중");
@@ -577,13 +591,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping("selectMemberDelete.do")
-	public String selectMemberDelete(Model model, HttpServletRequest req){
-		
-		String id = req.getParameter("id");
-		Object[] obj = req.getParameterValues("");
+	public String selectMemberDelete(Model model, HttpServletRequest req){	
+		//String id = req.getParameter("id");
+		String[] id = req.getParameterValues("tdArr");
+		String realId = "";
 		
 		MemberDAO mDao = new MemberDAO();
-		ArrayList<MemberDTO> mDto = mDao.selectMember(id);
+		ArrayList<MemberDTO> mDto = null;
+		
+		for(int i=0; i<id.length; i++){
+			realId = id[i];
+			mDto = mDao.selectMember(realId);
+		}
 		
 		model.addAttribute("sMemberList", mDto);
 		

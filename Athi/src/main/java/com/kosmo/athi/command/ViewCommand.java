@@ -42,6 +42,4 @@ public class ViewCommand implements ICommand {
 		dao.close();
 		cdao.close();
 	}
-
-
 }

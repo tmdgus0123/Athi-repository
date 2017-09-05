@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
-import com.kosmo.athi.model.CommentsDAO;
 import com.kosmo.athi.model.PagingUtil;
 
 public class BoardCommand implements ICommand {
@@ -27,13 +26,22 @@ public class BoardCommand implements ICommand {
 		String boardName = req.getParameter("boardName");
 		String searchColumn = req.getParameter("searchColumn");
 		String searchWord = req.getParameter("searchWord");
+		String category = req.getParameter("category");
 		
-		paramMap.put("boardName", boardName);
 		paramMap.put("searchColumn", searchColumn);
 		paramMap.put("searchWord", searchWord);
-		
+		paramMap.put("boardName", boardName);
+
 		//전체 레코드수 카운트
-		int totalRecordCount = dao.getTotalCount(paramMap);
+		int totalRecordCount = 0;
+
+		if (category != "") {
+			paramMap.put("category", category);
+			totalRecordCount = dao.getTotalCount(paramMap, category);
+		} else {
+			totalRecordCount = dao.getTotalCount(paramMap);
+		}
+		
 		//페이지 설정값
 		int pageSize = 9;
 		int blockPage = 5;
@@ -60,9 +68,16 @@ public class BoardCommand implements ICommand {
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage, 
 				req.getContextPath() + "/"+ boardName +".do?"+ addQueryStr);
 		
-		//DAO에서 list()메소드로 목록 가져오기
-		//여러 게시판을 분류하기 위해 게시판 이름을 파라미터로 받음
-		ArrayList<BoardDTO> listRows = dao.boardList(paramMap); 
+		// DAO에서 list()메소드로 목록 가져오기
+		// 여러 게시판을 분류하기 위해 게시판 이름을 파라미터로 받음
+		ArrayList<BoardDTO> listRows = null;
+		
+		if(category!=""){
+			listRows = dao.boardList(paramMap, category);
+		}
+		else{
+			listRows = dao.boardList(paramMap);
+		}
 		
 		//Spring JDBC사용시 답변글 들여쓰기 처리
 		int virtualNum = 0;
@@ -90,6 +105,7 @@ public class BoardCommand implements ICommand {
 		model.addAttribute("listRows", listRows);
 		//게시판 이름 저장
 		model.addAttribute("boardName", boardName);
+		model.addAttribute("category", category);
 		dao.close();
 	}
 

@@ -89,7 +89,7 @@
 								<c:forEach items='${listRows}' var='row' varStatus='loop'>
 									<tr>
 										<td style="text-align: center;">${row.rNum}</td>
-										<td><a href="./view.do?idx=${row.num }&nowPage=${nowPage}">${row.title}</a></td>
+										<td><a href="./view.do?num=${row.num }&nowPage=${nowPage}">${row.title}</a></td>
 										<td style="text-align: center;">${row.id}</td>
 										<td style="text-align: center;">${row.postdate}</td>
 										<td style="text-align: center;">${row.visit_cnt}</td>

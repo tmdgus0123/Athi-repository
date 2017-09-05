@@ -39,13 +39,15 @@
 						<div style="float: left;">
 							<form action="">
 								<div class="form-group">
-									<select name="searchColumn" class="form-control">
-										<option value="">카테고리</option>
+									<select name="category" class="form-control">
+										<option value="" style="color:red;">--- 카테고리 ---</option>
+										<option value="">---------------</option>
 										<option value="">JAVA</option>
 										<option value="">HTML</option>
 										<option value="">CSS</option>
 										<option value="">jQuery</option>
 										<option value="">Spring</option>
+										<option value="">---------------</option>
 									</select>
 								</div>
 							</form>
