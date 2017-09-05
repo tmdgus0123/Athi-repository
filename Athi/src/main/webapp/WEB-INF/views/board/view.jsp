@@ -66,21 +66,19 @@
 						<!-- 반복문 시작 -->
 						<c:forEach items='${comments}' var='dto' varStatus='loop'>
 							<li>
-							<form id="commForm_${dto.num }">
 								<div class="row" style="margin-top: 25px;">
 									<div class="col-sm-1">
 										<input type="checkbox" style="margin-top: 6.5px;" />
 									</div>
 									<div class="col-sm-9 text-left">
-										<div id="comm_${dto.num }">${dto.id }/(${dto.postdate })</div>
+										<div><strong>${dto.id }</strong>/<span>(${dto.postdate })</span></div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
 									<div class="col-sm-1 text-right">
-										<button id="deleteBtn_${dto.num }" class="btn btn-danger" style="margin-top: 13px;">삭제</button>
+										<button class="btn btn-danger" style="margin-top: 13px;" onclick="">삭제</button>
 									</div>
 									<div class="col-sm-1" style="margin-top: 25px;"></div>
 								</div>
-							</form>
 							</li>
 						</c:forEach>
 						<!-- 반복문 끝 -->
@@ -140,8 +138,7 @@
 				}
 			});
 		});
-		
-		$('#deleteBtn_${list}')
+	
 	</script>
 
 </body>
