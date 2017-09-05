@@ -68,7 +68,7 @@
 						</div>
 					</div>
 					<div class="row form-group">
-						<div class="col-sm-12 text-right" style="margin-bottom:15px;">
+						<div class="col-sm-12 text-right" style="margin-bottom: 15px;">
 							<button type="submit" class="btn btn-success">등록하기</button>
 						</div>
 					</div>
@@ -95,5 +95,6 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
+	
 </body>
 </html>

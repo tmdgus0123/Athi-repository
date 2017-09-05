@@ -271,6 +271,37 @@ public class BoardDAO {
 		return (BoardDTO) template.queryForObject(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
 	
+	// 게시글 추천수증가
+	public void comm_Cnt(final String num) {
+		
+		String sql = "UPDATE board SET comm_cnt=comm_cnt+1 WHERE num=?";
+
+		this.template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setString(1, num);
+			}
+		});
+	}
+	
+	//게시글 추천수 DB등록
+	public int chuCnt(int comm_cnt) {
+		int rs = 0;
+		
+		try {
+			String sql = "INSERT INTO board VALUES board VALUES(board_seq.nextval, title, content, sysdate, id, 0, ?, 0, board_seq.currval, 0, 0, null)";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, comm_cnt);
+			
+			rs = psmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}	
+	
 	// 포트폴리오 상세보기
 	public BoardDTO portfolioView(String pidx) {
 		
