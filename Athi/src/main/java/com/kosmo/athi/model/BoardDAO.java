@@ -272,9 +272,9 @@ public class BoardDAO {
 	}
 	
 	// 게시글 추천수증가
-	public void comm_Cnt(final String num) {
+	public void recom_Cnt(final String num) {
 		
-		String sql = "UPDATE board SET comm_cnt=comm_cnt+1 WHERE num=?";
+		String sql = "UPDATE board SET recom_cnt=recom_cnt+1 WHERE num=?";
 
 		this.template.update(sql, new PreparedStatementSetter() {
 			@Override
