@@ -85,19 +85,19 @@
 		<i class="fa fa-angle-up"></i>
 	</a>
 
-	<jsp:include page="/common/modalLogin.jsp" />
+   <jsp:include page="/common/modalLogin.jsp" />
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>
-	<script src="./resources/sb-admin/vendor/popper/popper.min.js"></script>
-	<script src="./resources/sb-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+   <!-- Bootstrap core JavaScript -->
+   <script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>
+   <script src="./resources/sb-admin/vendor/popper/popper.min.js"></script>
+   <script src="./resources/sb-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-	<!-- Plugin JavaScript -->
-	<script src="./resources/sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-	<script src="./resources/sb-admin/vendor/datatables/jquery.dataTables.js"></script>
-	<script src="./resources/sb-admin/vendor/datatables/dataTables.bootstrap4.js"></script>
+   <!-- Plugin JavaScript -->
+   <script src="./resources/sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+   <script src="./resources/sb-admin/vendor/datatables/jquery.dataTables.js"></script>
+   <script src="./resources/sb-admin/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-	<!-- Custom scripts for this sb-admin -->
-	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
+   <!-- Custom scripts for this sb-admin -->
+   <script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 </body>
 </html>

@@ -29,6 +29,9 @@ import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
+import com.kosmo.athi.command.PortfolioBoardCommand;
+import com.kosmo.athi.command.PortfolioViewCommand;
+import com.kosmo.athi.command.PortfolioWriteCommand;
 import com.kosmo.athi.command.SearchCommand;
 import com.kosmo.athi.command.SelectMemberDeleteCommand;
 import com.kosmo.athi.command.SelectPostDeleteCommand;
@@ -54,7 +57,7 @@ import com.kosmo.athi.model.MemberDTO;
 public class HomeController {
 
 	ICommand command = null;
-
+	
 	// Spring JDBC를 사용하기 위한 설정
 	// JDBC템플릿설정
 	private JdbcTemplate template;
@@ -450,7 +453,7 @@ public class HomeController {
 		return "redirect:"+ req.getParameter("boardName") +".do?boardName="+req.getParameter("boardName")+"&nowPage="+ req.getParameter("nowPage");
 	}
 
-	@RequestMapping("/board/pModifyAction.do")
+	@RequestMapping("/board/ModifyAction.do")
 	public String pModifyAction(HttpServletRequest req, Model model) {
 
 		model.addAttribute("req", req);
@@ -482,12 +485,16 @@ public class HomeController {
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
+	
+	@RequestMapping("/portfolioBoard.do")
+	public String portfolioBoard(HttpServletRequest req, Model model) {
+		System.out.println("portfolioBoard() 메소드 실행");
 
-	@RequestMapping("/displayPortfolio.do")
-	public String displayPortfolio(Model model) {
-
-		System.out.println("displayPortfolio() 메소드 실행");
-		return "displayPortfolio";
+		model.addAttribute("req", req);
+		command = new PortfolioBoardCommand();
+		command.execute(model);
+		
+		return "fileupload/portfolioBoard";
 	}
 
 	@RequestMapping("/portfolioWrite.do")
@@ -496,6 +503,7 @@ public class HomeController {
 		return "fileupload/portfolioWrite";
 	}
 	
+
 	@RequestMapping("/QnAcategory.do")
 	public String QnACategoryView(HttpServletRequest req, Model model){
 		System.out.println("QnAcategory() 메소드 실행");
@@ -521,75 +529,26 @@ public class HomeController {
 		
 		return "tipCategoryView";
 	}
+	
 	@RequestMapping("/portfolioWriteAction.do")
-	public String uploadAction(HttpServletRequest req, Model model) {
-		System.out.println("파일업로드 진행중");
-		// 파일이 저장될 path 설정
-		String path = "C:\\05Git\\athi\\src\\main\\webapp\\resources\\upload";
-		Map returnObject = new HashMap();
+	public String portfolioWriteAction(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
 
-		try {
-			// MultipartHttpServletRequest 생성
-			MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req;
-			Iterator iter = mhsr.getFileNames();
-			MultipartFile mfile = null;
-			String fieldName = "";
-			List resultList = new ArrayList();
+		command = new PortfolioWriteCommand();
+		command.execute(model);
 
-			// 디렉토리가 없다면 생성
-			File dir = new File(path);
-			if (!dir.isDirectory()) {
-				dir.mkdirs();
-			}
-
-			// 값이 나올때까지
-			while (iter.hasNext()) {
-
-				fieldName = (String) iter.next();
-
-				// 내용을 가져와서
-				mfile = mhsr.getFile(fieldName);
-				String origName;
-				origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8");// 한글깨짐
-																								// 방지
-
-				// 파일명이 없다면
-				if ("".equals(origName)) {
-					continue;
-				}
-
-				// 파일 명 변경(uuid로 암호화)
-				String ext = origName.substring(origName.lastIndexOf('.'));
-
-				// 확장자
-				String saveFileName = getUuid() + ext;
-
-				// 설정한 path에 파일저장
-				File serverFile = new File(path + File.separator + saveFileName);
-				mfile.transferTo(serverFile);
-				Map file = new HashMap();
-				file.put("origName", origName);
-				file.put("sfile", serverFile);
-				resultList.add(file);
-			}
-			returnObject.put("files", resultList);
-			returnObject.put("params", mhsr.getParameterMap());
-			
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		model.addAttribute("returnObject", returnObject);
-		return "fileupload/portfolioWriteAction";
+		return "fileupload/portfolioBoard";
 	}
+	
+	@RequestMapping("portfolioView.do")
+	public String portfolioView(Model model, HttpServletRequest req) {
 
-	// uuid생성
-	public static String getUuid() {
-		return UUID.randomUUID().toString().replaceAll("-", "");
+		model.addAttribute("req", req);
+
+		command = new PortfolioViewCommand();
+		command.execute(model);
+
+		return "fileupload/portfolioView";
 	}
 	
 	@RequestMapping("selectMemberDelete.do")

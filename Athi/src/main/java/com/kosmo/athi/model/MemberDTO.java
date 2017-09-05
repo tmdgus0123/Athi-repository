@@ -117,7 +117,7 @@ public class MemberDTO {
 	public void setRegidate(java.sql.Date regidate) {
 		this.regidate = regidate;
 	}
-
+	
 	public int getGrade() {
 		return grade;
 	}
