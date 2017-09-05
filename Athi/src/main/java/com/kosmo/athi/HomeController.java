@@ -27,7 +27,6 @@ import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
-import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
 import com.kosmo.athi.command.SearchCommand;
@@ -493,17 +492,6 @@ public class HomeController {
 	public String portfolioWrite() {
 
 		return "fileupload/portfolioWrite";
-	}
-
-	@RequestMapping("/comments.do")
-	public String comments(HttpServletRequest req, Model model) {
-		System.out.println("comments() 메소드 실행");
-		
-		model.addAttribute("req", req);
-		command = new CommentsCommand();
-		command.execute(model);
-		
-		return "board/commentsAction";
 	}
 	
 	@RequestMapping("/QnAcategory.do")

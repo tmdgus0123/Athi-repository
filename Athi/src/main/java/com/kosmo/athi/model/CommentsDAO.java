@@ -97,5 +97,22 @@ public class CommentsDAO {
 		
 		return (CommentsDTO)template.queryForObject(sql, new BeanPropertyRowMapper<CommentsDTO>(CommentsDTO.class));
 	}
+
+	public int delete(String num) {
+		int rs = 0;
+				
+		try {
+		String sql = "DELETE FROM comments WHERE num=?";
+		
+		psmt = conn.prepareStatement(sql);
+		psmt.setString(1, num);
+		
+		rs = psmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 	
 }
