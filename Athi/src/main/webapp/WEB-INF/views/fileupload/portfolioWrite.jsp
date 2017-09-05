@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
 
@@ -35,13 +37,22 @@
 					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
 					<div class="row form-group">
 						<div class="col-sm-2">
-							<select name="pLang" class="form-control">
-								<option value="bootstrap">Bootstrap</option>
-								<option value="css">CSS</option>
-								<option value="jQueryUI">jQuery UI</option>
+							<select class="form-control" name="pLang">
+								<option value="">카테고리</option>
+								<option value="java">java</option>
+								<option value="html">html</option>
+								<option value="javascript">javascript</option>
+								<option value="jQuery">jQuery</option>
+								<option value="spring">spring</option>
+								<option value="JSP">JSP</option>
+								<option value="bootstrap">bootstrap</option>
+								<option value="jqueryUI">jqueryUI</option>
+								<option value="css">css</option>
+								<option value="servlet">servlet</option>
 							</select>
 						</div>
-						<div class="col-sm-10">
+						<div class="col-sm-1" style="margin: auto;">제목</div>
+						<div class="col-sm-9">
 							<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." />
 						</div>
 					</div>
@@ -63,7 +74,7 @@
 						</div>
 					</div>
 					<div class="row form-group">
-						<div class="col-sm-12 text-right" style="margin-bottom:15px;">
+						<div class="col-sm-12 text-right" style="margin-bottom: 15px;">
 							<button type="submit" class="btn btn-success">등록하기</button>
 						</div>
 					</div>

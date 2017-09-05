@@ -31,15 +31,15 @@
 			</div>
 		</div>
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
-			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 5px; padding-bottom: 5px; margin-bottom: 25px; opacity: 0.85;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; margin-bottom: 25px; opacity: 0.85;">
 				<form name="writeFrm" action="writeAction.do" method="post" onsubmit="return checkWriteFrm();">
 					<input type="hidden" name="boardName" value="${param.boardName}" readonly /> <input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
 					<div class="row form-group">
-						<div class="col-sm-2">
-							<c:choose>
-								<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
-									<select class="form-control" name="pLang" style="width: 90%;" id="">
-										<option value="" style="color: red;">--- 카테고리 ---</option>
+						<c:choose>
+							<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
+								<div class="col-sm-2">
+									<select class="form-control" name="pLang">
+										<option value="">카테고리</option>
 										<option value="java">java</option>
 										<option value="html">html</option>
 										<option value="javascript">javascript</option>
@@ -51,21 +51,45 @@
 										<option value="css">css</option>
 										<option value="servlet">servlet</option>
 									</select>
-								</c:when>
-							</c:choose>
-						</div>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." />
-						</div>
+								</div>
+								<div class="col-sm-1" style="margin: auto;">
+									<h6>제목</h6>
+								</div>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." />
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="col-sm-2 text-center" style="margin: auto;">
+									<h6>제목</h6>
+								</div>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." />
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="row form-group" style="background-color: #e7adb7; height: 50px">
 						<div class="col-sm-11 text-right" style="margin: auto;">글쓴이 : ${param.id }</div>
 						<div class="col-sm-1"></div>
 					</div>
 					<div class="row form-group">
-						<div class="col-sm-12">
-							<textarea name="content" class="form-control" style="height: 400px;" placeholder="내용을 입력해주세요."></textarea>
-						</div>
+						<c:choose>
+							<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
+								<div class="col-sm-12">
+									<textarea name="content" class="form-control" style="height: 400px;" placeholder="내용을 입력해주세요."></textarea>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="col-sm-2 text-center">
+									<h6>내용</h6>
+								</div>
+								<div class="col-sm-10">
+									<textarea name="content" class="form-control" style="height: 400px;" placeholder="내용을 입력해주세요."></textarea>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-12 text-right" style="margin-bottom: 15px;">
@@ -95,6 +119,6 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-	
+
 </body>
 </html>
