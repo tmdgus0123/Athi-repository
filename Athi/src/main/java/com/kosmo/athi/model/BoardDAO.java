@@ -183,6 +183,38 @@ public class BoardDAO {
 		String sql = "SELECT * FROM board b join board_type bt on b.num=bt.num WHERE b.num='" + pidx + "'";
 		return (BoardDTO) template.queryForObject(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
+	
+	// 게시글 추천수증가
+	public void comm_Cnt(final String num) {
+		
+		String sql = "UPDATE board SET comm_cnt=comm_cnt+1 WHERE num=?";
+
+		this.template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setString(1, num);
+			}
+		});
+	}
+	
+	//게시글 추천수 DB등록
+	public int chuCnt(int comm_cnt) {
+		int rs = 0;
+		
+		try {
+			String sql = "INSERT INTO board VALUES board VALUES(board_seq.nextval, title, content, sysdate, id, 0, ?, 0, board_seq.currval, 0, 0, null)";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, comm_cnt);
+			
+			rs = psmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}	
+	
 
 	// 글쓰기 (언어 X)
 	public int write(final String boardName, final String id, final String title, final String content) {
@@ -341,4 +373,6 @@ public class BoardDAO {
 
 		return result;
 	}
+	
+	//추천수 증가
 }

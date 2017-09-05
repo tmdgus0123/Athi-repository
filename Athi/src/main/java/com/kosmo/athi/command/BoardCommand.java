@@ -26,11 +26,12 @@ public class BoardCommand implements ICommand {
 		//게시판 이름
 		String boardName = req.getParameter("boardName");
 		String searchColumn = req.getParameter("searchColumn");
-		String searchWord = req.getParameter("searchWord");
+		String searchWord = req.getParameter("searchWord");		
 		
 		paramMap.put("boardName", boardName);
 		paramMap.put("searchColumn", searchColumn);
 		paramMap.put("searchWord", searchWord);
+		
 		
 		//전체 레코드수 카운트
 		int totalRecordCount = dao.getTotalCount(paramMap);
