@@ -38,7 +38,7 @@
 				<div class="row" style="background-color: #f3f3f3; border-top-left-radius: 1em; border-top-right-radius: 1em; height: 50px;">
 					<div class="col-sm-4 text-left" style="margin: auto;">${viewRow.num }</div>
 					<div class="col-sm-4 text-center" style="margin: auto;">${viewRow.title }</div>
-					<div class="col-sm-4 text-right" style="margin: auto;">조회 : ${viewRow.visit_cnt } / 추천 : ${viewRow.recom_cnt }</div>
+					<div class="col-sm-4 text-right" style="margin: auto;">조회 : ${viewRow.visit_cnt } / 추천 : ${viewRow.comm_cnt }</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6 text-left">${viewRow.board_name }</div>
