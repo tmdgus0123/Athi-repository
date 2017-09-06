@@ -56,7 +56,6 @@
 					</div>
 				</div>
 				<div class="text-right" style="margin-top: 25px; margin-bottom: 25px;">
-					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 					<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
 					<c:choose>
 						<c:when test="${user_id==viewRow.id }">
@@ -64,6 +63,7 @@
 							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
 						</c:when>
 					</c:choose>
+					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 					<!-- 추천,비추천기능 -->
 					<div id="chuBtn" class="row">
 						<div class="text-center" style="margin: auto; padding-left: 0px;">
@@ -93,8 +93,7 @@
 										</div>
 										<div class="col-sm-9 text-left">
 											<div>
-												<strong>${dto.id }</strong>/
-												<span>(${dto.postdate })</span>
+												<strong>${dto.id }</strong>/<span>(${dto.postdate })</span>
 											</div>
 											<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 										</div>
@@ -107,9 +106,6 @@
 							</c:forEach>
 							<!-- 반복문 끝 -->
 						</ul>
-						<a id="MOVE_TOP_BTN" href="#">
-							<font size="4">맨위로</font>
-						</a>
 						<form name="commentsForm">
 							<input type="hidden" id="num" value="${viewRow.num }" />
 							<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
@@ -126,6 +122,7 @@
 								<div class="col-sm-1"></div>
 							</div>
 						</form>
+					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 					</div>
 				</div>
 			</div>
@@ -161,8 +158,7 @@
         });
     });
 	</script>
-
-
+	
 	<!-- 댓글 추가 -->
 	<script>
 		$('#enrollBtn').click(function() {

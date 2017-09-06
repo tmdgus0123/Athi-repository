@@ -282,10 +282,10 @@
 							<div class="input-group">
 								<input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="이메일" /> <select name="emailChange">
 									<option value="">도메인</option>
-									<option value="@naver.com">@naver.com</option>
-									<option value="@nate.com">@nate.com</option>
-									<option value="@hanmail.net">@hanmail.net</option>
-									<option value="@gmail.com">@gmail.com</option>
+									<option value="@naver.com">naver.com</option>
+									<option value="@nate.com">nate.com</option>
+									<option value="@hanmail.net">hanmail.net</option>
+									<option value="@gmail.com">gmail.com</option>
 								</select>
 							</div>
 						</div>
@@ -328,28 +328,3 @@
 </body>
 
 </html>
-
-<table class="table" style="margin-top: 50px;">
-	<tr>
-		<td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-			<h4>제목</h4>
-		</td>
-		<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><input type="text" class="form-control" name="title" style="width: 90%; border: 2px solid black; color: white;" /></td>
-	</tr>
-	<tr>
-		<td style="padding-top: 50px; padding-bottom: 50px; text-align: center;"><br> <br> <br> <br>
-			<h4>내용</h4></td>
-		<td colspan="3" style="padding-top: 50px; padding-bottom: 50px;"><textarea name="content" class="form-control" style="width: 90%; height: 200px; border: 2px solid black; color: white;"></textarea></td>
-	</tr>
-	<tr>
-		<td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-			<h4>첨부파일</h4>
-		</td>
-		<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><input type="file" class="form-control" name="file" style="width: 90%; border: 2px solid black; color: white;" /></td>
-	</tr>
-	<tr>
-		<td colspan="4" style="text-align: center; margin-top: 25px;">
-			<button type="submit" class="btn btn-success">등록하기</button>
-		</td>
-	</tr>
-</table>

@@ -235,7 +235,7 @@ public class HomeController {
 		command = new WriteCommand();
 		command.execute(model);
 
-		return "redirect: " + req.getParameter("boardName") + ".do";
+		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 
 	// 상세보기
@@ -301,7 +301,7 @@ public class HomeController {
 
 		mDao.close();
 
-		return "redirect: /";
+		return "redirect:/";
 	}
 
 	@RequestMapping("signUpAction.do")
@@ -332,7 +332,7 @@ public class HomeController {
 		}
 		out.flush();
 
-		urlPage = "redirect: home";
+		urlPage = "redirect:home";
 
 		return urlPage;
 	}
@@ -344,7 +344,7 @@ public class HomeController {
 		session.removeAttribute("user_id");
 		session.removeAttribute("user_pwd");
 		
-		mav.setViewName("redirect: /");
+		mav.setViewName("redirect:/");
 
 		return mav;
 	}
@@ -438,7 +438,7 @@ public class HomeController {
 		command = new SearchCommand();
 		command.execute(model);
 
-		return "redirect: " + req.getParameter("boardName") + ".do";
+		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 
 	@RequestMapping("reply.do")
@@ -469,7 +469,7 @@ public class HomeController {
 		command = new ModeCommand();
 		command.execute(model);
 
-		return "redirect: /" + req.getParameter("boardName") + ".do";
+		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 
 	@RequestMapping("/board/modify.do")
@@ -491,7 +491,7 @@ public class HomeController {
 		command = new ModeCommand();
 		command.execute(model);
 
-		return "redirect: /" + req.getParameter("boardName") + ".do";
+		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 	
 	@RequestMapping("/portfolioBoard.do")
@@ -567,7 +567,7 @@ public class HomeController {
 		command = new PortfolioWriteCommand();
 		command.execute(model);
 
-		return "redirect:  portfolioBoard.do";
+		return "redirect:portfolioBoard.do";
 	}
 	
 	@RequestMapping("portfolioView.do")
@@ -600,7 +600,7 @@ public class HomeController {
 		command = new PortfolioModifyActionCommand();
 		command.execute(model);
 		
-		return "redirect: portfolioBoard.do";
+		return "redirect:portfolioBoard.do";
 	}
 	
 	@RequestMapping("selectMemberDelete.do")

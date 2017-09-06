@@ -42,7 +42,7 @@
 									<select name="searchColumn" class="form-control">
 										<option value="">카테고리</option>
 										<option value="myPosts">내가 쓴 글</option>
-										<option value="myComment">내그 쓴 답글</option>
+										<option value="myComment">내가 쓴 답글</option>
 									</select>
 								</div>
 							</form>
