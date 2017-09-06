@@ -1,6 +1,5 @@
 package com.kosmo.athi.command;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 

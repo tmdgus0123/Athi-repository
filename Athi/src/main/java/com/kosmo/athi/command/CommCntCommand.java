@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
-import com.kosmo.athi.model.CommentsDAO;
 
 public class CommCntCommand implements ICommand {
 
