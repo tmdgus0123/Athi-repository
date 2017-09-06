@@ -20,7 +20,7 @@
 				return false;
 			}
 			
-			if($('input[type="text"][name="pwdtxt"]').val()!="탈퇴하겠습니다."){
+			if($('input[type="text"][name="pwdtxt"]').val()!="탈퇴"){
 				alert("문장을 잘못 입력하였습니다.");
 				$('input[type="text"][name="pwdtxt"]').val("");
 				return false;

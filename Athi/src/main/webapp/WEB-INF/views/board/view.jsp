@@ -107,7 +107,7 @@
 								</div>
 							</li>
 						</c:forEach>
-						<!-- 반복문 끝 -->					
+					<!-- 반복문 끝 -->					
 					</ul>			
 					<a id="MOVE_TOP_BTN" href="#"><font size="4">맨위로</font></a>		
 					<form name="commentsForm">

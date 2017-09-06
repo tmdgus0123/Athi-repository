@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
+import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
@@ -42,6 +43,8 @@ import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
 import com.kosmo.athi.command.EditMemberCommand;
+import com.kosmo.athi.command.ExpEditCommand;
+import com.kosmo.athi.command.GradeEditCommand;
 import com.kosmo.athi.command.MemberDeleteCommand;
 import com.kosmo.athi.command.MemberModifyCommand;
 import com.kosmo.athi.command.ModeCommand;
@@ -599,5 +602,38 @@ public class HomeController {
 		command.execute(model);
 		
 		return "adminBoard";
+	}
+	
+	@RequestMapping("memberEdit.do")
+	public String memberEdit(Model model, HttpServletRequest req){
+		
+		model.addAttribute("req", req);
+		
+		command = new AdminEditCommand();
+		command.execute(model);
+		
+		return "process/memberEdit";
+	}
+	
+	@RequestMapping("gradeEdit.do")
+	public String gradeEdit(Model model, HttpServletRequest req){
+		
+		model.addAttribute("req", req);
+		
+		command = new GradeEditCommand();
+		command.execute(model);
+		
+		return "adminMember";
+	}
+	
+	@RequestMapping("expEdit.do")
+	public String expEdit(Model model, HttpServletRequest req){
+		
+		model.addAttribute("req", req);
+		
+		command = new ExpEditCommand();
+		command.execute(model);
+		
+		return "adminMember";
 	}
 }

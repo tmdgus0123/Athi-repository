@@ -95,6 +95,5 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-	
 </body>
 </html>

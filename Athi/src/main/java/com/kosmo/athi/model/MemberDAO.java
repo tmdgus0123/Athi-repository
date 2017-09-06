@@ -147,10 +147,18 @@ public class MemberDAO {
 		return rs;
 	}
 	
+	// 관리자 모드에서 회원의 아이디를 클릭했을때 정보를 가져오기
+	public MemberDTO memberInfo(String id){
+	
+		String sql = "SELECT * FROM member b join member_grade bg on b.id=bg.id WHERE b.id='"+id+"'";
+
+		return (MemberDTO)template.queryForObject(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
+	}
+	
 	// 관리자 모드에서 회원정보 불러오기
 	public ArrayList<MemberDTO> selectMember(String id){
 	
-		String sql = " SELECT b.* FROM member b join member_grade bg on b.id=bg.id WHERE b.id in '"+id+"'";
+		String sql = "SELECT b.* FROM member b join member_grade bg on b.id=bg.id WHERE b.id in '"+id+"'";
 
 		return (ArrayList<MemberDTO>)template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
 	}
@@ -281,5 +289,40 @@ public class MemberDAO {
 	        +" ) Tb ) WHERE rNum BETWEEN 1 AND 3";
 		
 		return (ArrayList<MemberDTO>)this.template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
+	}
+	
+	public void gradeEdit(final int grade, final String id){
+		
+		String sql = "UPDATE member_grade SET grade=? WHERE id=?";
+		
+		this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, grade);
+				ps.setString(2, id);
+			}
+		});
+	}
+	
+	public void expEdit(final int exp, final String id){
+		
+		String sql = "";
+		
+		if(exp<0){
+			sql = "UPDATE member_grade SET exp-=? WHERE id=?";
+		}
+		else{
+			sql = "UPDATE member_grade SET exp+=? WHERE id=?";
+		}
+		
+		this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, exp);
+				ps.setString(2, id);
+			}
+		});
 	}
 }
