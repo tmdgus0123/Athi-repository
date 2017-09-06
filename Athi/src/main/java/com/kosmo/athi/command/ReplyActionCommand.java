@@ -19,7 +19,6 @@ public class ReplyActionCommand implements ICommand {
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest) paramMap.get("req");
 
-		String nowPage = req.getParameter("nowPage");
 		String num = req.getParameter("num");
 		BoardDTO dto = dao.selectPosts(num);
 		

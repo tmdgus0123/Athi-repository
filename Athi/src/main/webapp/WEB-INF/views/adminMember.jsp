@@ -122,7 +122,7 @@
 											<td class="text-center"><input type="checkbox" name="deleteInfo" value="${row.id}"/></td>
 											<td>${row.grade}</td>
 											<td>${row.exp}</td>
-											<td>${row.id}</td>
+											<td><a style="color:blue;" onmouseout="this.style='color:blue;';" onmouseover="this.style='text-decoration:underline; cursor:pointer;'" onclick="window.open('memberEdit.do?user_id=${row.id}', '회원 정보 출력', 'width=900px, height=900px, scrollbars=yes');">${row.id}</a></td>
 											<td>${row.name}</td>
 											<td>${row.regidate}</td>
 										</tr>

@@ -145,7 +145,9 @@
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fa fa-angle-up"></i>
 	</a>
-
+	
+	<jsp:include page="/common/modalLogin.jsp" />
+	
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>
 	<script src="./resources/sb-admin/vendor/popper/popper.min.js"></script>

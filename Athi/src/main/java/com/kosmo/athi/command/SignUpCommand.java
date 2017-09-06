@@ -1,6 +1,5 @@
 package com.kosmo.athi.command;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
@@ -44,7 +43,7 @@ public class SignUpCommand implements ICommand {
 		int retValue = mdao.signUp(mdto);
 		
 		model.addAttribute("retValue", retValue);
-	
+		
 		mdao.close();
 	}
 }
