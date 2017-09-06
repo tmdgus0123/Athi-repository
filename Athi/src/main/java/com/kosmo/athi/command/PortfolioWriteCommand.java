@@ -101,10 +101,11 @@ public class PortfolioWriteCommand implements ICommand {
 		List list = (List)returnObject.get("files");
 		Map listMap = (Map)list.get(0);
 		String fileName = (String)listMap.get("fileName");
+		String language = req.getParameter("language");
 		
 		BoardDAO dao = new BoardDAO();
 		
-		dao.portfolioWrite(id, title, content, fileName);
+		dao.portfolioWrite(id, title, content, fileName, language);
 		
 		dao.close();
 	}

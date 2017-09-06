@@ -30,7 +30,7 @@ public class PortfolioBoardCommand implements ICommand{
 		paramMap.put("searchWord", searchWord);
 
 		// 전체 레코드수 카운트
-		int totalRecordCount = dao.myPageGetTotalCount(paramMap);
+		int totalRecordCount = dao.portfolioGetTotalCount(paramMap);
 		
 		// 페이지 설정값
 		int pageSize = 9;

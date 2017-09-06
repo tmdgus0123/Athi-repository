@@ -11,6 +11,31 @@
 <meta name="author" content="">
 <title>ATHI</title>
 
+<script>
+	function frm()
+	{
+		var f = document.frm;
+		if(f.portfolioLanguage.value == "")
+		{
+			alert("카테고리를 선택하세요.");
+			f.portfolioLanguage.focus();
+			return false;
+		}
+		if(f.title.value == "")
+		{
+			alert("제목을 입력하세요.");
+			f.title.focus();
+			return false;
+		}
+		if(f.file.value == "")
+		{
+			alert("첨부파일을 선택하세요.");
+			f.file.focus();
+			return false;
+		}
+	}
+</script>
+
 <!-- Bootstrap core CSS -->
 <link href="./resources/sb-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom fonts for this sb-admin -->
@@ -33,22 +58,15 @@
 		</div>
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; margin-bottom: 25px; opacity: 0.85;">
-				<form id="frm" name="frm" method="post" enctype="multipart/form-data" action="portfolioWriteAction.do">
+				<form id="frm" name="frm" method="post" enctype="multipart/form-data" action="portfolioWriteAction.do" onsubmit="return frm();">
 					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
 					<div class="row form-group">
 						<div class="col-sm-2">
-							<select class="form-control" name="portfolioLanguage">
+							<select class="form-control" name="language">
 								<option value="">카테고리</option>
-								<option value="java">java</option>
-								<option value="html">html</option>
-								<option value="javascript">javascript</option>
-								<option value="jQuery">jQuery</option>
-								<option value="spring">spring</option>
-								<option value="JSP">JSP</option>
-								<option value="bootstrap">bootstrap</option>
-								<option value="jqueryUI">jqueryUI</option>
-								<option value="css">css</option>
-								<option value="servlet">servlet</option>
+								<option value="Web">웹</option>
+								<option value="Game">게임</option>
+								<option value="Application">어플리케이션</option>
 							</select>
 						</div>
 						<div class="col-sm-1" style="margin: auto;">제목</div>

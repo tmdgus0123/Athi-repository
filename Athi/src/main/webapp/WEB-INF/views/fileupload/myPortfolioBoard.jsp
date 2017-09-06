@@ -40,25 +40,8 @@
 		</div>
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
-				<div class="row">
-					<div class="col-sm-12">
-						<div style="float: right; margin-bottom: 25px;">
-							<c:choose>
-								<c:when test="${user_id!=null}">
-									<form action="portfolioWrite.do" method="get">
-										<input type="hidden" name="nowPage" value="${nowPage }" /> 
-										<input type="hidden" name="id" value="${user_id }" />
-										<div class="input-group">
-											<button type="submit" class="btn btn-info">글쓰기</button>
-										</div>
-									</form>
-								</c:when>
-							</c:choose>
-						</div>
-					</div>
-				</div>
 				<section id="portfolio">
-					<div class="container">
+					<div class="container" style="margin-top: 5px;">
 						<div class="box">
 							<!--/.center-->
 							<ul class="portfolio-filter text-left">
@@ -109,7 +92,7 @@
 				</section>
 				<!--/#portfolio-->
 				<!-- 페이지 번호 -->
-				<div class="row" style="margin-top: 15px; margin-bottom: 20px;">
+				<div class="row" style="margin-top: 10px; margin-bottom: -15px;">
 					<div class="col-sm-6">
 						<div style="float: left;">
 							<ul class="pagination">
@@ -145,9 +128,9 @@
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fa fa-angle-up"></i>
 	</a>
-	
+
 	<jsp:include page="/common/modalLogin.jsp" />
-	
+
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>
 	<script src="./resources/sb-admin/vendor/popper/popper.min.js"></script>

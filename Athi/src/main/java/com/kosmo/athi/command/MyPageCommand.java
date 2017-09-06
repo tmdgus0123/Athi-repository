@@ -38,7 +38,6 @@ public class MyPageCommand implements ICommand{
 		
 		// 전체 레코드수 카운트
 		int totalRecordCount = dao.myPageGetTotalCount(paramMap);
-		System.out.println("카운트 " + totalRecordCount);
 		
 		// 페이지 설정값
 		int pageSize = 9;
