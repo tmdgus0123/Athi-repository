@@ -36,12 +36,12 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-bottom: 10px; opacity: 0.85;">
 				<div class="row" style="background-color: #f3f3f3; border-top-left-radius: 1em; border-top-right-radius: 1em; height: 50px;">
-					<div class="col-sm-4 text-left" style="margin: auto;">${viewRow.num }</div>
+					<div class="col-sm-4 text-left" style="margin: auto;">${viewRow.id }${viewRow.num }</div>
 					<div class="col-sm-4 text-center" style="margin: auto;">${viewRow.title }</div>
 					<div class="col-sm-4 text-right" style="margin: auto;">조회 : ${viewRow.visit_cnt }</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6 text-left">${viewRow.board_name }</div>
+					<div class="col-sm-6 text-left">${viewRow.num }</div>
 					<div class="col-sm-6 text-right">${viewRow.postdate }</div>
 				</div>
 				<div style="height: 100px;">
@@ -57,11 +57,12 @@
 						</c:when>
 					</c:choose>
 				</div>
-				<!-- 추천기능 -->
+				<!-- 추천 기능 -->
 				<div id="chuBtn">
-					<div class="text-center" style="margin: auto; padding-left: 0px;">
+					<div class="text-center" style="margin: auto;">
 						<button id="choiceBtn" type="button" style="border: 0; outline: 0; background-color: white;">
-							<img src="resources/images/chu_up.png"><br> <font size="4"><b>추천수 : ${viewRow.recom_cnt}</b></font>
+							<img src="resources/images/chu_up.png"> <br> <font size="4"> <b>추천 : ${viewRow.recom_cnt}</b>
+							</font>
 						</button>
 						<br>
 					</div>
@@ -83,7 +84,8 @@
 									</div>
 									<div class="col-sm-9 text-left">
 										<div>
-											<strong>${dto.id }</strong>/<span>(${dto.postdate })</span>
+											<strong>${dto.id }</strong>/
+											<span>(${dto.postdate })</span>
 										</div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
@@ -98,24 +100,24 @@
 					</ul>
 					<form name="commentsForm">
 						<input type="hidden" id="num" value="${viewRow.num }" />
-						<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
-							<div class="col-sm-2">
-								<br /> <strong>${user_id }</strong> <input type="hidden" id="id" value="${user_id }" />
+						<div class="row" style="margin-top: 50px; padding: 25px; background-color: #f3f3f3;">
+							<div class="col-sm-2" style="margin: auto;">
+								<strong>${user_id }</strong> <input type="hidden" id="id" value="${user_id }" />
 							</div>
 							<div class="col-sm-8">
 								<textarea id="content" rows="3" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
 							</div>
-							<div class="col-sm-1">
-								<input type="button" id="enrollBtn" value="등록" />
+							<div class="col-sm-2" style="margin: auto;">
+								<input class="btn" type="button" id="enrollBtn" value="등록" />
 							</div>
-							<div class="col-sm-1"></div>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<a class="scroll-to-top rounded" href="#page-top"> <i class="fa fa-angle-up"></i>
+	<a class="scroll-to-top rounded" href="#page-top">
+		<i class="fa fa-angle-up"></i>
 	</a>
 
 	<jsp:include page="/common/modalLogin.jsp" />
@@ -186,7 +188,7 @@
 				});	
 			}
 			else{
-				alert("비회원은 추천불가능.");
+				alert("비회원은 추천이 불가능합니다.");
 			}	
 		});
 	</script>

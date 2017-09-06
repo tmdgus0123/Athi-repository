@@ -27,9 +27,7 @@ public class PortfolioWriteCommand implements ICommand {
 		// 파일이 저장될 path 설정
 		String path = "C:\\Users\\user\\git\\Athi-repository\\Athi\\src\\main\\webapp\\resources\\images";
 
-		BoardDAO bDao = new BoardDAO();
-
-		Map returnObject = new HashMap();
+		Map<String, Object> returnObject = new HashMap<String, Object>();
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest) map.get("req");
 		
@@ -107,6 +105,8 @@ public class PortfolioWriteCommand implements ICommand {
 		BoardDAO dao = new BoardDAO();
 		
 		dao.portfolioWrite(id, title, content, fileName);
+		
+		dao.close();
 	}
 
 	// uuid생성

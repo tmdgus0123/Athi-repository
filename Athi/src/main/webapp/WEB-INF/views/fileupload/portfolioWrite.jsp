@@ -37,7 +37,7 @@
 					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
 					<div class="row form-group">
 						<div class="col-sm-2">
-							<select class="form-control" name="pLang">
+							<select class="form-control" name="portfolioLanguage">
 								<option value="">카테고리</option>
 								<option value="java">java</option>
 								<option value="html">html</option>

@@ -31,6 +31,7 @@ public class BoardCommand implements ICommand {
 		paramMap.put("searchColumn", searchColumn);
 		paramMap.put("searchWord", searchWord);
 		paramMap.put("boardName", boardName);
+		
 		//전체 레코드수 카운트
 		int totalRecordCount = 0;
 
@@ -60,7 +61,6 @@ public class BoardCommand implements ICommand {
 		paramMap.put("totalCount", totalRecordCount);
 		paramMap.put("pageSize", pageSize);
 		paramMap.put("boardName", boardName);
-		
 		
 		//page처리를 위한 문자열 생성
 		String addQueryStr = "boardName="+ boardName +"&";
