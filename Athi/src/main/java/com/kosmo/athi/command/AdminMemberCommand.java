@@ -16,6 +16,7 @@ public class AdminMemberCommand implements ICommand {
 		
 		ArrayList<MemberDTO> lists = dao.getTotalMemberRecord();
 		
+		
 		model.addAttribute("memberRows", lists);
 
 		dao.close();

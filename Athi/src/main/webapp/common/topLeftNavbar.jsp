@@ -211,19 +211,19 @@
 								</c:otherwise>
 							</c:choose>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="myPortfolio.do">
+							<a class="dropdown-item" href="myPortfolio.do" style="cursor:pointer;">
 								<strong style="color:#acc800;">나의 포트폴리오</strong>
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="myPage.do">
+							<a class="dropdown-item" href="myPage.do" style="cursor:pointer;">
 								<strong style="color:#fdbc00;">나의 활동내역</strong>
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="editMember.do?user_id=${user_id}&user_pwd=${user_pwd}">
+							<a class="dropdown-item" href="editMember.do?user_id=${user_id}&user_pwd=${user_pwd}" style="cursor:pointer;">
 								<strong style="color:#608ffb;">회원 정보수정</strong>
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" onclick="window.open('withDraw.do?id=${user_id}', '', 'width=500px, height=500px, status=no, toolbar=no, menubar=no, resizable=no');">
+							<a class="dropdown-item" onclick="window.open('withDraw.do?id=${user_id}', '', 'width=500px, height=500px, status=no, toolbar=no, menubar=no, resize=no');" style="cursor:pointer;">
 								<strong style="color:#f1685e;">회원 탈퇴</strong>
 							</a>
 						</div>

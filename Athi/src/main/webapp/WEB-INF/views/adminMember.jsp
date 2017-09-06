@@ -43,7 +43,7 @@
 									<div class="mr-5">알림 갯수</div>
 								</div>
 								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+									<span class="float-left" onclick="location.href='./'">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
