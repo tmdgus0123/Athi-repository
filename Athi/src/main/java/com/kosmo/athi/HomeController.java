@@ -302,10 +302,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("signUpAction.do")
-	public String signUpAction(HttpServletResponse response, HttpServletRequest req, Model model) {
-
-		String urlPage;
-
+	public void signUpAction(HttpServletResponse rep, HttpServletRequest req, Model model) throws IOException {
 		model.addAttribute("req", req);
 
 		command = new SignUpCommand();
@@ -314,24 +311,27 @@ public class HomeController {
 		Map<String, Object> map = model.asMap();
 		int retValue = (Integer) map.get("retValue");
 
-		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		if (retValue==2){
+			
+			out = rep.getWriter();
+			
+			rep.setContentType("text/html; charset='UTF-8'"); 
+			out.println("<script>");
+			out.println("alert('회원 가입을 완료하였습니다.');");
+			out.println("window.location.href='./';");
+			out.println("</script>");
 		}
-
-		if (retValue == 2) {
-			out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
-		} else {
-			out.println("<script>alert('회원가입을 실패하였습니다.');</script>");
+		else{
+			out = rep.getWriter();
+			
+			rep.setContentType("text/html; charset='UTF-8'"); 
+			out.println("<script>");
+			out.println("alert('회원 가입을 실패하였습니다.');");
+			out.println("window.location.href='./';");
+			out.println("</script>");
 		}
-		out.flush();
-
-		urlPage = "redirect:home";
-
-		return urlPage;
 	}
 
 	@RequestMapping("/logOutAction.do")
@@ -401,20 +401,19 @@ public class HomeController {
 		Map<String, Object> map = model.asMap();
 		int ret = (Integer) map.get("modeValue");
 		
-		
 		PrintWriter out = null;
 		
 		if (ret==1){
+			session.invalidate();
 			
 			out = rep.getWriter();
 			
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
-			out.println("history.back();");
+			out.println("self.close();");
+			out.println("window.location.href='./';");
 			out.println("</script>");
-			
-			session.invalidate();
 		}
 		else{
 			out = rep.getWriter();
@@ -422,7 +421,8 @@ public class HomeController {
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 실패! 정보 오류');");
-			out.println("history.back();");
+			out.println("self.close();");
+			out.println("window.location.href='./';");
 			out.println("</script>");
 		}
 	}

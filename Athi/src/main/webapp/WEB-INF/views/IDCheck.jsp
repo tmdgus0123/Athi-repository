@@ -26,7 +26,7 @@
 	else{
 %>
 	<script>
-		alert("중복된 아이디 입니다.");
+		alert("중복되거나 사용할 수 없는 아이디 입니다.");
 		opener.signFrm.inputId.value="";
 		opener.signFrm.inputId.focus();
 		self.close();
