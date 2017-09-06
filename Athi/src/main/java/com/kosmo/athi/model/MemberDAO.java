@@ -73,35 +73,51 @@ public class MemberDAO {
 	//회원가입
 	public int signUp(MemberDTO dto) {
 		int retVal = 0;
-		try {
-			//인자 순서 : id, pass, name, address, email, birthday, gender, phone, regidate, grade, report_cnt, exp
-			String sql = "INSERT INTO member VALUES(?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
-			
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, dto.getId());
-			psmt.setString(2, dto.getPass());
-			psmt.setString(3, dto.getName());
-			psmt.setString(4, dto.getAddress());
-			psmt.setString(5, dto.getEmail());
-			psmt.setDate(6, (java.sql.Date)dto.getBirthday());
-			psmt.setString(7, dto.getGender());
-			psmt.setString(8, dto.getPhone());			
-			
-			retVal = psmt.executeUpdate();
-			
-			if(retVal==1){
-				String sql2 = "INSERT INTO member_grade VALUES(?, 1, 0, 0)";
-				psmt = conn.prepareStatement(sql2);
-				psmt.setString(1, dto.getId());
+		
+		int chkCount = 0; 
+		
+		chkCount = idCheck(dto.getId());
+		
+		if(chkCount==1){
+			retVal = 0;
+		}
+		else{
+			try {
+				//인자 순서 : id, pass, name, address, email, birthday, gender, phone, regidate, grade, report_cnt, exp
+				String sql = "INSERT INTO member VALUES(?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
 				
-				retVal += psmt.executeUpdate();
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, dto.getId());
+				psmt.setString(2, dto.getPass());
+				psmt.setString(3, dto.getName());
+				psmt.setString(4, dto.getAddress());
+				psmt.setString(5, dto.getEmail());
+				psmt.setDate(6, (java.sql.Date)dto.getBirthday());
+				psmt.setString(7, dto.getGender());
+				psmt.setString(8, dto.getPhone());			
+				
+				retVal = psmt.executeUpdate();
+				
+				if(retVal==1){
+					String sql2 = "INSERT INTO member_grade VALUES(?, 1, 0, 0)";
+					psmt = conn.prepareStatement(sql2);
+					psmt.setString(1, dto.getId());
+					
+					retVal += psmt.executeUpdate();
+				}
+			}
+			catch(Exception e) {
+				e.printStackTrace();
 			}
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
 		return retVal;
+	}
+	
+	public int idCheck(final String id){
+			
+		String sql = "SELECT count(*) FROM secession_log WHERE id='"+id+"'";
+		
+		return template.queryForObject(sql, Integer.class);
 	}
 	
 	//회원 삭제
@@ -109,12 +125,24 @@ public class MemberDAO {
 		int rs = 0;
 		
 		try {
-			String sql = "DELETE FROM member WHERE id=?";
+			String sql = "DELETE FROM member_grade WHERE id=?";
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			
 			rs = psmt.executeUpdate();
+			
+			if(rs==1){
+				String sql2 = "DELETE FROM member WHERE id=?";
+				
+				psmt = conn.prepareStatement(sql2);
+				psmt.setString(1, id);
+				
+				String sql3 = "INSERT INTO secession_log VALUES(?)";
+				
+				psmt = conn.prepareStatement(sql3);
+				psmt.setString(1, id);
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -176,20 +204,29 @@ public class MemberDAO {
 		
 		boolean isFlag = false;
 		
-		String sql = "SELECT * FROM member m join member_grade mg on m.id=mg.id WHERE m.id=? AND m.pass=?";
+		int chkCount = 0;
 		
-		try{
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
-			psmt.setString(2, pass);
-			rs = psmt.executeQuery();
-			
-			if(rs.next()){
-				isFlag = true;
-			}
+		chkCount = idCheck(id);
+		
+		if(chkCount==1){
+			isFlag = false;
 		}
-		catch(Exception e){
-			e.printStackTrace();
+		else{
+			String sql = "SELECT * FROM member m join member_grade mg on m.id=mg.id WHERE m.id=? AND m.pass=?";
+			
+			try{
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, id);
+				psmt.setString(2, pass);
+				rs = psmt.executeQuery();
+				
+				if(rs.next()){
+					isFlag = true;
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
 		return isFlag;
@@ -200,19 +237,28 @@ public class MemberDAO {
 		
 		boolean isFlag = false;
 		
-		String sql = "SELECT * FROM member m join member_grade mg on m.id=mg.id WHERE m.id=?";
+		int chkCount = 0;
 		
-		try{
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
-			rs = psmt.executeQuery();
-			
-			if(rs.next()){
-				isFlag = true;
-			}
+		chkCount = idCheck(id);
+		
+		if(chkCount==1){
+			isFlag = true;
 		}
-		catch(Exception e){
-			e.printStackTrace();
+		else{
+			String sql = "SELECT * FROM member m join member_grade mg on m.id=mg.id WHERE m.id=?";
+			
+			try{
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, id);
+				rs = psmt.executeQuery();
+				
+				if(rs.next()){
+					isFlag = true;
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
 		return isFlag;
@@ -224,9 +270,9 @@ public class MemberDAO {
 		int retValue = 0;
 		
 		if(retval==1){
-		String dbQuery2 = "DELETE FROM member WHERE id=? AND pass=?";
+		String dbQuery1 = "DELETE FROM member WHERE id=? AND pass=?";
 		
-		retValue = this.template.update(dbQuery2, new PreparedStatementSetter() {
+		retValue = this.template.update(dbQuery1, new PreparedStatementSetter() {
 			
 				@Override
 				public void setValues(PreparedStatement psmt) throws SQLException {
@@ -242,22 +288,38 @@ public class MemberDAO {
 	
 	public int deleteMember2(final String id){
 		
-		String dbQuery1 = "DELETE FROM member_grade WHERE id=?";
+		int retVal = 0;
 		
-		return this.template.update(dbQuery1, new PreparedStatementSetter() {
+		String dbQuery1 = "INSERT INTO secession_log VALUES(?)";
+		
+		retVal = this.template.update(dbQuery1, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement psmt) throws SQLException {
 				psmt.setString(1, id);
 			}
 		});
+		
+		if(retVal==1){
+			String dbQuery2 = "DELETE FROM member_grade WHERE id=?";
+			
+			retVal = this.template.update(dbQuery2, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement psmt) throws SQLException {
+					psmt.setString(1, id);
+				}
+			});
+		}
+		
+		return retVal;
 	}
 	
 	public void deleteMember3(final String id){
 		
 		int commit = 0;
 		
-		String dbQuery1 = "DELETE FROM member_grade WHERE id=?";
+		String dbQuery1 = "INSERT INTO secession_log VALUES (?)";
 		
 		commit = this.template.update(dbQuery1, new PreparedStatementSetter() {
 			
@@ -269,13 +331,23 @@ public class MemberDAO {
 		
 		if(commit==1){
 			
-			String dbQuery2 = "DELETE FROM member WHERE id=?";
+			String dbQuery2 = "DELETE FROM member_grade WHERE id=?";
 			
-			this.template.update(dbQuery1, new PreparedStatementSetter() {
+			this.template.update(dbQuery2, new PreparedStatementSetter() {
 				
 				@Override
 				public void setValues(PreparedStatement psmt) throws SQLException {
 					psmt.setString(1, id);
+				}
+			});
+			
+			String dbQuery3 = "DELETE FROM member WHERE id=?";
+			
+			this.template.update(dbQuery3, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setString(1, id);
 				}
 			});
 		}

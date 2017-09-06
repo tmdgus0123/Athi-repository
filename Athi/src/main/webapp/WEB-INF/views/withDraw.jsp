@@ -48,7 +48,7 @@
 						<tr>
 							<td>
 								<div class="form-group">
-									<input type="text" class="form-control" name="txt" placeholder='"탈퇴"를 입력하세요.' />
+									<input type="text" class="form-control" name="pwdtxt" placeholder='"탈퇴"를 입력하세요.' />
 									<span style="color: red;">"탈퇴"를 입력하시면 탈퇴가 완료됩니다.</span>
 								</div>
 							</td>
