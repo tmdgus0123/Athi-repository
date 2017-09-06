@@ -233,7 +233,8 @@ public class HomeController {
 		command = new WriteCommand();
 		command.execute(model);
 
-		return "redirect:" + req.getParameter("boardName") + ".do";
+
+		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 
 	// 상세보기
@@ -437,7 +438,7 @@ public class HomeController {
 		command = new SearchCommand();
 		command.execute(model);
 
-		return "redirect:" + req.getParameter("boardName") + ".do";
+		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 	
 	@RequestMapping("portfolioSearch.do")
@@ -611,6 +612,7 @@ public class HomeController {
 		command.execute(model);
 		
 		return "redirect:portfolioBoard.do";
+
 	}
 	
 	@RequestMapping("portfolioDeleteAction.do")
@@ -622,6 +624,7 @@ public class HomeController {
 		command.execute(model);
 
 		return "redirect:portfolioBoard.do";
+		
 	}
 	
 	@RequestMapping("selectMemberDelete.do")

@@ -93,7 +93,8 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-12 text-right" style="margin-bottom: 15px;">
-							<button type="submit" class="btn btn-success">등록하기</button>
+							<button type="submit" class="btn btn-success">등록</button>
+							<button type="button" class="btn btn-danger" onclick="history.back();">취소</button>
 						</div>
 					</div>
 				</form>
