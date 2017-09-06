@@ -32,17 +32,19 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-bottom: 10px; opacity: 0.85;">
 				<div class="row" style="background-color: #f3f3f3; border-top-left-radius: 1em; border-top-right-radius: 1em; height: 50px;">
-					<div class="col-sm-4 text-left" style="margin: auto;">인벤관리자</div>
-					<div class="col-sm-4 text-center" style="margin: auto;">제목</div>
-					<div class="col-sm-4 text-right" style="margin: auto;">조회 : 100 / 추천 : 100</div>
+					<div class="col-sm-4 text-left" style="margin: auto;">글쓴이 : ${viewRow.id }</div>
+					<div class="col-sm-4 text-center" style="margin: auto;">${viewRow.title }</div>
+					<div class="col-sm-4 text-right" style="margin: auto;">조회수 : ${viewRow.visit_cnt }</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6 text-left">[정보]</div>
-					<div class="col-sm-6 text-right">2017-09-03 12:59:59</div>
+					<div class="col-sm-6 text-left">${viewRow.num }</div>
+					<div class="col-sm-6 text-right">${viewRow.postdate }</div>
 				</div>
 				<div>
-					<div class="text-left" style="margin-top:50px; margin-bottom:50px;">
-						<img src="./resources/images/${param.fileName }" style="width:500px; height:500px;"/>
+					<div class="text-left" style="margin-top: 50px; margin-bottom: 50px;">
+						<img src="./resources/images/${param.fileName }" /> 
+						<br><br><br>
+						${viewRow.content }
 					</div>
 				</div>
 				<div class="text-right" style="margin-top: 25px; margin-bottom: 25px;">
@@ -50,12 +52,12 @@
 					<button type="submit" class="btn btn-success">답글</button>
 					<c:choose>
 						<c:when test="${user_id==viewRow.id}">
-							<button type="button" class="btn btn-primary" onclick="location.href='board/modify.do?mode=modify&num=${param.num}&boardName=${param.boardName}'">수정</button>
-							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
+							<button type="button" class="btn btn-primary" onclick="location.href='./portfolioModify.do?mode=modify&num=${param.num}'">수정</button>
+							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}'">삭제</button>
 						</c:when>
 					</c:choose>
 				</div>
-				<div class="row" style="background-color: #f3f3f3; height: 50px">
+				<div class="row" style="background-color: #f3f3f3; height: 50px;">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-10 text-left" style="margin: auto; padding-left: 30px;">댓글 수(0)</div>
 					<div class="col-sm-1"></div>
@@ -78,7 +80,7 @@
 					<div class="row" style="margin-top: 50px;">
 						<div class="col-sm-1"></div>
 						<div class="col-sm-9">
-							<textarea name="text" rows="5" style="width: 100%;">텍스트</textarea>
+							<textarea name="text" rows="5" style="width: 100%; resize: none;">텍스트</textarea>
 						</div>
 						<div class="col-sm-1">
 							<button class="btn btn-default">답글</button>

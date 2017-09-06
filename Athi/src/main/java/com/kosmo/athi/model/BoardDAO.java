@@ -261,6 +261,19 @@ public class BoardDAO {
 			}
 		});
 	}
+	
+	// 포트폴리오 조회수 증가
+	private void portfoliovisit_cnt(final String pidx) {
+
+		String sql = "UPDATE project_board SET visit_cnt=visit_cnt+1 WHERE num=?";
+
+		this.template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setInt(1, Integer.parseInt(pidx));
+			}
+		});
+	}
 
 	// 상세보기
 	public BoardDTO postView(String pidx) {
@@ -368,8 +381,8 @@ public class BoardDAO {
 	// 포트폴리오 상세보기
 	public BoardDTO portfolioView(String pidx) {
 		
-		// 조회수증가
-		visit_cnt(pidx);
+		// 조회 수 증가
+		portfoliovisit_cnt(pidx);
 
 		String sql = "SELECT * FROM project_board WHERE num='" + pidx + "'";
 		return (BoardDTO) template.queryForObject(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
@@ -566,6 +579,7 @@ public class BoardDAO {
 	}
 
 	public int portfolioWrite(final String id, final String title, final String content, final String fileName) {
+		
 		int retValue = 0;
 
 		String sql = "INSERT INTO project_board VALUES(project_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, 0, 0, 0)";
@@ -582,5 +596,22 @@ public class BoardDAO {
 		});
 
 		return retValue;
+	}
+	
+	public void modifyPortfolio(final String id, final String num,  final String title, final String content, final String fileName) {
+		
+		String query = "update project_board SET title=?, content=?, fileName=? WHERE id=? AND num=?";
+		
+		this.template.update(query, new PreparedStatementSetter(){
+			
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException{
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, fileName);
+			psmt.setString(4, id);
+			psmt.setInt(5, Integer.parseInt(num));
+			}
+		});
 	}
 }
