@@ -499,9 +499,9 @@ public class BoardDAO {
 	}
 	
 	//게시글 하나 가져오기
-	public BoardDTO selectPosts(String num) {
+	public BoardDTO getPost(String num) {
 
-		String dbQuery = "SELECT * FROM board b join board_type bt ON b.num=bt.num WHERE b.num=" + num;
+		String dbQuery = "SELECT * FROM board b JOIN board_type bt ON b.num=bt.num WHERE b.num=" + num;
 
 		return (BoardDTO) template.queryForObject(dbQuery, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
@@ -525,15 +525,13 @@ public class BoardDAO {
 	}
 
 	// 답글
-	public int replyWrite(BoardDTO dto, String id, String boardName, String title, String content) {
-
-		replyPrevUpdate(dto.getBgroup(), dto.getBstep());
+	public int replyWrite(BoardDTO dto, String id, String title, String content) {
 
 		int rs = 0;
 		int result = 0;
 
 		try {
-			String sql = "INSERT INTO board VALUES (board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, ?, ?, null,0)";
+			String sql = "INSERT INTO board VALUES (board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, ?, ?, null, 0)";
 
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, title);

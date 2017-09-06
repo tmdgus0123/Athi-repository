@@ -19,7 +19,7 @@ public class ModifyInfoCommand implements ICommand{
 		String num  = req.getParameter("num");
 		
 		BoardDAO bDao = new BoardDAO();
-		BoardDTO infoList = bDao.selectPosts(num);
+		BoardDTO infoList = bDao.getPost(num);
 		
 		model.addAttribute("postInfo", infoList);
 		bDao.close();
