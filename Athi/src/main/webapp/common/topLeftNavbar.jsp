@@ -223,7 +223,7 @@
 								<strong style="color:#608ffb;">회원 정보수정</strong>
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" onclick="window.open('withDraw.do?id=${user_id}', '', 'width=500px, height=500px, status=no, toolbar=no, menubar=no, scrollbars=no');">
+							<a class="dropdown-item" onclick="window.open('withDraw.do?id=${user_id}', '', 'width=500px, height=500px, status=no, toolbar=no, menubar=no, resizable=no');">
 								<strong style="color:#f1685e;">회원 탈퇴</strong>
 							</a>
 						</div>

@@ -24,13 +24,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
+import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
-import com.kosmo.athi.command.CommCntCommand;
+import com.kosmo.athi.command.RecomCntCommand;
 import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
+import com.kosmo.athi.command.NotRecomCntCommand;
 import com.kosmo.athi.command.PortfolioBoardCommand;
 import com.kosmo.athi.command.PortfolioViewCommand;
 import com.kosmo.athi.command.PortfolioWriteCommand;
@@ -41,6 +43,8 @@ import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
 import com.kosmo.athi.command.EditMemberCommand;
+import com.kosmo.athi.command.ExpEditCommand;
+import com.kosmo.athi.command.GradeEditCommand;
 import com.kosmo.athi.command.MemberDeleteCommand;
 import com.kosmo.athi.command.MemberModifyCommand;
 import com.kosmo.athi.command.ModeCommand;
@@ -533,14 +537,25 @@ public class HomeController {
 	}
 	@RequestMapping("/commChoice.do")
 	public String choice(HttpServletRequest req, Model model) {
-		System.out.println("commCnt() 메소드 실행");
+		System.out.println("recomCnt() 메소드 실행");
 		System.out.println("값넘어옴"+ req.getParameter("num"));
 		
 		model.addAttribute("req", req);
-		command = new CommCntCommand();
+		command = new RecomCntCommand();
 		command.execute(model);
 		
-		return "board/commCntAction";
+		return "board/recomCntAction";
+	}
+	@RequestMapping("/nRecom.do")
+	public String declaration(HttpServletRequest req, Model model) {
+		System.out.println("nRecom() 메소드 실행");
+		System.out.println("값넘어옴"+ req.getParameter("num"));
+		
+		model.addAttribute("req", req);
+		command = new NotRecomCntCommand();
+		command.execute(model);
+		
+		return "board/nrecomCntAction";
 	}
 
 	@RequestMapping("/portfolioWriteAction.do")
@@ -587,5 +602,38 @@ public class HomeController {
 		command.execute(model);
 		
 		return "adminBoard";
+	}
+	
+	@RequestMapping("memberEdit.do")
+	public String memberEdit(Model model, HttpServletRequest req){
+		
+		model.addAttribute("req", req);
+		
+		command = new AdminEditCommand();
+		command.execute(model);
+		
+		return "process/memberEdit";
+	}
+	
+	@RequestMapping("gradeEdit.do")
+	public String gradeEdit(Model model, HttpServletRequest req){
+		
+		model.addAttribute("req", req);
+		
+		command = new GradeEditCommand();
+		command.execute(model);
+		
+		return "adminMember";
+	}
+	
+	@RequestMapping("expEdit.do")
+	public String expEdit(Model model, HttpServletRequest req){
+		
+		model.addAttribute("req", req);
+		
+		command = new ExpEditCommand();
+		command.execute(model);
+		
+		return "adminMember";
 	}
 }

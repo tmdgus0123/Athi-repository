@@ -30,7 +30,7 @@
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 
 </head>
-<body class="fixed-nav" id="page-top">
+<body class="fixed-nav sidenav-toggled" id="page-top">
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
 

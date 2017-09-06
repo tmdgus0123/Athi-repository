@@ -20,7 +20,6 @@ public class CommCntCommand implements ICommand {
 		String num = req.getParameter("num");
 
 		BoardDAO dao = new BoardDAO();
-		dao.comm_Cnt(num);
 		
 		BoardDTO dto = dao.postView(num);
 		model.addAttribute("commCnt", dto.getcomm_cnt());
