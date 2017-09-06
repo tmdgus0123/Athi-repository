@@ -6,6 +6,7 @@
 <html>
 <head>
 
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,7 +46,16 @@
 					<div class="col-sm-6 text-right">${viewRow.postdate }</div>
 				</div>
 				<div style="height: 100px;">
-					<div class="text-left" style="margin-top: 100px;">${viewRow.content }</div>
+					<div class="text-left" style="margin-top: 100px;">
+					<c:choose>
+						<c:when test="${viewRow.nrecom_cnt >= 10}">
+							<b>블라인드 된 게시글 입니다.</b>
+						</c:when>
+						<c:otherwise>
+							${viewRow.content}
+						</c:otherwise>
+					</c:choose>
+					</div>
 				</div>
 				<div class="text-right" style="margin-top: 25px; margin-bottom: 25px;">
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
@@ -56,12 +66,15 @@
 							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
 						</c:when>
 					</c:choose>
-				</div>
-				<!-- 추천기능 -->
-				<div id="chuBtn">
+
+				<!-- 추천,비추천기능 -->
+				<div id="chuBtn" class="row" >
 					<div class="text-center" style="margin: auto; padding-left: 0px;">
 						<button id="choiceBtn" type="button" style="border: 0; outline: 0; background-color: white;">
 							<img src="resources/images/chu_up.png"><br> <font size="4"><b>추천수 : ${viewRow.recom_cnt}</b></font>
+						</button>
+						<button id="nRecomBtn" type="button" style="border: 0; outline: 0; background-color: white;">
+							<img src="resources/images/chu_down.png"><br> <font size="4"><b>반대수 : ${viewRow.nrecom_cnt}</b></font>
 						</button>
 						<br>
 					</div>
@@ -69,8 +82,8 @@
 				<br />
 				<div class="row" style="background-color: #f3f3f3; height: 50px">
 					<div class="col-sm-1"></div>
-					<div class="col-sm-10 text-left" style="margin: auto; padding-left: 30px;">댓글 수(${viewRow.comm_cnt })</div>
-					<div class="col-sm-1"></div>
+					<div class="col-sm-9 text-left" style="margin: auto; padding-left: 30px;">댓글 수(${viewRow.comm_cnt })</div>
+					<div id="declaBtn" class="col-sm-2" style="margin: auto; padding-left: 30px;"></div>
 				</div>
 				<div class="col-sm-12" style="background-color: white; border-radius: 1em; padding-bottom: 40px;">
 					<ul id="comments" style="list-style: none;">
@@ -94,7 +107,9 @@
 								</div>
 							</li>
 						</c:forEach>
-					</ul>
+					<!-- 반복문 끝 -->					
+					</ul>			
+					<a id="MOVE_TOP_BTN" href="#"><font size="4">맨위로</font></a>		
 					<form name="commentsForm">
 						<input type="hidden" id="num" value="${viewRow.num }" />
 						<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
@@ -107,11 +122,13 @@
 							<div class="col-sm-1">
 								<input type="button" id="enrollBtn" value="등록" />
 							</div>
-							<div class="col-sm-1"></div>
+							<div class="col-sm-1">
+							</div>
 						</div>
-					</form>
+					</form>					
 				</div>
 			</div>
+	
 		</div>
 	</div>
 	<a class="scroll-to-top rounded" href="#page-top"> <i class="fa fa-angle-up"></i>
@@ -131,6 +148,20 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
+	
+	<!-- 부드럽게 화면위로 롤링 -->
+	<script>
+    $(function() {        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+	</script>
+
+
 	<!-- 댓글 추가 -->
 	<script>
 		$('#enrollBtn').click(function() {
@@ -188,6 +219,31 @@
 				alert("비회원은 추천불가능.");
 			}	
 		});
+	</script>
+	
+	<!-- 반대 추가 -->
+	<script>
+		$('#nRecomBtn').click(function() {
+		if(${user_id!=null}){
+			alert("반대하셨습니다.");
+		
+			$.ajax({
+					url : 'nRecom.do', //form : action
+					type : 'post', // form : method 
+					dataType : 'html',
+					data :{ // form : input 's			
+							num : $('#num').val()
+					},
+				success : function(data){
+					$('#chuBtn').html("");
+					$('#chuBtn').append(data);
+				}
+			});	
+		}
+		else{
+			alert("비회원은 반대불가능.");
+		}	
+	});
 	</script>
 </body>
 </html>

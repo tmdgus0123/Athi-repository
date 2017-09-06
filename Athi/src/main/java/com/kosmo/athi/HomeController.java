@@ -32,6 +32,7 @@ import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
+import com.kosmo.athi.command.NotRecomCntCommand;
 import com.kosmo.athi.command.PortfolioBoardCommand;
 import com.kosmo.athi.command.PortfolioViewCommand;
 import com.kosmo.athi.command.PortfolioWriteCommand;
@@ -302,7 +303,10 @@ public class HomeController {
 	}
 
 	@RequestMapping("signUpAction.do")
-	public void signUpAction(HttpServletResponse rep, HttpServletRequest req, Model model) throws IOException {
+	public String signUpAction(HttpServletResponse response, HttpServletRequest req, Model model) {
+
+		String urlPage;
+
 		model.addAttribute("req", req);
 
 		command = new SignUpCommand();
@@ -311,27 +315,24 @@ public class HomeController {
 		Map<String, Object> map = model.asMap();
 		int retValue = (Integer) map.get("retValue");
 
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = null;
-		
-		if (retValue==2){
-			
-			out = rep.getWriter();
-			
-			rep.setContentType("text/html; charset='UTF-8'"); 
-			out.println("<script>");
-			out.println("alert('회원 가입을 완료하였습니다.');");
-			out.println("window.location.href='./';");
-			out.println("</script>");
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		else{
-			out = rep.getWriter();
-			
-			rep.setContentType("text/html; charset='UTF-8'"); 
-			out.println("<script>");
-			out.println("alert('회원 가입을 실패하였습니다.');");
-			out.println("window.location.href='./';");
-			out.println("</script>");
+
+		if (retValue == 2) {
+			out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
+		} else {
+			out.println("<script>alert('회원가입을 실패하였습니다.');</script>");
 		}
+		out.flush();
+
+		urlPage = "redirect:home";
+
+		return urlPage;
 	}
 
 	@RequestMapping("/logOutAction.do")
@@ -401,19 +402,20 @@ public class HomeController {
 		Map<String, Object> map = model.asMap();
 		int ret = (Integer) map.get("modeValue");
 		
+		
 		PrintWriter out = null;
 		
 		if (ret==1){
-			session.invalidate();
 			
 			out = rep.getWriter();
 			
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
-			out.println("self.close();");
-			out.println("window.location.href='./';");
+			out.println("history.back();");
 			out.println("</script>");
+			
+			session.invalidate();
 		}
 		else{
 			out = rep.getWriter();
@@ -421,8 +423,7 @@ public class HomeController {
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 실패! 정보 오류');");
-			out.println("self.close();");
-			out.println("window.location.href='./';");
+			out.println("history.back();");
 			out.println("</script>");
 		}
 	}
@@ -545,6 +546,17 @@ public class HomeController {
 		command.execute(model);
 		
 		return "board/recomCntAction";
+	}
+	@RequestMapping("/nRecom.do")
+	public String declaration(HttpServletRequest req, Model model) {
+		System.out.println("nRecom() 메소드 실행");
+		System.out.println("값넘어옴"+ req.getParameter("num"));
+		
+		model.addAttribute("req", req);
+		command = new NotRecomCntCommand();
+		command.execute(model);
+		
+		return "board/nrecomCntAction";
 	}
 
 	@RequestMapping("/portfolioWriteAction.do")
