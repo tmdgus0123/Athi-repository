@@ -64,8 +64,6 @@
 							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
 						</c:when>
 					</c:choose>
-<<<<<<< HEAD
-
 					<!-- 추천,비추천기능 -->
 					<div id="chuBtn" class="row">
 						<div class="text-center" style="margin: auto; padding-left: 0px;">
