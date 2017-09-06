@@ -35,12 +35,12 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-bottom: 10px; opacity: 0.85;">
 				<div class="row" style="background-color: #f3f3f3; border-top-left-radius: 1em; border-top-right-radius: 1em; height: 50px;">
-					<div class="col-sm-4 text-left" style="margin: auto;">${viewRow.num }</div>
+					<div class="col-sm-4 text-left" style="margin: auto;">${viewRow.id }${viewRow.num }</div>
 					<div class="col-sm-4 text-center" style="margin: auto;">${viewRow.title }</div>
 					<div class="col-sm-4 text-right" style="margin: auto;">조회 : ${viewRow.visit_cnt }</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6 text-left">${viewRow.board_name }</div>
+					<div class="col-sm-6 text-left">${viewRow.num }</div>
 					<div class="col-sm-6 text-right">${viewRow.postdate }</div>
 				</div>
 				<div style="height: 100px;">
@@ -64,6 +64,7 @@
 							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
 						</c:when>
 					</c:choose>
+<<<<<<< HEAD
 
 					<!-- 추천,비추천기능 -->
 					<div id="chuBtn" class="row">
@@ -218,7 +219,7 @@
 				});	
 			}
 			else{
-				alert("비회원은 추천불가능.");
+				alert("비회원은 추천이 불가능합니다.");
 			}	
 		});
 	</script>

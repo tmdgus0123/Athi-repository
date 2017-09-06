@@ -34,6 +34,8 @@ import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
 import com.kosmo.athi.command.NotRecomCntCommand;
 import com.kosmo.athi.command.PortfolioBoardCommand;
+import com.kosmo.athi.command.PortfolioModifyActionCommand;
+import com.kosmo.athi.command.PortfolioModifyCommand;
 import com.kosmo.athi.command.PortfolioViewCommand;
 import com.kosmo.athi.command.PortfolioWriteCommand;
 import com.kosmo.athi.command.SearchCommand;
@@ -233,7 +235,7 @@ public class HomeController {
 		command = new WriteCommand();
 		command.execute(model);
 
-		return "redirect:" + req.getParameter("boardName") + ".do";
+		return "redirect: " + req.getParameter("boardName") + ".do";
 	}
 
 	// 상세보기
@@ -299,7 +301,7 @@ public class HomeController {
 
 		mDao.close();
 
-		return "redirect:/";
+		return "redirect: /";
 	}
 
 	@RequestMapping("signUpAction.do")
@@ -330,7 +332,7 @@ public class HomeController {
 		}
 		out.flush();
 
-		urlPage = "redirect:home";
+		urlPage = "redirect: home";
 
 		return urlPage;
 	}
@@ -342,7 +344,7 @@ public class HomeController {
 		session.removeAttribute("user_id");
 		session.removeAttribute("user_pwd");
 		
-		mav.setViewName("redirect:/");
+		mav.setViewName("redirect: /");
 
 		return mav;
 	}
@@ -436,7 +438,7 @@ public class HomeController {
 		command = new SearchCommand();
 		command.execute(model);
 
-		return "redirect:" + req.getParameter("boardName") + ".do";
+		return "redirect: " + req.getParameter("boardName") + ".do";
 	}
 
 	@RequestMapping("reply.do")
@@ -456,10 +458,10 @@ public class HomeController {
 		command = new ReplyActionCommand();
 		command.execute(model);
 		
-		return "redirect:"+ req.getParameter("boardName") +".do?boardName="+req.getParameter("boardName")+"&nowPage="+ req.getParameter("nowPage");
+		return "redirect: "+ req.getParameter("boardName") +".do?boardName="+req.getParameter("boardName")+"&nowPage="+ req.getParameter("nowPage");
 	}
 
-	@RequestMapping("/board/ModifyAction.do")
+	@RequestMapping("pModifyAction.do")
 	public String pModifyAction(HttpServletRequest req, Model model) {
 
 		model.addAttribute("req", req);
@@ -467,7 +469,7 @@ public class HomeController {
 		command = new ModeCommand();
 		command.execute(model);
 
-		return "redirect:/" + req.getParameter("boardName") + ".do";
+		return "redirect: /" + req.getParameter("boardName") + ".do";
 	}
 
 	@RequestMapping("/board/modify.do")
@@ -489,7 +491,7 @@ public class HomeController {
 		command = new ModeCommand();
 		command.execute(model);
 
-		return "redirect:/" + req.getParameter("boardName") + ".do";
+		return "redirect: /" + req.getParameter("boardName") + ".do";
 	}
 	
 	@RequestMapping("/portfolioBoard.do")
@@ -565,7 +567,7 @@ public class HomeController {
 		command = new PortfolioWriteCommand();
 		command.execute(model);
 
-		return "fileupload/portfolioBoard";
+		return "redirect:  portfolioBoard.do";
 	}
 	
 	@RequestMapping("portfolioView.do")
@@ -579,9 +581,31 @@ public class HomeController {
 		return "fileupload/portfolioView";
 	}
 	
+	@RequestMapping("portfolioModify.do")
+	public String portfolioModify(HttpServletRequest req, Model model) {
+
+		model.addAttribute("req", req);
+
+		command = new PortfolioModifyCommand();
+		command.execute(model);
+
+		return "fileupload/portfolioModify";
+	}
+	
+	@RequestMapping("portfolioModifyAction.do")
+	public String portfolioModifyAction(HttpServletRequest req, Model model){
+		System.out.println("portfolioModifyAction() 실행");
+		
+		model.addAttribute("req",req);
+		command = new PortfolioModifyActionCommand();
+		command.execute(model);
+		
+		return "redirect: portfolioBoard.do";
+	}
+	
 	@RequestMapping("selectMemberDelete.do")
 	public String selectMemberDelete(Model model, HttpServletRequest req){
-		System.out.println("회원삭제 실행");
+		System.out.println("회원 삭제 실행");
 		
 		model.addAttribute("req", req);
 		

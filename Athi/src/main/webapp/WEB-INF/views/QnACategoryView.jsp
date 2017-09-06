@@ -22,17 +22,17 @@
 					<form action="" name="categoryFrm">
 						<div class="form-group">
 							<select id="category" class="form-control">
-								<option value="" style="color:red;" <%if(category.equals(null)){%>selected<%}%>>--- 카테고리 ---</option>
-								<option value="java" <%if(category.equals("java")){%>selected<%}%>>java</option>
-								<option value="html"<%if(category.equals("html")){%>selected<%}%>>html</option>
-								<option value="javascript"<%if(category.equals("javascript")){%>selected<%}%>>javascript</option>
+								<option value="" style="color:red;" <%if(category.equals(null)){%>selected<%}%>>카테고리</option>
+								<option value="java" <%if(category.equals("java")){%>selected<%}%>>Java</option>
+								<option value="html"<%if(category.equals("html")){%>selected<%}%>>HTML</option>
+								<option value="javascript"<%if(category.equals("javascript")){%>selected<%}%>>JavaScript</option>
 								<option value="jQuery"<%if(category.equals("jQuery")){%>selected<%}%>>jQuery</option>
-								<option value="spring"<%if(category.equals("spring")){%>selected<%}%>>spring</option>
+								<option value="spring"<%if(category.equals("spring")){%>selected<%}%>>Spring</option>
 								<option value="JSP"<%if(category.equals("JSP")){%>selected<%}%>>JSP</option>
-								<option value="bootstrap"<%if(category.equals("bootstrap")){%>selected<%}%>>bootstrap</option>
-								<option value="jqueryUI"<%if(category.equals("jqueryUI")){%>selected<%}%>>jqueryUI</option>
-								<option value="css"<%if(category.equals("css")){%>selected<%}%>>css</option>
-								<option value="servlet"<%if(category.equals("servlet")){%>selected<%}%>>servlet</option>
+								<option value="bootstrap"<%if(category.equals("bootstrap")){%>selected<%}%>>Bootstrap</option>
+								<option value="jqueryUI"<%if(category.equals("jqueryUI")){%>selected<%}%>>jQueryUI</option>
+								<option value="css"<%if(category.equals("css")){%>selected<%}%>>CSS</option>
+								<option value="servlet"<%if(category.equals("servlet")){%>selected<%}%>>jspServlet</option>
 							</select>
 						</div>
 					</form>

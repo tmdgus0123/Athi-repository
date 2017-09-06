@@ -16,10 +16,10 @@ public class ModifyInfoCommand implements ICommand{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
-		String num  = req.getParameter("num");
+		String idx  = req.getParameter("idx");
 		
 		BoardDAO bDao = new BoardDAO();
-		BoardDTO infoList = bDao.getPost(num);
+		BoardDTO infoList = bDao.getPost(idx);
 		
 		model.addAttribute("postInfo", infoList);
 		bDao.close();
