@@ -137,7 +137,6 @@
 									<tr>
 										<td colspan="6" style="text-align: right;">
 											<button type="button" class="btn btn-danger" name="memberBtn">선택 회원 삭제</button> &nbsp;&nbsp;&nbsp;
-											<button type="button" class="btn btn-info" name="gradeBtn">회원 등급 조정</button>
 										</td>
 									</tr>
 								</tfoot>

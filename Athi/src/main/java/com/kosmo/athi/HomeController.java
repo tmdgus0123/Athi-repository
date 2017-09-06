@@ -534,6 +534,7 @@ public class HomeController {
 		
 		return "tipCategoryView";
 	}
+	
 	@RequestMapping("/commChoice.do")
 	public String choice(HttpServletRequest req, Model model) {
 		System.out.println("recomCnt() 메소드 실행");
