@@ -31,6 +31,7 @@ import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
+import com.kosmo.athi.command.NotRecomCntCommand;
 import com.kosmo.athi.command.PortfolioBoardCommand;
 import com.kosmo.athi.command.PortfolioViewCommand;
 import com.kosmo.athi.command.PortfolioWriteCommand;
@@ -541,6 +542,17 @@ public class HomeController {
 		command.execute(model);
 		
 		return "board/recomCntAction";
+	}
+	@RequestMapping("/nRecom.do")
+	public String declaration(HttpServletRequest req, Model model) {
+		System.out.println("nRecom() 메소드 실행");
+		System.out.println("값넘어옴"+ req.getParameter("num"));
+		
+		model.addAttribute("req", req);
+		command = new NotRecomCntCommand();
+		command.execute(model);
+		
+		return "board/nrecomCntAction";
 	}
 
 	@RequestMapping("/portfolioWriteAction.do")

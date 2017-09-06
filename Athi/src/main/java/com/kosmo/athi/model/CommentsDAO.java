@@ -64,12 +64,12 @@ public class CommentsDAO {
 
 		return (ArrayList<CommentsDTO>) template.query(sql, new BeanPropertyRowMapper<CommentsDTO>(CommentsDTO.class));
 	}
-
+	
 	//댓글 DB등록
 	public int enroll(String board_num, String id, String content) {
 		int rs = 0;
 		try {
-			String sql = "INSERT INTO comments VALUES ( comments_seq.nextval, ?, sysdate, ?, ?, 0, 0, 0, 0 )";
+			String sql = "INSERT INTO comments VALUES ( comments_seq.nextval, ?, sysdate, ?, ?, 0, 0, 0, 0)";
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);

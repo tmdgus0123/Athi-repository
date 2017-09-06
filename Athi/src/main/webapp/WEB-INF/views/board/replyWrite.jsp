@@ -40,30 +40,6 @@
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
-<<<<<<< HEAD
-	 <div class="container">
-      <div class="col-sm-12" style="margin-top: 50px;">
-         <div class="col-sm-12 text-center" style="background-color:white; color:black; font-weight:bold; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-            <h1>답글 작성</h1>
-         </div>
-         <div>
-            <div class="col-sm-12" style="margin-top: 50px;">
-               <div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 5px; margin-bottom: 25px; opacity: 0.85;">
-                  <form name="writeFrm" action="writeAction.do" method="post" onsubmit="return checkWriteFrm();">
-                    <input type="hidden" name="num" value="${dto.num }" />
-					<input type="hidden" name="id" value="${user_id }" />
-					<input type="hidden" name="nowPage" value="${nowPage }" />
-					<input type="hidden" name="boardName" value="${dto.board_name }" />
-                     <div class="form-group">
-                        <table class="table" style="margin-top: 50px;">
-                           <tr>
-                              <td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-                                 <h4>제목</h4>
-                              </td>
-                              <td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;">
-                              	<input type="text" class="form-control" name="title" style="width: 90%; border: 2px solid black; background-color:gray; color:white;" value="${dto.getTitle()}" />
-                              </td>
-=======
 	<div class="content-wrapper py-3" style="background-color: #f2f4f7;">
 		<div class="col-sm-12">
 			<hr>
@@ -77,7 +53,6 @@
 					<input type="hid den" name="id" value="${user_id }" />
 					<input type="hid den" name="nowPage" value="${nowPage }" />
 					<input type="hid den" name="boardName" value="${dto.board_name }" />
->>>>>>> branch 'master' of https://github.com/jk7009ya/athi.git
 
                               <c:if test="${dto.board_name !='accident' and dto.board_name !='freeBoard' and dto.board_name !='notice' and dto.board_name !='suggestions'}">
                                  <td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
@@ -122,30 +97,14 @@
                               <td colspan="4" style="text-align: center;">
 								<button class="btn btn-success" type="submit">등록</button>
 								<button class="btn btn-danger" type="button" onclick="history.back();">취소</button>
-<<<<<<< HEAD
-							  </td>	
-                           </tr>
-                        </table>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-	<jsp:include page="/common/modalLogin.jsp" />
-=======
 							</td>
 						</tr>
-
 					</table>
 				</form>
 			</div>
 		</div>
 		<jsp:include page="/common/modalLogin.jsp" />
 	</div>
->>>>>>> branch 'master' of https://github.com/jk7009ya/athi.git
-
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/sb-admin/vendor/jquery/jquery.min.js"></script>

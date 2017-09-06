@@ -13,7 +13,8 @@ public class BoardDTO {
 
 	private int comm_cnt; // 댓글수
 	private int recom_cnt; // 추천수
-	
+	private int nrecom_cnt; //반대수
+
 	// 게시판 정렬에 필요한 변수
 	private int bgroup;
 	private int bstep;
@@ -31,7 +32,7 @@ public class BoardDTO {
 	public BoardDTO() {
 	}
 
-	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int bgroup, int bstep, int bdepth, String board_name, String fileName) {
+	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int nrecom_cnt, int bgroup, int bstep, int bdepth, String board_name, String fileName) {
 
 		this.num = num;
 		this.title = title;
@@ -41,6 +42,7 @@ public class BoardDTO {
 		this.visit_cnt = visit_cnt;
 		this.comm_cnt = comm_cnt;
 		this.recom_cnt = recom_cnt;
+		this.nrecom_cnt = nrecom_cnt;
 		this.bgroup = bgroup;
 		this.bstep = bstep;
 		this.bdepth = bdepth;
@@ -48,7 +50,7 @@ public class BoardDTO {
 		this.fileName = fileName;
 	}
 
-	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int bgroup, int bstep, int bdepth) {
+	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int bgroup, int bstep, int bdepth, int nrecom_cnt) {
 		this.num = num;
 		this.title = title;
 		this.content = content;
@@ -60,6 +62,7 @@ public class BoardDTO {
 		this.bgroup = bgroup;
 		this.bstep = bstep;
 		this.bdepth = bdepth;
+		this.nrecom_cnt = nrecom_cnt;
 	}
 
 	public String getFileName() {
@@ -122,8 +125,8 @@ public class BoardDTO {
 		return comm_cnt;
 	}
 
-	public void setcomm_cnt(int comm_cnt) {
-		this.comm_cnt = comm_cnt;
+	public void setcomm_cnt(int nrecom_cnt) {
+		this.comm_cnt = nrecom_cnt;
 	}
 
 	public int getRecom_cnt() {
@@ -132,6 +135,14 @@ public class BoardDTO {
 
 	public void setRecom_cnt(int recom_cnt) {
 		this.recom_cnt = recom_cnt;
+	}
+	
+	public int getNrecom_cnt() {
+		return nrecom_cnt;
+	}
+
+	public void setNrecom_cnt(int nrecom_cnt) {
+		this.nrecom_cnt = nrecom_cnt;
 	}
 
 	public int getBgroup() {

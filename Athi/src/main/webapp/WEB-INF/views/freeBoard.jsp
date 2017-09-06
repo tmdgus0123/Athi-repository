@@ -57,9 +57,10 @@
 				<table class="table table-hover">
 					<colgroup>
 						<col width="10%" />
-						<col width="30%" />
+						<col width="25%" />
+						<col width="15%" />
 						<col width="20%" />
-						<col width="20%" />
+						<col width="10%" />
 						<col width="10%" />
 						<col width="10%" />
 					</colgroup>
@@ -71,6 +72,7 @@
 							<th class="text-center">등록일</th>
 							<th class="text-center">조회수</th>
 							<th class="text-center">추천</th>
+							<th class="text-center">비추천</th>
 						</tr>
 					</thead>
 
@@ -92,11 +94,12 @@
 								<c:forEach items='${listRows}' var='row' varStatus='loop'>
 									<tr>
 										<td style="text-align: center;">${row.rNum}</td>
-										<td><a href="./view.do?num=${row.num }&nowPage=${nowPage}&rNum=${row.rNum}&boardName=${boardName}">${row.title}</a></td>
+										<td><a href="./view.do?num=${row.num }&nowPage=${nowPage}&rNum=${row.rNum}&boardName=${boardName}">${row.title}(${row.comm_cnt})</a></td>
 										<td style="text-align: center;">${row.id}</td>
 										<td style="text-align: center;">${row.postdate}</td>
 										<td style="text-align: center;">${row.visit_cnt}</td>
 										<td style="text-align: center;">${row.recom_cnt}</td>
+										<td style="text-align: center;">${row.nrecom_cnt}</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
