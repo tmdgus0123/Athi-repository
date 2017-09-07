@@ -44,5 +44,7 @@ public class WriteCommand implements ICommand{
 		}
 				
 		model.addAttribute("boardName", boardName);
+		
+		bDao.close();
 	}
 }

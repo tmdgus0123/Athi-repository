@@ -33,5 +33,7 @@ public class ModeCommand implements ICommand{
 		}
 		
 		model.addAttribute("boardName", boardName);
+		
+		bDao.close();
 	}
 }

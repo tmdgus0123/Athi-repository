@@ -27,5 +27,7 @@ public class RankListCommand implements ICommand{
 		model.addAttribute("firstrDate", rankList.get(0).getRegidate());
 		model.addAttribute("secondrDate", rankList.get(1).getRegidate());
 		model.addAttribute("thirdrDate", rankList.get(2).getRegidate());
+		
+		mDao.close();
 	}
 }

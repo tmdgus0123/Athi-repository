@@ -108,6 +108,8 @@ public class PortfolioModifyActionCommand implements ICommand{
 		BoardDAO dao = new BoardDAO();
 		
 		dao.modifyPortfolio(id, num, title, content, fileName);
+		
+		dao.close();
 	}
 
 	// uuid생성
