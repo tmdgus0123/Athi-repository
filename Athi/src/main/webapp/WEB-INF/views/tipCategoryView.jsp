@@ -21,7 +21,7 @@
 				<div style="float: left;">
 					<form action="" name="categoryFrm">
 						<div class="form-group">
-							<select id="category" class="form-control">
+							<select id="category" name="category" class="form-control">
 								<option value="" style="color:red;" <%if(category.equals(null)){%>selected<%}%>>--- 카테고리 ---</option>
 								<option value="java" <%if(category.equals("java")){%>selected<%}%>>java</option>
 								<option value="html"<%if(category.equals("html")){%>selected<%}%>>html</option>
@@ -113,6 +113,9 @@
 						<div class="form-group" style="margin-top:18px;">
 							<input type="hidden" name="boardName" value="${boardName }" />
 							<input type="hidden" name="nowPage" value="${nowPage }" />
+							<% if(request.getParameter("category")!=null){ %>
+							<input type="hidden" name="category" value="<%=request.getParameter("category")%>" />
+							<%} %>
 							<select name="searchColumn" class="form-control">
 								<option value="title">제목</option>
 								<option value="content">내용</option>

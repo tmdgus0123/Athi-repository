@@ -17,5 +17,6 @@ public class SearchCommand implements ICommand {
 		model.addAttribute("boardName", req.getParameter("boardName"));
 		model.addAttribute("searchColumn", req.getParameter("searchColumn"));
 		model.addAttribute("searchWord", req.getParameter("searchWord"));
+		model.addAttribute("category", req.getParameter("category"));
 	}
 }
