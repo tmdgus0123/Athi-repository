@@ -93,7 +93,6 @@
 								</div>
 							</c:otherwise>
 						</c:choose>
-
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-12 text-right" style="margin-bottom: 15px;">

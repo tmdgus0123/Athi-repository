@@ -56,8 +56,10 @@
 					</div>
 				</div>
 				<div class="text-right" style="margin-top: 25px; margin-bottom: 25px;">
-					<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
 					<c:choose>
+						<c:when test="${user_id!=null}">
+							<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
+						</c:when>
 						<c:when test="${user_id==viewRow.id }">
 							<button type="button" class="btn btn-primary" onclick="location.href='modify.do?mode=modify&num=${viewRow.num}&boardName=${param.boardName}'">수정</button>
 							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${viewRow.num}&boardName=${param.boardName}'">삭제</button>
@@ -96,10 +98,14 @@
 												<strong>${dto.id }</strong>/<span>(${dto.postdate })</span>
 											</div>
 											<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
-										</div>
+										</div>'
+										<c:choose>
+										<c:when test="${user_id==dto.id or user_id=='athi'}">
 										<div class="col-sm-1 text-right">
 											<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
 										</div>
+										</c:when>
+										</c:choose>
 										<div class="col-sm-1" style="margin-top: 25px;"></div>
 									</div>
 								</li>
@@ -221,7 +227,7 @@
 	<!-- 반대 추가 -->
 	<script>
 		$('#nRecomBtn').click(function() {
-		if(${user_id!=null}){
+			if(${user_id!=null}){
 			alert("반대하셨습니다.");
 		
 			$.ajax({
