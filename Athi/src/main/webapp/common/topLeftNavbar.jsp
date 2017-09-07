@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	<a class="navbar-brand" href="<%=request.getContextPath()%>/">아 띠</a>
+	<a class="navbar-brand text-center" href="<%=request.getContextPath()%>/" style="background:green; font-family:Tahoma; margin-left:-15px; height:100%;"><i class="fa fa-handshake-o"></i>&nbsp;아 띠</a>
 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -211,11 +211,7 @@
 								</c:otherwise>
 							</c:choose>
 							<div class="dropdown-divider"></div>
-<<<<<<< HEAD
 							<a class="dropdown-item" href="myPortfolio.do" style="cursor:pointer;">
-=======
-							<a class="dropdown-item" href="myPortfolioBoard.do">
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 								<strong style="color:#acc800;">나의 포트폴리오</strong>
 							</a>
 							<div class="dropdown-divider"></div>

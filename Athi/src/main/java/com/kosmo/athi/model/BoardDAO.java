@@ -581,7 +581,7 @@ public class BoardDAO {
 	//게시글 하나 가져오기
 	public BoardDTO getPost(String num) {
 
-		String dbQuery = "SELECT * FROM board b JOIN board_type bt ON b.num=bt.num WHERE b.num=" + num;
+		String dbQuery = "SELECT * FROM board b JOIN board_type bt ON b.num=bt.num WHERE b.num="+ num;
 
 		return (BoardDTO) template.queryForObject(dbQuery, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}

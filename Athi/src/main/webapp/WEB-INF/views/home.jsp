@@ -43,11 +43,19 @@
 			<img src="./resources/images/baner4.jpg" width=100% height="200px" />
 		</div>
 		<!-- 배너 끝 -->
+		<!-- 소개글 시작 -->
+		<div class="jumboton text-center" style="margin-top:16px; font-size:2.0em; background-color:">
+			<pre>
+ATHI 생활 코딩.
+정보 공유를 위한 사이트입니다.
+			</pre>
+		</div>
+		<!-- 소개글 종료 -->
 		<!-- 순위 시작 -->
-		<div class="col-sm-12" style="margin-top: 16px;">
+		<div class="col-sm-12" style="margin-top:16px;">
 			<div class="card mb-3">
-				<div class="card-header">
-					<i class="fa fa-fw fa-user"></i>아띠 회원 랭킹
+				<div class="card-header" style="color:white; background:#0069D9;">
+					<i class="fa fa-fw fa-user"></i> 아띠 회원 랭킹
 				</div>
 				<div class="card-body">
 					<div class="row">
@@ -105,7 +113,7 @@
 		<!-- 차트 시작 -->
 		<div class="col-sm-12">
 			<div class="card mb-3" id="div1">
-				<div class="card-header">
+				<div class="card-header" style="background:#0069D9; color:white;">
 					<i class="fa fa-area-chart"></i> 방문자수 그래프
 				</div>
 				<div class="card-body">

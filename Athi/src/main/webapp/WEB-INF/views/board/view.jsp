@@ -59,8 +59,8 @@
 					<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
 					<c:choose>
 						<c:when test="${user_id==viewRow.id }">
-							<button type="button" class="btn btn-primary" onclick="location.href='board/modify.do?mode=modify&num=${param.num}&boardName=${param.boardName}'">수정</button>
-							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}&boardName=${param.boardName}'">삭제</button>
+							<button type="button" class="btn btn-primary" onclick="location.href='modify.do?mode=modify&num=${viewRow.num}&boardName=${param.boardName}'">수정</button>
+							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${viewRow.num}&boardName=${param.boardName}'">삭제</button>
 						</c:when>
 					</c:choose>
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>

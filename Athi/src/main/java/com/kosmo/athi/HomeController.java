@@ -483,7 +483,7 @@ public class HomeController {
 		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 
-	@RequestMapping("/board/modify.do")
+	@RequestMapping("/modify.do")
 	public String modify(HttpServletRequest req, Model model) {
 
 		model.addAttribute("req", req);
