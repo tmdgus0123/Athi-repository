@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
@@ -11,7 +12,7 @@ import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
 import com.kosmo.athi.model.PagingUtil;
 
-public class PortfolioBoardCommand implements ICommand{
+public class MyPortfolioBoardCommand implements ICommand{
 	
 	@Override
 	public void execute(Model model) {
@@ -21,6 +22,11 @@ public class PortfolioBoardCommand implements ICommand{
 		// 파라미터받기
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
+		HttpSession session = (HttpSession)paramMap.get("session");
+		
+		// 아이디
+		String id = session.getAttribute("user_id").toString();
+		paramMap.put("id", id);
 		
 		// 검색
 		String searchColumn = req.getParameter("searchColumn");
@@ -30,7 +36,7 @@ public class PortfolioBoardCommand implements ICommand{
 		paramMap.put("searchWord", searchWord);
 
 		// 전체 레코드수 카운트
-		int totalRecordCount = dao.portfolioGetTotalCount(paramMap);
+		int totalRecordCount = dao.myPortfolioGetTotalCount(paramMap);
 		
 		// 페이지 설정값
 		int pageSize = 9;
@@ -58,7 +64,7 @@ public class PortfolioBoardCommand implements ICommand{
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage, req.getContextPath() + "/myPage.do?");
 		
 		// DAO에서 list()메소드로 목록 가져오기
-		ArrayList<BoardDTO> listRows = dao.portfolioBoardList(paramMap); 
+		ArrayList<BoardDTO> listRows = dao.myPortfolioBoardList(paramMap); 
 		
 		// Spring JDBC사용시 답변글 들여쓰기 처리
 		int virtualNum = 0;

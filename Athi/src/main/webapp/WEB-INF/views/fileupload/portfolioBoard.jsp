@@ -66,13 +66,13 @@
 									<a class="btn btn-primary active" href="#" data-filter="*">All</a>
 								</li>
 								<li>
-									<a class="btn btn-primary" href="#" data-filter=".bootstrap">Bootstrap</a>
+									<a class="btn btn-primary" href="#" data-filter=".Web">웹</a>
 								</li>
 								<li>
-									<a class="btn btn-primary" href="#" data-filter=".html">HTML</a>
+									<a class="btn btn-primary" href="#" data-filter=".Game">게임</a>
 								</li>
 								<li>
-									<a class="btn btn-primary" href="#" data-filter=".wordpress">Wordpress</a>
+									<a class="btn btn-primary" href="#" data-filter=".Application">어플리케이션</a>
 								</li>
 							</ul>
 							<!--/#portfolio-filter-->
@@ -85,10 +85,10 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach items='${listRows}' var='row' varStatus='loop'>
-											<li class="portfolio-item bootstrap apps col-sm-6">
+											<li class="portfolio-item ${row.p_language } apps col-sm-6">
 												<div class="item-inner">
 													<div class="portfolio-image">
-														<img src="./resources/images/${row.fileName }" alt="">
+														<img src="./resources/images/${row.fileName }">
 														<div class="overlay">
 															<a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="./resources/images/${row.fileName }">
 																<i class="icon-eye-open"></i>
@@ -119,7 +119,7 @@
 					</div>
 					<div class="col-sm-6">
 						<div style="float: right;">
-							<form action="search.do" class="form-inline" name="searchFrm" method="get">
+							<form action="portfolioSearch.do" class="form-inline" name="searchFrm" method="get">
 								<div class="form-group" style="margin-top: 18px;">
 									<input type="hidden" name="boardName" value="${boardName }" /> <input type="hidden" name="nowPage" value="${nowPage }" /> <select name="searchColumn" class="form-control">
 										<option value="title">제목</option>

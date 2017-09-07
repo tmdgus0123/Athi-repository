@@ -20,19 +20,18 @@ public class ReplyActionCommand implements ICommand {
 		HttpServletRequest req = (HttpServletRequest) paramMap.get("req");
 
 		String num = req.getParameter("num");
-		BoardDTO dto = dao.selectPosts(num);
+		BoardDTO dto = dao.getPost(num);
 		
 		String id = req.getParameter("id");
-		String boardName = req.getParameter("boardName");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		
 
 		//답글의 깊이만큼 들여쓰기
 		for(int i=0; i<dto.getBdepth(); i++) {
 			title = "  "+ title;
 		}
-		dao.replyWrite(dto, id, boardName, title, content);
-		
+		dao.replyWrite(dto, id, title, content);
 	}
 
 }

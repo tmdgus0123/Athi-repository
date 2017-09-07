@@ -1,15 +1,8 @@
 package com.kosmo.athi;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,20 +13,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
-import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
 import com.kosmo.athi.command.ICommand;
 import com.kosmo.athi.command.MyPageCommand;
+import com.kosmo.athi.command.MyPortfolioBoardCommand;
 import com.kosmo.athi.command.NotRecomCntCommand;
 import com.kosmo.athi.command.PortfolioBoardCommand;
+import com.kosmo.athi.command.PortfolioDeleteCommand;
 import com.kosmo.athi.command.PortfolioModifyActionCommand;
 import com.kosmo.athi.command.PortfolioModifyCommand;
 import com.kosmo.athi.command.PortfolioViewCommand;
@@ -56,7 +48,6 @@ import com.kosmo.athi.command.ReplyActionCommand;
 import com.kosmo.athi.command.ReplyCommand;
 import com.kosmo.athi.model.Constant;
 import com.kosmo.athi.model.MemberDAO;
-import com.kosmo.athi.model.MemberDTO;
 
 /**
  * Handles requests for the application home page.
@@ -121,12 +112,19 @@ public class HomeController {
 		return "termsOfService";
 	}
 
-	@RequestMapping("/myPortfolio.do")
-	public String myPortfolio(Model model) {
-		System.out.println("myPortfolio() 메소드 실행");
-		return "myPortfolio";
+	@RequestMapping("myPortfolioBoard.do")
+	public String myPortfolio(Model model, HttpServletRequest req, HttpSession session) {
+		
+		System.out.println("myPortfolioBoard() 메소드 실행");
+		
+		model.addAttribute("req", req);
+		model.addAttribute("session", session);
+		command = new MyPortfolioBoardCommand();
+		command.execute(model);
+		
+		return "fileupload/myPortfolioBoard";
 	}
-
+	
 	@RequestMapping("/notice.do")
 	public String notice(HttpServletRequest req, Model model) {
 		System.out.println("notice() 메소드 실행");
@@ -235,7 +233,8 @@ public class HomeController {
 		command = new WriteCommand();
 		command.execute(model);
 
-		return "redirect: " + req.getParameter("boardName") + ".do";
+
+		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
 
 	// 상세보기
@@ -276,6 +275,7 @@ public class HomeController {
 
 	@RequestMapping("/withDraw.do")
 	public String withDraw(HttpServletRequest req, Model model) {
+		
 		model.addAttribute("req", req);
 		return "withDraw";
 	}
@@ -440,6 +440,17 @@ public class HomeController {
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
+	
+	@RequestMapping("portfolioSearch.do")
+	public String portfolioSearch(HttpServletRequest req, Model model) {
+		System.out.println("portfolioSearch() 메소드 호출");
+
+		model.addAttribute("req", req);
+		command = new SearchCommand();
+		command.execute(model);
+
+		return "redirect:portfolioBoard.do";
+	}
 
 	@RequestMapping("reply.do")
 	public String reply(HttpServletRequest req, Model model) {
@@ -568,7 +579,7 @@ public class HomeController {
 		command = new PortfolioWriteCommand();
 		command.execute(model);
 
-		return "redirect:  portfolioBoard.do";
+		return "redirect:portfolioBoard.do";
 	}
 	
 	@RequestMapping("portfolioView.do")
@@ -601,7 +612,20 @@ public class HomeController {
 		command = new PortfolioModifyActionCommand();
 		command.execute(model);
 		
-		return "redirect: portfolioBoard.do";
+		return "redirect:portfolioBoard.do";
+
+	}
+	
+	@RequestMapping("portfolioDeleteAction.do")
+	public String portfolioDeleteAction(HttpServletRequest req, Model model) {
+
+		model.addAttribute("req", req);
+
+		command = new PortfolioDeleteCommand();
+		command.execute(model);
+
+		return "redirect:portfolioBoard.do";
+		
 	}
 	
 	@RequestMapping("selectMemberDelete.do")

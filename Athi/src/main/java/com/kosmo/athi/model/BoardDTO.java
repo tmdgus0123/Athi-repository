@@ -29,10 +29,13 @@ public class BoardDTO {
 	// 포트폴리오 파일 이름
 	private String fileName;
 	
+	// 포트폴리오 카테고리 언어
+	private String p_language;
+	
 	public BoardDTO() {
 	}
 
-	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int nrecom_cnt, int bgroup, int bstep, int bdepth, String board_name, String fileName) {
+	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int nrecom_cnt, int bgroup, int bstep, int bdepth, String board_name, String fileName, String p_language) {
 
 		this.num = num;
 		this.title = title;
@@ -48,6 +51,7 @@ public class BoardDTO {
 		this.bdepth = bdepth;
 		this.board_name = board_name;
 		this.fileName = fileName;
+		this.p_language = p_language;
 	}
 
 	protected BoardDTO(int num, String title, String content, Date postdate, String id, int visit_cnt, int comm_cnt, int recom_cnt, int bgroup, int bstep, int bdepth, int nrecom_cnt) {
@@ -63,6 +67,14 @@ public class BoardDTO {
 		this.bstep = bstep;
 		this.bdepth = bdepth;
 		this.nrecom_cnt = nrecom_cnt;
+	}
+
+	public String getP_language() {
+		return p_language;
+	}
+
+	public void setP_language(String p_language) {
+		this.p_language = p_language;
 	}
 
 	public String getFileName() {

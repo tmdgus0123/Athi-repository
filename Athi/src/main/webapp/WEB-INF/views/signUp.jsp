@@ -268,10 +268,10 @@
 								<input type="text" class="form-control" name="inputEmail2" id="inputEmail2" placeholder="이메일" /> 
 								<select name="emailChange">
 									<option value="">도메인</option>
-									<option value="@naver.com">@naver.com</option>
-									<option value="@nate.com">@nate.com</option>
-									<option value="@hanmail.net">@hanmail.net</option>
-									<option value="@gmail.com">@gmail.com</option>
+									<option value="@naver.com">naver.com</option>
+									<option value="@nate.com">nate.com</option>
+									<option value="@hanmail.net">hanmail.net</option>
+									<option value="@gmail.com">gmail.com</option>
 								</select>
 							</div>
 						</div>
@@ -313,4 +313,3 @@
 
 </body>
 </html>
-

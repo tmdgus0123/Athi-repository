@@ -22,7 +22,7 @@ public class ReplyCommand implements ICommand {
 		String nowPage = req.getParameter("nowPage");
 		String num = req.getParameter("num");
 
-		BoardDTO dto = dao.selectPosts(num);
+		BoardDTO dto = dao.getPost(num);
 		
 		//답글 추가 처리
 		dto.setTitle("[답글]"+ dto.getTitle());

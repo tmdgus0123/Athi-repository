@@ -211,7 +211,11 @@
 								</c:otherwise>
 							</c:choose>
 							<div class="dropdown-divider"></div>
+<<<<<<< HEAD
 							<a class="dropdown-item" href="myPortfolio.do" style="cursor:pointer;">
+=======
+							<a class="dropdown-item" href="myPortfolioBoard.do">
+>>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 								<strong style="color:#acc800;">나의 포트폴리오</strong>
 							</a>
 							<div class="dropdown-divider"></div>

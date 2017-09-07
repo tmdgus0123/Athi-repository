@@ -52,8 +52,8 @@
 					<button type="submit" class="btn btn-success">답글</button>
 					<c:choose>
 						<c:when test="${user_id==viewRow.id}">
-							<button type="button" class="btn btn-primary" onclick="location.href='./portfolioModify.do?mode=modify&num=${param.num}'">수정</button>
-							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${param.num}'">삭제</button>
+							<button type="button" class="btn btn-primary" onclick="location.href='./portfolioModify.do?num=${param.num}'">수정</button>
+							<button type="button" class="btn btn-danger" onclick="location.href='./portfolioDeleteAction.do?num=${param.num}'">삭제</button>
 						</c:when>
 					</c:choose>
 				</div>

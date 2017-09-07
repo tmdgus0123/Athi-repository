@@ -40,70 +40,43 @@
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
-	<div class="content-wrapper py-3" style="background-color: #f2f4f7;">
-		<div class="col-sm-12">
-			<hr>
-			<div class="text-center">
+	<div class="container">
+		<div class="col-sm-12" style="margin-top: 50px;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
 				<h1>답글쓰기</h1>
 			</div>
-			<hr>
-			<div class="text-center">
-				<form name="writeFrm" action="<c:url value='replyAction.do' />" method="post" onsubmit="return checkWriteFrm();">
-					<input type="hid den" name="num" value="${dto.num }" />
-					<input type="hid den" name="id" value="${user_id }" />
-					<input type="hid den" name="nowPage" value="${nowPage }" />
-					<input type="hid den" name="boardName" value="${dto.board_name }" />
-
-                              <c:if test="${dto.board_name !='accident' and dto.board_name !='freeBoard' and dto.board_name !='notice' and dto.board_name !='suggestions'}">
-                                 <td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-                                    <h4>카테고리</h4>
-                                 </td>
-                                 <td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;">
-                                    <select name="pLang" class="form-control" name="title" style="width: 90%;" id="">
-                                       <c:choose>
-                                          <c:when test="${dto.board_name =='QnADesign'}">
-                                             <option value="bootstrap">Bootstrap</option>
-                                             <option value="css">CSS</option>
-                                             <option value="jQueryUI">jQuery UI</option>
-                                          </c:when>
-                                          <c:when test="${dto.board_name =='QnADevelop'}">
-                                             <option value="java">JAVA</option>
-                                             <option value="javascript">javascript</option>
-                                             <option value="html">HTML</option>
-                                             <option value="jQueryAjax">jQuery&Ajax</option>
-                                             <option value="jspServlet">JSP&Servlet</option>
-                                             <option value="spring">SRPING</option>
-                                          </c:when>
-                                          <c:when test="${dto.board_name =='QnAProgram'}">
-                                             <option value="software">소프트웨어</option>
-                                             <option value="hardware">하드웨어</option>
-                                             <option value="system">시스템</option>                                             
-                                          </c:when>
-                                       </c:choose>
-                                    </select>
-                                 </td>
-                              </c:if>
-                           </tr>
-                           <tr>
-                              <td style="padding-top: 50px; padding-bottom: 50px; text-align: center;"><br> <br> <br> <br>
-                                 <h4>내용</h4></td>
-                              <td colspan="3" style="padding-top: 50px; padding-bottom: 50px;">
-                              	<textarea name="content" class="form-control" style="width: 90%; height: 200px; border: 2px solid black; background-color:gray; color:white;">
-                              		${dto.getContent() }
-                              	</textarea>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td colspan="4" style="text-align: center;">
-								<button class="btn btn-success" type="submit">등록</button>
-								<button class="btn btn-danger" type="button" onclick="history.back();">취소</button>
-							</td>
-						</tr>
-					</table>
+		</div>
+		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
+			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 5px; padding-bottom: 5px; margin-bottom: 25px; opacity: 0.85;">
+				<form name="writeFrm" action="replyAction.do" method="post" onsubmit="return checkWriteFrm();">
+					<input type="hidden" name="num" value="${dto.num }" readonly />
+					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly />
+					<input type="hidden" name="id" value="${user_id}" readonly />
+					<input type="hidden" name="boardName" value="${dto.board_name }" />
+					<div class="row form-group">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="title" value="${dto.title }" />
+						</div>
+					</div>
+					<div class="row form-group" style="background-color: #e7adb7; height: 50px">
+						<div class="col-sm-11 text-right" style="margin: auto;">작성자 : ${user_id }</div>
+						<div class="col-sm-1"></div>
+					</div>
+					<div class="row form-group">
+						<div class="col-sm-12">
+							<textarea name="content" class="form-control" style="height: 400px;">${dto.content }</textarea>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-sm-12 text-right" style="margin-bottom: 15px;">
+							<button type="submit" class="btn btn-success">등록</button>
+							<button type="button" class="btn btn-dange" onclick="history.back();">취소</button>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
-		<jsp:include page="/common/modalLogin.jsp" />
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
