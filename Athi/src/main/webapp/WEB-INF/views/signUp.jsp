@@ -1,5 +1,8 @@
+<%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" var="thisYmd" />
 <html>
 <head>
 <meta charset="utf-8">
@@ -76,14 +79,18 @@
 			location.href="./";
 		});
 
-		$('input[type="password"][id="inputPasswordCheck"]').on("keyup",function() {
-			var val1 = $(
-					'input[type="password"][id="inputPassword"]')
-					.val();
-			var val2 = $(
-					'input[type="password"][id="inputPasswordCheck"]')
-					.val();
+		$('input[type="password"][id="inputPasswordCheck"]').on("blur",function() {
+			var val1 = $('input[type="password"][id="inputPassword"]').val();
+			var val2 = $('input[type="password"][id="inputPasswordCheck"]').val();
 			$('p[id="chkTxt"]').html("");
+			
+			if(val1.length<8 && val2.length<8){
+				alert("비밀번호는 특수문자 및 한영, 숫자 포함 8자 이상입니다.");
+				$('input[type="password"][id="inputPassword"]').val("");
+				$('input[type="password"][id="inputPasswordCheck"]').val("");
+				$('input[type="password"][id="inputPassword"]').focus();
+				return false;
+			}
 
 			if (val1 == val2) {
 				$('p[id="chkTxt"]').html(
@@ -142,6 +149,8 @@
 				}
 				if ($("#inputEmail").val() == "" || $("#inputEmail2").val() == "") {
 					alert("이메일 혹은 도메인을 입력해주세요.");
+					if ($("#inputEmail").val() == "") $("#inputEmail").focus();
+					if ($("#inputEmail2").val() == "") $("#inputEmail2").focus();
 					return false;
 				}
 
@@ -168,7 +177,7 @@
 					<br /><br />
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<div class="col-sm-8 text-center" style="font-size:0.8em; font-family:Tahoma; font-weight:bold;">
+						<div class="col-sm-8 text-center" style="font-size:1.7em; font-family:Tahoma; color:green; font-weight:bold;">
 							<span>아래 항목은 필수 입력 사항입니다.</span>
 						</div>
 						<div class="col-sm-2"></div>
@@ -234,7 +243,7 @@
 						<div class="col-sm-2"></div>
 						<label class="col-sm-2 control-label text-left" for="inputName">생년월일</label>
 						<div class="col-sm-6">
-							<input class="form-control" name="inputBirthday" id="inputBirthday" type="date" placeholder="생년월일 8자리 입력">
+							<input class="form-control" name="inputBirthday" id="inputBirthday" type="date" max="${thisYmd}" placeholder="생년월일 8자리 입력">
 						</div>
 						<div class="col-sm-2"></div>
 					</div>
@@ -265,7 +274,7 @@
 						<div class="col-sm-6">
 							<div class="input-group">
 								<input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="이메일" /> 
-								<input type="text" class="form-control" name="inputEmail2" id="inputEmail2" placeholder="이메일" /> 
+								<input type="text" class="form-control" name="inputEmail2" id="inputEmail2" placeholder="도메인" /> 
 								<select name="emailChange">
 									<option value="">도메인</option>
 									<option value="@naver.com">naver.com</option>

@@ -98,9 +98,11 @@
 										</div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
+									<c:when test="${user_id==dto.id or user_id=='athi'}">
 									<div class="col-sm-1 text-right">
 										<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
 									</div>
+									</c:when>
 									<div class="col-sm-1" style="margin-top: 25px;"></div>
 								</div>
 							</li>
@@ -120,13 +122,22 @@
 								<textarea id="content" rows="3" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
 							</div>
 							<div class="col-sm-1">
-								<input type="button" id="enrollBtn" value="등록" />
+								<input type="button" class="btn btn-success" id="enrollBtn" value="등록" />
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 					</form>
 				</div>
-				<div class="col-sm-12 text-right">
+				<div class="col-sm-12">
+					<c:choose>
+						<c:when test="${user_id!=null}">
+							<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
+						</c:when>
+						<c:when test="${user_id==viewRow.id }">
+							<button type="button" class="btn btn-primary" onclick="location.href='modify.do?mode=modify&num=${viewRow.num}&boardName=${param.boardName}'">수정</button>
+							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${viewRow.num}&boardName=${param.boardName}'">삭제</button>
+						</c:when>
+					</c:choose>
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 				</div>
 			</div>

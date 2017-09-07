@@ -104,58 +104,60 @@
       </div>
       <div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
          <div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
-            <table class="table table-bordered" id="dataTable" cellspacing="0">
-               <thead>
-                  <tr class="btn-success">
-                     <th class="text-center"><input type="checkbox" /></th>
-                     <th>번호</th>
-                     <th>제목</th>
-                     <th>글쓴이</th>
-                     <th>등록일</th>
-                     <th>조회수</th>
-                     <th>추천수</th>
-                     <th>댓글수</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <!-- 반복문 시작 -->
-                  <c:choose>
-                     <c:when test="${empty boardRows}">
-                        <tr style="text-align: center;">
-                           <td colspan="8">등록된 글이 없습니다.</td>
-                        </tr>
-                     </c:when>
-                     <c:otherwise>
-                        <c:forEach items='${boardRows}' var='row' varStatus='loop'>
-                           <tr>
-                              <td><input type="checkbox" name="listBox" value="${row.num}"/></td>
-                              <td>${row.num}</td>
-                              <td>
-                                 <a href="./view.do?num=${row.num }&nowPage=${nowPage}">${row.title}</a>
-                              </td>
-                              <td>${row.id}</td>
-                              <td>${row.postdate}</td>
-                              <td>${row.visit_cnt}</td>
-                              <td>${row.comm_cnt}</td>
-                              <td>${row.recom_cnt}</td>
-                           </tr>
-                        </c:forEach>
-                     </c:otherwise>
-                  </c:choose>
-                  <!-- 반복문 끝 -->
-               </tbody>
-                <c:choose>
-                     <c:when test="${not empty boardRows}">
-	               <tfoot>
-	               	  <tr>
-	               		<td colspan="8" style="text-align:right;">
-							<button type="button" class="btn btn-danger" name="postBtn">선택 게시물 삭제</button>
-						</td>
-					  </tr>
-	               </tfoot>
-	               	</c:when>
-	            </c:choose>
-            </table>
+	     	<form name="postList"> 
+	            <table class="table table-bordered" id="dataTable" cellspacing="0">
+	               <thead>
+	                  <tr class="btn-success">
+	                     <th class="text-center"><a onclick="allCheck();"><input type="checkbox" name="allBox"/></a></th>
+	                     <th>번호</th>
+	                     <th>제목</th>
+	                     <th>글쓴이</th>
+	                     <th>등록일</th>
+	                     <th>조회수</th>
+	                     <th>추천수</th>
+	                     <th>댓글수</th>
+	                  </tr>
+	               </thead>
+	               <tbody>
+	                  <!-- 반복문 시작 -->
+	                  <c:choose>
+	                     <c:when test="${empty boardRows}">
+	                        <tr style="text-align: center;">
+	                           <td colspan="8">등록된 글이 없습니다.</td>
+	                        </tr>
+	                     </c:when>
+	                     <c:otherwise>
+	                        <c:forEach items='${boardRows}' var='row' varStatus='loop'>
+	                           <tr>
+	                              <td><input type="checkbox" name="listBox" value="${row.num}"/></td>
+	                              <td>${row.num}</td>
+	                              <td>
+	                                 <a href="./view.do?num=${row.num }&nowPage=${nowPage}">${row.title}</a>
+	                              </td>
+	                              <td>${row.id}</td>
+	                              <td>${row.postdate}</td>
+	                              <td>${row.visit_cnt}</td>
+	                              <td>${row.comm_cnt}</td>
+	                              <td>${row.recom_cnt}</td>
+	                           </tr>
+	                        </c:forEach>
+	                     </c:otherwise>
+	                  </c:choose>
+	                  <!-- 반복문 끝 -->
+	               </tbody>
+	                <c:choose>
+	                     <c:when test="${not empty boardRows}">
+		               <tfoot>
+		               	  <tr>
+		               		<td colspan="8" style="text-align:right;">
+								<button type="button" class="btn btn-danger" name="postBtn">선택 게시물 삭제</button>
+							</td>
+						  </tr>
+		               </tfoot>
+		               	</c:when>
+		            </c:choose>
+	            </table>
+	     	</form>
          </div>
       </div>
    </div>
@@ -177,7 +179,19 @@
 
    <!-- Custom scripts for this sb-admin -->
    <script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-   
+   	<script>
+	function allCheck(){
+		var frm = document.postList;
+		for (var i=0; i<frm.listBox.length; i++){
+			if(frm.listBox[i].checked == false){
+				frm.listBox[i].checked = true;
+			}
+			else if(frm.listBox[i].checked == true){
+				frm.listBox[i].checked = false;
+			}
+		}
+	}
+	</script>
    	<script>
 		jQuery.ajaxSettings.traditional = true;
 		
