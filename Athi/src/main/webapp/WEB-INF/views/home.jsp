@@ -44,7 +44,7 @@
 		</div>
 		<!-- 배너 끝 -->
 		<!-- 소개글 시작 -->
-		<div class="jumboton text-center" style="margin-top:16px; font-size:2.0em; background-color:">
+		<div class="jumboton text-center" style="margin-top:16px; font-size:2.0em; background:#f2f4f7 no-repeat;">
 			<pre>
 ATHI 생활 코딩.
 정보 공유를 위한 사이트입니다.
