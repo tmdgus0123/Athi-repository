@@ -25,6 +25,10 @@ public class SelectPostDeleteCommand implements ICommand{
 			exePostNum = postNum[i];
 			dao.postDelete(exePostNum);
 		}
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 		dao.close();
 	}
 }

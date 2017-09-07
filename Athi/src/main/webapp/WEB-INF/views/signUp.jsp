@@ -31,11 +31,9 @@
 		$("select[name='emailChange']").change(function() {
 			var str = "";
 			$("#inputEmail2").val("");
-			$(
-					"select[name='emailChange'] option:selected")
-					.each(function() {
-						str = $(this).val();
-					});
+			$("select[name='emailChange'] option:selected").each(function() {
+				str = $(this).val();
+			});
 			$("#inputEmail2").val(str);
 		}).change();
 
@@ -54,9 +52,7 @@
 
 		$('input[type="checkbox"][name="inputGender"][id="inputGender"]').click(function() {
 			if ($(this).prop('checked')) {
-				$(
-						'input[type="checkbox"][name="inputGender"][id="inputGender"]')
-						.prop('checked', false);
+				$('input[type="checkbox"][name="inputGender"][id="inputGender"]').prop('checked', false);
 				$(this).prop('checked', true);
 			}
 		});
@@ -70,13 +66,14 @@
 				return false;
 			}
 
-			window.open("./IDCheck.do?user_id="
-					+ f.inputId.value, "",
-					"width = 500, height = 300");
+			window.open("./IDCheck.do?user_id="+ f.inputId.value, "", "width = 500, height = 300");
 		});
 					
 		$('button[type="button"][class="btn btn-danger"][name="mainBtn"]').on("click", function(){
-			location.href="./";
+			var que = confirm("정말 취소하시겠습니까?");
+			
+			if(que){location.href="./";}
+			else{}
 		});
 
 		$('input[type="password"][id="inputPasswordCheck"]').on("blur",function() {
@@ -167,7 +164,7 @@
 	<div class="container">
 		<div class="col-sm-12" style="margin-top: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-				<h1>회원가입</h1>
+				<h1>회원 가입</h1>
 			</div>
 		</div>
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
@@ -185,7 +182,7 @@
 					<br /><br />
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputId">아이디</label>
+						<label class="col-sm-2 control-label text-left" for="inputId" style="font-weight:bold;">아이디</label>
 						<div class="col-sm-6">
 							<div class="input-group">
 								<input type="text" class="form-control" name="inputId" id="inputId" placeholder="아이디" />
@@ -200,16 +197,16 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputPassword">비밀번호</label>
+						<label class="col-sm-2 control-label text-left" for="inputPassword" style="font-weight:bold;">비밀번호</label>
 						<div class="col-sm-6">
 							<input class="form-control" name="inputPassword" id="inputPassword" type="password" placeholder="비밀번호">
-							<p class="help-block text-left">숫자, 특수문자 포함 8자 이상</p>
+							<p class="help-block text-left" style="color:red;">숫자, 특수문자 포함 8자 이상</p>
 						</div>
 						<div class="col-sm-2"></div>
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputPasswordCheck">비밀번호 확인</label>
+						<label class="col-sm-2 control-label text-left" for="inputPasswordCheck" style="font-weight:bold;">비밀번호 확인</label>
 						<div class="col-sm-6">
 							<input class="form-control" name="inputPasswordCheck" id="inputPasswordCheck" type="password" placeholder="비밀번호 확인">
 							<p class="help-block text-left" id="chkTxt">비밀번호를 입력해주세요.</p>
@@ -218,7 +215,7 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputName">이름</label>
+						<label class="col-sm-2 control-label text-left" for="inputName" style="font-weight:bold;">이름</label>
 						<div class="col-sm-6">
 							<input class="form-control" name="inputName" id="inputName" type="text" placeholder="이름">
 						</div>
@@ -226,10 +223,10 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputAddr">주소</label>
+						<label class="col-sm-2 control-label text-left" for="inputAddr" style="font-weight:bold;">주소</label>
 						<div class="col-sm-6">
 							<div class="input-group">
-								<input type="text" class="form-control" name="inputAddr" id="inputAddr" id="inputId" placeholder="주소" />
+								<input type="text" class="form-control" name="inputAddr" id="inputAddr" placeholder="주소" />
 								<span class="input-group-btn">
 									<button type="button" id="postBtn" class="btn btn-primary">
 										주소 입력<i class="fa fa-mail-forward spaceLeft"></i>
@@ -241,15 +238,15 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputName">생년월일</label>
+						<label class="col-sm-2 control-label text-left" for="inputName" style="font-weight:bold;">생년월일</label>
 						<div class="col-sm-6">
-							<input class="form-control" name="inputBirthday" id="inputBirthday" type="date" max="${thisYmd}" placeholder="생년월일 8자리 입력">
+							<input class="form-control" name="inputBirthday" id="inputBirthday" type="date" max="${thisYmd}">
 						</div>
 						<div class="col-sm-2"></div>
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left">성별</label>
+						<label class="col-sm-2 control-label text-left" style="font-weight:bold;">성별</label>
 						<div class="col-sm-6 text-left">
 							<div class="btn btn-primary">
 								<input type="checkbox" name="inputGender" class="" id="inputGender" value="남" /> <i class="fa fa-mars-stroke-v" aria-hidden="true"></i>남성
@@ -262,7 +259,7 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputNumber">휴대폰 번호</label>
+						<label class="col-sm-2 control-label text-left" for="inputNumber" style="font-weight:bold;">휴대폰 번호</label>
 						<div class="col-sm-6">
 							<input type="tel" class="form-control" name="inputPhone" id="inputPhone" placeholder="- 없이 입력해 주세요" />
 						</div>
@@ -270,17 +267,20 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
-						<label class="col-sm-2 control-label text-left" for="inputEmail">이메일</label>
+						<label class="col-sm-2 control-label text-left" for="inputEmail" style="font-weight:bold;">이메일</label>
 						<div class="col-sm-6">
 							<div class="input-group">
 								<input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="이메일" /> 
-								<input type="text" class="form-control" name="inputEmail2" id="inputEmail2" placeholder="도메인" /> 
+								<input type="text" class="form-control" name="inputEmail2" id="inputEmail2" placeholder="도메인 (기타입력은 기타 선택후 직접 작성)" /> 
 								<select name="emailChange">
 									<option value="">도메인</option>
-									<option value="@naver.com">naver.com</option>
-									<option value="@nate.com">nate.com</option>
-									<option value="@hanmail.net">hanmail.net</option>
-									<option value="@gmail.com">gmail.com</option>
+									<option value="@naver.com">네이버</option>
+									<option value="@nate.com">네이트</option>
+									<option value="@hanmail.net">다음</option>
+									<option value="@gmail.com">구글 E메일</option>
+									<option value="@yahoo.com">야후</option>
+									<option value="@hotmail.com">핫메일</option>
+									<option value="">기타 입력</option>
 								</select>
 							</div>
 						</div>
@@ -289,11 +289,11 @@
 					<div class="row form-group">
 						<div class="col-sm-12 text-center" style="margin-top: 15px;">
 							<button class="btn btn-success" type="submit" name="signUpBtn">
-								<i class="fa fa-check spaceLeft"></i>회원가입
+								<i class="fa fa-check spaceLeft"></i> 회원가입
 							</button>
 							&nbsp;&nbsp;&nbsp;
 							<button class="btn btn-danger" type="button" name="mainBtn">
-								<i class="fa fa-times spaceLeft"></i>가입취소
+								<i class="fa fa-times spaceLeft"></i> 가입취소
 							</button>
 						</div>
 					</div>

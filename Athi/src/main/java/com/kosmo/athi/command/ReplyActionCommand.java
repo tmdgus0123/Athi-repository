@@ -32,6 +32,10 @@ public class ReplyActionCommand implements ICommand {
 			title = "  "+ title;
 		}
 		dao.replyWrite(dto, id, title, content);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 		dao.close();
 	}
 
