@@ -685,4 +685,12 @@ public class HomeController {
 		
 		return "adminMember";
 	}
+	
+	@RequestMapping("syntax.do")
+	public String syntax(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("text", req.getParameter("text"));
+		
+		return "board/syntax";
+	}
 }
