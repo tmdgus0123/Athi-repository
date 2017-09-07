@@ -138,14 +138,11 @@
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
-			<div class="row form-group">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-6">
-					<div class="input-group">
-						<button type="button" id="closeBtn">닫기</button>
-					</div>
-				</div>
-				<div class="col-sm-2"><button type="button" id="closeBtn">확인</button></div>
+			<br /><br />
+			<div class="form-group text-center">
+				<button type="button" class="btn btn-danger" id="closeBtn">닫기</button>
+				&nbsp;&nbsp;&nbsp;
+				<button type="button" class="btn btn-success" id="reloadBtn">새로고침</button>
 			</div>
 		</form>
 	</div>
@@ -191,9 +188,12 @@
 		
 		$("#closeBtn").click(function() {
 			opener.location.reload();
-					
 			self.close();
 		})
+		
+		$("reloadBtn").click(function(){
+			window.location.reload();
+		});
 	</script>
 </body>
 </html>
