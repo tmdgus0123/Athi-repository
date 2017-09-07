@@ -62,14 +62,25 @@
 							<img src="resources/images/chu_up.png"><br> <font size="4"><b>추천수 : ${viewRow.recom_cnt}</b></font>
 						</button>
 						<button id="nRecomBtn" type="button" style="border: 0; outline: 0; background-color: white;">
-							<img src="resources/images/chu_down.png"><br> <font size="4"><b>반대수 : ${viewRow.nrecom_cnt}</b></font>
+							<img src="resources/images/chu_down.png"><br> <font size="4"><b>비추천 : ${viewRow.nrecom_cnt}</b></font>
 						</button>
 					</div>
 				</div>
 				<div class="row" style="background-color: #f3f3f3; height: 50px">
 					<div class="col-sm-1"></div>
-					<div class="col-sm-9 text-left" style="margin: auto; padding-left: 30px;">댓글 수(${viewRow.comm_cnt })</div>
-					<div id="declaBtn" class="col-sm-2" style="margin: auto; padding-left: 30px;"></div>
+					<div class="col-sm-7 text-left" style="margin: auto; padding-left: 30px;">댓글 수(${viewRow.comm_cnt })</div>
+					<div id="declaBtn" class="col-sm-4 text-right" style="margin: auto; padding-left: 30px;">
+						<c:choose>
+							<c:when test="${user_id!=null}">
+								<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
+							</c:when>
+							<c:when test="${user_id==viewRow.id }">
+								<button type="button" class="btn btn-primary" onclick="location.href='modify.do?mode=modify&num=${viewRow.num}&boardName=${param.boardName}'">수정</button>
+								<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${viewRow.num}&boardName=${param.boardName}'">삭제</button>
+							</c:when>
+						</c:choose>
+						<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
+					</div>
 				</div>
 				<div class="col-sm-12">
 					<ul id="comments" style="list-style: none;">
@@ -102,7 +113,8 @@
 						<input type="hidden" id="num" value="${viewRow.num }" />
 						<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
 							<div class="col-sm-2">
-								<br /> <strong>${user_id }</strong> <input type="hidden" id="id" value="${user_id }" />
+								<br /> <strong>${user_id }</strong>
+								<input type="hidden" id="id" value="${user_id }" />
 							</div>
 							<div class="col-sm-8">
 								<textarea id="content" rows="3" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
@@ -114,18 +126,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="col-sm-12">
-					<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
-
-					<c:choose>
-						<c:when test="${user_id!=null}">
-							<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
-						</c:when>
-						<c:when test="${user_id==viewRow.id }">
-							<button type="button" class="btn btn-primary" onclick="location.href='modify.do?mode=modify&num=${viewRow.num}&boardName=${param.boardName}'">수정</button>
-							<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${viewRow.num}&boardName=${param.boardName}'">삭제</button>
-						</c:when>
-					</c:choose>
+				<div class="col-sm-12 text-right">
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 				</div>
 			</div>
@@ -197,10 +198,11 @@
 		}
 	</script>
 
-	<!-- 추천 추가 -->
+	<!-- 추천/반대 -->
 	<script>
+	// 추천 추가
 		$('#choiceBtn').click(function() {
-			if(${user_id!=null}){
+			if(<%=session.getAttribute("user_id") != null%>){
 				alert("추천하셨습니다.");
 				$.ajax({
 						url : 'commChoice.do', //form : action
@@ -216,16 +218,14 @@
 				});	
 			}
 			else{
-				alert("비회원은 추천이 불가능합니다.");
+				alert("로그인 후 추천 할 수 있습니다.");
 			}	
 		});
-	</script>
 
-	<!-- 반대 추가 -->
-	<script>
+	// 반대 추가
 		$('#nRecomBtn').click(function() {
-			if(${user_id!=null}){
-			alert("반대하셨습니다.");
+			if(<%=session.getAttribute("user_id") != null%>){
+			alert("비추천하셨습니다.");
 		
 			$.ajax({
 					url : 'nRecom.do', //form : action
@@ -241,7 +241,7 @@
 			});	
 		}
 		else{
-			alert("비회원은 반대불가능.");
+			alert("로그인 후 비추천 할 수 있습니다.");
 		}	
 	});
 	</script>

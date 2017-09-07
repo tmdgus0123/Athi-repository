@@ -27,20 +27,17 @@ public class PortfolioModifyActionCommand implements ICommand{
 		// 파일이 저장될 path 설정
 		String path = "C:\\Users\\user\\git\\Athi-repository\\Athi\\src\\main\\webapp\\resources\\images";
 
-		BoardDAO bDao = new BoardDAO();
-
-		Map returnObject = new HashMap();
+		Map<String, Object> returnObject = new HashMap<String, Object>();
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest) map.get("req");
 		
 		try {
-			
 			// MultipartHttpServletRequest 생성
 			MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req;
-			Iterator iter = mhsr.getFileNames();
+			Iterator<String> iter = mhsr.getFileNames();
 			MultipartFile mfile = null;
 			String fieldName = "";
-			List resultList = new ArrayList();
+			List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 
 			// 디렉토리가 없다면 생성
 			File dir = new File(path);
@@ -50,7 +47,6 @@ public class PortfolioModifyActionCommand implements ICommand{
 
 			// 값이 나올때까지
 			while (iter.hasNext()) {
-
 				fieldName = (String) iter.next();
 
 				// 내용을 가져와서
@@ -72,7 +68,7 @@ public class PortfolioModifyActionCommand implements ICommand{
 				// 설정한 path에 파일저장
 				File serverFile = new File(path + File.separator + saveFileName);
 				mfile.transferTo(serverFile);
-				Map file = new HashMap();
+				Map<String, Object> file = new HashMap<String, Object>();
 				file.put("origName", origName);
 				file.put("fileName", saveFileName);
 				file.put("sfile", serverFile);
@@ -108,6 +104,7 @@ public class PortfolioModifyActionCommand implements ICommand{
 		BoardDAO dao = new BoardDAO();
 		
 		dao.modifyPortfolio(id, num, title, content, fileName);
+		dao.close();
 	}
 
 	// uuid생성

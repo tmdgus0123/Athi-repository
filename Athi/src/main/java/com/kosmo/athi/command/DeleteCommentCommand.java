@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.CommentsDAO;
 
 public class DeleteCommentCommand implements ICommand {
@@ -21,7 +20,7 @@ public class DeleteCommentCommand implements ICommand {
 
 		CommentsDAO cdao = new CommentsDAO();
 
-		cdao.delete(num);
+		cdao.deleteComments(num);
 
 		cdao.close();
 	}
