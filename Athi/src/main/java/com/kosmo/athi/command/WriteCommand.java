@@ -34,10 +34,6 @@ public class WriteCommand implements ICommand {
 		}
 
 		model.addAttribute("boardName", boardName);
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 		bDao.close();
 	}
 }
