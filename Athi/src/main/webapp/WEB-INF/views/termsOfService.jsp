@@ -20,26 +20,17 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="./resources/jQuery/jquery-3.2.1.js"></script>
 
 <script>
-
-	$('input[type="checkbox"][name="accept"]').click(function(){
-		if($(this).prop('checked')){
-			$('input[type="checkbox"][name="accept"]').prop('checked', false);
-			$(this).prop('checked', true);
-		}
-	});
-
-   function allCheck() {
-      var frm = document.frm;
-      for (var i = 0; i < frm.accept.length; i++) {
-         if (frm.accept[i].checked == true) {
-            frm.accept[i].checked = false;
-         } else if (frm.accept[i].checked == false) {
-            frm.accept[i].checked = true;
-         }
-      }
-   }
+	function allCheck(){
+		var frm = document.frm;
+		for (var i=0; i<frm.accept.length; i++){
+		   if(frm.accept[i].checked == false){
+		      frm.accept[i].checked = true;
+		   }
+		}	
+	}
    function trimCheck() {
       var frm = document.frm;
       var count = 0;
@@ -98,7 +89,7 @@
          </div>
       </form>
       <div class="text-center" style="margin-top: 50px;">
-         <button type=button class="btn btn-primary" name="acceptAll" onclick="allCheck();">전체 동의하기</button>
+         <button type="button" class="btn btn-primary" name="acceptAll" onclick="allCheck();">전체 동의하기</button>
       </div>
       <div class="text-center" style="margin-top: 50px; margin-bottom: 50px;">
          <button type="button" class="btn btn-danger" onclick="location.href='<%=request.getContextPath()%>/'">이전으로</button>

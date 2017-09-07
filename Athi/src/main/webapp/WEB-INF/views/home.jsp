@@ -42,19 +42,15 @@
 		</div>
 		<!-- 배너 끝 -->
 		<!-- 소개글 시작 -->
-<<<<<<< HEAD
 		<div class="col-sm-12">
-			<div class="jumbotron">
-				<h1>아띠</h1>
-				<p>커뮤니티 사이트 아띠입니다.</p>
+			<div class="jumbotron text-center">
+				<h1>아띠 코딩</h1>
+				<p>
+					커뮤니티 사이트 아띠에 오신것을 환영합니다. <br />
+					
+				</p>
 			</div>
-=======
-		<div class="jumboton text-center" style="margin-top:16px; font-size:2.0em; background:#f2f4f7 no-repeat;">
-			<pre>
-ATHI 생활 코딩.
-정보 공유를 위한 사이트입니다.
-			</pre>
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
+
 		</div>
 		<!-- 소개글 종료 -->
 		<!-- 순위 시작 -->
