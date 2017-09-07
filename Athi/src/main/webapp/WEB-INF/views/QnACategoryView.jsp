@@ -113,6 +113,9 @@
 						<div class="form-group" style="margin-top:18px;">
 							<input type="hidden" name="boardName" value="${boardName }" />
 							<input type="hidden" name="nowPage" value="${nowPage }" />
+							<% if(request.getParameter("category")!=null){ %>
+							<input type="hidden" name="category" value="<%=request.getParameter("category")%>" />
+							<%} %>
 							<select name="searchColumn" class="form-control">
 								<option value="title">제목</option>
 								<option value="content">내용</option>
