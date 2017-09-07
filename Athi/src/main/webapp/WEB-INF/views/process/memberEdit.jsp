@@ -136,7 +136,7 @@
 						<button type="button" class="btn btn-danger" id="expBtn">경험치 조정</button>
 					</div>
 				</div>
-				<div class="col-sm-2"></div>
+				<div class="col-sm-2"><button type="button" id="closeBtn">확인</button></div>
 			</div>
 		</form>
 	</div>
@@ -155,7 +155,7 @@
 				dataType : "script",
 				type : "post",
 				cache : false,
-				success : function(data){
+				success : function(data) {
 					window.location.reload();
 				}
 			});
@@ -174,11 +174,17 @@
 				dataType : "script",
 				type : "post",
 				cache : false,
-				success : function(data){
+				success : function(data) {
 					window.location.reload();
 				}
 			});
 		});
+		
+		$("#closeBtn").click(function() {
+			opener.location.reload();
+					
+			self.close();
+		})
 	</script>
 </body>
 </html>
