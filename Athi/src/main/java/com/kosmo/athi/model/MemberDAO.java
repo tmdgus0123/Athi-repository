@@ -377,22 +377,17 @@ public class MemberDAO {
 		});
 	}
 	
-	public void expEdit(final int exp, final String id){
+	public void expEdit(final String exp, final String id){
 		
-		String sql = "";
+		System.out.println("expEdit() 실행");
 		
-		if(exp<0){
-			sql = "UPDATE member_grade SET exp-=? WHERE id=?";
-		}
-		else{
-			sql = "UPDATE member_grade SET exp+=? WHERE id=?";
-		}
+		String sql = "UPDATE member_grade SET exp=exp+? WHERE id=?";
 		
 		this.template.update(sql, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, exp);
+				ps.setInt(1, Integer.parseInt(exp));
 				ps.setString(2, id);
 			}
 		});

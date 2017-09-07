@@ -24,156 +24,131 @@
 <script src="./resources/jQuery/jquery-3.2.1.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-	$(document)
-			.ready(
-					function() {
-						$("select[name='emailChange']")
-								.change(
-										function() {
-											var str = "";
-											$("#inputEmail2").val("");
-											$(
-													"select[name='emailChange'] option:selected")
-													.each(function() {
-														str = $(this).val();
-													});
-											$("#inputEmail2").val(str);
-										}).change();
-
-						$("button[type='button'][id='postBtn']").on(
-								"click",
-								function() {
-									// 다음 우편번호 API 기능 이용.
-									new daum.Postcode({
-										oncomplete : function(data) {
-											var fn = document.signFrm;
-
-											fn.inputAddr.value = data.zonecode
-													+ " " + data.address;
-											fn.inputAddr.focus();
-										}
-									}).open();
-								});
-
-						$(
-								'input[type="checkbox"][name="gender"][id="inputGender"]')
-								.click(
-										function() {
-											if ($(this).prop('checked')) {
-												$(
-														'input[type="checkbox"][name="gender"][id="inputGender"]')
-														.prop('checked', false);
-												$(this).prop('checked', true);
-											}
-										});
-
-						$('button[type="button"][name="idChk"]').on(
-								"click",
-								function() {
-									var f = document.signFrm;
-
-									if (f.inputId.value == "") {
-										alert("ID를 입력해주세요.");
-										f.inputId.focus();
-										return false;
-									}
-
-									window.open("./IDCheck.do?user_id="
-											+ f.inputId.value, "",
-											"width = 500, height = 300");
-								});
-						
-						$('button[type="button"][class="btn btn-danger"][name="mainBtn"]').on("click", function(){
-							location.href="./";
-						});
-
-						$('input[type="password"][id="inputPasswordCheck"]')
-								.on(
-										"keyup",
-										function() {
-											var val1 = $(
-													'input[type="password"][id="inputPassword"]')
-													.val();
-											var val2 = $(
-													'input[type="password"][id="inputPasswordCheck"]')
-													.val();
-											$('p[id="chkTxt"]').html("");
-
-											if (val1 == val2) {
-												$('p[id="chkTxt"]').html(
-														"비밀번호가 일치합니다.");
-												$('p[id="chkTxt"]').css({
-													"fontWeight" : "bold",
-													color : "blue"
-												});
-											} else if (val1 != val2) {
-												$('p[id="chkTxt"]').html(
-														"비밀번호를 다시 확인해주세요.");
-												$('p[id="chkTxt"]').css({
-													"fontWeight" : "bold",
-													color : "red"
-												});
-											}
-										});
-
-						$(
-								'button[class="btn btn-success"][type="submit"][name="signUpBtn"]')
-								.on(
-										"click",
-										function() {
-
-											if ($("#inputId").val() == "") {
-												alert("아이디를 입력해주세요.");
-												return false;
-											}
-											if ($(
-													"input[type='hidden'][name='overFlag']")
-													.val() == 0) {
-												alert("아이디 중복확인을 해주세요.");
-												return false;
-											}
-											if ($("#inputPassword").val() == "") {
-												alert("비밀번호를 입력해주세요.");
-												return false;
-											}
-											if ($("#inputPasswordCheck").val() == "") {
-												alert("비밀번호를 확인해주세요.");
-												return false;
-											}
-											if ($("#inputName").val() == "") {
-												alert("이름을 입력해주세요.");
-												return false;
-											}
-											if ($("#inputAddr").val() == "") {
-												alert("주소를 입력해주세요.");
-												return false;
-											}
-											if ($("#inputBirthday").val() == "") {
-												alert("생년월일을 입력해주세요.");
-												return false;
-											}
-											if ($("#inputGender").val() == "") {
-												alert("성별을 입력해주세요.");
-												return false;
-											}
-											if ($("#inputPhone").val() == "") {
-												alert("휴대폰 번호를 입력해주세요.");
-												return false;
-											}
-											if ($("#inputEmail").val() == ""
-													|| $("#inputEmail2").val() == "") {
-												alert("이메일 혹은 도메인을 입력해주세요.");
-												return false;
-											}
-
-											else {
-												$(
-														'form[name="signFrm"][method="post"]')
-														.attr("action",
-																"./signUpAction.do");
-											}
-										});
+	$(document).ready(function() {
+		$("select[name='emailChange']").change(function() {
+			var str = "";
+			$("#inputEmail2").val("");
+			$(
+					"select[name='emailChange'] option:selected")
+					.each(function() {
+						str = $(this).val();
 					});
+			$("#inputEmail2").val(str);
+		}).change();
+
+		$("button[type='button'][id='postBtn']").on("click", function() {
+			// 다음 우편번호 API 기능 이용.
+			new daum.Postcode({
+				oncomplete : function(data) {
+					var fn = document.signFrm;
+
+					fn.inputAddr.value = data.zonecode
+							+ " " + data.address;
+					fn.inputAddr.focus();
+				}
+			}).open();
+		});
+
+		$('input[type="checkbox"][name="inputGender"][id="inputGender"]').click(function() {
+			if ($(this).prop('checked')) {
+				$(
+						'input[type="checkbox"][name="inputGender"][id="inputGender"]')
+						.prop('checked', false);
+				$(this).prop('checked', true);
+			}
+		});
+
+		$('button[type="button"][name="idChk"]').on("click", function() {
+			var f = document.signFrm;
+
+			if (f.inputId.value == "") {
+				alert("ID를 입력해주세요.");
+				f.inputId.focus();
+				return false;
+			}
+
+			window.open("./IDCheck.do?user_id="
+					+ f.inputId.value, "",
+					"width = 500, height = 300");
+		});
+					
+		$('button[type="button"][class="btn btn-danger"][name="mainBtn"]').on("click", function(){
+			location.href="./";
+		});
+
+		$('input[type="password"][id="inputPasswordCheck"]').on("keyup",function() {
+			var val1 = $(
+					'input[type="password"][id="inputPassword"]')
+					.val();
+			var val2 = $(
+					'input[type="password"][id="inputPasswordCheck"]')
+					.val();
+			$('p[id="chkTxt"]').html("");
+
+			if (val1 == val2) {
+				$('p[id="chkTxt"]').html(
+						"비밀번호가 일치합니다.");
+				$('p[id="chkTxt"]').css({
+					"fontWeight" : "bold",
+					color : "blue"
+				});
+			} else if (val1 != val2) {
+				$('p[id="chkTxt"]').html(
+						"비밀번호를 다시 확인해주세요.");
+				$('p[id="chkTxt"]').css({
+					"fontWeight" : "bold",
+					color : "red"
+				});
+			}
+		});
+
+		$('button[class="btn btn-success"][type="submit"][name="signUpBtn"]').on("click", function() {
+
+				if ($("#inputId").val() == "") {
+					alert("아이디를 입력해주세요.");
+					return false;
+				}
+				if ($("input[type='hidden'][name='overFlag']").val() == 0) {
+					alert("아이디 중복확인을 해주세요.");
+					return false;
+				}
+				if ($("#inputPassword").val() == "") {
+					alert("비밀번호를 입력해주세요.");
+					return false;
+				}
+				if ($("#inputPasswordCheck").val() == "") {
+					alert("비밀번호를 확인해주세요.");
+					return false;
+				}
+				if ($("#inputName").val() == "") {
+					alert("이름을 입력해주세요.");
+					return false;
+				}
+				if ($("#inputAddr").val() == "") {
+					alert("주소를 입력해주세요.");
+					return false;
+				}
+				if ($("#inputBirthday").val() == "") {
+					alert("생년월일을 입력해주세요.");
+					return false;
+				}
+				if ($("#inputGender").val() == "") {
+					alert("성별을 입력해주세요.");
+					return false;
+				}
+				if ($("#inputPhone").val() == "") {
+					alert("휴대폰 번호를 입력해주세요.");
+					return false;
+				}
+				if ($("#inputEmail").val() == "" || $("#inputEmail2").val() == "") {
+					alert("이메일 혹은 도메인을 입력해주세요.");
+					return false;
+				}
+
+				else {$('form[name="signFrm"][method="post"]').attr("action","./signUpAction.do");
+				}
+		});
+	});
 </script>
 </head>
 
@@ -190,6 +165,15 @@
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
 				<form name="signFrm" method="post">
 					<input type="hidden" name="overFlag" value="0" />
+					<br /><br />
+					<div class="row form-group">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-8 text-center" style="font-size:0.8em; font-family:Tahoma; font-weight:bold;">
+							<span>아래 항목은 필수 입력 사항입니다.</span>
+						</div>
+						<div class="col-sm-2"></div>
+					</div>
+					<br /><br />
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
 						<label class="col-sm-2 control-label text-left" for="inputId">아이디</label>
@@ -280,7 +264,9 @@
 						<label class="col-sm-2 control-label text-left" for="inputEmail">이메일</label>
 						<div class="col-sm-6">
 							<div class="input-group">
-								<input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="이메일" /> <select name="emailChange">
+								<input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="이메일" /> 
+								<input type="text" class="form-control" name="inputEmail2" id="inputEmail2" placeholder="이메일" /> 
+								<select name="emailChange">
 									<option value="">도메인</option>
 									<option value="@naver.com">@naver.com</option>
 									<option value="@nate.com">@nate.com</option>
@@ -326,30 +312,5 @@
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 
 </body>
-
 </html>
 
-<table class="table" style="margin-top: 50px;">
-	<tr>
-		<td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-			<h4>제목</h4>
-		</td>
-		<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><input type="text" class="form-control" name="title" style="width: 90%; border: 2px solid black; color: white;" /></td>
-	</tr>
-	<tr>
-		<td style="padding-top: 50px; padding-bottom: 50px; text-align: center;"><br> <br> <br> <br>
-			<h4>내용</h4></td>
-		<td colspan="3" style="padding-top: 50px; padding-bottom: 50px;"><textarea name="content" class="form-control" style="width: 90%; height: 200px; border: 2px solid black; color: white;"></textarea></td>
-	</tr>
-	<tr>
-		<td width="" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
-			<h4>첨부파일</h4>
-		</td>
-		<td colspan="3" width="90%" style="padding-top: 50px; padding-bottom: 50px;"><input type="file" class="form-control" name="file" style="width: 90%; border: 2px solid black; color: white;" /></td>
-	</tr>
-	<tr>
-		<td colspan="4" style="text-align: center; margin-top: 25px;">
-			<button type="submit" class="btn btn-success">등록하기</button>
-		</td>
-	</tr>
-</table>

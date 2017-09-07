@@ -102,7 +102,7 @@
 				<div class="col-sm-2"></div>
 				<label class="col-sm-2 control-label text-left btn-primary" for="inputNumber">휴대폰 번호</label>
 				<div class="col-sm-6">
-					<input type="tel" class="form-control" name="inputPhone" id="inputPhone" value="${mList.phone}" readonly />
+					<input type="tel" class="form-control" name="inputNumber" id="inputNumber" value="${mList.phone}" readonly />
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
@@ -118,10 +118,10 @@
 			</div>
 			<div class="row form-group">
 				<div class="col-sm-2"></div>
-				<label class="col-sm-2 control-label text-left btn-primary" for="inputEmail">회원 등급</label>
+				<label class="col-sm-2 control-label text-left btn-primary" for="memberGrade">회원 등급</label>
 				<div class="col-sm-6">
 					<div class="input-group">
-						<input type="text" class="form-control" name="inputEmail" id="inputEmail" value="${mList.grade}" readonly />
+						<input type="text" class="form-control" name="memberGrade" id="memberGrade" value="${mList.grade}" readonly />
 						<button type="button" class="btn btn-info" id="gradeBtn">등급 조정</button>
 					</div>
 				</div>
@@ -129,11 +129,20 @@
 			</div>
 			<div class="row form-group">
 				<div class="col-sm-2"></div>
-				<label class="col-sm-2 control-label text-left btn-primary" for="inputEmail">경험치</label>
+				<label class="col-sm-2 control-label text-left btn-primary" for="memberExp">경험치</label>
 				<div class="col-sm-6">
 					<div class="input-group">
-						<input type="text" class="form-control" name="inputEmail" id="inputEmail" value="${mList.exp}" readonly />
+						<input type="text" class="form-control" name="memberExp" id="memberExp" value="${mList.exp}" readonly />
 						<button type="button" class="btn btn-danger" id="expBtn">경험치 조정</button>
+					</div>
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-6">
+					<div class="input-group">
+						<button type="button" id="closeBtn">닫기</button>
 					</div>
 				</div>
 				<div class="col-sm-2"></div>
@@ -178,6 +187,11 @@
 					window.location.reload();
 				}
 			});
+		});
+		
+		$("#closeBtn").click(function(){
+			opener.location.reload();
+			self.close();
 		});
 	</script>
 </body>

@@ -394,6 +394,9 @@ public class BoardDAO {
 		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
+		
+		updateExp(id);
+		
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, null,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -416,6 +419,9 @@ public class BoardDAO {
 		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
+		
+		updateExp(id);
+		
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, ?,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -541,7 +547,9 @@ public class BoardDAO {
 	public int replyWrite(BoardDTO dto, String id, String boardName, String title, String content) {
 
 		replyPrevUpdate(dto.getBgroup(), dto.getBstep());
-
+		
+		updateExp(id);
+		
 		int rs = 0;
 		int result = 0;
 
@@ -580,6 +588,8 @@ public class BoardDAO {
 
 	public int portfolioWrite(final String id, final String title, final String content, final String fileName) {
 		
+		updateReportCnt(id);
+		
 		int retValue = 0;
 
 		String sql = "INSERT INTO project_board VALUES(project_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, 0, 0, 0)";
@@ -611,6 +621,46 @@ public class BoardDAO {
 			psmt.setString(3, fileName);
 			psmt.setString(4, id);
 			psmt.setInt(5, Integer.parseInt(num));
+			}
+		});
+	}
+	
+	public void updateExp(final String id){
+		
+		String sql = "UPDATE member_grade SET exp=exp+1 WHERE id=?";
+		
+		this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, id);
+			}
+		});
+	}
+	
+	public void updateReportCnt(final String id){
+		
+		String sql = "UPDATE member_grade SET report_cnt=report_cnt+1 WHERE id=?";
+		
+		this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, id);
+			}
+		});
+	}
+	
+	// 자동 레벨업 기능을 위한 경험치 체크 함수
+	public int checkExp(final String id){
+		String sql = "UPDATE member_grade SET grade = grade+1 WHERE id=? AND exp >= (SELECT exp FROM exp_grade_list)";
+		
+		return this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				
+				ps.setString(1, id);
 			}
 		});
 	}

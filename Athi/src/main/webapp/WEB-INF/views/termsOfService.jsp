@@ -22,6 +22,14 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script>
+
+	$('input[type="checkbox"][name="accept"]').click(function(){
+		if($(this).prop('checked')){
+			$('input[type="checkbox"][name="accept"]').prop('checked', false);
+			$(this).prop('checked', true);
+		}
+	});
+
    function allCheck() {
       var frm = document.frm;
       for (var i = 0; i < frm.accept.length; i++) {
@@ -70,7 +78,7 @@
                   <%@ include file="/resources/termsOfService/termsOfService2.txt"%>
                   </textarea>
                   <label for="a1" class="btn btn-primary" style="float: right; margin-top: 50px;"> 
-                     <input type="checkbox" id="a2" name="accept" /> 동의
+                     <input type="checkbox" id="a1" name="accept" /> 동의
                   </label>
                </div>
             </div>
