@@ -58,7 +58,7 @@
       <form name="frm">
          <div class="col-sm-12" style="margin-top: 50px;">
             <div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-               <h1>회원가입 약정</h1>
+               <h1>회원가입 약관</h1>
             </div>
          </div>
          <div class="row" style="margin-top: 50px;">

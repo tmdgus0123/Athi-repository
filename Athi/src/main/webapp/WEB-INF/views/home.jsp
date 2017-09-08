@@ -43,10 +43,14 @@
 		<!-- 배너 끝 -->
 		<!-- 소개글 시작 -->
 		<div class="col-sm-12">
-			<div class="jumbotron text-center">
-				<h1>아띠 코딩</h1>
-				<p>
-					커뮤니티 사이트 아띠에 오신것을 환영합니다. <br />
+			<div class="jumbotron text-center" style="background:#4ea8ad; margin-top:15px;">
+				<h1 style="color:red; font-size:1.8em; font-weight:bold;">아띠 코딩</h1>
+				<p style="font-size:1.3em; color:white;">
+					코딩 관련 커뮤니티 사이트 아띠에 방문하여 주신 것을 진심으로 환영합니다. <br />
+					저희 아띠 사이트는 이전에 국내에서 없었던 프로젝트 공유 및 체계적인 회원 관리를 하고 있습니다. <br />
+					방문해주셔서 감사드리며, 좋은 정보를 얻어가셨으면 좋겠습니다. <br />
+					사이트 내에 부족한 점은 건의사항 게시판에 건의하여 주시면, 검토 후 적극적으로 반영하겠습니다. <br /> 
+					또한, 본 사이트 운영자들도 원활한 커뮤니티가 이뤄질 수 있도록 노력하겠습니다. <br />
 				</p>
 			</div>
 		</div>
@@ -100,7 +104,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="card-footer small text-muted">Update 시간 : ${thisYmd}</div>
+				<div class="card-footer small text-muted"><a class="fa fa-check" style="cursor:pointer;" onclick="window.location.reload();"></a>&nbsp;Update 시간 : ${thisYmd}</div>
 			</div>
 		</div>
 		<!-- 순위 끝 -->
@@ -113,7 +117,7 @@
 				<div class="card-body">
 					<canvas id="chart" width="100%" height="30"></canvas>
 				</div>
-				<div class="card-footer small text-muted">Update 시간 : ${thisYmd}</div>
+				<div class="card-footer small text-muted"><a class="fa fa-check" style="cursor:pointer;" onclick="window.location.reload();"></a>&nbsp;Update 시간 : ${thisYmd}</div>
 			</div>
 		</div>
 	</div>

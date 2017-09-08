@@ -21,7 +21,10 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+<script>
+<input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
+	$("input[type='checkbox'][name='replyChk']")
+</script>
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -78,7 +81,7 @@
 							<li id="li_${dto.num }">
 								<div class="row">
 									<div class="col-sm-1">
-										<input type="checkbox" style="margin-top: 6.5px;" />
+										<input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
 									</div>
 									<div class="col-sm-9 text-left">
 										<div>
@@ -100,21 +103,26 @@
 					</ul>
 				</div>
 				<div class="col-sm-12">
+					
 					<form name="commentsForm">
 						<input type="hidden" id="num" value="${viewRow.num }" />
 						<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
 							<div class="col-sm-2">
-								<br /> <strong>${user_id }</strong> <input type="hidden" id="id" value="${user_id }" />
+								<br /> <strong>${user_id }</strong> <input type="hidden" id="id" value="${user_id }"/>
+								
 							</div>
 							<div class="col-sm-8">
-								<textarea id="content" rows="3" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
+								<textarea id="content" rows="3" style="width: 100%;" <% if(session.getAttribute("user_id")==null){ %> placeholder="비회원은 로그인 후 댓글 작성이 가능합니다."  readonly<%} else{%>placeholder="내용을 입력하세요."<%} %>></textarea>
 							</div>
+							<c:if test="${user_id ne null}">
 							<div class="col-sm-1">
 								<input type="button" class="btn btn-success" id="enrollBtn" value="등록" />
 							</div>
+							</c:if>
 							<div class="col-sm-1"></div>
 						</div>
 					</form>
+					
 				</div>
 				<div class="col-sm-12">
 					<c:choose>
