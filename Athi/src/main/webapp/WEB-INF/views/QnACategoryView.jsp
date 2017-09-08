@@ -23,7 +23,7 @@
 						<div class="form-group">
 							<select id="category" class="form-control">
 								<option value="" style="color:red;" <%if(category.equals(null)){%>selected<%}%>>카테고리</option>
-								<option value="java" <%if(category.equals("java")){%>selected<%}%>>Java</option>
+								<option value="java" <%if(category.equals("java")){%>selected<%}%>>JAVA</option>
 								<option value="html"<%if(category.equals("html")){%>selected<%}%>>HTML</option>
 								<option value="javascript"<%if(category.equals("javascript")){%>selected<%}%>>JavaScript</option>
 								<option value="jQuery"<%if(category.equals("jQuery")){%>selected<%}%>>jQuery</option>

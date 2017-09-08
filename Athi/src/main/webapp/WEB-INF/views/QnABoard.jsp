@@ -56,8 +56,8 @@
 										<% } 
 											else{
 										%>
-											<option value="" style="color:red;">--- 카테고리 ---</option>
-											<option value="java">Java</option>
+											<option value="" style="color:red;">카테고리</option>
+											<option value="java">JAVA</option>
 											<option value="html">HTML</option>
 											<option value="javascript">JavaScript</option>
 											<option value="jQuery">jQuery</option>

@@ -21,10 +21,23 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <script>
 <input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
 	$("input[type='checkbox'][name='replyChk']")
 </script>
+
+<!-- SystaxHighligter -->
+<script src="./resources/syntaxhigh/scripts/shCore.js"></script>
+<script src="./resources/syntaxhigh/scripts/shBrushJava.js"></script>
+<script src="./resources/syntaxhigh/scripts/shBrushCss.js"></script>
+<link type="text/css" rel="stylesheet" href="./resources/syntaxhigh/styles/shCore.css">
+<link type="text/css" rel="stylesheet" href="./resources/syntaxhigh/styles/shThemeMidnight.css">
+<script>
+	SyntaxHighlighter.all();
+</script>
+<!-- SystaxHighligter -->
+
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -53,8 +66,8 @@
 								<b>블라인드 된 게시글 입니다.</b>
 							</c:when>
 							<c:otherwise>
-							${viewRow.content}
-						</c:otherwise>
+								${viewRow.content}
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</div>
