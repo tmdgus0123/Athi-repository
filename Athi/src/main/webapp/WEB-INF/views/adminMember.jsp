@@ -99,7 +99,7 @@
 					<table class="table table-bordered" id="dataTable" cellspacing="0">
 						<thead>
 							<tr class="btn-primary">
-								<th style="width:5%;" class="text-center"><a onclick="allCheck();"><input type="checkbox" /></a></th>
+								<th class="text-center"><a onclick="allCheck();"><input type="checkbox" /></a></th>
 								<th>등급</th>
 								<th>경험치</th>
 								<th>아이디</th>

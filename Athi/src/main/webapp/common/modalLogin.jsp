@@ -14,12 +14,10 @@
 <!-- Login Modal -->
 <div class="modal fade" id="Login" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content" style="background-color:#3F3F3F; box-shadow:5px 5px 0px 0px; border-radius:2em;">
-			<br />
-			<div class="text-center">
-				<h5 class="modal-title" style="font-family:휴먼편지체; color:white; font-size:2.0em;">ATHI'S LOG-IN</h5>
+		<div class="modal-content" style="background-color:#343a40; box-shadow:5px 5px 0px 0px; border-radius:2em;">
+			<div class="modal-header">
+				<h5 class="modal-title" style="font-family:휴먼편지체; color:white; font-size:2.0em;">ATHI LOG-IN</h5>
 			</div>
-			<div class="modal-header"></div>
 			<div class="modal-body">
 				<form name="modalFrm" class="form-hofizontal" method="post" action="LoginProcess.do" onsubmit="return isTrimCheck();">
 					<div class="form-group">
