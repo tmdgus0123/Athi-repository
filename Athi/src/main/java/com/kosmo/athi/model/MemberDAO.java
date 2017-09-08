@@ -194,7 +194,7 @@ public class MemberDAO {
 	//회원정보수정을 위한 회원 데이터 가져오기
 	public ArrayList<MemberDTO> selectMember(String id, String pass){
 		
-		String sql = "SELECT b.* FROM member b join member_grade bg on b.id=bg.id WHERE b.id='"+id+"' AND b.pass='"+pass+"'";
+		String sql = "SELECT b.*, bg.grade FROM member b join member_grade bg on b.id=bg.id WHERE b.id='"+id+"' AND b.pass='"+pass+"'";
 		
 		return (ArrayList<MemberDTO>)template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
 	}

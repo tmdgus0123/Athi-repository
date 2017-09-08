@@ -2,6 +2,7 @@ package com.kosmo.athi;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +49,7 @@ import com.kosmo.athi.command.ReplyActionCommand;
 import com.kosmo.athi.command.ReplyCommand;
 import com.kosmo.athi.model.Constant;
 import com.kosmo.athi.model.MemberDAO;
+import com.kosmo.athi.model.MemberDTO;
 
 /**
  * Handles requests for the application home page.
@@ -286,11 +288,16 @@ public class HomeController {
 
 		MemberDAO mDao = new MemberDAO();
 		boolean isMember = mDao.isMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
-
+		
+		ArrayList<MemberDTO> member = mDao.selectMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
+		
+		int user_grade = member.get(0).getGrade();
+		
 		try {
 			if (isMember == true) {
 				session.setAttribute("user_id", req.getParameter("user_id"));
 				session.setAttribute("user_pwd", req.getParameter("user_pwd"));
+				session.setAttribute("user_grade", user_grade);
 
 				System.out.println(session.getAttribute("user_id") + " " + session.getAttribute("user_pwd"));
 			}
