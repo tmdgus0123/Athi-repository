@@ -105,11 +105,12 @@
 							<li id="li_${dto.num }">
 								<div class="row">
 									<div class="col-sm-1">
-										<input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
+										<input type="checkbox" style="margin-top: 6.5px;" />
 									</div>
 									<div class="col-sm-9 text-left">
 										<div>
-											<strong>${dto.id }</strong>/ <span>(${dto.postdate })</span>
+											<strong>${dto.id }</strong>/
+											<span>(${dto.postdate })</span>
 										</div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
@@ -128,7 +129,6 @@
 					</ul>
 				</div>
 				<div class="col-sm-12">
-
 					<form name="commentsForm">
 						<input type="hidden" id="num" value="${viewRow.num }" />
 						<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
@@ -147,7 +147,6 @@
 							<div class="col-sm-1"></div>
 						</div>
 					</form>
-
 				</div>
 				<div class="col-sm-12 text-right">
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
