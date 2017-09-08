@@ -21,10 +21,23 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <script>
 <input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
 	$("input[type='checkbox'][name='replyChk']")
 </script>
+
+<!-- SystaxHighligter -->
+<script src="./resources/syntaxhigh/scripts/shCore.js"></script>
+<script src="./resources/syntaxhigh/scripts/shBrushJava.js"></script>
+<script src="./resources/syntaxhigh/scripts/shBrushCss.js"></script>
+<link type="text/css" rel="stylesheet" href="./resources/syntaxhigh/styles/shCore.css">
+<link type="text/css" rel="stylesheet" href="./resources/syntaxhigh/styles/shThemeMidnight.css">
+<script>
+	SyntaxHighlighter.all();
+</script>
+<!-- SystaxHighligter -->
+
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -53,8 +66,8 @@
 								<b>블라인드 된 게시글 입니다.</b>
 							</c:when>
 							<c:otherwise>
-							${viewRow.content}
-						</c:otherwise>
+								${viewRow.content}
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</div>
@@ -92,11 +105,12 @@
 							<li id="li_${dto.num }">
 								<div class="row">
 									<div class="col-sm-1">
-										<input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
+										<input type="checkbox" style="margin-top: 6.5px;" />
 									</div>
 									<div class="col-sm-9 text-left">
 										<div>
-											<strong>${dto.id }</strong>/ <span>(${dto.postdate })</span>
+											<strong>${dto.id }</strong>/
+											<span>(${dto.postdate })</span>
 										</div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
@@ -115,7 +129,6 @@
 					</ul>
 				</div>
 				<div class="col-sm-12">
-
 					<form name="commentsForm">
 						<input type="hidden" id="num" value="${viewRow.num }" />
 						<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
@@ -134,7 +147,6 @@
 							<div class="col-sm-1"></div>
 						</div>
 					</form>
-
 				</div>
 				<div class="col-sm-12 text-right">
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>

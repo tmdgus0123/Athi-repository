@@ -112,8 +112,8 @@
 							<col width="*" />
 							<col width="15%" />
 							<col width="18%" />
-							<col width="10%" />
-							<col width="10%" />
+							<col width="9%" />
+							<col width="9%" />
 						</colgroup>
 						<thead>
 						<tr class="btn-success">
@@ -130,7 +130,6 @@
 							<th>추천수</th>
 						</tr>
 						</thead>
-
 						<tbody>
 							<!-- 반복문 시작 -->
 							<c:choose>
