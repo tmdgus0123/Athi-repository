@@ -96,16 +96,17 @@
 									</div>
 									<div class="col-sm-9 text-left">
 										<div>
-											<strong>${dto.id }</strong>/
-											<span>(${dto.postdate })</span>
+											<strong>${dto.id }</strong>/ <span>(${dto.postdate })</span>
 										</div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
-									<c:when test="${user_id==dto.id or user_id=='athi'}">
-									<div class="col-sm-1 text-right">
-										<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
-									</div>
-									</c:when>
+									<c:choose>
+										<c:when test="${user_id==dto.id or user_id=='athi'}">
+											<div class="col-sm-1 text-right">
+												<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
+											</div>
+										</c:when>
+									</c:choose>
 									<div class="col-sm-1" style="margin-top: 25px;"></div>
 								</div>
 							</li>
@@ -114,7 +115,7 @@
 					</ul>
 				</div>
 				<div class="col-sm-12">
-					
+
 					<form name="commentsForm">
 						<input type="hidden" id="num" value="${viewRow.num }" />
 						<div class="row" style="margin-top: 50px; background-color: #f3f3f3; padding: 10px;">
@@ -123,17 +124,17 @@
 								<input type="hidden" id="id" value="${user_id }" />
 							</div>
 							<div class="col-sm-8">
-								<textarea id="content" rows="3" style="width: 100%;" <% if(session.getAttribute("user_id")==null){ %> placeholder="비회원은 로그인 후 댓글 작성이 가능합니다."  readonly<%} else{%>placeholder="내용을 입력하세요."<%} %>></textarea>
+								<textarea id="content" rows="3" style="width: 100%;" <%if (session.getAttribute("user_id") == null) {%> placeholder="비회원은 로그인 후 댓글 작성이 가능합니다." readonly <%} else {%> placeholder="내용을 입력하세요." <%}%>></textarea>
 							</div>
 							<c:if test="${user_id ne null}">
-							<div class="col-sm-1">
-								<input type="button" class="btn btn-success" id="enrollBtn" value="등록" />
-							</div>
+								<div class="col-sm-1">
+									<input type="button" class="btn btn-success" id="enrollBtn" value="등록" />
+								</div>
 							</c:if>
 							<div class="col-sm-1"></div>
 						</div>
 					</form>
-					
+
 				</div>
 				<div class="col-sm-12 text-right">
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
@@ -175,6 +176,9 @@
 	<!-- 댓글 추가 -->
 	<script>
 		$('#enrollBtn').click(function() {
+			
+			if($('#content').val()==""){alert("댓글 내용이 비어있습니다."); $('#content').focus(); return false;}
+			
 			$.ajax({
 				url : 'comments.do', //form : action
 				type : 'post', // form : method

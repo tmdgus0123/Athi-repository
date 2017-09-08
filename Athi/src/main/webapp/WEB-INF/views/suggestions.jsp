@@ -35,25 +35,7 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
 				<div class="row" style="margin-bottom: 10px;">
-					<div class="col-sm-6">
-						<div style="float: left;">
-							<form action="">
-								<div class="form-group">
-									<select name="searchColumn" class="form-control">
-										<option value="" style="color:red;">--- 카테고리 ---</option>
-										<option value="">---------------</option>
-										<option value="">JAVA</option>
-										<option value="">HTML</option>
-										<option value="">CSS</option>
-										<option value="">jQuery</option>
-										<option value="">Spring</option>
-										<option value="">---------------</option>
-									</select>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-12">
 						<div style="float: right;">
 						<c:choose>
 							<c:when test="${user_id!=null}">
