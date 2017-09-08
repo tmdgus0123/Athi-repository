@@ -33,7 +33,9 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; margin-bottom: 25px; opacity: 0.85;">
 				<form name="writeFrm" action="writeAction.do" method="post" onsubmit="return checkWriteFrm();">
-					<input type="hidden" name="boardName" value="${param.boardName}" readonly /> <input type="hidden" name="nowPage" value="${param.nowPage}" readonly /> <input type="hidden" name="id" value="${param.id}" />
+					<input type="hidden" name="boardName" value="${param.boardName}" readonly />
+					<input type="hidden" name="nowPage" value="${param.nowPage}" readonly />
+					<input type="hidden" name="id" value="${param.id}" />
 					<div class="row form-group">
 						<c:choose>
 							<c:when test="${param.boardName=='QnABoard' or param.boardName=='tipBoard'}">
@@ -70,8 +72,11 @@
 						</c:choose>
 					</div>
 					<div class="row form-group" style="background-color: #e7adb7; height: 50px">
-						<div class="col-sm-11 text-right" style="margin: auto;">글쓴이 : ${param.id }</div>
-						<div class="col-sm-1"></div>
+						<div class="col-sm-6 text-left">
+							<input type="button" id="java" value="JAVA" />
+							<input type="button" id="css" value="CSS" />
+						</div>
+						<div class="col-sm-6 text-right" style="margin: auto;">글쓴이 : ${param.id }</div>
 					</div>
 					<div class="row form-group">
 						<c:choose>
@@ -121,5 +126,23 @@
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 
+	<script>
+		$("#java").click(function() {
+			alert("emfdjdha");
+			$.ajax({
+				url : "syntax.do", // form : action
+				data : { // form : input 's
+					text : $("textarea[name='content']").val()
+				},
+				type : "post", // form : method
+				success : function(data) { // 다시 돌아옴
+					$("textarea[name='content']").val(data);
+				}
+			});			
+		});
+
+		$("#css").click(function() {
+		});
+	</script>
 </body>
 </html>

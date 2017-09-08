@@ -38,7 +38,8 @@
 		<!-- 배너 시작 -->
 		<div class="row cycle-slideshow" style="margin-top: -16px;">
 			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> <img src="./resources/images/baner2.jpg" width=100% height="200px" /> <img src="./resources/images/baner3.jpg" width=100% height="200px" /> <img
-				src="./resources/images/baner4.jpg" width=100% height="200px" />
+				src="./resources/images/baner4.jpg" width=100% height="200px"
+			/>
 		</div>
 		<!-- 배너 끝 -->
 		<!-- 소개글 시작 -->
@@ -150,7 +151,7 @@
 		var ctx = document.getElementById("chart");
 		var total = '<c:out value="${total}"/>';
 		var today = '<c:out value="${today}"/>';
-		
+
 		var myLineChart = new Chart(ctx, {
 			type : 'line',
 			data : {
@@ -167,7 +168,7 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					data : [ total, "23" , "31", "58", "21", "25", today ],
+					data : [ total, "23", "31", "58", "21", "25", today ],
 				} ],
 			},
 			options : {

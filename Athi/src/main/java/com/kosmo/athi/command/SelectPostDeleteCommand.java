@@ -25,7 +25,6 @@ public class SelectPostDeleteCommand implements ICommand{
 			exePostNum = postNum[i];
 			dao.postDelete(exePostNum);
 		}
-		
 		dao.close();
 	}
 }

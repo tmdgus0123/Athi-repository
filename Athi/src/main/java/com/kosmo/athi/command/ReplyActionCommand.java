@@ -32,7 +32,6 @@ public class ReplyActionCommand implements ICommand {
 			title = "  "+ title;
 		}
 		dao.replyWrite(dto, id, title, content);
-		
 		dao.close();
 	}
 

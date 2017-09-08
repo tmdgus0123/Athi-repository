@@ -35,10 +35,10 @@ public class PortfolioWriteCommand implements ICommand {
 			
 			// MultipartHttpServletRequest 생성
 			MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req;
-			Iterator iter = mhsr.getFileNames();
+			Iterator<String> iter = mhsr.getFileNames();
 			MultipartFile mfile = null;
 			String fieldName = "";
-			List resultList = new ArrayList();
+			List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 
 			// 디렉토리가 없다면 생성
 			File dir = new File(path);
@@ -70,7 +70,7 @@ public class PortfolioWriteCommand implements ICommand {
 				// 설정한 path에 파일저장
 				File serverFile = new File(path + File.separator + saveFileName);
 				mfile.transferTo(serverFile);
-				Map file = new HashMap();
+				Map<String, Object> file = new HashMap<String, Object>();
 				file.put("origName", origName);
 				file.put("fileName", saveFileName);
 				file.put("sfile", serverFile);
