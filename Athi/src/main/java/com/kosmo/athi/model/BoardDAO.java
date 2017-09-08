@@ -635,7 +635,7 @@ public class BoardDAO {
 
 		int retValue = 0;
 
-		String sql = "INSERT INTO project_board VALUES(project_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, 0, 0, 0, ?)";
+		String sql = "INSERT INTO project_board VALUES(project_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, 0, 0, 0, ?, 0)";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
 
