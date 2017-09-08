@@ -14,25 +14,24 @@
 <!-- Login Modal -->
 <div class="modal fade" id="Login" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content">
+		<div class="modal-content" style="background-color:#343a40; box-shadow:5px 5px 0px 0px; border-radius:2em;">
 			<div class="modal-header">
-				<h5 class="modal-title">로그인</h5>
+				<h5 class="modal-title" style="font-family:휴먼편지체; color:white; font-size:2.0em;">ATHI LOG-IN</h5>
 			</div>
 			<div class="modal-body">
 				<form name="modalFrm" class="form-hofizontal" method="post" action="LoginProcess.do" onsubmit="return isTrimCheck();">
 					<div class="form-group">
-						<input type="text" class="form-control" name="user_id" placeholder="Id" />
+						<input type="text" class="form-control" name="user_id" placeholder="ID" />
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" name="user_pwd" placeholder="Password" />
+						<input type="password" class="form-control" name="user_pwd" placeholder="PASSWORD" />
 					</div>
 					<div style="text-align: center;">
-						<input type="submit" class="btn btn-info" value="로그인">
+						<input type="submit" class="btn btn" value="로그인">
+						&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 					</div>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>

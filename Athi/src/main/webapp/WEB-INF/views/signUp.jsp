@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" var="thisYmd" />
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -66,7 +67,7 @@
 				return false;
 			}
 
-			window.open("./IDCheck.do?user_id="+ f.inputId.value, "", "width = 500, height = 300");
+			window.open("./IDCheck.do?user_id="+ f.inputId.value, "", "width=500, height=300");
 		});
 					
 		$('button[type="button"][class="btn btn-danger"][name="mainBtn"]').on("click", function(){
@@ -90,69 +91,60 @@
 			}
 
 			if (val1 == val2) {
-				$('p[id="chkTxt"]').html(
-						"비밀번호가 일치합니다.");
-				$('p[id="chkTxt"]').css({
-					"fontWeight" : "bold",
-					color : "blue"
-				});
+				$('p[id="chkTxt"]').html("비밀번호가 일치합니다.");
+				$('p[id="chkTxt"]').css({"fontWeight" : "bold", color : "blue"});
 			} else if (val1 != val2) {
-				$('p[id="chkTxt"]').html(
-						"비밀번호를 다시 확인해주세요.");
-				$('p[id="chkTxt"]').css({
-					"fontWeight" : "bold",
-					color : "red"
-				});
+				$('p[id="chkTxt"]').html("비밀번호를 다시 확인해주세요.");
+				$('p[id="chkTxt"]').css({"fontWeight" : "bold", color : "red"});
 			}
 		});
 
 		$('button[class="btn btn-success"][type="submit"][name="signUpBtn"]').on("click", function() {
 
-				if ($("#inputId").val() == "") {
-					alert("아이디를 입력해주세요.");
-					return false;
-				}
-				if ($("input[type='hidden'][name='overFlag']").val() == 0) {
-					alert("아이디 중복확인을 해주세요.");
-					return false;
-				}
-				if ($("#inputPassword").val() == "") {
-					alert("비밀번호를 입력해주세요.");
-					return false;
-				}
-				if ($("#inputPasswordCheck").val() == "") {
-					alert("비밀번호를 확인해주세요.");
-					return false;
-				}
-				if ($("#inputName").val() == "") {
-					alert("이름을 입력해주세요.");
-					return false;
-				}
-				if ($("#inputAddr").val() == "") {
-					alert("주소를 입력해주세요.");
-					return false;
-				}
-				if ($("#inputBirthday").val() == "") {
-					alert("생년월일을 입력해주세요.");
-					return false;
-				}
-				if ($("#inputGender").val() == "") {
-					alert("성별을 입력해주세요.");
-					return false;
-				}
-				if ($("#inputPhone").val() == "") {
-					alert("휴대폰 번호를 입력해주세요.");
-					return false;
-				}
-				if ($("#inputEmail").val() == "" || $("#inputEmail2").val() == "") {
-					alert("이메일 혹은 도메인을 입력해주세요.");
-					if ($("#inputEmail").val() == "") $("#inputEmail").focus();
-					if ($("#inputEmail2").val() == "") $("#inputEmail2").focus();
-					return false;
-				}
+			if ($("#inputId").val() == "") {
+				alert("아이디를 입력해주세요.");
+				return false;
+			}
+			if ($("input[type='hidden'][name='overFlag']").val() == 0) {
+				alert("아이디 중복확인을 해주세요.");
+				return false;
+			}
+			if ($("#inputPassword").val() == "") {
+				alert("비밀번호를 입력해주세요.");
+				return false;
+			}
+			if ($("#inputPasswordCheck").val() == "") {
+				alert("비밀번호를 확인해주세요.");
+				return false;
+			}
+			if ($("#inputName").val() == "") {
+				alert("이름을 입력해주세요.");
+				return false;
+			}
+			if ($("#inputAddr").val() == "") {
+				alert("주소를 입력해주세요.");
+				return false;
+			}
+			if ($("#inputBirthday").val() == "") {
+				alert("생년월일을 입력해주세요.");
+				return false;
+			}
+			if ($("#inputGender").val() == "") {
+				alert("성별을 입력해주세요.");
+				return false;
+			}
+			if ($("#inputPhone").val() == "") {
+				alert("휴대폰 번호를 입력해주세요.");
+				return false;
+			}
+			if ($("#inputEmail").val() == "" || $("#inputEmail2").val() == "") {
+				alert("이메일 혹은 도메인을 입력해주세요.");
+				if ($("#inputEmail").val() == "") $("#inputEmail").focus();
+				if ($("#inputEmail2").val() == "") $("#inputEmail2").focus();
+				return false;
+			}
 
-				else {$('form[name="signFrm"][method="post"]').attr("action","./signUpAction.do");
-				}
+			else {$('form[name="signFrm"][method="post"]').attr("action","./signUpAction.do");}
 		});
 	});
 </script>

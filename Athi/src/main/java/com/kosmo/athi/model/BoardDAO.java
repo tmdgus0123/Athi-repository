@@ -361,25 +361,21 @@ public class BoardDAO {
 			}
 		});
 	}
+	
+	// 게시글 추천수증가
+	public void proj_recom_Cnt(final String num) {
 
-	// 게시글 추천수 DB등록
-	public int chuCnt(int recomm_cnt) {
-		int rs = 0;
+		String sql = "UPDATE project_board SET recom_cnt=recom_cnt+1 WHERE num=?";
 
-		try {
-			String sql = "INSERT INTO board VALUES board VALUES(board_seq.nextval, title, content, sysdate, id, 0, 0, ?, board_seq.currval, 0, 0, null,0)";
-
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, recomm_cnt);
-
-			rs = psmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return rs;
+		this.template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setString(1, num);
+			}
+		});
 	}
-
-	// 게시글 반대수증가
+	
+	// 게시글 비추천수 증가
 	public void nrecom_Cnt(final String num) {
 
 		String sql = "UPDATE board SET nrecom_cnt=nrecom_cnt+1 WHERE num=?";
@@ -391,22 +387,18 @@ public class BoardDAO {
 			}
 		});
 	}
+	
+	// 포트폴리오 게시글 반대수증가
+	public void proj_nrecom_Cnt(final String num) {
 
-	// 게시글 반대수 DB등록
-	public int NchuCnt(int nrecom_cnt) {
-		int rs = 0;
+		String sql = "UPDATE project_board SET nrecom_cnt=nrecom_cnt+1 WHERE num=?";
 
-		try {
-			String sql = "INSERT INTO board VALUES board VALUES(board_seq.nextval, title, content, sysdate, id, 0, 0, 0, board_seq.currval, 0, 0, null,?)";
-
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, nrecom_cnt);
-
-			rs = psmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return rs;
+		this.template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setString(1, num);
+			}
+		});
 	}
 
 	// 게시글 댓글수증가
@@ -421,24 +413,20 @@ public class BoardDAO {
 			}
 		});
 	}
+	
+	// 게시글 댓글수증가
+	public void proj_reply_Cnt(final String num) {
 
-	// 게시글 댓글수 DB등록
-	public int replyCnt(int comm_cnt) {
-		int rs = 0;
+		String sql = "UPDATE project_board SET comm_cnt=comm_cnt+1 WHERE num=?";
 
-		try {
-			String sql = "INSERT INTO board VALUES board VALUES(board_seq.nextval, title, content, sysdate, id, 0, ?, 0, board_seq.currval, 0, 0, null,0)";
-
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, comm_cnt);
-
-			rs = psmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return rs;
+		this.template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement psmt) throws SQLException {
+				psmt.setString(1, num);
+			}
+		});
 	}
-
+	
 	// 포트폴리오 상세보기
 	public BoardDTO portfolioView(String pidx) {
 

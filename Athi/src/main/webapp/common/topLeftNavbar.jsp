@@ -229,7 +229,7 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="logOutAction.do">
+						<a class="nav-link" onclick="confirmChk();">
 							<i class="fa fa-fw fa-user"></i> 로그아웃
 						</a>
 					</li>
@@ -237,4 +237,17 @@
 			</c:choose>
 		</ul>
 	</div>
+	
+	<script>
+		function confirmChk(){
+			var con = confirm("로그아웃 하시겠습니까?");
+			
+			if(con){
+				window.location.href='logOutAction.do';
+			}
+			else{
+				
+			}
+		}
+	</script>
 </nav>

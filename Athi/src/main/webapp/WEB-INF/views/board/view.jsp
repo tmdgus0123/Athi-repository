@@ -21,7 +21,10 @@
 <!-- Custom styles for this sb-admin -->
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+<script>
+<input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
+	$("input[type='checkbox'][name='replyChk']")
+</script>
  <!-- Syntax Highlighter 사용하기 Start -->
  
 <script src="./resources/syntaxhigh/scripts/shCore.js"></script>
@@ -107,11 +110,13 @@
 										</div>
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
-									<c:when test="${user_id==dto.id or user_id=='athi'}">
-									<div class="col-sm-1 text-right">
-										<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
-									</div>
-									</c:when>
+									<c:choose>
+										<c:when test="${user_id==dto.id or user_id=='athi'}">
+											<div class="col-sm-1 text-right">
+												<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
+											</div>
+										</c:when>
+									</c:choose>
 									<div class="col-sm-1" style="margin-top: 25px;"></div>
 								</div>
 							</li>
@@ -128,11 +133,13 @@
 								<input type="hidden" id="id" value="${user_id }" />
 							</div>
 							<div class="col-sm-8">
-								<textarea id="content" rows="3" style="width: 100%;" placeholder="내용을 입력하세요."></textarea>
+								<textarea id="content" rows="3" style="width: 100%;" <%if (session.getAttribute("user_id") == null) {%> placeholder="비회원은 로그인 후 댓글 작성이 가능합니다." readonly <%} else {%> placeholder="내용을 입력하세요." <%}%>></textarea>
 							</div>
-							<div class="col-sm-1">
-								<input type="button" class="btn btn-success" id="enrollBtn" value="등록" />
-							</div>
+							<c:if test="${user_id ne null}">
+								<div class="col-sm-1">
+									<input type="button" class="btn btn-success" id="enrollBtn" value="등록" />
+								</div>
+							</c:if>
 							<div class="col-sm-1"></div>
 						</div>
 					</form>
@@ -177,6 +184,9 @@
 	<!-- 댓글 추가 -->
 	<script>
 		$('#enrollBtn').click(function() {
+			
+			if($('#content').val()==""){alert("댓글 내용이 비어있습니다."); $('#content').focus(); return false;}
+			
 			$.ajax({
 				url : 'comments.do', //form : action
 				type : 'post', // form : method

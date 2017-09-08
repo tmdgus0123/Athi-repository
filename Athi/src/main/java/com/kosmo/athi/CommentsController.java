@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kosmo.athi.command.CommentsCommand;
 import com.kosmo.athi.command.DeleteCommentCommand;
 import com.kosmo.athi.command.ICommand;
+import com.kosmo.athi.command.PortpolioCommentsCommand;
+import com.kosmo.athi.command.PortpolioDeleteCommentCommand;
 import com.kosmo.athi.model.Constant;
 
 @Controller
@@ -48,5 +50,25 @@ public class CommentsController {
 		command.execute(model);
 		
 		return "/board/view";
+	}
+	
+	@RequestMapping("/proj_comments.do")
+	public String proj_comments(HttpServletRequest req, Model model){
+		
+		model.addAttribute("req", req);
+		command = new PortpolioCommentsCommand();
+		command.execute(model);
+		
+		return "board/commentsAction";
+	}
+	
+	@RequestMapping("/proj_deleteComments.do")
+	public String proj_deleteComments(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		command = new PortpolioDeleteCommentCommand();
+		command.execute(model);
+		
+		return "fileupload/portfolioView";
 	}
 }

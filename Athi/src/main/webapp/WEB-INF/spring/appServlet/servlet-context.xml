@@ -30,9 +30,16 @@
 
 
 	<!-- JDBC템플릿 설정 : datasource 빈을 생성함 -->
+<!-- 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /> -->
+<!-- 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.0.166:1521:orcl" /> -->
+<!-- 		<beans:property name="username" value="athi" /> -->
+<!-- 		<beans:property name="password" value="1234" /> -->
+<!-- 	</beans:bean> -->
+	
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.0.166:1521:orcl" />
+		<beans:property name="url" value="jdbc:oracle:thin:@183.109.117.30:30:orcl" />
 		<beans:property name="username" value="athi" />
 		<beans:property name="password" value="1234" />
 	</beans:bean>

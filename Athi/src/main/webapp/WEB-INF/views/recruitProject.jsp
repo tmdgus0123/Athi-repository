@@ -40,7 +40,7 @@
 					<div class="col-sm-6">
 						<div style="float: right;">
 						<c:choose>
-							<c:when test="${user_id!=null}">
+							<c:when test="${user_id!=null and user_grade>5}">
 							<form action="write.do" method="get">
 								<input type="hidden" name="boardName" value="${boardName}" />
 								<input type="hidden" name="nowPage" value="${nowPage}" />
@@ -57,11 +57,11 @@
 				<table class="table table-hover">
 					<colgroup>
 						<col width="10%" />
-						<col width="30%" />
-						<col width="20%" />
-						<col width="20%" />
-						<col width="10%" />
-						<col width="10%" />
+						<col width="*" />
+						<col width="15%" />
+						<col width="18%" />
+						<col width="7%" />
+						<col width="15%" />
 					</colgroup>
 					<thead>
 						<tr class="active">

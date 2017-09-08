@@ -19,5 +19,4 @@ public class AdminBoardCommand implements ICommand {
 
 		dao.close();
 	}
-
 }
