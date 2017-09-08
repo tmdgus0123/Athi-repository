@@ -22,6 +22,15 @@
 <link href="./resources/sb-admin/css/sb-admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+ <!-- Syntax Highlighter 사용하기 Start -->
+ 
+<script src="./resources/syntaxhigh/scripts/shCore.js"></script>
+<script src="./resources/syntaxhigh/scripts/shBrushJava.js"></script>
+<script src="./resources/syntaxhigh/scripts/shBrushCss.js"></script>
+<link type="text/css" rel="stylesheet" href="./resources/syntaxhigh/styles/shCore.css" />   
+<link type="text/css" rel="stylesheet" href="./resources/syntaxhigh/styles/shThemeEclipse.css" />   
+<!-- Syntax Highlighter 사용하기 End -->
+      
 </head>
 <body class="fixed-nav sidenav-toggled" id="page-top" style="background-image: url('./resources/images/backGroundImage.jpg'); background-repeat: no-repeat; background-size: cover;">
 	<!-- Navigation -->
@@ -50,8 +59,8 @@
 								<b>블라인드 된 게시글 입니다.</b>
 							</c:when>
 							<c:otherwise>
-							${viewRow.content}
-						</c:otherwise>
+								${viewRow.content}
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</div>
