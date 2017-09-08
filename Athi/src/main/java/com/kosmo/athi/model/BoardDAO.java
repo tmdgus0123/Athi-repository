@@ -444,8 +444,6 @@ public class BoardDAO {
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
 		
-		updateExp(id);
-		
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, null,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -459,6 +457,9 @@ public class BoardDAO {
 			}
 		});
 
+		updateExp(id);
+		checkExp(id);
+		
 		return retValue;
 	}
 
@@ -709,10 +710,10 @@ public class BoardDAO {
 	}
 	
 	// 자동 레벨업 기능을 위한 경험치 체크 함수
-	public int checkExp(final String id){
+	public void checkExp(final String id){
 		String sql = "UPDATE member_grade SET grade = grade+1 WHERE id=? AND exp >= (SELECT exp FROM exp_grade_list)";
 		
-		return this.template.update(sql, new PreparedStatementSetter() {
+		this.template.update(sql, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
