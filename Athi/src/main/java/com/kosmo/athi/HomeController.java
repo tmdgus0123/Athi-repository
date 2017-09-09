@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
+import com.kosmo.athi.command.AdminPortfolioBoardCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
@@ -199,7 +200,18 @@ public class HomeController {
 
 		return "tipBoard";
 	}
+	
+	@RequestMapping("adminPortfolioBoard.do")
+	public String adminPortfolioBoard(HttpServletRequest req, Model model) {
+		System.out.println("portfolioBoard() 메소드 실행");
 
+		model.addAttribute("req", req);
+		command = new AdminPortfolioBoardCommand();
+		command.execute(model);
+		
+		return "adminPortfolioBoard";
+	}
+	
 	@RequestMapping("/adminBoard.do")
 	public String adminBoard(Model model) {
 		System.out.println("adminBoard() 메소드 호출");
@@ -526,7 +538,6 @@ System.out.println("커멘드 들어가기전");
 		return "fileupload/portfolioWrite";
 	}
 	
-
 	@RequestMapping("/QnAcategory.do")
 	public String QnACategoryView(HttpServletRequest req, Model model){
 		System.out.println("QnAcategory() 메소드 실행");
