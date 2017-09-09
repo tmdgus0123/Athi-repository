@@ -76,11 +76,9 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {
-
-		if (session.getAttribute("user_id") != null) {
-			model.addAttribute("session", session);
-		}
-
+		System.out.println("home() 메소드 실행");
+		
+		model.addAttribute("session", session);
 		command = new RankListCommand();
 		command.execute(model);
 

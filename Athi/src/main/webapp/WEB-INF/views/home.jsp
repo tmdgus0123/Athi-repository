@@ -1,3 +1,5 @@
+<%@page import="java.sql.Date"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -103,7 +105,7 @@
 		<div class="col-sm-12">
 			<div class="card mb-3" id="div1">
 				<div class="card-header  text-muted">
-					<i class="fa fa-area-chart"></i> 방문자수 [ total : ${sessionScope.totalCnt} ]
+					<i class="fa fa-area-chart"></i> 방문자수 [ total : ${sessionScope.total_vcnt} ]
 				</div>
 				<div class="card-body">
 					<canvas id="chart" width="100%" height="30"></canvas>
@@ -139,11 +141,11 @@
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 	<script>
 		var ctx = document.getElementById("chart");
-		var today = '<c:out value="${today}"/>';
 		var myLineChart = new Chart(ctx, {
 			type : 'line',
 			data : {
-				labels : [ "08.30", "08.31", "09.01", "09.02", "09.03", "09.04", "09.05" ],
+				labels : [ "${sessionScope.dateList.get(0)}", "${sessionScope.dateList.get(1)}", "${sessionScope.dateList.get(2)}",
+					"${sessionScope.dateList.get(3)}", "${sessionScope.dateList.get(4)}", "${sessionScope.dateList.get(5)}", "${sessionScope.dateList.get(6)}" ],
 				datasets : [ {
 					label : "방문자수",
 					lineTension : 0.3,
@@ -156,7 +158,8 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					data : [ "23", "31", "58", "21", "25", "11", "55" ]
+					data : [ "${sessionScope.visitList.get(0)}", "${sessionScope.visitList.get(1)}", "${sessionScope.visitList.get(2)}", 
+						"${sessionScope.visitList.get(3)}", "${sessionScope.visitList.get(4)}", "${sessionScope.visitList.get(5)}", "${sessionScope.visitList.get(6)}" ]
 				} ],
 			},
 			options : {
