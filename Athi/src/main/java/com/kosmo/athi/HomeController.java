@@ -201,13 +201,14 @@ public class HomeController {
 		return "tipBoard";
 	}
 	
-	@RequestMapping("/adminPortfolioBoard.do")
-	public String adminPortfolioBoard(Model model) {
-		System.out.println("adminPortfolioBoard() 메소드 호출");
+	@RequestMapping("adminPortfolioBoard.do")
+	public String adminPortfolioBoard(HttpServletRequest req, Model model) {
+		System.out.println("portfolioBoard() 메소드 실행");
 
+		model.addAttribute("req", req);
 		command = new AdminPortfolioBoardCommand();
 		command.execute(model);
-
+		
 		return "adminPortfolioBoard";
 	}
 	
