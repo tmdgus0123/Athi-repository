@@ -37,20 +37,18 @@ public class MonitoringDAO {
 	}
 	
 	public void setVisitCount() throws SQLException{
-		
-		System.out.println("setTotalCount() 실행");
+		System.out.println("setVisitCount() 실행");
 		
 		int retVal = 0;
 		
 		try{
-			String sql = "INSERT INTO visit VALUES(sysdate)";
+			String sql = "INSERT INTO visit VALUES (sysdate, visit_seq.nextval)";
 			conn.setAutoCommit(false);
 			
 			psmt = conn.prepareStatement(sql);
 			retVal = psmt.executeUpdate();
 			
-			System.out.println(rs);
-			
+System.out.println(retVal);
 			if(retVal==1){
 				conn.commit();
 			}
@@ -108,5 +106,43 @@ public class MonitoringDAO {
 			e.printStackTrace();
 		}
 		return retVal;
+	}
+	
+	public int getSelectCount(String date) throws SQLException{
+		System.out.println("getSelectCount() 실행");
+		int retVal = 0;
+		
+		try{
+			String sql = "SELECT count(*) FROM visit WHERE "
+					+ " to_date(v_date, 'YYYY-MM-DD') = ?";
+			conn.setAutoCommit(false);
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, date);
+			rs = psmt.executeQuery();
+			rs.next();
+			
+			retVal = rs.getInt(1);
+			if(retVal>0){
+				conn.commit();
+			}
+		}
+		catch(Exception e){
+			conn.rollback();
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+	
+	public void close() {
+		try {
+			if(psmt != null) psmt.close();
+			if(conn != null) conn.close();
+			if(rs != null) rs.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

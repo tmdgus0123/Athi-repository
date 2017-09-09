@@ -17,30 +17,26 @@ public class SessionMonitoring implements HttpSessionListener{
 	}
 	
 	private void execute(HttpSessionEvent event){
-		
 		System.out.println("방문자수 카운터 시작");
 		
-		int today_vcnt = 0;
 		int total_vcnt = 0;
-		
-		System.out.println(event.getSession().isNew());
 		
 		MonitoringDAO mDao = MonitoringDAO.getInstance();
 		
 		try {
+			//세션이 생성되면 DB에 sysdate를 추가한다
 			mDao.setVisitCount();
 			
 			total_vcnt = mDao.getTotalCount();
-			today_vcnt = mDao.getTodayCount();
 			
 			HttpSession session = event.getSession();
 			
-			session.setAttribute("totalCnt", total_vcnt);
-			session.setAttribute("todayCnt", today_vcnt);
-		
+			session.setAttribute("total_vcnt", total_vcnt);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		mDao.close();
 	}
 
 	@Override

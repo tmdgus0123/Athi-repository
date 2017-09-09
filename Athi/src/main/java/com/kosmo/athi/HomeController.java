@@ -231,10 +231,11 @@ public class HomeController {
 	@RequestMapping("/writeAction.do")
 	public String writeAction(HttpServletRequest req, Model model) {
 
+System.out.println("커멘드 들어가기전");
 		model.addAttribute("req", req);
 		command = new WriteCommand();
 		command.execute(model);
-
+		System.out.println("커멘드 들어간 후");
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
@@ -312,9 +313,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("signUpAction.do")
-	public String signUpAction(HttpServletResponse response, HttpServletRequest req, Model model) {
-
-		String urlPage;
+	public void signUpAction(HttpServletResponse response, HttpServletRequest req, Model model) {
 
 		model.addAttribute("req", req);
 
@@ -324,24 +323,21 @@ public class HomeController {
 		Map<String, Object> map = model.asMap();
 		int retValue = (Integer) map.get("retValue");
 
-		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
+			response.setContentType("text/html;charset=utf-8");
+		
+			if (retValue != 0) {
+				out.println("<script>alert('회원가입이 완료되었습니다.'); window.location.href='./';</script>");
+			} else {
+				out.println("<script>alert('회원가입을 실패하였습니다.'); history.back();</script>");
+			}
+			out.flush();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		if (retValue == 2) {
-			out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
-		} else {
-			out.println("<script>alert('회원가입을 실패하였습니다.');</script>");
-		}
-		out.flush();
-
-		urlPage = "redirect:home";
-
-		return urlPage;
 	}
 
 	@RequestMapping("/logOutAction.do")
@@ -415,16 +411,16 @@ public class HomeController {
 		PrintWriter out = null;
 		
 		if (ret==1){
+			session.invalidate();
 			
 			out = rep.getWriter();
 			
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
-			out.println("history.back();");
+			out.println("window.self.close()");
+			out.println("opener.location.reload();");
 			out.println("</script>");
-			
-			session.invalidate();
 		}
 		else{
 			out = rep.getWriter();
@@ -432,7 +428,8 @@ public class HomeController {
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 실패! 정보 오류');");
-			out.println("history.back();");
+			out.println("window.self.close()");
+			out.println("opener.location.reload();");
 			out.println("</script>");
 		}
 	}
@@ -675,11 +672,10 @@ public class HomeController {
 	public String gradeEdit(Model model, HttpServletRequest req){
 		
 		model.addAttribute("req", req);
-		
 		command = new GradeEditCommand();
 		command.execute(model);
 		
-		return "adminMember";
+		return "process/memberEdit";
 	}
 	
 	@RequestMapping("expEdit.do")

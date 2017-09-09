@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd HH:mm:ss" var="thisYmd" />
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,15 +38,11 @@
 	<div class="content-wrapper py-3">
 		<!-- 배너 시작 -->
 		<div class="row cycle-slideshow" style="margin-top: -16px;">
-			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> 
-			<img src="./resources/images/baner2.jpg" width=100% height="200px" /> 
-			<img src="./resources/images/baner3.jpg" width=100% height="200px" /> 
-			<img src="./resources/images/baner4.jpg" width=100% height="200px" />
+			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> <img src="./resources/images/baner2.jpg" width=100% height="200px" /> <img src="./resources/images/baner3.jpg" width=100% height="200px" /> <img
+				src="./resources/images/baner4.jpg" width=100% height="200px"
+			/>
 		</div>
 		<!-- 배너 끝 -->
-		<!-- 소개글 시작 -->
-			
-		<!-- 소개글 종료 -->
 		<!-- 순위 시작 -->
 		<div class="col-sm-12">
 			<div class="card mb-3">
@@ -106,7 +103,7 @@
 		<div class="col-sm-12">
 			<div class="card mb-3" id="div1">
 				<div class="card-header  text-muted">
-					<i class="fa fa-area-chart"></i> 방문자수 그래프
+					<i class="fa fa-area-chart"></i> 방문자수 [ total : ${sessionScope.totalCnt} ]
 				</div>
 				<div class="card-body">
 					<canvas id="chart" width="100%" height="30"></canvas>
@@ -125,9 +122,6 @@
 		<i class="fa fa-angle-up"></i>
 	</a>
 
-	<c:set var="total" value="${sessionScope.totalCnt}" />
-	<c:set var="today" value="${sessionScope.todayCnt}" />
-
 	<jsp:include page="/common/modalLogin.jsp" />
 
 	<!-- Bootstrap core JavaScript -->
@@ -145,14 +139,11 @@
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 	<script>
 		var ctx = document.getElementById("chart");
-		var total = '<c:out value="${total}"/>';
 		var today = '<c:out value="${today}"/>';
-
 		var myLineChart = new Chart(ctx, {
 			type : 'line',
 			data : {
-				labels : [ "Total", "08.30", "08.31", "09.01", "09.02",
-						"09.03", "09.04" ],
+				labels : [ "08.30", "08.31", "09.01", "09.02", "09.03", "09.04", "09.05" ],
 				datasets : [ {
 					label : "방문자수",
 					lineTension : 0.3,
@@ -165,7 +156,7 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					data : [ total, "23", "31", "58", "21", "25", today ],
+					data : [ "23", "31", "58", "21", "25", "11", "55" ]
 				} ],
 			},
 			options : {
@@ -184,7 +175,7 @@
 					yAxes : [ {
 						ticks : {
 							min : 0,
-							max : 1000,
+							max : 300,
 							maxTicksLimit : 5
 						},
 						gridLines : {

@@ -26,12 +26,11 @@ public class WriteCommand implements ICommand {
 
 		BoardDAO bDao = new BoardDAO();
 
-		if (req.getParameter("pLang") != null) {
+		if (req.getParameter("pLang") != null) 		
 			pLang = req.getParameter("pLang");
-			retValue = bDao.write(boardName, id, title, content, pLang);
-		} else {
-			retValue = bDao.write(boardName, id, title, content);
-		}
+		System.out.println("글쓰기전");
+		retValue = bDao.write(boardName, id, title, content, pLang);
+		System.out.println("글쓰기후");
 
 		model.addAttribute("boardName", boardName);
 		bDao.close();

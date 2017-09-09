@@ -25,7 +25,7 @@ public class PortfolioWriteCommand implements ICommand {
 
 		System.out.println("파일업로드 진행 중");
 		// 파일이 저장될 path 설정
-		String path = "C:\\Users\\user\\git\\Athi-repository\\Athi\\src\\main\\webapp\\resources\\images";
+		String path = "C:\\04Git\\Athi-repository\\Athi\\src\\main\\webapp\\resources\\images";
 
 		Map<String, Object> returnObject = new HashMap<String, Object>();
 		Map<String, Object> map = model.asMap();

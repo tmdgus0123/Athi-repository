@@ -135,7 +135,7 @@
 				dataType : 'script',
 				type : "post", // form : method
 				success : function(data) { // 다시 돌아옴
-					$("textarea[name='content']").val(data);
+					$("textarea[name='content']").val(data.replace("<br>", "\r\n"));
 				}
 			});			
 		});

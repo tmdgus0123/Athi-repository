@@ -241,7 +241,7 @@ public class MemberDAO {
 		
 		chkCount = idCheck(id);
 		
-		if(chkCount==1){
+		if(chkCount!=0){
 			isFlag = true;
 		}
 		else{
@@ -269,7 +269,7 @@ public class MemberDAO {
 		int retval = deleteMember2(id);
 		int retValue = 0;
 		
-		if(retval==1){
+		if(retval!=0){
 		String dbQuery1 = "DELETE FROM member WHERE id=? AND pass=?";
 		
 		retValue = this.template.update(dbQuery1, new PreparedStatementSetter() {
@@ -300,7 +300,7 @@ public class MemberDAO {
 			}
 		});
 		
-		if(retVal==1){
+		if(retVal!=0){
 			String dbQuery2 = "DELETE FROM member_grade WHERE id=?";
 			
 			retVal = this.template.update(dbQuery2, new PreparedStatementSetter() {
@@ -329,7 +329,7 @@ public class MemberDAO {
 			}
 		});
 		
-		if(commit==1){
+		if(commit!=0){
 			
 			String dbQuery2 = "DELETE FROM member_grade WHERE id=?";
 			
@@ -366,16 +366,20 @@ public class MemberDAO {
 	
 	public void gradeEdit(final int grade, final String id){
 		
-		String sql = "UPDATE member_grade SET grade=? WHERE id=?";
-		
+		final String sql = "UPDATE member_grade SET grade=? WHERE id=?";
+
+		System.out.println("sql 전");
 		this.template.update(sql, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
+
 				ps.setInt(1, grade);
 				ps.setString(2, id);
+				System.out.println("sql 안");
 			}
 		});
+		System.out.println("sql 후");
 	}
 	
 	public void expEdit(final String exp, final String id){
