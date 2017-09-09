@@ -44,10 +44,10 @@
 		</div>
 		<!-- 배너 끝 -->
 		<!-- 소개글 시작 -->
-			
+
 		<!-- 소개글 종료 -->
 		<!-- 순위 시작 -->
-		<div class="col-sm-12">
+		<div class="col-sm-12" style="margin-top: 15px;">
 			<div class="card mb-3">
 				<div class="card-header  text-muted">
 					<i class="fa fa-fw fa-user"></i> 아띠 회원 랭킹

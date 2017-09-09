@@ -55,7 +55,8 @@ public class PortfolioBoardCommand implements ICommand{
 		paramMap.put("pageSize", pageSize);
 		
 		// page처리를 위한 문자열 생성
-		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage, req.getContextPath() + "/myPage.do?");
+		String addQueryStr = "";
+		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage, req.getContextPath() + "portfolioBoard.do?" + addQueryStr);
 		
 		// DAO에서 list()메소드로 목록 가져오기
 		ArrayList<BoardDTO> listRows = dao.portfolioBoardList(paramMap); 

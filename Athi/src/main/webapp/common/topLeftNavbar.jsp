@@ -83,6 +83,9 @@
 						</a>
 						<ul class="sidenav-second-level collapse" id="collapseComponents4">
 							<li>
+								<a href="adminPortfolioBoard.do?">포트폴리오 게시판 관리</a>
+							</li>
+							<li>
 								<a href="adminBoard.do?">게시판 관리</a>
 							</li>
 							<li>
