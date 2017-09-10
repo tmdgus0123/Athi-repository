@@ -53,7 +53,7 @@
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach items='${newPortfolioList }' var='list' varStatus='loop'>
+					<c:forEach items='${newPortfolioList}' var='list' varStatus='loop'>
 						<tr>
 							<td>${list.num }</td>
 							<td>${list.title }</td>

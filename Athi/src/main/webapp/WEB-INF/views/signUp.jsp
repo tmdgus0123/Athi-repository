@@ -170,7 +170,6 @@
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
 				<form name="signFrm" method="post">
 					<input type="hidden" name="overFlag" value="0" />
-<<<<<<< HEAD
 					<input type="hidden" name="emailFlag" value="0" />
 					<br /><br />
 					<div class="row form-group">
@@ -181,8 +180,6 @@
 						<div class="col-sm-2"></div>
 					</div>
 					<br /><br />
-=======
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
 						<label class="col-sm-2 control-label text-left" for="inputId" style="font-weight:bold;">아이디</label>
