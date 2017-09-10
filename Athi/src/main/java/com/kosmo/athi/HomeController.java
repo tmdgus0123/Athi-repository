@@ -19,11 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
-<<<<<<< HEAD
-import com.kosmo.athi.command.AdminPrpoCommand;
-=======
 import com.kosmo.athi.command.AdminPortfolioBoardCommand;
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
+import com.kosmo.athi.command.AdminPrpoCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
@@ -250,10 +247,8 @@ System.out.println("커멘드 들어가기전");
 		model.addAttribute("req", req);
 		command = new WriteCommand();
 		command.execute(model);
-
-		return "redirect:" + req.getParameter("boardName");
 		System.out.println("커멘드 들어간 후");
-
+		return "redirect:" + req.getParameter("boardName");
 	}
 
 	// 상세보기
@@ -425,8 +420,7 @@ System.out.println("커멘드 들어가기전");
 		int ret = (Integer) map.get("modeValue");
 
 		PrintWriter out = null;
-		
-
+	
 		if (ret!=0){
 
 			session.invalidate();
@@ -437,7 +431,6 @@ System.out.println("커멘드 들어가기전");
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
 			out.println("window.self.close();");
-
 			out.println("opener.location.reload();");
 			out.println("</script>");
 		}
