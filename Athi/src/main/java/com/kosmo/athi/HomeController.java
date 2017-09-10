@@ -1,6 +1,7 @@
 package com.kosmo.athi;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
+import com.kosmo.athi.command.AdminPrpoCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
@@ -62,7 +64,7 @@ public class HomeController {
 	// Spring JDBC를 사용하기 위한 설정
 	// JDBC템플릿설정
 	private JdbcTemplate template;
-
+	
 	// setter설정
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
@@ -235,8 +237,7 @@ public class HomeController {
 		command = new WriteCommand();
 		command.execute(model);
 
-
-		return "redirect:/" + req.getParameter("boardName") + ".do";
+		return "redirect:" + req.getParameter("boardName");
 	}
 
 	// 상세보기
@@ -289,12 +290,11 @@ public class HomeController {
 		MemberDAO mDao = new MemberDAO();
 		boolean isMember = mDao.isMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
 		
-		ArrayList<MemberDTO> member = mDao.selectMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
-		
-		int user_grade = member.get(0).getGrade();
-		
 		try {
 			if (isMember == true) {
+				ArrayList<MemberDTO> member = mDao.selectMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
+				
+				int user_grade = member.get(0).getGrade();
 				session.setAttribute("user_id", req.getParameter("user_id"));
 				session.setAttribute("user_pwd", req.getParameter("user_pwd"));
 				session.setAttribute("user_grade", user_grade);
@@ -308,13 +308,11 @@ public class HomeController {
 
 		mDao.close();
 
-		return "redirect:/";
+		return "home";
 	}
 
 	@RequestMapping("signUpAction.do")
-	public String signUpAction(HttpServletResponse response, HttpServletRequest req, Model model) {
-
-		String urlPage;
+	public void signUpAction(HttpServletResponse response, HttpServletRequest req, Model model) {
 
 		model.addAttribute("req", req);
 
@@ -324,25 +322,25 @@ public class HomeController {
 		Map<String, Object> map = model.asMap();
 		int retValue = (Integer) map.get("retValue");
 
-		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = null;
+		
 		try {
 			out = response.getWriter();
+			
+			response.setContentType("text/html;charset=utf-8");
+			
+			if (retValue != 0) {
+				out.println("<script>alert('회원가입이 완료되었습니다.'); window.location.href='"+"./"+"';</script>");
+			} else {
+				out.println("<script>alert('회원가입을 실패하였습니다.'); history.back(); </script>");
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		if (retValue == 2) {
-			out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
-		} else {
-			out.println("<script>alert('회원가입을 실패하였습니다.');</script>");
-		}
-		out.flush();
-
-		urlPage = "redirect:home";
-
-		return urlPage;
+		
 	}
+
 
 	@RequestMapping("/logOutAction.do")
 	public ModelAndView logOutAction(HttpServletRequest req, HttpSession session){
@@ -410,21 +408,20 @@ public class HomeController {
 
 		Map<String, Object> map = model.asMap();
 		int ret = (Integer) map.get("modeValue");
-		
-		
+
 		PrintWriter out = null;
 		
-		if (ret==1){
+		if (ret!=0){
+			session.invalidate();
 			
 			out = rep.getWriter();
 			
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
-			out.println("history.back();");
+			out.println("window.self.close();");
+			out.println("opener.location.reload();");
 			out.println("</script>");
-			
-			session.invalidate();
 		}
 		else{
 			out = rep.getWriter();
@@ -699,5 +696,14 @@ public class HomeController {
 		model.addAttribute("text", req.getParameter("text"));
 		
 		return "board/syntax";
+	}
+	
+	@RequestMapping("adminProject.do")
+	public String adminProject(Model model){
+		
+		command = new AdminPrpoCommand();
+		command.execute(model);
+		
+		return "adminProject";
 	}
 }

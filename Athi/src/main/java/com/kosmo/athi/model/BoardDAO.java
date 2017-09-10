@@ -267,6 +267,14 @@ public class BoardDAO {
 
 		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
+	
+	// 관리자용 포트폴리오 전체 가져오기
+	public ArrayList<BoardDTO> portfolioBoardList(){
+		
+		String dbQuery = "SELECT * FROM project_board";
+		
+		return (ArrayList<BoardDTO>) template.query(dbQuery, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
 
 	// 포트폴리오 목록 불러오기
 	public ArrayList<BoardDTO> portfolioBoardList(Map<String, Object> map) {
@@ -456,9 +464,11 @@ public class BoardDAO {
 				ps.setString(4, boardName);
 			}
 		});
-
-		updateExp(id);
-		checkExp(id);
+		
+		if(retValue==1){
+			updateExp(id);
+		}
+		//checkExp(id);
 		
 		return retValue;
 	}
@@ -469,9 +479,6 @@ public class BoardDAO {
 		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
-		
-		updateExp(id);
-		
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, ?,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -485,6 +492,11 @@ public class BoardDAO {
 				ps.setString(5, boardName);
 			}
 		});
+		
+		
+		if(retValue==1){
+			updateExp(id);
+		}
 		return retValue;
 	}
 

@@ -90,7 +90,7 @@
 							<c:when test="${user_id!=null}">
 								<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
 							</c:when>
-							<c:when test="${user_id==viewRow.id }">
+							<c:when test="${user_id==viewRow.id or user_grade==0}">
 								<button type="button" class="btn btn-primary" onclick="location.href='modify.do?mode=modify&num=${viewRow.num}&boardName=${param.boardName}'">수정</button>
 								<button type="button" class="btn btn-danger" onclick="location.href='./editAction.do?mode=delete&num=${viewRow.num}&boardName=${param.boardName}'">삭제</button>
 							</c:when>
@@ -115,7 +115,7 @@
 										<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 									</div>
 									<c:choose>
-										<c:when test="${user_id==dto.id or user_id=='athi'}">
+										<c:when test="${user_id==dto.id or user_grade==0}">
 											<div class="col-sm-1 text-right">
 												<button class="btn btn-danger" style="margin-top: 13px;" onclick="deleteComments(${dto.num})">삭제</button>
 											</div>

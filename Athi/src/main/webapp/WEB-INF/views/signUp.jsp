@@ -144,7 +144,8 @@
 				return false;
 			}
 
-			else {$('form[name="signFrm"][method="post"]').attr("action","./signUpAction.do");}
+			else {
+				$('form[name="signFrm"][method="post"]').attr("action","./signUpAction.do");}
 		});
 	});
 </script>
@@ -276,7 +277,9 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-2"></div>
+						<div class="col-sm-2">
+							<button>이메일 인증</button>
+						</div>
 					</div>
 					<div class="row form-group">
 						<div class="col-sm-12 text-center" style="margin-top: 15px;">

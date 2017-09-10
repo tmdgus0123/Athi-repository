@@ -269,7 +269,7 @@ public class MemberDAO {
 		int retval = deleteMember2(id);
 		int retValue = 0;
 		
-		if(retval==1){
+		if(retval!=0){
 		String dbQuery1 = "DELETE FROM member WHERE id=? AND pass=?";
 		
 		retValue = this.template.update(dbQuery1, new PreparedStatementSetter() {
@@ -300,7 +300,7 @@ public class MemberDAO {
 			}
 		});
 		
-		if(retVal==1){
+		if(retVal!=0){
 			String dbQuery2 = "DELETE FROM member_grade WHERE id=?";
 			
 			retVal = this.template.update(dbQuery2, new PreparedStatementSetter() {
@@ -358,7 +358,7 @@ public class MemberDAO {
 	    String sql ="SELECT * FROM (" +
 	        " SELECT Tb.*, rownum rNum FROM( "
 	        + " SELECT m.*, mg.grade, ROW_NUMBER() OVER(ORDER BY mg.grade DESC, mg.exp DESC) "
-	        + " FROM member m join member_grade mg on m.id = mg.id WHERE m.id!='athi'"
+	        + " FROM member m join member_grade mg on m.id = mg.id WHERE mg.grade!=0"
 	        + " ) Tb ) WHERE rNum BETWEEN 1 AND 3";
 		
 		return (ArrayList<MemberDTO>)this.template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));

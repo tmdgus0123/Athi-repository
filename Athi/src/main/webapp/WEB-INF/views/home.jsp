@@ -9,7 +9,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="http://malsup.github.com/jquery.cycle2.js"></script>
-
+ 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,6 +34,10 @@
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
 
+	<!-- 방문자수 -->
+	<c:set var="total" value="${sessionScope.totalCnt}" />
+	<c:set var="today" value="${sessionScope.todayCnt}" />
+	
 	<div class="content-wrapper py-3">
 		<!-- 배너 시작 -->
 		<div class="row cycle-slideshow" style="margin-top: -16px;">
@@ -47,7 +51,7 @@
 			
 		<!-- 소개글 종료 -->
 		<!-- 순위 시작 -->
-		<div class="col-sm-12">
+		<div class="col-sm-12" style="margin-top:15px;">
 			<div class="card mb-3">
 				<div class="card-header  text-muted">
 					<i class="fa fa-fw fa-user"></i> 아띠 회원 랭킹
@@ -61,10 +65,27 @@
 								</div>
 								<div class="card-body text-center" style="background-color: silver; color: #f3f3f3;">
 									<img src="./resources/images/silverLaurel.jpg" class="rounded-circle" width="100" height="100">
-									<h1>ID : ${secondId}</h1>
-									<h3>등급 : ${secondGrade}</h3>
+									<c:choose>
+										<c:when test="${secondId ne null and secondGrade ne null}">
+											<h1>ID : ${secondId}</h1>
+											<h3>등급 : ${secondGrade}</h3>
+										</c:when>
+										<c:otherwise>
+											<h1>ID : </h1>
+											<h3>등급 : </h3>
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="card-footer small text-muted">가입일 : ${secondrDate}</div>
+								<div class="card-footer small text-muted">
+								<c:choose>
+									<c:when test="${secondrDate}">
+										가입일 : ${secondrDate}
+									</c:when>
+									<c:otherwise>
+										가입일 : 
+									</c:otherwise>
+								</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -74,10 +95,27 @@
 								</div>
 								<div class="card-body text-center" style="background-color: gold; color: #f3f3f3;">
 									<img src="./resources/images/goldLaurel.jpg" class="rounded-circle" width="100" height="100">
-									<h1>ID : ${firstId}</h1>
-									<h3>등급 : ${firstGrade}</h3>
+									<c:choose>
+										<c:when test="${firstId ne null and firstGrade ne null}">
+											<h1>ID : ${firstId}</h1>
+											<h3>등급 : ${firstGrade}</h3>
+										</c:when>
+										<c:otherwise>
+											<h1>ID : </h1>
+											<h3>등급 : </h3>
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="card-footer small text-muted">가입일 : ${firstrDate}</div>
+								<div class="card-footer small text-muted">
+									<c:choose>
+										<c:when test="${firstrDate}">
+											가입일 : ${firstrDate}
+										</c:when>
+										<c:otherwise>
+											가입일 : 
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -87,10 +125,27 @@
 								</div>
 								<div class="card-body text-center" style="background-color: peru; color: #f3f3f3;">
 									<img src="./resources/images/bronzeLaurel.jpg" class="rounded-circle" width="100" height="100">
-									<h1>ID : ${thirdId}</h1>
-									<h3>등급 : ${thirdGrade}</h3>
+									<c:choose>
+										<c:when test="${thirdId ne null and thirdGrade ne null}">
+											<h1>ID : ${thirdId}</h1>
+											<h3>등급 : ${thirdGrade}</h3>
+										</c:when>
+										<c:otherwise>
+											<h1>ID : </h1>
+											<h3>등급 : </h3>
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="card-footer small text-muted">가입일 : ${thirdrDate}</div>
+								<div class="card-footer small text-muted">									
+									<c:choose>
+										<c:when test="${thirdrDate}">
+											가입일 : ${thirdrDate}
+										</c:when>
+										<c:otherwise>
+											가입일 : 
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -106,7 +161,7 @@
 		<div class="col-sm-12">
 			<div class="card mb-3" id="div1">
 				<div class="card-header  text-muted">
-					<i class="fa fa-area-chart"></i> 방문자수 그래프
+					<i class="fa fa-area-chart"></i> 방문자수 그래프 &nbsp; Total : ${total} / Today : ${today}
 				</div>
 				<div class="card-body">
 					<canvas id="chart" width="100%" height="30"></canvas>
@@ -125,8 +180,6 @@
 		<i class="fa fa-angle-up"></i>
 	</a>
 
-	<c:set var="total" value="${sessionScope.totalCnt}" />
-	<c:set var="today" value="${sessionScope.todayCnt}" />
 
 	<jsp:include page="/common/modalLogin.jsp" />
 
@@ -151,9 +204,8 @@
 		var myLineChart = new Chart(ctx, {
 			type : 'line',
 			data : {
-				labels : [ "Total", "08.30", "08.31", "09.01", "09.02",
-						"09.03", "09.04" ],
-				datasets : [ {
+				labels : ["08.30", "08.31", "09.01", "09.02", "09.03", "09.04" ],
+				datasets : [{
 					label : "방문자수",
 					lineTension : 0.3,
 					backgroundColor : "rgba(2,117,216,0.2)",
@@ -165,8 +217,8 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					data : [ total, "23", "31", "58", "21", "25", today ],
-				} ],
+					data : ["23", "31", "58", "21", "25", today],
+				}],
 			},
 			options : {
 				scales : {
@@ -210,11 +262,5 @@
 	<script src="./resources/assets/scripts/scripts.js"></script>
 
 	<!-- Call CoverVid -->
-	<script type="text/javascript">
-		// If using jQuery
-		// $('.masthead-video').coverVid(1920, 1080);
-		// If not using jQuery (Native Javascript)
-		coverVid(document.querySelector('.masthead-video'), 640, 360);
-	</script>
 </body>
 </html>

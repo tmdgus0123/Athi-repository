@@ -27,7 +27,7 @@
 						<input type="password" class="form-control" name="user_pwd" placeholder="PASSWORD" />
 					</div>
 					<div style="text-align: center;">
-						<input type="submit" class="btn btn" value="로그인">
+						<input type="submit" name="loginBtn" class="btn btn" value="로그인">
 						&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 					</div>
