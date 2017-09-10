@@ -9,6 +9,12 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav navbar-sidenav">
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="아띠 소개">
+				<a class="nav-link" href="athiIntroduce.do">
+					<i class="fa fa-commenting"></i>
+					<span class="nav-link-text"> 아띠 소개 </span>
+				</a>
+			</li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="공지사항">
 				<a class="nav-link" href="notice.do?boardName=notice">
 					<i class="fa fa-fw fa-bullhorn"></i>

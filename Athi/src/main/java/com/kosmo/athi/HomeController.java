@@ -748,4 +748,10 @@ public class HomeController {
 		
 		return "board/newPostList";
 	}
+	
+	@RequestMapping("/athiIntroduce.do")
+	public String athiIntroduce(Model model){
+		
+		return "athiIntroduce";
+	}
 }

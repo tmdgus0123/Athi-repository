@@ -40,9 +40,10 @@
 	<div class="content-wrapper py-3">
 		<!-- 배너 시작 -->
 		<div class="row cycle-slideshow" style="margin-top: -16px;">
-			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> <img src="./resources/images/baner2.jpg" width=100% height="200px" /> <img src="./resources/images/baner3.jpg" width=100% height="200px" /> <img
-				src="./resources/images/baner4.jpg" width=100% height="200px"
-			/>
+			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> 
+			<img src="./resources/images/baner2.jpg" width=100% height="200px" /> 
+			<img src="./resources/images/baner3.jpg" width=100% height="200px" /> 
+			<img src="./resources/images/baner4.jpg" width=100% height="200px"/>
 		</div>
 		<!-- 배너 끝 -->
 		<!-- 순위 시작 -->
@@ -73,7 +74,7 @@
 								</div>
 								<div class="card-footer small text-muted">
 								<c:choose>
-									<c:when test="${secondrDate}">
+									<c:when test="${secondrDate ne null}">
 										가입일 : ${secondrDate}
 									</c:when>
 									<c:otherwise>
@@ -103,7 +104,7 @@
 								</div>
 								<div class="card-footer small text-muted">
 									<c:choose>
-										<c:when test="${firstrDate}">
+										<c:when test="${firstrDate ne null}">
 											가입일 : ${firstrDate}
 										</c:when>
 										<c:otherwise>
@@ -133,7 +134,7 @@
 								</div>
 								<div class="card-footer small text-muted">									
 									<c:choose>
-										<c:when test="${thirdrDate}">
+										<c:when test="${thirdrDate ne null}">
 											가입일 : ${thirdrDate}
 										</c:when>
 										<c:otherwise>

@@ -40,7 +40,7 @@
 					<div class="col-sm-6">
 						<div style="float: right;">
 						<c:choose>
-							<c:when test="${user_id!=null and user_grade>5}">
+							<c:when test="${user_id!=null and user_grade>5 or user_grade==0}">
 							<form action="write.do" method="get">
 								<input type="hidden" name="boardName" value="${boardName}" />
 								<input type="hidden" name="nowPage" value="${nowPage}" />
