@@ -15,8 +15,7 @@ public class RankListCommand implements ICommand {
 		MemberDAO mDao = new MemberDAO();
 
 		ArrayList<MemberDTO> rankList = mDao.rankList();
-<<<<<<< HEAD
-		
+
 		if(rankList.size()!=0){
 			
 			String[] order = {"first","second", "third"};
@@ -42,22 +41,6 @@ public class RankListCommand implements ICommand {
 			}
 		}
 		
-=======
-
-		if(rankList.size() > 2) {
-			model.addAttribute("firstId", rankList.get(0).getId());
-			model.addAttribute("firstGrade", rankList.get(0).getGrade());
-			model.addAttribute("firstrDate", rankList.get(0).getRegidate());
-
-			model.addAttribute("secondId", rankList.get(1).getId());
-			model.addAttribute("secondGrade", rankList.get(1).getGrade());
-			model.addAttribute("secondrDate", rankList.get(1).getRegidate());
-
-			model.addAttribute("thirdId", rankList.get(2).getId());
-			model.addAttribute("thirdGrade", rankList.get(2).getGrade());
-			model.addAttribute("thirdrDate", rankList.get(2).getRegidate());
-		}
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 		mDao.close();
 	}
 }
