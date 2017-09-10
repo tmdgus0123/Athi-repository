@@ -29,7 +29,7 @@
 	<div class="container">
 		<div class="col-sm-12" style="margin-top: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-				<h1>게시물 관리</h1>
+				<h1>포트폴리오 관리</h1>
 			</div>
 			<div class="col-sm-12" style="margin-top: 50px; height: 125px; opacity: 0.85;">
 				<div class="col-sm-12">
@@ -105,63 +105,69 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
 				<form name="postList">
-					<section id="portfolio">
-						<div class="container">
-							<div class="box">
-								<!--/.center-->
-								<ul class="portfolio-filter text-left">
-									<li>
-										<a class="btn btn-primary active" href="#" data-filter="*">All</a>
-									</li>
-									<li>
-										<a class="btn btn-primary" href="#" data-filter=".Web">웹</a>
-									</li>
-									<li>
-										<a class="btn btn-primary" href="#" data-filter=".Game">게임</a>
-									</li>
-									<li>
-										<a class="btn btn-primary" href="#" data-filter=".Application">어플리케이션</a>
-									</li>
-								</ul>
-								<!--/#portfolio-filter-->
-								<ul class="portfolio-items">
-									<c:choose>
-										<c:when test="${empty listRows}">
-											<li class="portfolio-item bootstrap apps col-sm-12">
-												<h5>등록된 글이 없습니다.</h5>
-											</li>
-										</c:when>
-										<c:otherwise>
-											<c:forEach items='${listRows}' var='row' varStatus='loop'>
-												<li class="portfolio-item ${row.p_language } apps col-sm-6">
-													<div class="item-inner">
-														<div class="portfolio-image">
-															<img src="./resources/images/${row.fileName }">
-															<div class="overlay">
-																<a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="./resources/images/${row.fileName }">
-																	<i class="icon-eye-open"></i>
-																</a>
-															</div>
-														</div>
-														<input type="checkbox" name="listBox" value="${row.num }" />
-														<a href="portfolioView.do?num=${row.num }&nowPage=${nowPage }&rNum=${row.rNum }&fileName=${row.fileName }">${row.title }</a>
-													</div>
-												</li>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</ul>
-							</div>
-							<!--/.box-->
-						</div>
-						<!--/.container-->
-					</section>
-					<!--/#portfolio-->
-					<c:choose>
-						<c:when test="${not empty boardRows}">
-							<button type="button" class="btn btn-danger" name="postBtn">선택 게시물 삭제</button>
-						</c:when>
-					</c:choose>
+					<table class="table table-bordered" id="dataTable" cellspacing="0">
+						<colgroup>
+							<col width="7%" />
+							<col width="8%" />
+							<col width="*" />
+							<col width="15%" />
+							<col width="18%" />
+							<col width="9%" />
+							<col width="9%" />
+						</colgroup>
+						<thead>
+						<tr class="btn-info">
+							<th class="text-center">
+								<a onclick="allCheck();">
+									<input type="checkbox" />
+								</a>
+							</th>
+							<th>번호</th>
+							<th>제목</th>
+							<th>글쓴이</th>
+							<th>등록일</th>
+							<th>조회수</th>
+							<th>추천수</th>
+						</tr>
+						</thead>
+						<tbody>
+							<!-- 반복문 시작 -->
+							<c:choose>
+								<c:when test="${empty portfolioRows }">
+									<tr style="text-align: center;">
+										<td colspan="7">등록된 글이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items='${portfolioRows }' var='row' varStatus='loop'>
+										<tr>
+											<td class="text-center"><a>
+													<input type="checkbox" name="listBox" value="${row.num }" />
+												</a></td>
+											<td>${row.num }</td>
+											<td><a href="./portfolioView.do?num=${row.num }&nowPage=${nowPage }">${row.title } [${row.recom_cnt }]</a></td>
+											<td>${row.id }</td>
+											<td>${row.postdate }</td>
+											<td>${row.visit_cnt }</td>
+											<td>${row.comm_cnt }</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							<!-- 반복문 끝 -->
+						</tbody>
+						<c:choose>
+							<c:when test="${not empty portfolioRows}">
+								<tfoot>
+									<tr>
+										<td colspan="7" style="text-align: right;">
+											<button type="button" class="btn btn-danger" name="postBtn">선택 게시물 삭제</button>
+										</td>
+									</tr>
+								</tfoot>
+							</c:when>
+						</c:choose>
+					</table>
 				</form>
 			</div>
 		</div>
@@ -185,53 +191,44 @@
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 	<script>
-		function allCheck() {
-			var frm = document.postList;
-			for (var i = 0; i < frm.listBox.length; i++) {
-				if (frm.listBox[i].checked == false) {
-					frm.listBox[i].checked = true;
-				} else if (frm.listBox[i].checked == true) {
-					frm.listBox[i].checked = false;
-				}
+	function allCheck(){
+		var frm = document.postList;
+		for (var i=0; i<frm.listBox.length; i++){
+			if(frm.listBox[i].checked == false){
+				frm.listBox[i].checked = true;
+			}
+			else if(frm.listBox[i].checked == true){
+				frm.listBox[i].checked = false;
 			}
 		}
+	}
 	</script>
 	<script>
 		jQuery.ajaxSettings.traditional = true;
-
-		$('button[type="button"][class="btn btn-danger"][name="postBtn"]')
-				.click(
-						function() {
-							var arr = new Array();
-
-							$("input[name='listBox'][type='checkbox']:checked")
-									.each(
-											function(idx) {
-												arr
-														.push($(
-																"input[name='listBox'][type='checkbox']:checked")
-																.eq(idx).val());
-											});
-
-							$.ajax({
-								url : "selectPostDelete.do",
-								data : {
-									'postNum' : arr
-								},
-								type : "post",
-								success : function(data) {
-									alert("선택한 게시물 삭제를 정상적으로 처리하였습니다.");
-									window.location.reload();
-								},
-								error : function(request, status, error) {
-									alert("code: " + request.status + "\n"
-											+ "message: "
-											+ request.responseText + "\n"
-											+ "error: " + error);
-								},
-								async : true
-							});
-						});
+		
+		$('button[type="button"][class="btn btn-danger"][name="postBtn"]').click(function(){
+			var arr = new Array();
+			
+			$("input[name='listBox'][type='checkbox']:checked").each(function(idx){
+				arr.push($("input[name='listBox'][type='checkbox']:checked").eq(idx).val());
+			});
+			
+			$.ajax({
+				url : "selectPostDelete.do",
+				data : {
+					'postNum' : arr
+				},
+				type : "post",
+				success : function(data){
+					alert("선택한 게시물 삭제를 정상적으로 처리하였습니다.");
+					window.location.reload();
+				},
+				error : function(request, status, error) {
+				    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				},
+				async : true
+			});	
+		});
 	</script>
 </body>
 </html>

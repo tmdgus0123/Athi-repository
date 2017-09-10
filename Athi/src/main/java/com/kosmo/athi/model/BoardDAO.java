@@ -267,6 +267,14 @@ public class BoardDAO {
 
 		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
+	
+	// 관리자용 포트폴리오 전체 가져오기
+	public ArrayList<BoardDTO> portfolioBoardList(){
+		
+		String dbQuery = "SELECT * FROM project_board";
+		
+		return (ArrayList<BoardDTO>) template.query(dbQuery, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
 
 	// 포트폴리오 목록 불러오기
 	public ArrayList<BoardDTO> portfolioBoardList(Map<String, Object> map) {
@@ -443,8 +451,7 @@ public class BoardDAO {
 		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
-		
-		
+
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, null,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -457,7 +464,12 @@ public class BoardDAO {
 				ps.setString(4, boardName);
 			}
 		});
-
+		
+		if(retValue==1){
+			updateExp(id);
+		}
+		//checkExp(id);
+		
 		return retValue;
 	}
 
@@ -467,8 +479,7 @@ public class BoardDAO {
 		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
-		
-		
+
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, ?,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 System.out.println("템플릿 전");
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -486,9 +497,14 @@ System.out.println("템플릿 안 끝");
 			}
 		});
 
+		if(retValue==1){
+			updateExp(id);
+		}
+
 System.out.println("렙업전");
 
 System.out.println("렙업후");
+
 		return retValue;
 	}
 
@@ -714,10 +730,10 @@ System.out.println("렙업후");
 	}
 	
 	// 자동 레벨업 기능을 위한 경험치 체크 함수
-	public int checkExp(final String id){
+	public void checkExp(final String id){
 		String sql = "UPDATE member_grade SET grade = grade+1 WHERE id=? AND exp >= (SELECT exp FROM exp_grade_list)";
 		
-		return this.template.update(sql, new PreparedStatementSetter() {
+		this.template.update(sql, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {

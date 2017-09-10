@@ -62,7 +62,10 @@
 				<div class="text-right" style="margin-top: 25px; margin-bottom: 25px;">
 					<button type="button" class="btn btn-warning" onclick="history.back();">목록</button>
 					<c:choose>
-						<c:when test="${user_id==viewRow.id}">
+						<c:when test="${user_id!=null}">
+							<button type="button" class="btn btn-success" onclick="location.href='reply.do?num=${viewRow.num}&nowPage=${nowPage }'">답글</button>
+						</c:when>
+						<c:when test="${user_id==viewRow.id or user_grade==0}">
 							<button type="button" class="btn btn-primary" onclick="location.href='./portfolioModify.do?num=${param.num}'">수정</button>
 							<button type="button" class="btn btn-danger" onclick="location.href='./portfolioDeleteAction.do?num=${param.num}'">삭제</button>
 						</c:when>

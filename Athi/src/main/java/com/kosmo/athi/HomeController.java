@@ -1,6 +1,7 @@
 package com.kosmo.athi;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
@@ -19,6 +20,7 @@ import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
 import com.kosmo.athi.command.AdminPortfolioBoardCommand;
+import com.kosmo.athi.command.AdminPrpoCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
@@ -63,7 +65,7 @@ public class HomeController {
 	// Spring JDBC를 사용하기 위한 설정
 	// JDBC템플릿설정
 	private JdbcTemplate template;
-
+	
 	// setter설정
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
@@ -247,8 +249,7 @@ System.out.println("커멘드 들어가기전");
 		command = new WriteCommand();
 		command.execute(model);
 		System.out.println("커멘드 들어간 후");
-
-		return "redirect:/" + req.getParameter("boardName") + ".do";
+		return "redirect:" + req.getParameter("boardName");
 	}
 
 	// 상세보기
@@ -301,12 +302,11 @@ System.out.println("커멘드 들어가기전");
 		MemberDAO mDao = new MemberDAO();
 		boolean isMember = mDao.isMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
 		
-		ArrayList<MemberDTO> member = mDao.selectMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
-		
-		int user_grade = member.get(0).getGrade();
-		
 		try {
 			if (isMember == true) {
+				ArrayList<MemberDTO> member = mDao.selectMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
+				
+				int user_grade = member.get(0).getGrade();
 				session.setAttribute("user_id", req.getParameter("user_id"));
 				session.setAttribute("user_pwd", req.getParameter("user_pwd"));
 				session.setAttribute("user_grade", user_grade);
@@ -320,7 +320,7 @@ System.out.println("커멘드 들어가기전");
 
 		mDao.close();
 
-		return "redirect:/";
+		return "home";
 	}
 
 	@RequestMapping("signUpAction.do")
@@ -335,8 +335,10 @@ System.out.println("커멘드 들어가기전");
 		int retValue = (Integer) map.get("retValue");
 
 		PrintWriter out = null;
+		
 		try {
 			out = response.getWriter();
+
 			response.setContentType("text/html;charset=utf-8");
 		
 			if (retValue != 0) {
@@ -345,11 +347,11 @@ System.out.println("커멘드 들어가기전");
 				out.println("<script>alert('회원가입을 실패하였습니다.'); history.back();</script>");
 			}
 			out.flush();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 
 	@RequestMapping("/logOutAction.do")
 	public ModelAndView logOutAction(HttpServletRequest req, HttpSession session){
@@ -417,11 +419,11 @@ System.out.println("커멘드 들어가기전");
 
 		Map<String, Object> map = model.asMap();
 		int ret = (Integer) map.get("modeValue");
-		
-		
+
 		PrintWriter out = null;
-		
-		if (ret==1){
+	
+		if (ret!=0){
+
 			session.invalidate();
 			
 			out = rep.getWriter();
@@ -429,7 +431,7 @@ System.out.println("커멘드 들어가기전");
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
-			out.println("window.self.close()");
+			out.println("window.self.close();");
 			out.println("opener.location.reload();");
 			out.println("</script>");
 		}
@@ -705,5 +707,14 @@ System.out.println("커멘드 들어가기전");
 		model.addAttribute("text", req.getParameter("text"));
 		
 		return "board/syntax";
+	}
+	
+	@RequestMapping("adminProject.do")
+	public String adminProject(Model model){
+		
+		command = new AdminPrpoCommand();
+		command.execute(model);
+		
+		return "adminProject";
 	}
 }

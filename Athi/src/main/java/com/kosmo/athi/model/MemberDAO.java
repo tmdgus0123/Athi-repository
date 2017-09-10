@@ -358,7 +358,7 @@ public class MemberDAO {
 	    String sql ="SELECT * FROM (" +
 	        " SELECT Tb.*, rownum rNum FROM( "
 	        + " SELECT m.*, mg.grade, ROW_NUMBER() OVER(ORDER BY mg.grade DESC, mg.exp DESC) "
-	        + " FROM member m join member_grade mg on m.id = mg.id WHERE m.id!='athi'"
+	        + " FROM member m join member_grade mg on m.id = mg.id WHERE mg.grade!=0"
 	        + " ) Tb ) WHERE rNum BETWEEN 1 AND 3";
 		
 		return (ArrayList<MemberDTO>)this.template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));

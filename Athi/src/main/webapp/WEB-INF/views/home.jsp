@@ -12,7 +12,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="http://malsup.github.com/jquery.cycle2.js"></script>
-
+ 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -60,10 +60,27 @@
 								</div>
 								<div class="card-body text-center" style="background-color: silver; color: #f3f3f3;">
 									<img src="./resources/images/silverLaurel.jpg" class="rounded-circle" width="100" height="100">
-									<h1>ID : ${secondId}</h1>
-									<h3>등급 : ${secondGrade}</h3>
+									<c:choose>
+										<c:when test="${secondId ne null and secondGrade ne null}">
+											<h1>ID : ${secondId}</h1>
+											<h3>등급 : ${secondGrade}</h3>
+										</c:when>
+										<c:otherwise>
+											<h1>ID : </h1>
+											<h3>등급 : </h3>
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="card-footer small text-muted">가입일 : ${secondrDate}</div>
+								<div class="card-footer small text-muted">
+								<c:choose>
+									<c:when test="${secondrDate}">
+										가입일 : ${secondrDate}
+									</c:when>
+									<c:otherwise>
+										가입일 : 
+									</c:otherwise>
+								</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -73,10 +90,27 @@
 								</div>
 								<div class="card-body text-center" style="background-color: gold; color: #f3f3f3;">
 									<img src="./resources/images/goldLaurel.jpg" class="rounded-circle" width="100" height="100">
-									<h1>ID : ${firstId}</h1>
-									<h3>등급 : ${firstGrade}</h3>
+									<c:choose>
+										<c:when test="${firstId ne null and firstGrade ne null}">
+											<h1>ID : ${firstId}</h1>
+											<h3>등급 : ${firstGrade}</h3>
+										</c:when>
+										<c:otherwise>
+											<h1>ID : </h1>
+											<h3>등급 : </h3>
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="card-footer small text-muted">가입일 : ${firstrDate}</div>
+								<div class="card-footer small text-muted">
+									<c:choose>
+										<c:when test="${firstrDate}">
+											가입일 : ${firstrDate}
+										</c:when>
+										<c:otherwise>
+											가입일 : 
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -86,10 +120,27 @@
 								</div>
 								<div class="card-body text-center" style="background-color: peru; color: #f3f3f3;">
 									<img src="./resources/images/bronzeLaurel.jpg" class="rounded-circle" width="100" height="100">
-									<h1>ID : ${thirdId}</h1>
-									<h3>등급 : ${thirdGrade}</h3>
+									<c:choose>
+										<c:when test="${thirdId ne null and thirdGrade ne null}">
+											<h1>ID : ${thirdId}</h1>
+											<h3>등급 : ${thirdGrade}</h3>
+										</c:when>
+										<c:otherwise>
+											<h1>ID : </h1>
+											<h3>등급 : </h3>
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="card-footer small text-muted">가입일 : ${thirdrDate}</div>
+								<div class="card-footer small text-muted">									
+									<c:choose>
+										<c:when test="${thirdrDate}">
+											가입일 : ${thirdrDate}
+										</c:when>
+										<c:otherwise>
+											가입일 : 
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -203,12 +254,5 @@
 	<script src="./resources/jQuert/covervid.js"></script>
 	<script src="./resources/assets/scripts/scripts.js"></script>
 
-	<!-- Call CoverVid -->
-	<script type="text/javascript">
-		// If using jQuery
-		// $('.masthead-video').coverVid(1920, 1080);
-		// If not using jQuery (Native Javascript)
-		coverVid(document.querySelector('.masthead-video'), 640, 360);
-	</script>
 </body>
 </html>

@@ -188,11 +188,11 @@
 		});
 
 		$("#closeBtn").click(function() {
-			opener.location.reload();
 			self.close();
+			opener.location.reload();
 		})
 
-		$("reloadBtn").click(function() {
+		$("#reloadBtn").click(function(){
 			window.location.reload();
 			self.close();
 		});

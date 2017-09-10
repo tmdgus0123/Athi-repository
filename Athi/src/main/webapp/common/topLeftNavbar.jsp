@@ -73,15 +73,9 @@
 					<span class="nav-link-text"> 건의사항</span>
 				</a>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="포트폴리오 게시판 관리">
-				<a class="nav-link" href="adminPortfolioBoard.do?">
-					<i class="fa fa-fw fa-comment"></i>
-					<span class="nav-link-text"> 포트폴리오 게시판 관리</span>
-				</a>
-			</li>
 			<!-- 관리자모드 S -->
 			<c:choose>
-				<c:when test="${user_id == 'athi'}">
+				<c:when test="${user_grade == 0}">
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="관리자 모드">
 						<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents4">
 							<i class="fa fa-fw fa-gears"></i>
@@ -89,13 +83,13 @@
 						</a>
 						<ul class="sidenav-second-level collapse" id="collapseComponents4">
 							<li>
-								<a href="adminPortfolioBoard.do">포트폴리오 게시판 관리</a>
-							</li>
-							<li>
 								<a href="adminBoard.do?">게시판 관리</a>
 							</li>
 							<li>
 								<a href="adminMember.do?">회원 관리</a>
+							</li>
+							<li>
+								<a href="adminProject.do?">포트폴리오 관리</a>
 							</li>
 						</ul>
 					</li>
@@ -129,13 +123,18 @@
 						<a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fa fa-fw fa-bell"></i>마이페이지
 						</a>
-						<div class="dropdown-menu" aria-labelledby="alertsDropdown">
+						<div class="dropdown-menu" aria-labelledby="alertsDropdown" style="border-radius:2em;">
 							<c:choose>							
-								<c:when test="${user_id=='athi'}">
-									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">관리자님 안녕하세요.</h6>
+								<c:when test="${user_grade==0}">
+									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">
+										<span style="color:blue;">관리자</span>님 안녕하세요.
+									</h6>
 								</c:when>
 								<c:otherwise>
-									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">${user_id}님의 마이 페이지</h6>
+									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">
+										<span style="color:blue;">${user_id}</span>님의 마이 페이지<br /><br />
+										현재 등급 : ${user_grade} / 10
+									</h6>
 								</c:otherwise>
 							</c:choose>
 							<div class="dropdown-divider"></div>
@@ -151,9 +150,11 @@
 								<strong style="color:#608ffb;">회원 정보수정</strong>
 							</a>
 							<div class="dropdown-divider"></div>
+							<c:if test="${user_id!='athi' }">
 							<a class="dropdown-item" onclick="window.open('withDraw.do?id=${user_id}', '', 'width=500px, height=500px, status=no, toolbar=no, menubar=no, resize=no');" style="cursor:pointer;">
 								<strong style="color:#f1685e;">회원 탈퇴</strong>
 							</a>
+							</c:if>
 						</div>
 					</li>
 					<li class="nav-item">
