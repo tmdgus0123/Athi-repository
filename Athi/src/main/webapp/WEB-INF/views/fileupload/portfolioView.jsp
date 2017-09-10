@@ -51,7 +51,10 @@
 								<b>블라인드 된 게시글 입니다.</b>
 							</c:when>
 							<c:otherwise>
-								<img src="./resources/images/${param.fileName }" /> <br> <br> <br> ${viewRow.content }
+								<img src="./resources/images/${param.fileName }" />
+								<br>
+								<br>
+								<br> ${viewRow.content }
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -81,11 +84,16 @@
 								<li id="li_${dto.num }">
 									<div class="row">
 										<div class="col-sm-1">
-											<input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
+										<c:choose >
+											<c:when test="${user_id == 'athi' }">
+												<input type="checkbox" name="replyChk" style="margin-top: 6.5px;" />
+											</c:when>
+										</c:choose>
 										</div>
 										<div class="col-sm-9 text-left">
 											<div>
-												<strong>${dto.id }</strong>/ <span>(${dto.postdate })</span>
+												<strong>${dto.id }</strong>/
+												<span>(${dto.postdate })</span>
 											</div>
 											<div style="margin-top: 25px; margin-bottom: 6.5px;">${dto.content }</div>
 										</div>
@@ -146,7 +154,7 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-	
+
 	<!-- 댓글 추가 -->
 	<script>
 		$('#enrollBtn').click(function() {

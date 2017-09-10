@@ -17,10 +17,10 @@
 <body style="background-image: url('./resources/images/bgimage.png'); background-repeat: no-repeat; background-size: cover;">
 	<div>
 		<form name="wdFrm" method="post">
-			<div class="row form-group" style="margin-top:150px;">
+			<div class="row form-group" style="margin-top: 150px;">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-6">
-					<h2 class="btn btn-info" style="font-size:1.5em;">&lt; ${mList.id}님의 회원 정보 &gt;</h2>
+					<h2 class="btn btn-info" style="font-size: 1.5em;">&lt; ${mList.id}님의 회원 정보 &gt;</h2>
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
@@ -52,9 +52,7 @@
 				<div class="col-sm-2"></div>
 				<label class="col-sm-2 control-label text-left btn-primary" for="inputAddr">주소</label>
 				<div class="col-sm-6">
-					<div class="input-group">
-						<input type="text" class="form-control" name="inputAddr" id="inputAddr" value="${mList.address}" readonly />
-					</div>
+					<input type="text" class="form-control" name="inputAddr" id="inputAddr" value="${mList.address}" readonly />
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
@@ -138,20 +136,21 @@
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
-			<br /><br />
+			<br />
+			<br />
 			<div class="form-group text-center">
 				<button type="button" class="btn btn-danger" id="closeBtn">닫기</button>
 				&nbsp;&nbsp;&nbsp;
-				<button type="button" class="btn btn-success" id="reloadBtn">새로고침</button>
+				<button type="button" class="btn btn-success" id="reloadBtn">변경</button>
 			</div>
 		</form>
 	</div>
-	
+
 	<script>
-		$("#gradeBtn").click(function(){
+		$("#gradeBtn").click(function() {
 			var grade = prompt("조정할 등급은?(1~10)");
 			var id = $("#user_id").val();
-			
+
 			$.ajax({
 				url : "gradeEdit.do",
 				data : {
@@ -162,15 +161,16 @@
 				type : "post",
 				cache : false,
 				success : function(data) {
+					opener.location.reload();
 					window.location.reload();
 				}
 			});
 		});
-		
-		$("#expBtn").click(function(){
+
+		$("#expBtn").click(function() {
 			var exp = prompt("삭감 또는 증감할 경험치?");
 			var id = $("#user_id").val();
-			
+
 			$.ajax({
 				url : "expEdit.do",
 				data : {
@@ -181,18 +181,20 @@
 				type : "post",
 				cache : false,
 				success : function(data) {
+					opener.location.reload();
 					window.location.reload();
 				}
 			});
 		});
-		
+
 		$("#closeBtn").click(function() {
 			self.close();
 			opener.location.reload();
 		})
-		
+
 		$("#reloadBtn").click(function(){
 			window.location.reload();
+			self.close();
 		});
 	</script>
 </body>

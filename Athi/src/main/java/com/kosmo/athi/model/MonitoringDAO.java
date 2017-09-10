@@ -1,13 +1,14 @@
 package com.kosmo.athi.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
 
 public class MonitoringDAO {
 	
@@ -36,77 +37,87 @@ public class MonitoringDAO {
 		}
 	}
 	
-	public void setVisitCount() throws SQLException{
-		
-		System.out.println("setTotalCount() 실행");
-		
-		int retVal = 0;
+	public void setVisitCount() {
+		System.out.println("setVisitCount() 실행");
 		
 		try{
-			String sql = "INSERT INTO visit VALUES(sysdate)";
-			conn.setAutoCommit(false);
+			String sql = "INSERT INTO visit VALUES (sysdate)";
 			
 			psmt = conn.prepareStatement(sql);
-			retVal = psmt.executeUpdate();
-			
-			System.out.println(rs);
-			
-			if(retVal==1){
-				conn.commit();
-			}
+			psmt.executeUpdate();
 		}
 		catch(Exception e){
-			conn.rollback();
 			e.printStackTrace();
 		}
 	}
 	
-	public int getTotalCount() throws SQLException{
+	public int getTotalCount() {
 		System.out.println("getTotalCount() 실행");
 		int retVal = 0;
 		
 		try{
 			String sql = "SELECT count(*) FROM visit";
-			conn.setAutoCommit(false);
 			
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 			rs.next();
 		
 			retVal = rs.getInt(1);
-			if(retVal>0){
-				conn.commit();
-			}
 		}
 		catch(Exception e){
-			conn.rollback();
 			e.printStackTrace();
 		}
 		return retVal;
 	}
 	
-	public int getTodayCount() throws SQLException{
-		System.out.println("getTodayCount() 실행");
+	//이전 날짜 가져오기
+	public Date getSelectDate(int num) {
+		Date date = null;
+		try {
+			String sql = "SELECT sysdate - "+ num +" FROM DUAL";
+
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			
+			date = rs.getDate(1);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
+	
+	//이전 날짜 방문자수 가져오기
+	public int getSelectCount(int num) {
+		System.out.println("getSelectCount() 실행");
 		int retVal = 0;
 		
 		try{
 			String sql = "SELECT count(*) FROM visit WHERE "
-					+ " to_date(v_date, 'YYYY-MM-DD') = to_date(sysdate, 'YYYY-MM-DD')";
-			conn.setAutoCommit(false);
-			
+					+ " to_date(v_date, 'YYYY/MM/DD') = to_date(sysdate - "+ num +", 'YYYY/MM/DD')";
+
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 			rs.next();
 			
 			retVal = rs.getInt(1);
-			if(retVal>0){
-				conn.commit();
-			}
 		}
 		catch(Exception e){
-			conn.rollback();
 			e.printStackTrace();
 		}
 		return retVal;
+	}
+	
+	public void close() {
+		try {
+			if(psmt != null) psmt.close();
+			if(conn != null) conn.close();
+			if(rs != null) rs.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -11,7 +11,7 @@ import com.kosmo.athi.model.BoardDAO;
 import com.kosmo.athi.model.BoardDTO;
 import com.kosmo.athi.model.PagingUtil;
 
-public class PortfolioBoardCommand implements ICommand{
+public class AdminPortfolioBoardCommand implements ICommand{
 	
 	@Override
 	public void execute(Model model) {
@@ -33,7 +33,7 @@ public class PortfolioBoardCommand implements ICommand{
 		int totalRecordCount = dao.portfolioGetTotalCount(paramMap);
 		
 		// 페이지 설정값
-		int pageSize = 9;
+		int pageSize = 4;
 		int blockPage = 5;
 		
 		// 전체 페이지 수
@@ -56,7 +56,7 @@ public class PortfolioBoardCommand implements ICommand{
 		
 		// page처리를 위한 문자열 생성
 		String addQueryStr = "";
-		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage, req.getContextPath() + "portfolioBoard.do?" + addQueryStr);
+		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage, req.getContextPath() + "adminPortfolioBoard.do?" + addQueryStr);
 		
 		// DAO에서 list()메소드로 목록 가져오기
 		ArrayList<BoardDTO> listRows = dao.portfolioBoardList(paramMap); 

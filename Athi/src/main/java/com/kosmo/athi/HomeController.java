@@ -19,7 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
+<<<<<<< HEAD
 import com.kosmo.athi.command.AdminPrpoCommand;
+=======
+import com.kosmo.athi.command.AdminPortfolioBoardCommand;
+>>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
 import com.kosmo.athi.command.CategoryViewCommand;
@@ -77,11 +81,9 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {
-
-		if (session.getAttribute("user_id") != null) {
-			model.addAttribute("session", session);
-		}
-
+		System.out.println("home() 메소드 실행");
+		
+		model.addAttribute("session", session);
 		command = new RankListCommand();
 		command.execute(model);
 
@@ -201,7 +203,18 @@ public class HomeController {
 
 		return "tipBoard";
 	}
+	
+	@RequestMapping("adminPortfolioBoard.do")
+	public String adminPortfolioBoard(HttpServletRequest req, Model model) {
+		System.out.println("portfolioBoard() 메소드 실행");
 
+		model.addAttribute("req", req);
+		command = new AdminPortfolioBoardCommand();
+		command.execute(model);
+		
+		return "adminPortfolioBoard";
+	}
+	
 	@RequestMapping("/adminBoard.do")
 	public String adminBoard(Model model) {
 		System.out.println("adminBoard() 메소드 호출");
@@ -233,11 +246,14 @@ public class HomeController {
 	@RequestMapping("/writeAction.do")
 	public String writeAction(HttpServletRequest req, Model model) {
 
+System.out.println("커멘드 들어가기전");
 		model.addAttribute("req", req);
 		command = new WriteCommand();
 		command.execute(model);
 
 		return "redirect:" + req.getParameter("boardName");
+		System.out.println("커멘드 들어간 후");
+
 	}
 
 	// 상세보기
@@ -326,19 +342,18 @@ public class HomeController {
 		
 		try {
 			out = response.getWriter();
-			
+
 			response.setContentType("text/html;charset=utf-8");
-			
+		
 			if (retValue != 0) {
-				out.println("<script>alert('회원가입이 완료되었습니다.'); window.location.href='"+"./"+"';</script>");
+				out.println("<script>alert('회원가입이 완료되었습니다.'); window.location.href='./';</script>");
 			} else {
-				out.println("<script>alert('회원가입을 실패하였습니다.'); history.back(); </script>");
+				out.println("<script>alert('회원가입을 실패하였습니다.'); history.back();</script>");
 			}
-			
+			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 
@@ -411,7 +426,9 @@ public class HomeController {
 
 		PrintWriter out = null;
 		
+
 		if (ret!=0){
+
 			session.invalidate();
 			
 			out = rep.getWriter();
@@ -420,6 +437,7 @@ public class HomeController {
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
 			out.println("window.self.close();");
+
 			out.println("opener.location.reload();");
 			out.println("</script>");
 		}
@@ -429,7 +447,8 @@ public class HomeController {
 			rep.setContentType("text/html; charset='UTF-8'"); 
 			out.println("<script>");
 			out.println("alert('탈퇴 실패! 정보 오류');");
-			out.println("history.back();");
+			out.println("window.self.close()");
+			out.println("opener.location.reload();");
 			out.println("</script>");
 		}
 	}
@@ -526,7 +545,6 @@ public class HomeController {
 		return "fileupload/portfolioWrite";
 	}
 	
-
 	@RequestMapping("/QnAcategory.do")
 	public String QnACategoryView(HttpServletRequest req, Model model){
 		System.out.println("QnAcategory() 메소드 실행");
@@ -672,11 +690,10 @@ public class HomeController {
 	public String gradeEdit(Model model, HttpServletRequest req){
 		
 		model.addAttribute("req", req);
-		
 		command = new GradeEditCommand();
 		command.execute(model);
 		
-		return "adminMember";
+		return "process/memberEdit";
 	}
 	
 	@RequestMapping("expEdit.do")

@@ -1,7 +1,10 @@
+<%@page import="java.sql.Date"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd HH:mm:ss" var="thisYmd" />
+
 
 <!DOCTYPE html>
 <html>
@@ -41,15 +44,11 @@
 	<div class="content-wrapper py-3">
 		<!-- 배너 시작 -->
 		<div class="row cycle-slideshow" style="margin-top: -16px;">
-			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> 
-			<img src="./resources/images/baner2.jpg" width=100% height="200px" /> 
-			<img src="./resources/images/baner3.jpg" width=100% height="200px" /> 
-			<img src="./resources/images/baner4.jpg" width=100% height="200px" />
+			<img src="./resources/images/baner1.jpg" width=100% height="200px" /> <img src="./resources/images/baner2.jpg" width=100% height="200px" /> <img src="./resources/images/baner3.jpg" width=100% height="200px" /> <img
+				src="./resources/images/baner4.jpg" width=100% height="200px"
+			/>
 		</div>
 		<!-- 배너 끝 -->
-		<!-- 소개글 시작 -->
-			
-		<!-- 소개글 종료 -->
 		<!-- 순위 시작 -->
 		<div class="col-sm-12" style="margin-top:15px;">
 			<div class="card mb-3">
@@ -161,7 +160,11 @@
 		<div class="col-sm-12">
 			<div class="card mb-3" id="div1">
 				<div class="card-header  text-muted">
+<<<<<<< HEAD
 					<i class="fa fa-area-chart"></i> 방문자수 그래프 &nbsp; Total : ${total} / Today : ${today}
+=======
+					<i class="fa fa-area-chart"></i> 방문자수 [ total : ${sessionScope.total_vcnt} ]
+>>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 				</div>
 				<div class="card-body">
 					<canvas id="chart" width="100%" height="30"></canvas>
@@ -180,7 +183,10 @@
 		<i class="fa fa-angle-up"></i>
 	</a>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 	<jsp:include page="/common/modalLogin.jsp" />
 
 	<!-- Bootstrap core JavaScript -->
@@ -198,14 +204,12 @@
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
 	<script>
 		var ctx = document.getElementById("chart");
-		var total = '<c:out value="${total}"/>';
-		var today = '<c:out value="${today}"/>';
-
 		var myLineChart = new Chart(ctx, {
 			type : 'line',
 			data : {
-				labels : ["08.30", "08.31", "09.01", "09.02", "09.03", "09.04" ],
-				datasets : [{
+				labels : [ "${sessionScope.dateList.get(0)}", "${sessionScope.dateList.get(1)}", "${sessionScope.dateList.get(2)}",
+					"${sessionScope.dateList.get(3)}", "${sessionScope.dateList.get(4)}", "${sessionScope.dateList.get(5)}", "${sessionScope.dateList.get(6)}" ],
+				datasets : [ {
 					label : "방문자수",
 					lineTension : 0.3,
 					backgroundColor : "rgba(2,117,216,0.2)",
@@ -217,8 +221,10 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					data : ["23", "31", "58", "21", "25", today],
-				}],
+					}],
+					data : [ "${sessionScope.visitList.get(0)}", "${sessionScope.visitList.get(1)}", "${sessionScope.visitList.get(2)}", 
+						"${sessionScope.visitList.get(3)}", "${sessionScope.visitList.get(4)}", "${sessionScope.visitList.get(5)}", "${sessionScope.visitList.get(6)}" ]
+				} ],
 			},
 			options : {
 				scales : {
@@ -236,7 +242,7 @@
 					yAxes : [ {
 						ticks : {
 							min : 0,
-							max : 1000,
+							max : 300,
 							maxTicksLimit : 5
 						},
 						gridLines : {

@@ -145,11 +145,11 @@
 													<input type="checkbox" name="listBox" value="${row.num }" />
 												</a></td>
 											<td>${row.num }</td>
-											<td><a href="./view.do?num=${row.num }&nowPage=${nowPage }">${row.title } [${row.recom_cnt }]</a></td>
+											<td><a href="./view.do?num=${row.num }&nowPage=${nowPage }">${row.title } [${row.comm_cnt }]</a></td>
 											<td>${row.id }</td>
 											<td>${row.postdate }</td>
 											<td>${row.visit_cnt }</td>
-											<td>${row.comm_cnt }</td>
+											<td>${row.recom_cnt }</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

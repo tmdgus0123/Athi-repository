@@ -16,12 +16,12 @@ public class GradeEditCommand implements ICommand{
 		
 		int grade = Integer.parseInt(req.getParameter("grade"));
 		String id = req.getParameter("id");
-		
+
 		System.out.println(id + " " + grade);
-		
+	
 		MemberDAO dao = new MemberDAO();
 		dao.gradeEdit(grade, id);
-		
+System.out.println("GradeEditComment exit");
 		dao.close();
 	}
 }

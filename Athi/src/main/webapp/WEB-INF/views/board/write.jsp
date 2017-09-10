@@ -135,24 +135,11 @@
 				dataType : 'script',
 				type : "post", // form : method
 				success : function(data) { // 다시 돌아옴
-					$("textarea[name='content']").val(data);
+					$("textarea[name='content']").val(data.replace("<br>", "\r\n"));
 				}
 			});			
 		});
 
-		$("#css").click(function() {
-			$.ajax({
-				url : "syntax.do", // form : action
-				data : { // form : input 's
-					text : $("textarea[name='content']").val()
-				},
-				dataType : 'script',
-				type : "post", // form : method
-				success : function(data) { // 다시 돌아옴
-					$("textarea[name='content']").val(data);
-				}
-			});			
-		});
 	</script>
 </body>
 </html>

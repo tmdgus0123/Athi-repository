@@ -451,7 +451,7 @@ public class BoardDAO {
 		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
-		
+
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, null,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
@@ -479,24 +479,32 @@ public class BoardDAO {
 		// 컬럼 순서 : num, title, content, postdate, id, visit_cnt, comm_cnt,
 		// recom_cnt,
 		// bgroup, bstep, bdepth, p_language
+
 		String sql = "INSERT ALL INTO board VALUES(board_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, board_seq.currval, 0, 0, ?,0)" + " INTO board_type VALUES(board_seq.currval, ?) SELECT * FROM DUAL";
-
+System.out.println("템플릿 전");
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
-
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
+
+System.out.println("템플릿 안");
 				ps.setString(1, title);
 				ps.setString(2, content);
 				ps.setString(3, id);
 				ps.setString(4, pLang);
 				ps.setString(5, boardName);
+
+System.out.println("템플릿 안 끝");
 			}
 		});
-		
-		
+
 		if(retValue==1){
 			updateExp(id);
 		}
+
+System.out.println("렙업전");
+
+System.out.println("렙업후");
+
 		return retValue;
 	}
 
@@ -648,7 +656,7 @@ public class BoardDAO {
 
 		int retValue = 0;
 
-		String sql = "INSERT INTO project_board VALUES(project_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, 0, 0, 0, ?)";
+		String sql = "INSERT INTO project_board VALUES(project_seq.nextval, ?, ?, sysdate, ?, 0, 0, 0, ?, 0, 0, 0, ?, 0)";
 
 		retValue = this.template.update(sql, new PreparedStatementSetter() {
 
