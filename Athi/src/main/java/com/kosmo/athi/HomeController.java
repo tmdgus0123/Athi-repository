@@ -40,6 +40,9 @@ import com.kosmo.athi.command.SelectPostDeleteCommand;
 import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
 import com.kosmo.athi.command.WriteCommand;
+import com.kosmo.athi.command.newMemberListCommand;
+import com.kosmo.athi.command.newPortfolioListCommand;
+import com.kosmo.athi.command.newPostListCommand;
 import com.kosmo.athi.command.EditMemberCommand;
 import com.kosmo.athi.command.ExpEditCommand;
 import com.kosmo.athi.command.GradeEditCommand;
@@ -61,11 +64,11 @@ import com.kosmo.athi.model.MemberDTO;
 public class HomeController {
 
 	ICommand command = null;
-	
+
 	// Spring JDBC를 사용하기 위한 설정
 	// JDBC템플릿설정
 	private JdbcTemplate template;
-	
+
 	// setter설정
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
@@ -79,12 +82,12 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {
 		System.out.println("home() 메소드 실행");
-		
+
 		model.addAttribute("session", session);
 		command = new RankListCommand();
 		command.execute(model);
-System.out.println(session.getAttribute("dateList"));
-System.out.println(session.getAttribute("visitList"));
+		System.out.println(session.getAttribute("dateList"));
+		System.out.println(session.getAttribute("visitList"));
 		return "home";
 	}
 
@@ -106,7 +109,7 @@ System.out.println(session.getAttribute("visitList"));
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
-		
+
 		return "freeBoard";
 	}
 
@@ -118,17 +121,17 @@ System.out.println(session.getAttribute("visitList"));
 
 	@RequestMapping("myPortfolioBoard.do")
 	public String myPortfolio(Model model, HttpServletRequest req, HttpSession session) {
-		
+
 		System.out.println("myPortfolioBoard() 메소드 실행");
-		
+
 		model.addAttribute("req", req);
 		model.addAttribute("session", session);
 		command = new MyPortfolioBoardCommand();
 		command.execute(model);
-		
+
 		return "fileupload/myPortfolioBoard";
 	}
-	
+
 	@RequestMapping("/notice.do")
 	public String notice(HttpServletRequest req, Model model) {
 		System.out.println("notice() 메소드 실행");
@@ -143,7 +146,7 @@ System.out.println(session.getAttribute("visitList"));
 	@RequestMapping("/QnABoard.do")
 	public String QnADesign(HttpServletRequest req, Model model) {
 		System.out.println("QnABoard() 메소드 실행");
-		
+
 		model.addAttribute("req", req);
 		command = new BoardCommand();
 		command.execute(model);
@@ -201,7 +204,7 @@ System.out.println(session.getAttribute("visitList"));
 
 		return "tipBoard";
 	}
-	
+
 	@RequestMapping("/adminBoard.do")
 	public String adminBoard(Model model) {
 		System.out.println("adminBoard() 메소드 호출");
@@ -233,7 +236,7 @@ System.out.println(session.getAttribute("visitList"));
 	@RequestMapping("/writeAction.do")
 	public String writeAction(HttpServletRequest req, Model model) {
 
-System.out.println("커멘드 들어가기전");
+		System.out.println("커멘드 들어가기전");
 		model.addAttribute("req", req);
 		command = new WriteCommand();
 		command.execute(model);
@@ -262,7 +265,7 @@ System.out.println("커멘드 들어가기전");
 		model.addAttribute("session", session);
 		command = new MyPageCommand();
 		command.execute(model);
-		
+
 		return "myPage";
 	}
 
@@ -279,7 +282,7 @@ System.out.println("커멘드 들어가기전");
 
 	@RequestMapping("/withDraw.do")
 	public String withDraw(HttpServletRequest req, Model model) {
-		
+
 		model.addAttribute("req", req);
 		return "withDraw";
 	}
@@ -290,11 +293,12 @@ System.out.println("커멘드 들어가기전");
 
 		MemberDAO mDao = new MemberDAO();
 		boolean isMember = mDao.isMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
-		
+
 		try {
 			if (isMember == true) {
-				ArrayList<MemberDTO> member = mDao.selectMember(req.getParameter("user_id"), req.getParameter("user_pwd"));
-				
+				ArrayList<MemberDTO> member = mDao.selectMember(req.getParameter("user_id"),
+					req.getParameter("user_pwd"));
+
 				int user_grade = member.get(0).getGrade();
 				session.setAttribute("user_id", req.getParameter("user_id"));
 				session.setAttribute("user_pwd", req.getParameter("user_pwd"));
@@ -309,7 +313,7 @@ System.out.println("커멘드 들어가기전");
 
 		mDao.close();
 
-		return "home";
+		return "redirect:/";
 	}
 
 	@RequestMapping("signUpAction.do")
@@ -324,12 +328,12 @@ System.out.println("커멘드 들어가기전");
 		int retValue = (Integer) map.get("retValue");
 
 		PrintWriter out = null;
-		
+
 		try {
 			out = response.getWriter();
 
 			response.setContentType("text/html;charset=utf-8");
-		
+
 			if (retValue != 0) {
 				out.println("<script>alert('회원가입이 완료되었습니다.'); window.location.href='./';</script>");
 			} else {
@@ -341,14 +345,13 @@ System.out.println("커멘드 들어가기전");
 		}
 	}
 
-
 	@RequestMapping("/logOutAction.do")
-	public ModelAndView logOutAction(HttpServletRequest req, HttpSession session){
-		
+	public ModelAndView logOutAction(HttpServletRequest req, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
 		session.removeAttribute("user_id");
 		session.removeAttribute("user_pwd");
-		
+
 		mav.setViewName("redirect:/");
 
 		return mav;
@@ -361,7 +364,8 @@ System.out.println("커멘드 들어가기전");
 	}
 
 	@RequestMapping("/modifyAction.do")
-	public void modifyAction(HttpServletRequest req, HttpServletResponse rep, HttpSession session, Model model) throws IOException {
+	public void modifyAction(HttpServletRequest req, HttpServletResponse rep, HttpSession session, Model model)
+		throws IOException {
 
 		System.out.println("modifyAction() 메소드 실행");
 
@@ -372,23 +376,22 @@ System.out.println("커멘드 들어가기전");
 
 		Map<String, Object> map = model.asMap();
 		int ret = (Integer) map.get("modeValue");
-		
+
 		PrintWriter out = null;
-		
-		if (ret==1){
-			
+
+		if (ret == 1) {
+
 			out = rep.getWriter();
-			
-			rep.setContentType("text/html; charset='UTF-8'"); 
+
+			rep.setContentType("text/html; charset='UTF-8'");
 			out.println("<script>");
 			out.println("alert('정보 수정을 완료하였습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
-		}
-		else{
+		} else {
 			out = rep.getWriter();
-			
-			rep.setContentType("text/html; charset='UTF-8'"); 
+
+			rep.setContentType("text/html; charset='UTF-8'");
 			out.println("<script>");
 			out.println("alert('정보 수정을 실패하였습니다.');");
 			out.println("history.back();");
@@ -397,7 +400,8 @@ System.out.println("커멘드 들어가기전");
 	}
 
 	@RequestMapping("deleteAction.do")
-	public void deleteAction(HttpServletRequest req, HttpServletResponse rep, Model model, HttpSession session) throws IOException {
+	public void deleteAction(HttpServletRequest req, HttpServletResponse rep, Model model, HttpSession session)
+		throws IOException {
 
 		System.out.println("deleteAction() 메소드 실행");
 
@@ -410,24 +414,23 @@ System.out.println("커멘드 들어가기전");
 		int ret = (Integer) map.get("modeValue");
 
 		PrintWriter out = null;
-	
-		if (ret!=0){
+
+		if (ret != 0) {
 
 			session.invalidate();
-			
+
 			out = rep.getWriter();
-			
-			rep.setContentType("text/html; charset='UTF-8'"); 
+
+			rep.setContentType("text/html; charset='UTF-8'");
 			out.println("<script>");
 			out.println("alert('탈퇴 완료! 이용해주셔서 감사합니다.');");
 			out.println("window.self.close();");
 			out.println("opener.location.reload();");
 			out.println("</script>");
-		}
-		else{
+		} else {
 			out = rep.getWriter();
-			
-			rep.setContentType("text/html; charset='UTF-8'"); 
+
+			rep.setContentType("text/html; charset='UTF-8'");
 			out.println("<script>");
 			out.println("alert('탈퇴 실패! 정보 오류');");
 			out.println("window.self.close()");
@@ -446,7 +449,7 @@ System.out.println("커멘드 들어가기전");
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
-	
+
 	@RequestMapping("portfolioSearch.do")
 	public String portfolioSearch(HttpServletRequest req, Model model) {
 		System.out.println("portfolioSearch() 메소드 호출");
@@ -464,18 +467,19 @@ System.out.println("커멘드 들어가기전");
 		model.addAttribute("req", req);
 		command = new ReplyCommand();
 		command.execute(model);
-		
+
 		return "board/replyWrite";
 	}
-	
+
 	@RequestMapping("replyAction.do")
 	public String replyAction(HttpServletRequest req, Model model) {
-		
+
 		model.addAttribute("req", req);
 		command = new ReplyActionCommand();
 		command.execute(model);
-		
-		return "redirect:/"+ req.getParameter("boardName") +".do?boardName="+req.getParameter("boardName")+"&nowPage="+ req.getParameter("nowPage");
+
+		return "redirect:/" + req.getParameter("boardName") + ".do?boardName=" + req.getParameter("boardName")
+			+ "&nowPage=" + req.getParameter("nowPage");
 	}
 
 	@RequestMapping("pModifyAction.do")
@@ -510,7 +514,7 @@ System.out.println("커멘드 들어가기전");
 
 		return "redirect:/" + req.getParameter("boardName") + ".do";
 	}
-	
+
 	@RequestMapping("/portfolioBoard.do")
 	public String portfolioBoard(HttpServletRequest req, Model model) {
 		System.out.println("portfolioBoard() 메소드 실행");
@@ -518,7 +522,7 @@ System.out.println("커멘드 들어가기전");
 		model.addAttribute("req", req);
 		command = new PortfolioBoardCommand();
 		command.execute(model);
-		
+
 		return "fileupload/portfolioBoard";
 	}
 
@@ -527,53 +531,54 @@ System.out.println("커멘드 들어가기전");
 
 		return "fileupload/portfolioWrite";
 	}
-	
+
 	@RequestMapping("/QnAcategory.do")
-	public String QnACategoryView(HttpServletRequest req, Model model){
+	public String QnACategoryView(HttpServletRequest req, Model model) {
 		System.out.println("QnAcategory() 메소드 실행");
-		
+
 		System.out.println(req.getParameter("category"));
-		
+
 		model.addAttribute("req", req);
 		command = new CategoryViewCommand();
 		command.execute(model);
-		
+
 		return "QnACategoryView";
 	}
-	
+
 	@RequestMapping("/tipcategory.do")
-	public String tipCategoryView(HttpServletRequest req, Model model){
+	public String tipCategoryView(HttpServletRequest req, Model model) {
 		System.out.println("QnAcategory() 메소드 실행");
-		
+
 		System.out.println(req.getParameter("category"));
-		
+
 		model.addAttribute("req", req);
 		command = new CategoryViewCommand();
 		command.execute(model);
-		
+
 		return "tipCategoryView";
 	}
-	
+
 	@RequestMapping("/commChoice.do")
 	public String choice(HttpServletRequest req, Model model) {
 		System.out.println("recomCnt() 메소드 실행");
-		System.out.println("값넘어옴"+ req.getParameter("num"));
-		
+		System.out.println("값넘어옴" + req.getParameter("num"));
+
 		model.addAttribute("req", req);
 		command = new RecomCntCommand();
 		command.execute(model);
-		
+
 		return "board/recomCntAction";
 	}
+
 	@RequestMapping("/nRecom.do")
 	public String declaration(HttpServletRequest req, Model model) {
 		System.out.println("nRecom() 메소드 실행");
-		System.out.println("값넘어옴"+ req.getParameter("num"));
-		
+		System.out.println("값넘어옴" + req.getParameter("num"));
+
 		model.addAttribute("req", req);
 		command = new NotRecomCntCommand();
 		command.execute(model);
-		
+
 		return "board/nrecomCntAction";
 	}
 
@@ -586,7 +591,7 @@ System.out.println("커멘드 들어가기전");
 
 		return "redirect:portfolioBoard.do";
 	}
-	
+
 	@RequestMapping("portfolioView.do")
 	public String portfolioView(Model model, HttpServletRequest req) {
 
@@ -597,7 +602,7 @@ System.out.println("커멘드 들어가기전");
 
 		return "fileupload/portfolioView";
 	}
-	
+
 	@RequestMapping("portfolioModify.do")
 	public String portfolioModify(HttpServletRequest req, Model model) {
 
@@ -608,19 +613,19 @@ System.out.println("커멘드 들어가기전");
 
 		return "fileupload/portfolioModify";
 	}
-	
+
 	@RequestMapping("portfolioModifyAction.do")
-	public String portfolioModifyAction(HttpServletRequest req, Model model){
+	public String portfolioModifyAction(HttpServletRequest req, Model model) {
 		System.out.println("portfolioModifyAction() 실행");
-		
-		model.addAttribute("req",req);
+
+		model.addAttribute("req", req);
 		command = new PortfolioModifyActionCommand();
 		command.execute(model);
-		
+
 		return "redirect:portfolioBoard.do";
 
 	}
-	
+
 	@RequestMapping("portfolioDeleteAction.do")
 	public String portfolioDeleteAction(HttpServletRequest req, Model model) {
 
@@ -630,90 +635,117 @@ System.out.println("커멘드 들어가기전");
 		command.execute(model);
 
 		return "redirect:portfolioBoard.do";
-		
+
 	}
-	
+
 	@RequestMapping("selectMemberDelete.do")
-	public String selectMemberDelete(Model model, HttpServletRequest req){
+	public String selectMemberDelete(Model model, HttpServletRequest req) {
 		System.out.println("회원 삭제 실행");
-		
+
 		model.addAttribute("req", req);
-		
+
 		command = new SelectMemberDeleteCommand();
 		command.execute(model);
-		
+
 		return "adminMember";
 	}
-	
+
 	@RequestMapping("selectPostDelete.do")
-	public String selectPostDelete(Model model, HttpServletRequest req){
-		
+	public String selectPostDelete(Model model, HttpServletRequest req) {
+
 		System.out.println("선택 게시물 삭제 실행");
-		
+
 		model.addAttribute("req", req);
-		
+
 		command = new SelectPostDeleteCommand();
 		command.execute(model);
-		
+
 		return "adminBoard";
 	}
-	
+
 	@RequestMapping("memberEdit.do")
-	public String memberEdit(Model model, HttpServletRequest req){
-		
+	public String memberEdit(Model model, HttpServletRequest req) {
+
 		model.addAttribute("req", req);
-		
+
 		command = new AdminEditCommand();
 		command.execute(model);
-		
+
 		return "process/memberEdit";
 	}
-	
+
 	@RequestMapping("gradeEdit.do")
-	public String gradeEdit(Model model, HttpServletRequest req){
-		
+	public String gradeEdit(Model model, HttpServletRequest req) {
+
 		model.addAttribute("req", req);
 		command = new GradeEditCommand();
 		command.execute(model);
-		
+
 		return "process/memberEdit";
 	}
-	
+
 	@RequestMapping("expEdit.do")
-	public String expEdit(Model model, HttpServletRequest req){
-		
+	public String expEdit(Model model, HttpServletRequest req) {
+
 		model.addAttribute("req", req);
-		
+
 		command = new ExpEditCommand();
 		command.execute(model);
-		
+
 		return "adminMember";
 	}
-	
+
 	@RequestMapping("syntax.do")
 	public String syntax(HttpServletRequest req, Model model) {
-		
+
 		model.addAttribute("text", req.getParameter("text"));
-		
+
 		return "board/syntax";
 	}
-	
+
 	@RequestMapping("adminProject.do")
-	public String adminProject(Model model){
-		
+	public String adminProject(Model model) {
+
 		command = new AdminPrpoCommand();
 		command.execute(model);
-		
+
 		return "adminProject";
 	}
+
+	@RequestMapping("selectPortfolioDelete.do")
+	public String selectPortfolioDelete(Model model, HttpServletRequest req) {
+
+		model.addAttribute("req", req);
+		command = new SelectPortfolioDeleteCommand();
+		command.execute(model);
+
+		return "adminBoard";
+	}
 	
-	 @RequestMapping("selectPortfolioDelete.do")
-	   public String selectPortfolioDelete(Model model, HttpServletRequest req){
-	      	      
-	      model.addAttribute("req", req);
-	      command = new SelectPortfolioDeleteCommand();
-	      command.execute(model);
-	      
-	      return "adminBoard";
-	   }
+	@RequestMapping("newMemberList.do")
+	public String newMemberList(Model model){
+		
+		command = new newMemberListCommand();
+		command.execute(model);
+		
+		return "board/newMemberList";
+	}
+	
+	@RequestMapping("newPortfolioList.do")
+	public String newPortfolioList(Model model){
+		
+		command = new newPortfolioListCommand();
+		command.execute(model);
+		
+		return "board/newPortfolioList";
+	}
+	
+	@RequestMapping("newPostList.do")
+	public String newPostList(Model model){
+		
+		command = new newPostListCommand();
+		command.execute(model);
+		
+		return "board/newPostList";
+	}
 }
