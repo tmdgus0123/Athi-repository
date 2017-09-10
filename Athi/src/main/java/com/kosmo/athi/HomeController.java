@@ -35,6 +35,7 @@ import com.kosmo.athi.command.PortfolioViewCommand;
 import com.kosmo.athi.command.PortfolioWriteCommand;
 import com.kosmo.athi.command.SearchCommand;
 import com.kosmo.athi.command.SelectMemberDeleteCommand;
+import com.kosmo.athi.command.SelectPortfolioDeleteCommand;
 import com.kosmo.athi.command.SelectPostDeleteCommand;
 import com.kosmo.athi.command.SignUpCommand;
 import com.kosmo.athi.command.ViewCommand;
@@ -82,7 +83,8 @@ public class HomeController {
 		model.addAttribute("session", session);
 		command = new RankListCommand();
 		command.execute(model);
-
+System.out.println(session.getAttribute("dateList"));
+System.out.println(session.getAttribute("visitList"));
 		return "home";
 	}
 
@@ -236,7 +238,7 @@ System.out.println("커멘드 들어가기전");
 		command = new WriteCommand();
 		command.execute(model);
 		System.out.println("커멘드 들어간 후");
-		return "redirect:" + req.getParameter("boardName");
+		return "redirect:" + req.getParameter("boardName") + ".do";
 	}
 
 	// 상세보기
@@ -704,4 +706,14 @@ System.out.println("커멘드 들어가기전");
 		
 		return "adminProject";
 	}
+	
+	 @RequestMapping("selectPortfolioDelete.do")
+	   public String selectPortfolioDelete(Model model, HttpServletRequest req){
+	      	      
+	      model.addAttribute("req", req);
+	      command = new SelectPortfolioDeleteCommand();
+	      command.execute(model);
+	      
+	      return "adminBoard";
+	   }
 }

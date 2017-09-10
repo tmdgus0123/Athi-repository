@@ -37,10 +37,6 @@
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
 
-	<!-- 방문자수 -->
-	<c:set var="total" value="${sessionScope.totalCnt}" />
-	<c:set var="today" value="${sessionScope.todayCnt}" />
-	
 	<div class="content-wrapper py-3">
 		<!-- 배너 시작 -->
 		<div class="row cycle-slideshow" style="margin-top: -16px;">
@@ -213,7 +209,6 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					
 					data : [ "${sessionScope.visitList.get(0)}", "${sessionScope.visitList.get(1)}", "${sessionScope.visitList.get(2)}", 
 						"${sessionScope.visitList.get(3)}", "${sessionScope.visitList.get(4)}", "${sessionScope.visitList.get(5)}", "${sessionScope.visitList.get(6)}" ]
 				} ],
@@ -259,6 +254,5 @@
 	<script src="./resources/jQuery/covervid.js"></script>
 	<script src="./resources/assets/scripts/scripts.js"></script>
 
-	<!-- Call CoverVid -->
 </body>
 </html>

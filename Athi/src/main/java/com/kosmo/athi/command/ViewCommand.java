@@ -26,8 +26,7 @@ public class ViewCommand implements ICommand {
 		BoardDTO dto = dao.postView(num);
 		
 		//상세보기 출바꿈 처리
-
-		dto.setContent(dto.getContent().replace("\r\n", "\n"));
+		dto.setContent(dto.getContent().replace("\r\n", "<br>"));
 		
 		model.addAttribute("nowPage", req.getParameter("nowPage"));
 		model.addAttribute("viewRow", dto);

@@ -133,7 +133,7 @@
 								<c:otherwise>
 									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">
 										<span style="color:blue;">${user_id}</span>님의 마이 페이지<br /><br />
-										현재 등급 : ${user_grade} / 10
+										현재 등급 : ${user_grade}
 									</h6>
 								</c:otherwise>
 							</c:choose>
