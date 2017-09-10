@@ -76,7 +76,7 @@
 							<input type="button" id="java" value="JAVA" />
 							<input type="button" id="css" value="CSS" />
 						</div>
-						<div class="col-sm-6 text-right" style="margin: auto;">글쓴이 : ${param.id }</div>
+						<div class="col-sm-6 text-right" style="margin: auto;">글쓴이 : <b>${param.id }</b></div>
 					</div>
 					<div class="row form-group">
 						<c:choose>

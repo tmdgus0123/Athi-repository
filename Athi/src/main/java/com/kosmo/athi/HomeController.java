@@ -249,7 +249,7 @@ System.out.println("커멘드 들어가기전");
 		command = new WriteCommand();
 		command.execute(model);
 		System.out.println("커멘드 들어간 후");
-		return "redirect:" + req.getParameter("boardName");
+		return "redirect:" + req.getParameter("boardName") + ".do";
 	}
 
 	// 상세보기
