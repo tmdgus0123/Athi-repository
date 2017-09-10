@@ -73,12 +73,6 @@
 					<span class="nav-link-text"> 건의사항</span>
 				</a>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="포트폴리오 게시판 관리">
-				<a class="nav-link" href="adminPortfolioBoard.do?">
-					<i class="fa fa-fw fa-comment"></i>
-					<span class="nav-link-text"> 포트폴리오 게시판 관리</span>
-				</a>
-			</li>
 			<!-- 관리자모드 S -->
 			<c:choose>
 				<c:when test="${user_grade == 0}">
@@ -88,9 +82,6 @@
 							<span class="nav-link-text">관리자 모드</span>
 						</a>
 						<ul class="sidenav-second-level collapse" id="collapseComponents4">
-							<li>
-								<a href="adminPortfolioBoard.do">포트폴리오 게시판 관리</a>
-							</li>
 							<li>
 								<a href="adminBoard.do?">게시판 관리</a>
 							</li>

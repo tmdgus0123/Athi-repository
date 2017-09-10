@@ -160,11 +160,7 @@
 		<div class="col-sm-12">
 			<div class="card mb-3" id="div1">
 				<div class="card-header  text-muted">
-<<<<<<< HEAD
-					<i class="fa fa-area-chart"></i> 방문자수 그래프 &nbsp; Total : ${total} / Today : ${today}
-=======
 					<i class="fa fa-area-chart"></i> 방문자수 [ total : ${sessionScope.total_vcnt} ]
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 				</div>
 				<div class="card-body">
 					<canvas id="chart" width="100%" height="30"></canvas>
@@ -183,10 +179,6 @@
 		<i class="fa fa-angle-up"></i>
 	</a>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 	<jsp:include page="/common/modalLogin.jsp" />
 
 	<!-- Bootstrap core JavaScript -->
@@ -221,7 +213,7 @@
 					pointHoverBackgroundColor : "rgba(2,117,216,1)",
 					pointHitRadius : 20,
 					pointBorderWidth : 2,
-					}],
+					
 					data : [ "${sessionScope.visitList.get(0)}", "${sessionScope.visitList.get(1)}", "${sessionScope.visitList.get(2)}", 
 						"${sessionScope.visitList.get(3)}", "${sessionScope.visitList.get(4)}", "${sessionScope.visitList.get(5)}", "${sessionScope.visitList.get(6)}" ]
 				} ],
@@ -264,7 +256,7 @@
 
 	<!-- Load Scripts -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="./resources/jQuert/covervid.js"></script>
+	<script src="./resources/jQuery/covervid.js"></script>
 	<script src="./resources/assets/scripts/scripts.js"></script>
 
 	<!-- Call CoverVid -->

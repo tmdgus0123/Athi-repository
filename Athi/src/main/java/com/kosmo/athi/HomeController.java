@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.athi.command.AdminBoardCommand;
 import com.kosmo.athi.command.AdminEditCommand;
 import com.kosmo.athi.command.AdminMemberCommand;
-import com.kosmo.athi.command.AdminPortfolioBoardCommand;
 import com.kosmo.athi.command.AdminPrpoCommand;
 import com.kosmo.athi.command.BoardCommand;
 import com.kosmo.athi.command.RecomCntCommand;
@@ -199,17 +198,6 @@ public class HomeController {
 		command.execute(model);
 
 		return "tipBoard";
-	}
-	
-	@RequestMapping("adminPortfolioBoard.do")
-	public String adminPortfolioBoard(HttpServletRequest req, Model model) {
-		System.out.println("portfolioBoard() 메소드 실행");
-
-		model.addAttribute("req", req);
-		command = new AdminPortfolioBoardCommand();
-		command.execute(model);
-		
-		return "adminPortfolioBoard";
 	}
 	
 	@RequestMapping("/adminBoard.do")

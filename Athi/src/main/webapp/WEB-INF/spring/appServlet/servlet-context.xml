@@ -48,30 +48,30 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 	
-	
 	<!-- MultipartResolver 설정 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10000000" /> 
 		<beans:property name="maxInMemorySize" value="10000000" />
 	</beans:bean>
 	
-	<!-- Email Bean 생성 -->
-	<!-- <beans:bean class="">
-		
-	</beans:bean> -->
-	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<beans:bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="587" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 		<beans:property name="username" value="아이디@gmail.com" />
 		<beans:property name="password" value="비밀번호" />
-		
+
 		<beans:property name="javaMailProperties">
 			<beans:props>
 				<beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
 				<beans:prop key="mail.smtp.startls.enable">true</beans:prop>
 				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
 			</beans:props>
 		</beans:property>
+	</beans:bean>
+	<beans:bean name="EmailServiceDAO" class="com.kosmo.athi.model.EmailServiceDAO">
+   		<beans:property name="javaMailSender" ref="javaMailSender" />
 	</beans:bean>
 </beans:beans>

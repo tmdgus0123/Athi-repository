@@ -26,11 +26,8 @@ public class ViewCommand implements ICommand {
 		BoardDTO dto = dao.postView(num);
 		
 		//상세보기 출바꿈 처리
-<<<<<<< HEAD
-		//dto.setContent(dto.getContent().replace("\r\n", "<br/>"));
-=======
+
 		dto.setContent(dto.getContent().replace("\r\n", "\n"));
->>>>>>> branch 'master' of https://github.com/tmdgus0123/Athi-repository.git
 		
 		model.addAttribute("nowPage", req.getParameter("nowPage"));
 		model.addAttribute("viewRow", dto);
