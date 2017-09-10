@@ -72,6 +72,7 @@ public class MonitoringDAO {
 	
 	//이전 날짜 가져오기
 	public Date getSelectDate(int num) {
+		System.out.println("getSelectDate() 실행");
 		Date date = null;
 		try {
 			String sql = "SELECT sysdate - "+ num +" FROM DUAL";

@@ -81,7 +81,8 @@ public class HomeController {
 		model.addAttribute("session", session);
 		command = new RankListCommand();
 		command.execute(model);
-
+System.out.println(session.getAttribute("dateList"));
+System.out.println(session.getAttribute("visitList"));
 		return "home";
 	}
 
