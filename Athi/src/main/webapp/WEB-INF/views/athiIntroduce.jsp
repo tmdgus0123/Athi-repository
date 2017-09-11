@@ -27,44 +27,45 @@
 	<!-- Navigation -->
 	<jsp:include page="/common/topLeftNavbar.jsp" />
 	<div class="container">
-		<div class="col-sm-12" style="margin-top: 50px;">
-			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
-				<h1>아띠의 소개</h1>
+		<div class="row col-sm-12" style="margin-top: 50px;">
+			<div class="col-sm-12 text-center btn-primary" style="color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 25px; opacity: 0.85;">
+				<h1>&lt; 아띠의 소개 &gt;</h1>
 			</div>
 		</div>
-		<div class="row col-sm-12" style="margin-top: 50px; padding:5px; margin-bottom: 50px;">
-			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
+		<div class="row col-sm-12" style="margin-top: 50px; margin-bottom: 50px; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
+			<div class="col-sm-12 text-center btn-success" style="color: white;">
 				<h1>포트폴리오</h1>
-				<p>
+			</div>
+			<br />
+			<div class="col-sm-12 text-center" style="background-color: white;">
+				<p style="font-size:1.3em;">
 					아띠 프로젝트는 여러분의 포트폴리오를 공유하고, <br /> 
 					다른 회원 간의 정보를 주고 받을 수 있습니다. <br />
 				</p>
 			</div>
 		</div>
-		<div class="row col-sm-12" style="margin-top: 50px; padding:5px; margin-bottom: 50px;">
-			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
+		<div class="row col-sm-12" style="margin-top: 50px; margin-bottom: 50px; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;"">
+			<div class="col-sm-12 text-center btn-primary">
 				<h1>등급 제도</h1>
-				<p>
+			</div>
+			<br />
+			<div class="col-sm-12 text-center" style="background-color: white;">
+				<p style="font-size:1.3em;">
 					등급 별로 나누어서, 체계적인 회원 관리를 할 수 있도록 등급 제도를 실시합니다. <br />
 					일정 이상 등급이 되면, 프로젝트 팀을 꾸리고, 스터디 그룹을 모집할 수도 있습니다. <br />
 				</p>
 			</div>
 		</div>
-		<div class="row col-sm-12" style="margin-top: 50px; padding:5px; margin-bottom: 50px;">
-			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
-				<h1>포트폴리오</h1>
-				<p>
-					아띠 프로젝트는 여러분의 포트폴리오를 공유하고, <br /> 
-					다른 회원 간의 정보를 주고 받을 수 있습니다. <br />
-				</p>
+		<div class="row col-sm-12" style="margin-top: 50px; margin-bottom: 50px; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
+			<div class="col-sm-12 text-center btn-info" style="color: white;">
+				<h1 class="">이용 관련 사항</h1>
 			</div>
-		</div>
-		<div class="row col-sm-12" style="margin-top: 50px; padding:5px; margin-bottom: 50px;">
-			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
-				<h1>포트폴리오</h1>
-				<p>
-					아띠 프로젝트는 여러분의 포트폴리오를 공유하고, <br /> 
-					다른 회원 간의 정보를 주고 받을 수 있습니다. <br />
+			<br />
+			<div class="col-sm-12 text-center" style="background-color: white;">
+				<p style="font-size:1.3em;">
+					홈페이지 활동은 회원 가입 후에 가능하며, 비회원은 글 읽기만 가능합니다. <br />
+					또한, 포트폴리오 역시 회원만 제공되는 기능이므로, 활동을 원하시는 분은 가입하신 후, <br />
+					활동해주시면 감사하겠습니다.
 				</p>
 			</div>
 		</div>
