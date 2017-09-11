@@ -191,6 +191,14 @@ public class MemberDAO {
 		return (ArrayList<MemberDTO>)template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
 	}
 	
+	//회원정보 가져오기
+	public MemberDTO getMember(String id) {
+		
+		String sql = "SELECT * FROM member b JOIN member_grade bg ON b.id=bg.id WHERE b.id='"+ id +"'";
+		
+		return (MemberDTO)template.queryForObject(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
+	}
+	
 	//회원정보수정을 위한 회원 데이터 가져오기
 	public ArrayList<MemberDTO> selectMember(String id, String pass){
 		
@@ -368,7 +376,6 @@ public class MemberDAO {
 		
 		final String sql = "UPDATE member_grade SET grade=? WHERE id=?";
 
-		System.out.println("sql 전");
 		this.template.update(sql, new PreparedStatementSetter() {
 			
 			@Override
@@ -376,14 +383,11 @@ public class MemberDAO {
 
 				ps.setInt(1, grade);
 				ps.setString(2, id);
-				System.out.println("sql 안");
 			}
 		});
-		System.out.println("sql 후");
 	}
 	
-	public void expEdit(final String exp, final String id){
-		
+	public void expEdit(final int exp, final String id){
 		System.out.println("expEdit() 실행");
 		
 		String sql = "UPDATE member_grade SET exp=exp+? WHERE id=?";
@@ -392,7 +396,7 @@ public class MemberDAO {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, Integer.parseInt(exp));
+				ps.setInt(1,exp);
 				ps.setString(2, id);
 			}
 		});

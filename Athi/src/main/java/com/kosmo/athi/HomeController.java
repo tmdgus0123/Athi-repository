@@ -233,11 +233,10 @@ System.out.println(session.getAttribute("visitList"));
 	@RequestMapping("/writeAction.do")
 	public String writeAction(HttpServletRequest req, Model model) {
 
-System.out.println("커멘드 들어가기전");
 		model.addAttribute("req", req);
 		command = new WriteCommand();
 		command.execute(model);
-		System.out.println("커멘드 들어간 후");
+
 		return "redirect:" + req.getParameter("boardName") + ".do";
 	}
 

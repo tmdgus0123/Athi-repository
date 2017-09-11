@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.kosmo.athi.model.BoardDAO;
+import com.kosmo.athi.model.MemberDAO;
 
 public class WriteCommand implements ICommand {
 
@@ -28,11 +29,15 @@ public class WriteCommand implements ICommand {
 
 		if (req.getParameter("pLang") != null) 		
 			pLang = req.getParameter("pLang");
-		System.out.println("글쓰기전");
+		
 		retValue = bDao.write(boardName, id, title, content, pLang);
-		System.out.println("글쓰기후");
 
 		model.addAttribute("boardName", boardName);
 		bDao.close();
+		
+		MemberDAO mdao = new MemberDAO();
+System.out.println("글쓰기 경험치 3증가");
+		mdao.expEdit(3, id);
+		mdao.close();
 	}
 }

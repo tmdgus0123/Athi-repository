@@ -15,7 +15,7 @@ public class ExpEditCommand implements ICommand{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
-		String exp = req.getParameter("exp");
+		int exp = Integer.parseInt(req.getParameter("exp"));
 		String id = req.getParameter("id");
 		
 		MemberDAO dao = new MemberDAO();

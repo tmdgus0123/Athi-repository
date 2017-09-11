@@ -1,6 +1,18 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kosmo.athi.model.MemberDTO"%>
+<%@page import="com.kosmo.athi.model.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% 
+String id = (String)session.getAttribute("user_id"); 
+if(id != null) {
+	MemberDAO dao = new MemberDAO();
+	MemberDTO dto = dao.getMember(id);
+	session.setAttribute("user_exp", dto.getExp());
+	dao.close();
+}
+%>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 	<a class="navbar-brand" href="<%=request.getContextPath()%>/" style="margin-left:15px;" ><i class="fa fa-handshake-o"></i> 아 띠</a>
@@ -123,7 +135,7 @@
 						<a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fa fa-fw fa-bell"></i>마이페이지
 						</a>
-						<div class="dropdown-menu" aria-labelledby="alertsDropdown" style="border-radius:2em;">
+						<div class="dropdown-menu" aria-labelledby="alertsDropdown">
 							<c:choose>							
 								<c:when test="${user_grade==0}">
 									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">
@@ -133,7 +145,7 @@
 								<c:otherwise>
 									<h6 class="dropdown-header" style="color:#131314; font-weight:bold; font-size:1.2em;">
 										<span style="color:blue;">${user_id}</span>님의 마이 페이지<br /><br />
-										현재 등급 : ${user_grade}
+										grade : ${user_grade} / exp : ${user_exp}
 									</h6>
 								</c:otherwise>
 							</c:choose>
