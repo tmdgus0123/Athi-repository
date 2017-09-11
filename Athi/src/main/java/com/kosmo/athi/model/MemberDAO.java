@@ -401,4 +401,19 @@ public class MemberDAO {
 			}
 		});
 	}
+
+	// 새로 가입한 회원수 체크
+	public int newMembers() {
+		
+		String sql = "SELECT count(*) FROM member WHERE to_date(regidate, 'YYYY/MM/DD') = to_date(sysdate, 'YYYY/MM/DD')";
+		
+		return this.template.queryForObject(sql, Integer.class);
+	}
+	
+	// 오늘 가입한 회원 명단 가져오기
+	public ArrayList<MemberDTO> newMemberList(){
+		String sql = "SELECT * FROM member WHERE to_date(regidate, 'YYYY/MM/DD') = to_date(sysdate, 'YYYY/MM/DD')";
+		
+		return (ArrayList<MemberDTO>)this.template.query(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
+	}
 }

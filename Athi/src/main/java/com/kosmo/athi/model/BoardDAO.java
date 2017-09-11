@@ -742,4 +742,33 @@ System.out.println("렙업후");
 			}
 		});
 	}
+	
+	// 새로운 게시글 카운트
+	public int newPosts() {
+		
+		String sql = "SELECT count(*) FROM board WHERE to_date(postdate, 'YYYY/MM/DD') = to_date(sysdate, 'YYYY/MM/DD')";
+		
+		return this.template.queryForObject(sql, Integer.class);
+	}
+
+	public int newPortfolios() {
+		
+		String sql = "SELECT count(*) FROM project_board WHERE to_date(postdate, 'YYYY/MM/DD') = to_date(sysdate, 'YYYY/MM/DD')";
+		
+		return this.template.queryForObject(sql, Integer.class);
+	}
+	
+	// 오늘의 게시글 가져오기
+	public ArrayList<BoardDTO> newPostList(){
+		String sql = "SELECT * FROM board WHERE to_date(postdate, 'YYYY/MM/DD') = to_date(sysdate, 'YYYY/MM/DD')";
+		
+		return (ArrayList<BoardDTO>)this.template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
+	
+	// 오늘의 포트폴리오 가져오기
+	public ArrayList<BoardDTO> newPortfolioList(){
+		String sql = "SELECT * FROM project_board WHERE to_date(postdate, 'YYYY/MM/DD') = to_date(sysdate, 'YYYY/MM/DD')";
+		
+		return (ArrayList<BoardDTO>)this.template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
+	}
 }

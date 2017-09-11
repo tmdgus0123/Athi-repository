@@ -33,58 +33,50 @@
 			<div class="col-sm-12" style="margin-top: 50px; height: 125px; opacity: 0.85;">
 				<div class="col-sm-12">
 					<div class="row">
-						<div class="col-sm-3" style="height: 125px;">
+						<div class="col-sm-4" style="height: 125px;">
 							<div class="card text-white bg-primary o-hidden h-100">
 								<div class="card-body">
 									<div class="card-body-icon">
 										<i class="fa fa-fw fa fa-pencil"></i>
 									</div>
-									<div class="mr-5">알림 갯수</div>
+									<div class="mr-5">오늘의 글 : ${newPostCnt} 개</div>
 								</div>
-								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left" onclick="location.href='./'">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+								<a href="newPostList.do" onclick="window.open(this.href,'_blank','width=1200,height=600, scrollbars=yes');return false;" class="card-footer text-white clearfix small z-1">
+									<span class="float-left">상세보기</span>
+									<span class="float-right">
+										<i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
 						</div>
-						<div class="col-sm-3" style="height: 125px;">
+						<div class="col-sm-4" style="height: 125px;">
 							<div class="card text-white bg-warning o-hidden h-100">
 								<div class="card-body">
 									<div class="card-body-icon">
 										<i class="fa fa-fw fa fa-eraser"></i>
 									</div>
-									<div class="mr-5">알림 갯수</div>
+									<div class="mr-5">오늘의 포트폴리오 : ${newPortfolioCnt} 개</div>
 								</div>
-								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+								<a href="newPortfolioList.do" onclick="window.open(this.href,'_blank','width=1200,height=600, scrollbars=yes');return false;" class="card-footer text-white clearfix small z-1">
+									<span class="float-left">상세보기</span>
+									<span class="float-right">
+										<i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>
 						</div>
-						<div class="col-sm-3" style="height: 125px;">
+						<div class="col-sm-4" style="height: 125px;">
 							<div class="card text-white bg-success o-hidden h-100">
 								<div class="card-body">
 									<div class="card-body-icon">
 										<i class="fa fa-fw fa fa-user-plus"></i>
 									</div>
-									<div class="mr-5">알림 갯수</div>
+									<div class="mr-5">오늘 가입한 회원 : ${newMemberCnt} 명 </div>
 								</div>
-								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="col-sm-3" style="height: 125px;">
-							<div class="card text-white bg-danger o-hidden h-100">
-								<div class="card-body">
-									<div class="card-body-icon">
-										<i class="fa fa-fw fa fa-user-times"></i>
-									</div>
-									<div class="mr-5">알림 갯수</div>
-								</div>
-								<a href="#" class="card-footer text-white clearfix small z-1">
-									<span class="float-left">상세 보기</span> <span class="float-right"> <i class="fa fa-angle-right"></i>
+								<a href="newMemberList.do" onclick="window.open(this.href,'_blank','width=800,height=600, scrollbars=yes');return false;" class="card-footer text-white clearfix small z-1">
+									<span class="float-left">상세보기</span>
+									<span class="float-right">
+										<i class="fa fa-angle-right"></i>
 									</span>
 								</a>
 							</div>

@@ -143,6 +143,12 @@
 				if ($("#inputEmail2").val() == "") $("#inputEmail2").focus();
 				return false;
 			}
+// 			if($("input[type='hidden'][name='emailFlag']").val()==0){
+// 				alert("이메일 인증이 완료되지 않았습니다.");
+// 				$("#inputEmail").css({"background":"#c9106c", "color":"white"});
+// 				$("#inputEmail2").css({"background":"#c9106c", "color":"white"});
+// 				return false;
+// 			}
 
 			else {
 				$('form[name="signFrm"][method="post"]').attr("action","./signUpAction.do");}
@@ -163,7 +169,8 @@
 		<div class="col-sm-12" style="margin-top: 50px; margin-bottom: 50px;">
 			<div class="col-sm-12 text-center" style="background-color: white; border-radius: 1em; padding-top: 25px; padding-bottom: 10px; opacity: 0.85;">
 				<form name="signFrm" method="post">
-					<input type="hidden" name="overFlag" value="0" />
+ 					<input type="hidden" name="overFlag" value="0" /> 
+<!-- 					<input type="hidden" name="emailFlag" value="0" /> -->
 					<br /><br />
 					<div class="row form-group">
 						<div class="col-sm-2"></div>
@@ -270,23 +277,24 @@
 									<option value="@naver.com">네이버</option>
 									<option value="@nate.com">네이트</option>
 									<option value="@hanmail.net">다음</option>
-									<option value="@gmail.com">구글 E메일</option>
+									<option value="@gmail.com">구글</option>
 									<option value="@yahoo.com">야후</option>
 									<option value="@hotmail.com">핫메일</option>
 									<option value="">기타 입력</option>
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-2">
-							<button>이메일 인증</button>
-						</div>
+<!-- 						<div class="col-sm-2" style="padding-top:-10px; margin-left:-15px;"> -->
+<!-- 							<button type="button" class="btn btn-primary" name="emailBtn">이메일 인증</button> -->
+<!-- 						</div> -->
 					</div>
+					<br /><br />
 					<div class="row form-group">
 						<div class="col-sm-12 text-center" style="margin-top: 15px;">
 							<button class="btn btn-success" type="submit" name="signUpBtn">
 								<i class="fa fa-check spaceLeft"></i> 회원가입
 							</button>
-							&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn btn-danger" type="button" name="mainBtn">
 								<i class="fa fa-times spaceLeft"></i> 가입취소
 							</button>
@@ -314,6 +322,16 @@
 
 	<!-- Custom scripts for this sb-admin -->
 	<script src="./resources/sb-admin/js/sb-admin.min.js"></script>
-
+	
+<!-- 	<script> -->
+<!--  		$("button[type='button'][name='emailBtn']").click(function(){ -->
+			
+<!--  			if($("input[name='inputEmail'][type='text']").val()==""){alert("이메일 아이디가 비어있습니다."); return false;} -->
+<!-- 			if($("input[name='inputEmail2'][type='text']").val()==""){alert("도메인 입력후 인증 가능합니다."); return false;} -->
+			
+<!--  			var email = $("input[name='inputEmail'][type='text']").val() + $("input[name='inputEmail2'][type='text']").val(); -->
+			
+<!--  	}); -->
+<!-- 	</script> -->
 </body>
 </html>
